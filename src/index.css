@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+@import 'material-symbols';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.hamburger-line {
+   @apply w-[20px] h-[2px] my-1 block bg-slate-200 rounded-full scale-100;
+}
+
+
+.humberger-aktif > span:nth-child(1) {
+
+   @apply origin-top-left rotate-[39deg] duration-300 ease-in-out; 
+
+}
+
+
+.humberger-aktif > span:nth-child(3) {
+
+   @apply origin-bottom-left rotate-[-39deg] duration-300 ease-in-out;
+
+   /* @apply hidden duration-300 ease-in-out; */
+   
+}
+
+.humberger-aktif > span:nth-child(2) {
+
+   @apply scale-0  duration-300 ease-in-out;
+
+}
+
+
+.nmPeraturan {
+   @apply text-slate-100 mx-6 my-6 font-onest md:text-[24px] text-[15px] block;
+}
+
+.tglPeraturan {
+   @apply text-slate-100 ml-6 mt-[-10px] font-onest md:text-[15px] text-[10px];
+}
+
+.stsBerlakuPeraturan {
+   @apply bg-kuningButton hover:bg-yellow-600 active:bg-yellow-600 active:text-slate-950 text-bluePu font-onest font-normal md:text-[15px] text-[10px] mt-[-10px] rounded-2xl md:w-[120px] w-[80px] md:h-[28px] h-[23px];
+}
+
+.downloadPeraturan {
+   @apply mt-[-10px] text-slate-100 flex gap-1 font-onest md:text-[15px] text-[10px];
+}
+
+.btnDetailPeraturan {
+   @apply bg-kuningButton hover:bg-yellow-600 font-onest font-medium text-slate-800 md:text-[18px] text-[10px] md:w-[110px] w-[65px] md:h-[40px] h-[20px] rounded-lg flex items-center justify-center gap-1;
+}
+
+body {
+   @apply bg-gradient-to-b from-bluePu from-60% to-white;
+}
+
