@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
 @import 'material-symbols';
 @tailwind base;
 @tailwind components;
@@ -34,23 +35,23 @@
 
 
 .nmPeraturan {
-   @apply text-slate-100 mx-6 my-6 font-onest md:text-[24px] text-[15px] block;
+   @apply text-slate-100 mx-6 my-6 font-onest md:text-[22px] text-[15px] block;
 }
 
 .tglPeraturan {
-   @apply text-slate-100 ml-6 mt-[-10px] font-onest md:text-[15px] text-[10px];
+   @apply text-slate-100 ml-6 mt-[-10px] font-onest md:text-[12px] text-[10px];
 }
 
 .stsBerlakuPeraturan {
-   @apply bg-kuningButton hover:bg-yellow-600 active:bg-yellow-600 active:text-slate-950 text-bluePu font-onest font-normal md:text-[15px] text-[10px] mt-[-10px] rounded-2xl md:w-[120px] w-[80px] md:h-[28px] h-[23px];
+   @apply bg-kuningButton hover:bg-yellow-600 active:bg-yellow-600 active:text-slate-950 text-bluePu font-onest font-normal md:text-[12px] text-[10px] mt-[-10px] rounded-2xl md:w-[110px] w-[80px] md:h-[25px] h-[23px];
 }
 
 .downloadPeraturan {
-   @apply mt-[-10px] text-slate-100 flex gap-1 font-onest md:text-[15px] text-[10px];
+   @apply mt-[-10px] text-slate-100 flex gap-1 font-onest md:text-[13px] text-[10px];
 }
 
 .btnDetailPeraturan {
-   @apply bg-kuningButton hover:bg-yellow-600 font-onest font-medium text-slate-800 md:text-[18px] text-[10px] md:w-[110px] w-[65px] md:h-[40px] h-[20px] rounded-lg flex items-center justify-center gap-1;
+   @apply bg-kuningButton hover:bg-yellow-600 font-onest font-medium text-slate-800 md:text-[15px] text-[10px] md:w-[105px] w-[65px] md:h-[35px] h-[20px] rounded-lg flex items-center justify-center gap-1;
 }
 
 body {

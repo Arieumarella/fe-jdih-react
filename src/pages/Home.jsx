@@ -3,6 +3,7 @@ import Pencarian from "../components/pencarian";
 import ImageSlider from "../components/imageSlider";
 import Box from "../components/Box";
 import Langganan from "../components/Langganan";
+import Footer from "../components/Footer";
 import sluet from "../assets/siluet-home.png";
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
     <ImageSlider/>  
     <Box/>
     <Langganan/>
+    <Footer/>
     </>
   );
 };
