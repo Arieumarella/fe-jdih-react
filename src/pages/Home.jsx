@@ -4,7 +4,10 @@ import ImageSlider from "../components/imageSlider";
 import Box from "../components/Box";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
+import ContainerContens from "../components/containerContens";
+import SliderMonografi from "../components/sliderMonografi";
 import sluet from "../assets/siluet-home.png";
+
 
 const Home = () => {
   return (
@@ -23,6 +26,8 @@ const Home = () => {
     <Pencarian/>
     <ImageSlider/>  
     <Box/>
+    <ContainerContens/>
+    <SliderMonografi/>
     <Langganan/>
     <Footer/>
     </>

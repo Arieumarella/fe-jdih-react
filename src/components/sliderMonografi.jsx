@@ -1,0 +1,115 @@
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import satu from "/src/assets/1.jpg";
+
+const images = [
+  { id: 1, src: {satu}, alt: "Nature adfasdg asvdfuv uyasgdfg yugsfuy uyasgdfy" },
+  { id: 2, src: "https://source.unsplash.com/400x300/?city", alt: "City" },
+  { id: 3, src: "https://source.unsplash.com/400x300/?technology", alt: "Technology" },
+  { id: 4, src: "https://source.unsplash.com/400x300/?architecture", alt: "Architecture" },
+  { id: 5, src: "https://source.unsplash.com/400x300/?people", alt: "People" },
+];
+
+export default function ImageSlider() {
+  return (
+
+    <div className="md:flex md:justify-between px-5 md:px-[60px] md:mt-[18px]">
+
+    {/* Ini adalah slider Berita */}
+    <div className="md:w-[50%] md:p-2">
+      <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center bg-bluePu">
+    <p className="font-onest font-semibold text-slate-100 md:text-[20px] text-[14px] my-4">
+      BERITA
+    </p>
+    <div className="relative w-full">
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={20}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 }, // Sesuaikan agar tidak terlalu kecil
+        }}
+        pagination={ false }
+        navigation={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Navigation, Autoplay]}
+        className="mySwiper w-full" // Ubah max-w menjadi w-full
+      >
+        {images.map((image) => (
+          <SwiperSlide key={image.id}>
+            <div className="group relative rounded-lg overflow-hidden shadow-lg transition-all duration-300">
+              <a href="#" className="block">
+                <img
+                  src={satu}
+                  alt={image.alt}
+                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="h-[50px] bg-kuningButton text-slate-900 text-center text-sm font-onest transition-all duration-300 group-hover:bg-yellow-500 group-hover:font-semibold font-onest flex items-center justify-center">
+                  {image.alt.length > 15 ? image.alt.substring(0, 15) + "..." : image.alt}
+                </div>
+              </a>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  </div>
+</div>
+
+    {/* Ini adalah slider Berita */}
+    <div className="md:w-[50%] md:p-2">
+      <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center bg-bluePu">
+    <p className="font-onest font-semibold text-slate-100 md:text-[20px] text-[14px] my-4">
+      MONOGRAFI
+    </p>
+    <div className="relative w-full">
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={20}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 }, // Sesuaikan agar tidak terlalu kecil
+        }}
+        pagination={ false }
+        navigation={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Navigation, Autoplay]}
+        className="mySwiper w-full" // Ubah max-w menjadi w-full
+      >
+        {images.map((image) => (
+          <SwiperSlide key={image.id}>
+            <div className="group relative rounded-lg overflow-hidden shadow-lg transition-all duration-300">
+              <a href="#" className="block">
+                <img
+                  src={satu}
+                  alt={image.alt}
+                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="h-[50px] bg-kuningButton text-slate-900 text-center text-sm font-onest transition-all duration-300 group-hover:bg-yellow-500 group-hover:font-semibold font-onest flex items-center justify-center">
+                  {image.alt.length > 15 ? image.alt.substring(0, 15) + "..." : image.alt}
+                </div>
+              </a>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  );
+}

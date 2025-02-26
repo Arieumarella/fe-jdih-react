@@ -55,6 +55,42 @@
 }
 
 body {
-   @apply bg-gradient-to-b from-bluePu from-60% to-white;
+   @apply bg-gradient-to-b from-bluePu from-30% to-white;
 }
+
+
+ 
+ .append-buttons {
+   text-align: center;
+   margin-top: 20px;
+ }
+ 
+ .append-buttons button {
+   margin: 5px;
+   padding: 10px 20px;
+   border: none;
+   background-color: #007aff;
+   color: white;
+   cursor: pointer;
+   border-radius: 5px;
+ }
+ 
+ .append-buttons button:hover {
+   background-color: #005bb5;
+ }
+ 
+ svg.star-svg {
+   display: inline;
+}
+
+.progres-bar {
+   @apply rounded-lg w-[60%] h-2.5 ;
+}
+
+ 
+ .progres-bar::-moz-progress-bar {
+   @apply bg-kuningButton
+ }
+ 
+ 
 

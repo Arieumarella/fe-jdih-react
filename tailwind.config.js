@@ -9,7 +9,9 @@ export default {
       colors: {
         dark: "#333333",
         bluePu : '#233b74',
-        kuningButton : `#FFE54E`
+        kuningButton : `#FFE54E`,
+        gradiankuning : `#09A8D4`,
+        gradianBiru : `#FFE54E`
       },
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif'],

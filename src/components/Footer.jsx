@@ -14,11 +14,10 @@ const Footer = () => {
         </div>
 
         <div className="md:text-[18px] text-[14px] md:w-[500px] w-full gap-2 items-center md:mt-10 mt-6 font-onest">
-        <p>Sekretariat Jenderal<br/>
+        <p>Biro Hukum, Sekretariat Jenderal<br/>
         Kementerian Pekerjaan Umum 
-        Jl. Pattimura No.20,
-        Rt.2/RW/1. Selon, Kebayoran. Baru, <br />
-        Kota Jakarta Selatan, DKI Jakarta 12110, Indonesia,</p>
+        <br />Lt. 7 Gedung Utama,Jl. Pattimura No.20,
+        Rt.2/RW/1. Selon, Kebayoran. Baru, Kota Jakarta Selatan, <br /> Jakarta 12110, Indonesia,</p>
         </div>
 
         <div className="md:text-[158x] text-[14px] md:w-[400px] w-full items-center md:mt-8 mt-4 font-onest">
@@ -32,11 +31,11 @@ const Footer = () => {
       <div className=" w-full text-left md:mt-0 mt-6">
         <p className="font-bold text-bluePu md:text-[30px] text-[18px] font-onest">Temukan Kami :</p>
         <div className="flex mx-1 md:my-4 my-0 text-bluePu md:gap-5 gap-2">
-          <a href=""><i class="fa-brands fa-instagram md:fa-4x fa-2x" ></i></a>
-          <a href=""><i class="fa-brands fa-twitter md:fa-4x fa-2x" ></i></a>
-          <a href=""><i class="fa-brands fa-facebook md:fa-4x fa-2x" ></i></a>
-          <a href=""><i class="fa-brands fa-youtube md:fa-4x fa-2x" ></i></a>
-          <a href=""><i class="fa-brands fa-google-play md:fa-4x fa-2x" ></i></a>
+          <a href=""><i class="fa-brands fa-instagram md:fa-3x fa-3x" ></i></a>
+          <a href=""><i class="fa-brands fa-twitter md:fa-3x fa-3x" ></i></a>
+          <a href=""><i class="fa-brands fa-facebook md:fa-3x fa-3x" ></i></a>
+          <a href=""><i class="fa-brands fa-youtube md:fa-3x fa-3x" ></i></a>
+          <a href=""><i class="fa-brands fa-google-play md:fa-3x fa-3x" ></i></a>
         </div>
       </div>
 
