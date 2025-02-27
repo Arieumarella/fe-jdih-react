@@ -30,81 +30,81 @@ const containerContens = () => {
     <>
     <section className=' px-5 md:px-[60px] mt-[18px] group'>
 
-        <div class="box-content size-25 border-2 md:w-full rounded-xl bg-bluePu md:flex">
+        <div className="box-content size-25 border-2 md:w-full rounded-xl bg-bluePu md:flex">
 
-        <div class="group md:px-6 px-6 md:py-4 text-center w-full md:my-4 my-2 md:text-[18px] text-[14px] ">
+        <div className="group md:px-6 px-6 md:py-4 text-center w-full md:my-4 my-2 md:text-[18px] text-[14px] ">
             <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>Unit Organisasi</p>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
               <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
-            <div class="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
+            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
                  <a href="">Sekretariat Jenderal</a>
             </div>
 
         </div>   
 
-        <div class="group px-6 md:py-4 py-1 text-center w-full md:my-4 ">
+        <div className="group px-6 md:py-4 py-1 text-center w-full md:my-4 ">
             <div className='group'>
             <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>Link Terkait</p>
 
-            <div class="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left group">
+            <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left group">
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 md:my-2'>
-                    <span class="material-symbols-outlined -rotate-45">link</span> <a href="">Badan Pembina Hukum Nasional</a>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Badan Pembina Hukum Nasional</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined -rotate-45">link</span> <a href="">JDIHN</a>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">JDIHN</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined -rotate-45">link</span> <a href="">Kemenko Infra</a>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kemenko Infra</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Perhubungan</a>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Perhubungan</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian LHK</a>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian LHK</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Parekaf</a>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Parekaf</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Kelautan & Perikanan</a>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Kelautan & Perikanan</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined -rotate-45">link</span> <a href="">Arsip Nasional</a>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Arsip Nasional</a>
                 </div>
             </div>
 
             </div>
 
             <div className='group md:my-4 my-6'>
-                <div class="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center">
+                <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center">
                     <p className='font-onest font-semibold text-slate-100 md:text-[20px] text-[18px]'>Statistik Pengunjung</p>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={data} margin={{right:10, top:20}} barSize={30} >
@@ -120,52 +120,52 @@ const containerContens = () => {
             </div>
         </div> 
         
-        <div class="group px-6 md:py-4 text-center w-full">
+        <div className="group px-6 md:py-4 text-center w-full">
             <div className='group md:my-4'>
             <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>Jenis Produk Hukum</p>
 
-            <div class="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left">
+            <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left">
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Undang-undang</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Undang-undang</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">PP Pengganti Undang-undang</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">PP Pengganti Undang-undang</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Pemerintah</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Pemerintah</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Presiden</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Presiden</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Presiden</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Presiden</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Instruksi Presiden</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Instruksi Presiden</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Menteri</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Menteri</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Menteri</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Menteri</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Surat Edaran Menteri</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Surat Edaran Menteri</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Instruksi Menteri</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Instruksi Menteri</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Menteri</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Menteri</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Sekertaris Jenderal</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Sekertaris Jenderal</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Surat Edaran Sekretaris Jenderal</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Surat Edaran Sekretaris Jenderal</a>
                 </div>
                 <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span class="material-symbols-outlined">receipt_long</span> <a href="">Terjemahan</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Terjemahan</a>
                 </div>
 
             </div>
@@ -173,7 +173,7 @@ const containerContens = () => {
             </div>
 
             <div className='group my-4'>
-            <div class="box-border border-2 w-full h-auto my-2 rounded-lg text-center">
+            <div className="box-border border-2 w-full h-auto my-2 rounded-lg text-center">
              <a href=""><img src={kuesioner} alt="Kuesioner" className='rounded-lg' /></a> 
             </div>
             </div>

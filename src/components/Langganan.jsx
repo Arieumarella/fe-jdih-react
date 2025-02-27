@@ -34,7 +34,7 @@ const Langganan = () => {
           <div className='md:flex md:flex-col font-roboto gap-1'>        
             <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
               <p>5</p>
-              <span class="material-symbols-outlined text-gradianBiru">
+              <span className="material-symbols-outlined text-gradianBiru">
               stars
               </span>
               <progress value={75} max={100} className='progres-bar'/>
@@ -43,7 +43,7 @@ const Langganan = () => {
 
             <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
               <p>4</p>
-              <span class="material-symbols-outlined text-gradianBiru">
+              <span className="material-symbols-outlined text-gradianBiru">
               stars
               </span>
               <progress value={75} max={100} className='progres-bar'/>
@@ -52,7 +52,7 @@ const Langganan = () => {
 
             <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
               <p>3</p>
-              <span class="material-symbols-outlined text-gradianBiru">
+              <span className="material-symbols-outlined text-gradianBiru">
               stars
               </span>
               <progress value={75} max={100} className='progres-bar'/>
@@ -61,7 +61,7 @@ const Langganan = () => {
 
             <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
               <p>2</p>
-              <span class="material-symbols-outlined text-gradianBiru">
+              <span className="material-symbols-outlined text-gradianBiru">
               stars
               </span>
               <progress value={75} max={100} className='progres-bar'/>
@@ -70,7 +70,7 @@ const Langganan = () => {
 
             <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
               <p>1</p>
-              <span class="material-symbols-outlined text-gradianBiru">
+              <span className="material-symbols-outlined text-gradianBiru">
               stars
               </span>
               <progress value={75} max={100} className='progres-bar'/>
@@ -102,7 +102,7 @@ const Langganan = () => {
               />
               <button 
                 type="submit" 
-                className="md:block hidden absolute right-2 top-1/2 -translate-y-1/2 bg-bluePu text-kuningButton font-roboto w-[100px] px-3 py-1 rounded-xl "
+                className="md:block hidden absolute right-2 top-1/2 -translate-y-1/2 bg-bluePu hover:bg-blue-950 text-kuningButton font-roboto w-[100px] px-3 py-1 rounded-xl "
               >
                 Kirim
               </button>
