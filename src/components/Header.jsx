@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import logoJDIHN from "/src/assets/jdihn.png";
 import pu from "../assets/pu.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSubmenu, setIsOpenSubmenu] = useState(false);
+
+  const navigate = useNavigate();
+
+  const navigateHandelClick = (link = '') => {
+    navigate(`/${link}`);
+  };
+
 
   function hendelHuberger() {
     console.log('1');
@@ -44,12 +52,12 @@ export default function Header() {
 
             {/* Navigasi Utama */}
           <nav className="flex space-x-[26px] text-sm font-medium text-white text-[20px] mr-[-64px]">
-            <a href="#home" className="hover:text-slate-300">Home</a>
+            <a href="#" className="hover:text-slate-300" onClick={(e) => { e.preventDefault(); navigateHandelClick(""); }}>Home</a>
 
             {/* Dropdown Produk Hukum */}
             <div className="relative group">
               <button type="button" className="flex items-center hover:text-slate-300">
-                Produk Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
+               Jenis Produk Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               {/* Submenu */}
               <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-55 ">
@@ -61,11 +69,11 @@ export default function Header() {
              {/* Dropdown Produk Hukum */}
              <div className="relative group">
               <button type="button" className="flex items-center hover:text-slate-300">
-                Produk Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
+                Informasi Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               {/* Submenu */}
               <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-auto">
-                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Instruksi Menteri</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita"); }} className="block px-4 py-2 hover:bg-slate-100">Berita</a></li>
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Peraturan Menteri</a></li>
               </ul>
             </div>
@@ -85,7 +93,7 @@ export default function Header() {
              {/* Dropdown Produk Hukum */}
              <div className="relative group">
               <button type="button" className="flex items-center hover:text-slate-300">
-                Produk Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
+                Tentang JDIH <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               {/* Submenu */}
               <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-auto">

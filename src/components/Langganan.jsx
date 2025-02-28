@@ -12,7 +12,7 @@ const Langganan = () => {
   return (
     <>
     
-    <section className='bg-bluePu text-white  text-center mt-4  md:flex md:justify-between md:px-[60px] items-center'>
+    <section className='bg-bluePu text-white  text-center  md:flex md:justify-between md:px-[60px] items-center'>
 
     <div className='w-full md:flex md:justify-center'>
       <p className='md:absolute font-semibold font-roboto md:text-[25px] text-[20px] py-4 md:mt-[18px] text-kuningButton text-center'>Indeks Kepuasan Masyarakat</p>
