@@ -11,6 +11,7 @@ import sluet from "../assets/siluet-home.png";
 
 
 const Home = () => {
+
   return (
     <>
     <Headers/>

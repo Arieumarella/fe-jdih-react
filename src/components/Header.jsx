@@ -16,7 +16,6 @@ export default function Header() {
 
 
   function hendelHuberger() {
-    console.log('1');
     if (isOpen) {
       setIsOpen(false);
     } else {
