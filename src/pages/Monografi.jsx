@@ -4,7 +4,7 @@ import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 
 
-const Home = () => {
+const Monografi = () => {
 
       let textKeterangan = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum.qadsf  sdfg dsfgdfshdfs";
       const trimmedText = textKeterangan.length > 120 ? textKeterangan.substring(0, 120) + "..." : textKeterangan;
@@ -16,12 +16,12 @@ const Home = () => {
             
         <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 '>
           
-          <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>Semua Berita</h1>
+          <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>Semua Monografi</h1>
 
           <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
             <input 
               type="text" 
-              placeholder="Cari judul berita..." 
+              placeholder="Cari judul monografi..." 
               className="w-full bg-transparent outline-none text-white placeholder-white font-roboto text-lg"
             />
             <button className="ml-2 w-[90px] bg-kuningButton text-bluePu px-4 py-2 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition">
@@ -139,5 +139,5 @@ const Home = () => {
     );
   };
   
-  export default Home;
+  export default Monografi;
   
