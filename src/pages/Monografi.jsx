@@ -105,9 +105,9 @@ const Monografi = () => {
           </div>
         </div>
 
-        {/* Pagination */}
-        <div className='flex justify-center items-center my-4 space-x-2'>
-          <span className='text-sm font-semibold font-roboto text-[25px]'>Halaman</span>
+         {/* Pagination */}
+         <div className='flex justify-end items-center my-4 space-x-2 gap-4'>
+          <span className='font-medium font-roboto text-[30px]'>Halaman</span>
           <div className='flex space-x-2 font-roboto md:text-[18px] text-[14px] shedow-lg'>
             <button className="md:px-4 px-3 md:py-2 py-1 bg-bluePu text-kuningButton rounded-lg shadow-md hover:bg-opacity-80 transition">
               1

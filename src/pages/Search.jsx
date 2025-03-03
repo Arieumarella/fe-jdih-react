@@ -5,9 +5,6 @@ import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
 
-
-
-
 const Search = () => {
 
     const { tipePencarian } = useParams();
@@ -98,6 +95,31 @@ const Search = () => {
 
 
         <Card/>
+        
+         {/* Pagination */}
+         <div className='flex justify-end items-center my-4 space-x-2 gap-4 w-full md:w-[70%] mx-auto'>
+          <span className='font-medium font-roboto text-[30px]'>Halaman</span>
+          <div className='flex space-x-2 font-roboto md:text-[18px] text-[14px] shedow-lg'>
+            <button className="md:px-4 px-3 md:py-2 py-1 bg-bluePu text-kuningButton rounded-lg shadow-md hover:bg-opacity-80 transition">
+              1
+            </button>
+            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
+              2
+            </button>
+            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
+              3
+            </button>
+            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
+              4
+            </button>
+            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
+              5
+            </button>
+            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
+              Next
+            </button>
+          </div>
+        </div>
 
         </section>      
         
