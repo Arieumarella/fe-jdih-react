@@ -38,11 +38,11 @@ const Search = () => {
             <input
                 type="text"
                 placeholder="Nama Peraturan"
-                className="w-[90%] h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none"
+                className="md:w-[90%] w-[100%] h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none"
             />
 
             {/* Tombol Cari */}
-            <button className="ml-2 w-[90px] bg-kuningButton text-bluePu px-4 py-3 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition cursor-pointer">
+            <button className="md:ml-2 mt-2 w-[90px] bg-kuningButton text-bluePu px-4 py-3 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition cursor-pointer">
                 Cari
             </button>
             <span className='block text-white font-semibold my-4 font-roboto cursor-pointer' onClick={hendelPencarianDetail}>Pencarian Detail <p className='inline' id='stsPencarianIcon'>{IconPencarianDetail}</p></span>
@@ -98,7 +98,7 @@ const Search = () => {
         
          {/* Pagination */}
          <div className='flex justify-end items-center my-4 space-x-2 gap-4 w-full md:w-[70%] mx-auto'>
-          <span className='font-medium font-roboto text-[30px]'>Halaman</span>
+          <span className='font-medium font-roboto md:text-[30px] text-[15px]'>Halaman</span>
           <div className='flex space-x-2 font-roboto md:text-[18px] text-[14px] shedow-lg'>
             <button className="md:px-4 px-3 md:py-2 py-1 bg-bluePu text-kuningButton rounded-lg shadow-md hover:bg-opacity-80 transition">
               1
