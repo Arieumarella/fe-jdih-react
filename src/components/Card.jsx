@@ -1,6 +1,14 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 const Card = () => {
+
+  const navigate = useNavigate();
+
+  const navigateHandelClick = (link = '') => {
+    navigate(`/${link}`);
+  };
+
   return (
     <>
     <div className="w-full md:w-[70%] mx-auto bg-white rounded-xl shadow-lg flex flex-col overflow-hidden my-10">
@@ -14,7 +22,10 @@ const Card = () => {
 
     {/* Title */}
     <div className="p-6">
-      <h2 className="md:text-[19px] text-[16px] font-semibold text-bluePu hover:text-opacity-70 font-roboto cursor-pointer">
+      <h2 
+      className="md:text-[19px] text-[16px] font-semibold text-bluePu hover:text-opacity-70 font-roboto cursor-pointer"
+      onClick={(e) => { e.preventDefault(); navigateHandelClick("detail-dokumen/slug"); }}
+      >
         Keputusan Menteri Pekerjaan Umum dan Perumahan Rakyat Nomor 1648/KPTS/M/2024 Tahun 2024 tentang Himpunan Pejabat Fungsional Permukiman
       </h2>
       <div className='flex mt-2 gap-3'>
@@ -50,7 +61,7 @@ const Card = () => {
 
      <div className="flex gap-3 mt-2">
       
-      <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-auto w-full md:px-3 px-2 py-2 rounded-2xl font-roboto md:text-[15px] text-[11px] flex items-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg">
+      <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-auto w-full md:px-3 px-2 py-2 rounded-2xl font-roboto md:text-[15px] text-[11px] flex items-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg ">
         <span className="material-symbols-outlined md:text-lg text-sm text-kuningButton">robot_2</span> Chat AI
       </button>
 
