@@ -2,19 +2,25 @@ import React from 'react';
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 
 const Monografi = () => {
 
-      let textKeterangan = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum.qadsf  sdfg dsfgdfshdfs";
+      let textKeterangan = "Hukum Acara Pidana";
       const trimmedText = textKeterangan.length > 120 ? textKeterangan.substring(0, 120) + "..." : textKeterangan;
 
+      const navigate = useNavigate();
+
+      const navigateHandelClick = (link = '') => {
+        navigate(`/${link}`);
+      };
 
     return (
       <>
         <Headers/>
             
-        <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 '>
+        <section className='h-full bg-slate-100 md:px-[300px] px-5 py-4 '>
           
           <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>Semua Monografi</h1>
 
@@ -32,82 +38,116 @@ const Monografi = () => {
 
           <div className='items-center grid md:grid-cols-3 grid-cols-2 md:gap-8 gap-2 mb-12'>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
+          <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi/slug"); }}>
+            <div className="w-full h-full bg-slate-400 md:aspect-[3/4] aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
+              
               {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+                <div className='flex flex-col'>
+                  <p className="line-clamp-2">{trimmedText}</p>
+                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
+          <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi/slug"); }}>
+            <div className="w-full h-full bg-slate-400 md:aspect-[3/4] aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
+              
               {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+                <div className='flex flex-col'>
+                  <p className="line-clamp-2">{trimmedText}</p>
+                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
+          <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi/slug"); }}>
+            <div className="w-full h-full bg-slate-400 md:aspect-[3/4] aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
+              
               {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+                <div className='flex flex-col'>
+                  <p className="line-clamp-2">{trimmedText}</p>
+                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
+          <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi/slug"); }}>
+            <div className="w-full h-full bg-slate-400 md:aspect-[3/4] aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
+              
               {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+                <div className='flex flex-col'>
+                  <p className="line-clamp-2">{trimmedText}</p>
+                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
+          <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi/slug"); }}>
+            <div className="w-full h-full bg-slate-400 md:aspect-[3/4] aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
+              
               {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+                <div className='flex flex-col'>
+                  <p className="line-clamp-2">{trimmedText}</p>
+                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
+          <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi/slug"); }}>
+            <div className="w-full h-full bg-slate-400 md:aspect-[3/4] aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
+              
               {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+                <div className='flex flex-col'>
+                  <p className="line-clamp-2">{trimmedText}</p>
+                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                </div>
               </div>
             </div>
           </div>
+
+
+
+
         </div>
 
          {/* Pagination */}
          <div className='flex justify-end items-center my-4 space-x-2 gap-4'>
-          <span className='font-medium font-roboto text-[30px]'>Halaman</span>
+          <span className='font-medium font-roboto md:text-[30px] text-[14px]'>Halaman</span>
           <div className='flex space-x-2 font-roboto md:text-[18px] text-[14px] shedow-lg'>
             <button className="md:px-4 px-3 md:py-2 py-1 bg-bluePu text-kuningButton rounded-lg shadow-md hover:bg-opacity-80 transition">
               1

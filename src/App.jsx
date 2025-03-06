@@ -7,6 +7,7 @@ import Monografi from "./pages/Monografi";
 import Search from "./pages/Search";
 import DetailDokumen from "./pages/DetailDokumen";
 import DetailBerita from "./pages/DetailBerita";
+import Detailmonografi from "./pages/DetailMonografi";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/Search/:tipePencarian" element={<Search />} />
       <Route path="/detail-dokumen/:slug" element={<DetailDokumen />} />
       <Route path="/Berita/:slug" element={<DetailBerita />} />
+      <Route path="/Monografi/:slug" element={<Detailmonografi />} />
     </Routes>
   )
 }
