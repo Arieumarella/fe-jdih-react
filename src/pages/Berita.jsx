@@ -2,9 +2,16 @@ import React from 'react';
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
+
+    const navigate = useNavigate();
+    
+      const navigateHandelClick = (link = '') => {
+        navigate(`/${link}`);
+      };
 
       let textKeterangan = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum.qadsf  sdfg dsfgdfshdfs";
       const trimmedText = textKeterangan.length > 120 ? textKeterangan.substring(0, 120) + "..." : textKeterangan;
@@ -30,84 +37,178 @@ const Home = () => {
           </div>
 
 
-          <div className='items-center grid md:grid-cols-3 grid-cols-2 md:gap-8 gap-2 mb-12'>
+          <div className='items-center grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-4 mb-12'>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
-              {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
 
-              {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 cursor-pointer"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita/slug"); }}>
+            {/* Gambar */}
+            <div className="w-full h-[180px] md:h-[250px] overflow-hidden group">
+              <img src="1.jpg" alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
+            </div>
+            {/* Konten */}
+            <div className="p-4">
+              {/* Tanggal Terbit */}
+              <p className="text-gray-500 md:text-sm text-[14px] font-semibold">28 Feb 2025</p>
+
+              {/* Judul Berita */}
+              <h3 className="text-bluePu font-roboto font-semibold text-[14px] md:text-base leading-tight md:mt-1 mt-2 hover:text-opacity-70 cursor-pointer ">
+                Perpres 12/2025: Rencana Pembangunan Jangka Menengah Nasional Tahun 2025-2029
+              </h3>
+
+              {/* Link Selengkapnya */}
+              <div className="mt-1 flex justify-end items-center">
+
+                {/* Jumlah Viewer */}
+                <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto md:mt-0 mt-2 text-[12px]">
+                <span className="material-symbols-outlined">visibility</span> <span>3083</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
-              {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 cursor-pointer"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita/slug"); }}>
+            {/* Gambar */}
+            <div className="w-full h-[180px] md:h-[250px] overflow-hidden group">
+              <img src="1.jpg" alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
+            </div>
+            {/* Konten */}
+            <div className="p-4">
+              {/* Tanggal Terbit */}
+              <p className="text-gray-500 md:text-sm text-[14px] font-semibold">28 Feb 2025</p>
 
-              {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              {/* Judul Berita */}
+              <h3 className="text-bluePu font-roboto font-semibold text-[14px] md:text-base leading-tight md:mt-1 mt-2 hover:text-opacity-70 cursor-pointer ">
+                Perpres 12/2025: Rencana Pembangunan Jangka Menengah Nasional Tahun 2025-2029
+              </h3>
+
+              {/* Link Selengkapnya */}
+              <div className="mt-1 flex justify-end items-center">
+
+                {/* Jumlah Viewer */}
+                <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto md:mt-0 mt-2 text-[12px]">
+                <span className="material-symbols-outlined">visibility</span> <span>3083</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
-              {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 cursor-pointer"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita/slug"); }}>
+            {/* Gambar */}
+            <div className="w-full h-[180px] md:h-[250px] overflow-hidden group">
+              <img src="1.jpg" alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
+            </div>
+            {/* Konten */}
+            <div className="p-4">
+              {/* Tanggal Terbit */}
+              <p className="text-gray-500 md:text-sm text-[14px] font-semibold">28 Feb 2025</p>
 
-              {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              {/* Judul Berita */}
+              <h3 className="text-bluePu font-roboto font-semibold text-[14px] md:text-base leading-tight md:mt-1 mt-2 hover:text-opacity-70 cursor-pointer ">
+                Perpres 12/2025: Rencana Pembangunan Jangka Menengah Nasional Tahun 2025-2029
+              </h3>
+
+              {/* Link Selengkapnya */}
+              <div className="mt-1 flex justify-end items-center">
+
+                {/* Jumlah Viewer */}
+                <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto md:mt-0 mt-2 text-[12px]">
+                <span className="material-symbols-outlined">visibility</span> <span>3083</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
-              {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 cursor-pointer"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita/slug"); }}>
+            {/* Gambar */}
+            <div className="w-full h-[180px] md:h-[250px] overflow-hidden group">
+              <img src="1.jpg" alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
+            </div>
+            {/* Konten */}
+            <div className="p-4">
+              {/* Tanggal Terbit */}
+              <p className="text-gray-500 md:text-sm text-[14px] font-semibold">28 Feb 2025</p>
 
-              {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              {/* Judul Berita */}
+              <h3 className="text-bluePu font-roboto font-semibold text-[14px] md:text-base leading-tight md:mt-1 mt-2 hover:text-opacity-70 cursor-pointer ">
+                Perpres 12/2025: Rencana Pembangunan Jangka Menengah Nasional Tahun 2025-2029
+              </h3>
+
+              {/* Link Selengkapnya */}
+              <div className="mt-1 flex justify-end items-center">
+
+                {/* Jumlah Viewer */}
+                <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto md:mt-0 mt-2 text-[12px]">
+                <span className="material-symbols-outlined">visibility</span> <span>3083</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
-              {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 cursor-pointer"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita/slug"); }}>
+            {/* Gambar */}
+            <div className="w-full h-[180px] md:h-[250px] overflow-hidden group">
+              <img src="1.jpg" alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
+            </div>
+            {/* Konten */}
+            <div className="p-4">
+              {/* Tanggal Terbit */}
+              <p className="text-gray-500 md:text-sm text-[14px] font-semibold">28 Feb 2025</p>
 
-              {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              {/* Judul Berita */}
+              <h3 className="text-bluePu font-roboto font-semibold text-[14px] md:text-base leading-tight md:mt-1 mt-2 hover:text-opacity-70 cursor-pointer ">
+                Perpres 12/2025: Rencana Pembangunan Jangka Menengah Nasional Tahun 2025-2029
+              </h3>
+
+              {/* Link Selengkapnya */}
+              <div className="mt-1 flex justify-end items-center">
+
+                {/* Jumlah Viewer */}
+                <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto md:mt-0 mt-2 text-[12px]">
+                <span className="material-symbols-outlined">visibility</span> <span>3083</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="group text-center cursor-pointer">
-            <div className="w-full h-full bg-slate-400 md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden relative shadow-lg">
-              {/* Gambar Background */}
-              <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-125 transition-all duration-500'></div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 cursor-pointer"
+          onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita/slug"); }}>
+            {/* Gambar */}
+            <div className="w-full h-[180px] md:h-[250px] overflow-hidden group">
+              <img src="1.jpg" alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
+            </div>
+            {/* Konten */}
+            <div className="p-4">
+              {/* Tanggal Terbit */}
+              <p className="text-gray-500 md:text-sm text-[14px] font-semibold">28 Feb 2025</p>
 
-              {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-bluePu group-hover:bg-opacity-100 bg-opacity-80 text-kuningButton font-semibold md:text-sm text-[9px] p-2 text-center font-roboto h-[60px] transition-all duration-500 items-center justify-center flex">
-                {trimmedText}
+              {/* Judul Berita */}
+              <h3 className="text-bluePu font-roboto font-semibold text-[14px] md:text-base leading-tight md:mt-1 mt-2 hover:text-opacity-70 cursor-pointer ">
+                Perpres 12/2025: Rencana Pembangunan Jangka Menengah Nasional Tahun 2025-2029
+              </h3>
+
+              {/* Link Selengkapnya */}
+              <div className="mt-1 flex justify-end items-center">
+
+                {/* Jumlah Viewer */}
+                <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto md:mt-0 mt-2 text-[12px]">
+                <span className="material-symbols-outlined">visibility</span> <span>3083</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+
+          
+
+         </div>
 
         {/* Pagination */}
         <div className='flex justify-end items-center my-4 space-x-2 gap-4'>
-          <span className='font-medium font-roboto text-[30px]'>Halaman</span>
+          <span className='font-medium font-roboto md:text-[30px] text-[14px]'>Halaman</span>
           <div className='flex space-x-2 font-roboto md:text-[18px] text-[14px] shedow-lg'>
             <button className="md:px-4 px-3 md:py-2 py-1 bg-bluePu text-kuningButton rounded-lg shadow-md hover:bg-opacity-80 transition">
               1

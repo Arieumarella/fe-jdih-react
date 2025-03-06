@@ -14,14 +14,12 @@ export default function Header() {
     navigate(`/${link}`);
   };
 
-
   function hendelHuberger() {
     if (isOpen) {
       setIsOpen(false);
     } else {
       setIsOpen(true);
     }
-  
   }
 
   // Handel Klik Submenu

@@ -6,7 +6,7 @@ import Berita from "./pages/Berita";
 import Monografi from "./pages/Monografi";
 import Search from "./pages/Search";
 import DetailDokumen from "./pages/DetailDokumen";
-
+import DetailBerita from "./pages/DetailBerita";
 
 function App() {
 
@@ -17,6 +17,7 @@ function App() {
       <Route path="/Monografi" element={<Monografi />} />
       <Route path="/Search/:tipePencarian" element={<Search />} />
       <Route path="/detail-dokumen/:slug" element={<DetailDokumen />} />
+      <Route path="/Berita/:slug" element={<DetailBerita />} />
     </Routes>
   )
 }
