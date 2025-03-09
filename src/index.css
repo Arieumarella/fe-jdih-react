@@ -92,5 +92,56 @@ body {
    @apply bg-kuningButton
  }
  
+
+ .orgchart {
+   background: transparent; 
+ }
+
+ .orgchart-container {
+   border: none
+ }
+
+ .orgchart .node:focus, 
+.orgchart .node:active {
+  background-color: inherit !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+ @layer components {
+   
+   .orgchart {
+     @apply w-full;
+   }
+    
+   .org-chart-container {
+     @apply flex justify-center p-5 bg-transparent min-h-screen;
+   }
+ 
+   .node-box {
+     @apply bg-bluePu text-white mx-auto rounded-lg p-4 w-44 shadow-md relative border-none;
+   }
+ 
+   .image-container {
+     @apply absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white rounded-full p-1;
+   }
+ 
+   .node-img {
+     @apply w-14 h-14 mx-auto rounded-full border-4 border-bluePu;
+   }
+ 
+   .node-role {
+     @apply text-xs font-bold uppercase mt-6;
+   }
+ 
+   .node-name {
+     @apply text-sm mt-2;
+   }
+ }
+
+ 
+ 
+ 
  
 

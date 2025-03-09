@@ -8,6 +8,8 @@ import Search from "./pages/Search";
 import DetailDokumen from "./pages/DetailDokumen";
 import DetailBerita from "./pages/DetailBerita";
 import Detailmonografi from "./pages/DetailMonografi";
+import StrukturOrganisasi from "./pages/StrukturOrganisasi";
+import PutusanPengadilan from "./pages/PutusanPengadilan";
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
       <Route path="/detail-dokumen/:slug" element={<DetailDokumen />} />
       <Route path="/Berita/:slug" element={<DetailBerita />} />
       <Route path="/Monografi/:slug" element={<Detailmonografi />} />
+      <Route path="/struktur-organisasi" element={<StrukturOrganisasi />} />
+      <Route path="/putasn-pengadilan" element={<PutusanPengadilan />} />
     </Routes>
   )
 }
