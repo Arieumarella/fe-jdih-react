@@ -73,6 +73,7 @@ export default function Header() {
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita"); }} className="block px-4 py-2 hover:bg-slate-100">Berita</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi"); }} className="block px-4 py-2 hover:bg-slate-100">Monografi</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("putasn-pengadilan"); }} className="block px-4 py-2 hover:bg-slate-100">Putusan Pengadilan</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("agenda"); }} className="block px-4 py-2 hover:bg-slate-100">Agenda</a></li>
                 
               </ul>
             </div>

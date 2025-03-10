@@ -11,6 +11,7 @@ import Detailmonografi from "./pages/DetailMonografi";
 import StrukturOrganisasi from "./pages/StrukturOrganisasi";
 import PutusanPengadilan from "./pages/PutusanPengadilan";
 import DetailPutusan from "./pages/DetailPutusan";
+import Agenda from "./pages/Agenda";
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
       <Route path="/struktur-organisasi" element={<StrukturOrganisasi />} />
       <Route path="/putasn-pengadilan" element={<PutusanPengadilan />} />
       <Route path="/putasn-pengadilan/:slug" element={<DetailPutusan />} />
-      
+      <Route path="/agenda" element={<Agenda />} />
     </Routes>
   )
 }
