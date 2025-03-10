@@ -23,7 +23,7 @@ const CardPutusanPengadilan = () => {
     <div className="p-6">
       <h2 
       className="md:text-[19px] text-[16px] font-semibold text-bluePu hover:text-opacity-70 font-roboto cursor-pointer"
-      onClick={(e) => { e.preventDefault(); navigateHandelClick("detail-dokumen/slug"); }}
+      onClick={(e) => { e.preventDefault(); navigateHandelClick("putasn-pengadilan/slug"); }}
       >
         Putusan Mahkamah Agung Nomor 23/G/2020/PTUN.JPR Tahun 2020
       </h2>
