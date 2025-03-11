@@ -36,7 +36,7 @@ const Monografi = () => {
           </div>
 
 
-          <div className='items-center grid md:grid-cols-3 grid-cols-2 md:gap-8 gap-2 mb-12'>
+          <div className='items-center grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-4 mb-12'>
 
           <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
           onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi/slug"); }}>
@@ -46,10 +46,10 @@ const Monografi = () => {
               <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[12px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
                 <div className='flex flex-col'>
                   <p className="line-clamp-2">{trimmedText}</p>
-                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                  <p className='mt-2 font-normal md:text-[14px] text-[22px] opacity-80'>Hukum Pidana</p>
                 </div>
               </div>
             </div>
@@ -63,10 +63,10 @@ const Monografi = () => {
               <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[12px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
                 <div className='flex flex-col'>
                   <p className="line-clamp-2">{trimmedText}</p>
-                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                  <p className='mt-2 font-normal md:text-[14px] text-[22px] opacity-80'>Hukum Pidana</p>
                 </div>
               </div>
             </div>
@@ -80,10 +80,10 @@ const Monografi = () => {
               <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[12px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
                 <div className='flex flex-col'>
                   <p className="line-clamp-2">{trimmedText}</p>
-                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                  <p className='mt-2 font-normal md:text-[14px] text-[22px] opacity-80'>Hukum Pidana</p>
                 </div>
               </div>
             </div>
@@ -97,10 +97,10 @@ const Monografi = () => {
               <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[12px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
                 <div className='flex flex-col'>
                   <p className="line-clamp-2">{trimmedText}</p>
-                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                  <p className='mt-2 font-normal md:text-[14px] text-[22px] opacity-80'>Hukum Pidana</p>
                 </div>
               </div>
             </div>
@@ -114,10 +114,10 @@ const Monografi = () => {
               <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[12px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
                 <div className='flex flex-col'>
                   <p className="line-clamp-2">{trimmedText}</p>
-                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                  <p className='mt-2 font-normal md:text-[14px] text-[22px] opacity-80'>Hukum Pidana</p>
                 </div>
               </div>
             </div>
@@ -131,10 +131,10 @@ const Monografi = () => {
               <div className='w-full h-full bg-[url("./assets/1.jpg")] bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500'></div>
 
               {/* Kotak Keterangan di Bagian Bawah */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[9px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[18px] text-[12px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
                 <div className='flex flex-col'>
                   <p className="line-clamp-2">{trimmedText}</p>
-                  <p className='mt-2 font-normal text-[14px] opacity-80'>Hukum Pidana</p>
+                  <p className='mt-2 font-normal md:text-[14px] text-[22px] opacity-80'>Hukum Pidana</p>
                 </div>
               </div>
             </div>

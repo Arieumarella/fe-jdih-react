@@ -30,7 +30,7 @@ const CardPutusanPengadilan = () => {
       <p className='block md:text-[16px] text-[14px] font-medium font-roboto text-slate-500'>Putusan Mahkamah Agung Nomor 23/G/2020/PTUN.JPR Tahun 2020 PT Citra Konstruksi Persada lawan Kelompok Kerja (Pokja) Pemilihan 71 SDA, dkk</p>
       <div className='flex mt-2 gap-3'>
         <div className='flex gap-1 font-roboto md:text-[16px] text-[12px] text-bluePu'>
-        <span class="material-symbols-outlined">schedule</span>
+        <span className="material-symbols-outlined">schedule</span>
           <p className='inline'>06 - Januari - 2025</p>
         </div>
       </div>

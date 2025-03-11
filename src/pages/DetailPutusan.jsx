@@ -37,7 +37,7 @@ const DetailPutusan = () => {
 
           {/* Card Peraturan */}
           <div className="md:max-w-[70%] max-w-[95%]  mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300">
-            <h2 className="md:text-[23px] text-[18px] font-bold font-roboto text-bluePu mt-3 md:text-left text-center">
+            <h2 className="md:text-[22px] text-[18px] font-bold font-roboto text-bluePu mt-3 md:text-left text-center">
             Putusan Mahkamah Agung Nomor 23/G/2020/PTUN.JPR Tahun 2020 PT Citra Konstruksi Persada lawan Kelompok Kerja (Pokja) Pemilihan 71 SDA, dkk
             </h2>
             

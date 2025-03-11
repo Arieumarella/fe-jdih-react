@@ -30,11 +30,11 @@ const Card = () => {
       </h2>
       <div className='flex mt-2 gap-3'>
         <div className='flex gap-1 font-roboto md:text-[19px] text-[12px] text-bluePu'>
-        <span class="material-symbols-outlined">history_edu</span>
+        <span className="material-symbols-outlined">history_edu</span>
           <p className='inline'>06 - Januari - 2025</p>
         </div>
         <div className='flex gap-1 font-roboto md:text-[19px] text-[12px] text-bluePu'>
-        <span class="material-symbols-outlined">campaign</span>
+        <span className="material-symbols-outlined">campaign</span>
           <p className='inline'>LN 12/2025</p>
         </div>
 
