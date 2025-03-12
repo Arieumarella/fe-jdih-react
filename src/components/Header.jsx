@@ -105,6 +105,9 @@ export default function Header() {
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" 
                 onClick={(e) => { e.preventDefault(); navigateHandelClick("prasyarat"); }}
                 >Prasyarat</a></li>
+                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" 
+                onClick={(e) => { e.preventDefault(); navigateHandelClick("kontak-kami"); }}
+                >Kontak Kami</a></li>
               </ul>
             </div>
 

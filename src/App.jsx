@@ -16,6 +16,7 @@ import Artikel from "./pages/Artikel";
 import DetailArtikel from "./pages/DetailArtikel";
 import TentangKami from "./pages/TentangKami";
 import Prasyarat from "./pages/Prasyarat";
+import KontakKami from "./pages/KontakKami";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
       <Route path="/artikel/:slug" element={<DetailArtikel />} />
       <Route path="/tentang-kami" element={<TentangKami />} />
       <Route path="/prasyarat" element={<Prasyarat />} />
+      <Route path="/kontak-kami" element={<KontakKami />} />
     </Routes>
   )
 }
