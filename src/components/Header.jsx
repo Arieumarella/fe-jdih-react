@@ -99,7 +99,12 @@ export default function Header() {
               {/* Submenu */}
               <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-auto">
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100"  onClick={(e) => { e.preventDefault(); navigateHandelClick("struktur-organisasi"); }}>Struktur Organisasi</a></li>
-                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Peraturan Menteri</a></li>
+                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" 
+                onClick={(e) => { e.preventDefault(); navigateHandelClick("tentang-kami"); }}
+                >Tentang Kami</a></li>
+                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" 
+                onClick={(e) => { e.preventDefault(); navigateHandelClick("prasyarat"); }}
+                >Prasyarat</a></li>
               </ul>
             </div>
 

@@ -25,10 +25,6 @@ const data = {
 };
 
 const StrukturOrganisasi = () => {
-
-  
-
-
     return (
       <>
         <Headers/>

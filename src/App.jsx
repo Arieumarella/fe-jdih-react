@@ -14,6 +14,8 @@ import DetailPutusan from "./pages/DetailPutusan";
 import Agenda from "./pages/Agenda";
 import Artikel from "./pages/Artikel";
 import DetailArtikel from "./pages/DetailArtikel";
+import TentangKami from "./pages/TentangKami";
+import Prasyarat from "./pages/Prasyarat";
 
 function App() {
 
@@ -32,6 +34,8 @@ function App() {
       <Route path="/agenda" element={<Agenda />} />
       <Route path="/artikel" element={<Artikel />} />
       <Route path="/artikel/:slug" element={<DetailArtikel />} />
+      <Route path="/tentang-kami" element={<TentangKami />} />
+      <Route path="/prasyarat" element={<Prasyarat />} />
     </Routes>
   )
 }
