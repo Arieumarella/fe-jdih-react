@@ -11,92 +11,93 @@ const DetailArtikel = () => {
             
             <section className="h-full bg-slate-100 py-4 h-[500px] ">
 
-            <div className='w-[60%] mx-auto p-4'>
+            <div className='md:w-[60%] w-[100%] mx-auto p-4'>
             
-            <p className="text-left md:pl-6 pl-4 font-roboto font-semibold text-gray-500 text-[14px]">11 Februari 2024</p>
+            <p className="text-left md:pl-6 pl-2 font-roboto font-semibold text-gray-500 md:text-[14px] text-[12px]">11 Februari 2024</p>
 
             {/* Judul */}
-            <h1 className="text-left font-roboto font-bold text-bluePu md:text-[24px] text-[23px]  md:pl-6 pl-4">
+            <h1 className="text-left font-roboto font-bold text-bluePu md:text-[24px] text-[20px]  md:pl-6 pl-2">
                 Menteri Pekerjaan Umum Memulai Pengabdian kepada Masyarakat yaitu membangun jaringan irigasi
             </h1>
 
             <img 
             src="/artikel.jpeg" 
             alt="image artikel"
-            className="md:ml-6 ml-4 rounded-2xl shadow-lg  w-[95%] item-center my-4" 
+            className="md:ml-6 ml-2 rounded-2xl shadow-lg  md:w-[95%] w-[90%] item-center my-4" 
             />
 
-            <div className="md:flex flex-col bg-white text-bluePu font-roboto shadow-md rounded-xl border border-gray-200 w-[95%] mx-auto my-6 p-6 min-h-[500px]">
+            <div className="md:flex flex-col bg-white text-bluePu font-roboto shadow-md rounded-xl border border-gray-200 md:w-[95%] w-[100%] mx-auto my-6 p-6 min-h-[500px]">
             {/* Header */}
-            <h2 className="text-lg font-semibold border-b pb-3 mb-4">
+            <h2 className="md:text-lg text-[16px] font-semibold border-b pb-3 mb-4">
                 Lembar Kerja Artikel
             </h2>
 
             {/* Konten Utama */}
-            <div className="flex flex-col gap-4">
-                <div className="flex">
-                <span className="w-1/3 font-medium">Tipe Dokumen</span>
-                <span className="w-2/3">Artikel</span>
-                </div>
+            <div className="flex flex-col gap-4 text-sm sm:text-base font-roboto">
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Tipe Dokumen</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">Artikel</span>
+              </div>
 
-                <div className="flex">
-                <span className="w-1/3 font-medium">Judul</span>
-                <span className="w-2/3 text-blue-600 cursor-pointer hover:text-blue-700 transition">
-                    Luhut Ungkap RI Incar Sumber Baru Pengganti BBM
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Judul</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px] text-blue-600 cursor-pointer hover:text-blue-700 transition">
+                  Luhut Ungkap RI Incar Sumber Baru Pengganti BBM
                 </span>
-                </div>
+              </div>
 
-                <div className="flex">
-                <span className="w-1/3 font-medium">T.E.U. Orang/Badan</span>
-                <span className="w-2/3">Verda Nano Setiawan / CNBC Indonesia</span>
-                </div>
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">T.E.U. Orang/Badan</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">Verda Nano Setiawan / CNBC Indonesia</span>
+              </div>
 
-                <div className="flex">
-                <span className="w-1/3 font-medium">Tempat Terbit</span>
-                <span className="w-2/3">Jakarta</span>
-                </div>
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Tempat Terbit</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">Jakarta</span>
+              </div>
 
-                <div className="flex">
-                <span className="w-1/3 font-medium">Tahun Terbit</span>
-                <span className="w-2/3">2024</span>
-                </div>
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Tahun Terbit</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">2024</span>
+              </div>
 
-                {/* Sumber (Dibuat Sejajar dengan Elemen Lain) */}
-                <div className="flex border-t pt-3">
-                <span className="w-1/3 font-medium">Sumber</span>
-                <div className="w-2/3 flex flex-col gap-1">
-                    <span className="text-sm">Penerbit: CNBC Indonesia</span>
-                    <span className="text-sm">Penulis: Verda Nano Setiawan</span>
-                    <span className="text-sm">Foto: CNBC Indonesia / Faisal Rahman</span>
+              {/* Sumber */}
+              <div className="flex flex-col sm:flex-row border-t pt-3">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Sumber</span>
+                <div className="w-full sm:w-2/3 flex flex-col gap-1">
+                  <span className="text-sm">Penerbit: CNBC Indonesia</span>
+                  <span className="text-sm">Penulis: Verda Nano Setiawan</span>
+                  <span className="text-sm">Foto: CNBC Indonesia / Faisal Rahman</span>
                 </div>
-                </div>
+              </div>
 
-                {/* Subjek */}
-                <div className="flex border-t pt-3">
-                <span className="w-1/3 font-medium">Subjek</span>
-                <span className="w-2/3">LUHUT - BBM</span>
-                </div>
+              {/* Subjek */}
+              <div className="flex flex-col sm:flex-row border-t pt-3">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Subjek</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">LUHUT - BBM</span>
+              </div>
 
-                <div className="flex">
-                <span className="w-1/3 font-medium">Bahasa</span>
-                <span className="w-2/3">Indonesia</span>
-                </div>
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Bahasa</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">Indonesia</span>
+              </div>
 
-                <div className="flex">
-                <span className="w-1/3 font-medium">Bidang Hukum</span>
-                <span className="w-2/3">Energi</span>
-                </div>
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Bidang Hukum</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">Energi</span>
+              </div>
 
-                <div className="flex">
-                <span className="w-1/3 font-medium">Lokasi</span>
-                <span className="w-2/3">CNBC</span>
-                </div>
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Lokasi</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">CNBC</span>
+              </div>
 
-                <div className="flex">
-                <span className="w-1/3 font-medium">Lampiran</span>
-                <span className="w-2/3">-</span>
-                </div>
+              <div className="flex flex-col sm:flex-row">
+                <span className="w-full sm:w-1/3 font-semibold text-[14px]">Lampiran</span>
+                <span className="w-full md:mt-0 mt-2 sm:w-2/3 text-[14px]">-</span>
+              </div>
             </div>
+
 
             <div className="flex gap-3 mt-2 border-t py-4">
             <p className='font-roboto font-semibold text-slate-600 md:text-[16px] text-[14px]'>Share :</p>
