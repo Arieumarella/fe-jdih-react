@@ -48,7 +48,7 @@ export default function Header() {
         <div className="hidden md:flex items-center font-roboto font-normal">
 
             {/* Navigasi Utama */}
-          <nav className="flex space-x-[26px] text-sm font-medium text-white text-[20px] mr-[-64px]">
+          <nav className="flex gap-8 text-sm font-medium text-white text-[25px] mr-[-64px]">
             <a href="#" className="hover:text-slate-300" onClick={(e) => { e.preventDefault(); navigateHandelClick(""); }}>Home</a>
 
             {/* Dropdown Produk Hukum */}
@@ -57,7 +57,7 @@ export default function Header() {
                Jenis Produk Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               {/* Submenu */}
-              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-55 ">
+              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-[180px] ">
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Instruksi Menteri</a></li>
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Peraturan Menteri</a></li>
               </ul>
@@ -69,7 +69,7 @@ export default function Header() {
                 Informasi Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               {/* Submenu */}
-              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-auto">
+              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-[180px]">
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita"); }} className="block px-4 py-2 hover:bg-slate-100">Berita</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("Monografi"); }} className="block px-4 py-2 hover:bg-slate-100">Monografi</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("putasn-pengadilan"); }} className="block px-4 py-2 hover:bg-slate-100">Putusan Pengadilan</a></li>
@@ -85,7 +85,7 @@ export default function Header() {
                 Produk Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               {/* Submenu */}
-              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-auto">
+              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-[180px]">
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Instruksi Menteri</a></li>
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Peraturan Menteri</a></li>
               </ul>
@@ -97,7 +97,7 @@ export default function Header() {
                 Tentang JDIH <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               {/* Submenu */}
-              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-auto">
+              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-[180px]">
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100"  onClick={(e) => { e.preventDefault(); navigateHandelClick("struktur-organisasi"); }}>Struktur Organisasi</a></li>
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" 
                 onClick={(e) => { e.preventDefault(); navigateHandelClick("tentang-kami"); }}
