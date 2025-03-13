@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logoJDIHN from "/src/assets/jdihn.png";
 import pu from "../assets/pu.png";
 import { useNavigate } from "react-router-dom";
+
 
 export default function Header() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSubmenu, setIsOpenSubmenu] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const navigate = useNavigate();
 
@@ -35,10 +37,30 @@ export default function Header() {
   }
 
 
+  function useScrollPosition() {
+    
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        setScrollPosition(window.scrollY);
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+    
+    return scrollPosition;
+  }
+
+  useScrollPosition();
+
   return (
     
-    <section className='sticky top-0 z-50 md:px-[60px]'>
-      <div className='container flex max-w-none justify-between   w-full md:h-20'>
+    <section className={`sticky top-0 z-50 md:px-[60px] bg-bluePu bg-opacity-${scrollPosition == 0 ? '0' : scrollPosition <= 70 ? '30' : scrollPosition > 100 ? '100' : '100'}`}>
+      <div className='container flex max-w-none justify-between  w-full md:h-20'>
        
         <div className='flex items-center group'>
           <img src={logoJDIHN} alt="JDIHN" className='h-12 py-2 px-2   md:w-full md:h-[65px] hidden md:block' />
