@@ -4,23 +4,26 @@ import Footer from "../components/Footer";
 import OrgChart from "@dabeng/react-orgchart";
 
 
-const data = {
-  id: "1",
-  name: "Rahayu",
-  role: "Karo Hukum",
-  img: "/images/rahayu.jpg",
+const orgData = {
+  name: "Rima Eryani",
+  title: "KETUA TIM PPP",
+  image: "/1.jpg", // Ganti dengan URL yang sesuai
   children: [
     {
-      id: "2",
-      name: "Rima Eryani",
-      role: "Ketua Tim PPP",
-      img: "/1.jpg",
-      children: [
-        { id: "3", name: "Nicolaus B. S. Naibaho", role: "Ketua Tim PPP 1", img: "/images/nicolaus.jpg" },
-        { id: "4", name: "Arif Wibowo", role: "Ketua Tim PPP 2", img: "/images/arif.jpg" },
-        { id: "5", name: "Vincentius Dhanang W.", role: "Ketua Tim PPP 3", img: "/images/vincentius.jpg" }
-      ],
-    }
+      name: "Nicolaus B. S. Naibaho",
+      title: "KETUA TIM PPP 1",
+      image: "/1.jpg",
+    },
+    {
+      name: "Arif Wibowo",
+      title: "KETUA TIM PPP 2",
+      image: "/1.jpg",
+    },
+    {
+      name: "Vincentius Dhanang W.",
+      title: "KETUA TIM PPP 3",
+      image: "/1.jpg",
+    },
   ],
 };
 
@@ -38,23 +41,16 @@ const StrukturOrganisasi = () => {
 
                 {/* Judul Berita */}
                 <h1 className="md:text-[23px] text-[23px] font-bold font-roboto text-blue-900 mt-3 text-center">
-                    Struktur Organisasi
+                    STRUKTUR ORGANISASI JDIH KEMENTERIAN PU
                 </h1>
 
+                <div className="my-4 p-4 font-roboto text-slate-600 text-justify">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ipsum aut voluptate ut exercitationem cum, quasi necessitatibus iure. Perferendis iste exercitationem impedit sed fugiat deserunt voluptatibus maiores cupiditate expedita eos.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto cum maiores et laborum quis similique iste eaque accusantium ducimus, veniam aspernatur consectetur obcaecati dolores at commodi dolorem quidem voluptatibus laboriosam!
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quisquam veritatis beatae? Assumenda tempore earum ratione possimus alias, exercitationem ex doloremque iusto hic nisi, veritatis sit omnis officia sint perspiciatis!
+                </div>
                 
-                <OrgChart
-                  datasource={data}
-                  pan={false}
-                  zoom={false}
-                  collapsible={false}
-                  NodeTemplate={({ nodeData }) => (
-                    <div className="node-box">
-                      <img src={nodeData.img} alt={nodeData.name} className="node-img" />
-                      <h3 className="node-name">{nodeData.name}</h3>
-                      <p className="node-role">{nodeData.role}</p>
-                    </div>
-                  )}
-                />
+                <img src="/StrukturOrganisasi.png" alt="image struktur organisasi"  className="w-auto mx-auto"/>
 
                 </div>
             </div>

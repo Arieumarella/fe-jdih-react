@@ -120,7 +120,7 @@ body {
    }
  
    .node-box {
-     @apply bg-bluePu text-white mx-auto rounded-lg p-4 w-44 shadow-md relative border-none;
+     @apply bg-bluePu text-white mx-auto rounded-lg p-4 w-[250px] shadow-md relative border-none;
    }
  
    .image-container {
@@ -128,16 +128,17 @@ body {
    }
  
    .node-img {
-     @apply w-14 h-14 mx-auto rounded-full border-4 border-bluePu;
+     @apply w-32 h-32 mx-auto rounded-full border-4 border-bluePu;
    }
  
    .node-role {
-     @apply text-xs font-bold uppercase mt-6;
+     @apply text-base font-bold font-roboto uppercase mt-2;
    }
  
    .node-name {
-     @apply text-sm mt-2;
+     @apply text-sm mt-4 font-roboto text-[14px];
    }
+
  }
 
  
