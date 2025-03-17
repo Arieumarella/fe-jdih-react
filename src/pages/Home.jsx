@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Headers from "../components/Header";
 import Pencarian from "../components/pencarian";
 import ImageSlider from "../components/imageSlider";
@@ -8,9 +8,18 @@ import Footer from "../components/Footer";
 import ContainerContens from "../components/containerContens";
 import SliderMonografi from "../components/sliderMonografi";
 import sluet from "../assets/siluet-home.png";
+import { getBanner } from '../services/home.services';
 
 
 const Home = () => {
+
+  const [banner, setBanner] = useState([]);
+
+  useEffect(() => {
+    getBanner().then((result) => {
+      setBanner(result);
+    });
+  }, []);
 
   return (
     <>
@@ -27,7 +36,7 @@ const Home = () => {
     </section>
     
     <Pencarian/>
-    <ImageSlider/>  
+    <ImageSlider data={banner}/>  
     <Box/>
     <ContainerContens/>
     <SliderMonografi/>

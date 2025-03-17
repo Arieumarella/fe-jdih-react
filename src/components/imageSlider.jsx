@@ -7,7 +7,10 @@ import "swiper/css/pagination";
 import satu from "/src/assets/1.jpg";
 import dua from "../assets/2.jpg";
 
-const ImageSlider = () => {
+const ImageSlider = (data) => {
+    console.log(data.data.data)
+   
+    
     return (
       <>
         <div className="px-5 md:px-[60px] py-4">
@@ -21,27 +24,30 @@ const ImageSlider = () => {
             loop={true}
             className="rounded-md shadow-xl"
         >
-            <SwiperSlide>
-            <img
-                src={satu}
-                alt="Slide 1"
-                className="w-full md:h-[600px] sm:h-[10px] object-cover rounded-xl"
-            />
-            </SwiperSlide>
-            <SwiperSlide>
-            <img
-                src={dua}
-                alt="Slide 2"
-                className="w-full md:h-[600px] sm:h-[10px] object-cover rounded-xl"
-            />
-            </SwiperSlide>
-            <SwiperSlide>
-            <img
-                src={dua}
-                alt="Slide 3"
-                className="w-full md:h-[600px] sm:h-[10px] object-cover rounded-xl"
-            />
-            </SwiperSlide>
+            
+            
+            {data?.data?.length > 0 ? (
+                data.data.map((item, index) => (
+                    <SwiperSlide key={index}>
+                        <img
+                            src={item.path_file} // Sesuaikan dengan field dari API
+                            alt={`image ${index}`} // Sesuaikan dengan field dari API
+                            className="w-full md:h-[600px] sm:h-[10px] object-cover rounded-xl"
+                        />
+                    </SwiperSlide>
+                ))
+            ) : (
+                <SwiperSlide>
+                    <img
+                        src={satu}
+                        alt="Slide 1"
+                        className="w-full md:h-[600px] sm:h-[10px] object-cover rounded-xl"
+                    />
+                </SwiperSlide>
+            )}
+            
+           
+
         </Swiper>
         </div>
       </>
