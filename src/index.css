@@ -35,7 +35,7 @@
 
 
 .nmPeraturan {
-   @apply text-slate-100 mx-6 my-6 font-onest md:text-[22px] text-[15px] block;
+   @apply text-slate-100 hover:text-kuningButton mx-6 my-6 font-onest md:text-[22px] text-[15px] block;
 }
 
 .tglPeraturan {
@@ -44,6 +44,10 @@
 
 .stsBerlakuPeraturan {
    @apply bg-kuningButton hover:bg-yellow-600 active:bg-yellow-600 active:text-slate-950 text-bluePu font-onest font-normal md:text-[12px] text-[10px] mt-[-10px] rounded-2xl md:w-[110px] w-[80px] md:h-[25px] h-[23px];
+}
+
+.stsTidakBerlakuPeraturan {
+  @apply bg-red-300 hover:bg-opacity-40 font-onest font-normal md:text-[12px] text-[10px] mt-[-10px] rounded-2xl md:w-[110px] w-[80px] md:h-[25px] h-[23px];
 }
 
 .downloadPeraturan {

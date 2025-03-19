@@ -5,12 +5,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import satu from "/src/assets/1.jpg";
-import dua from "../assets/2.jpg";
 
 const ImageSlider = (data) => {
-    console.log(data.data.data)
-   
-    
+        
     return (
       <>
         <div className="px-5 md:px-[60px] py-4">

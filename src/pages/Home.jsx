@@ -8,17 +8,27 @@ import Footer from "../components/Footer";
 import ContainerContens from "../components/containerContens";
 import SliderMonografi from "../components/sliderMonografi";
 import sluet from "../assets/siluet-home.png";
-import { getBanner } from '../services/home.services';
+import { getBanner, getNuwPeraturan } from '../services/home.services';
 
 
 const Home = () => {
 
   const [banner, setBanner] = useState([]);
+  const [nuwPeraturan, setNuwPeraturan] = useState([]);
 
   useEffect(() => {
+    
+    // Data Nammer
     getBanner().then((result) => {
       setBanner(result);
     });
+
+    // get Nuw Peraturan
+    getNuwPeraturan().then((result) => {
+
+      setNuwPeraturan(result);
+    });
+
   }, []);
 
   return (
@@ -37,7 +47,7 @@ const Home = () => {
     
     <Pencarian/>
     <ImageSlider data={banner}/>  
-    <Box/>
+    <Box data={nuwPeraturan}/>
     <ContainerContens/>
     <SliderMonografi/>
     <Langganan/>

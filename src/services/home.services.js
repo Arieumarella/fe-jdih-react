@@ -8,3 +8,13 @@ export const getBanner = async () => {
         return err;
     }
 };
+
+
+export const getNuwPeraturan = async () => {
+    try {
+        const res = await axios.get("http://localhost:3000/home/getNuwPeraturan");
+        return res.data.data;
+    } catch (err) {
+        return err;
+    }
+};
