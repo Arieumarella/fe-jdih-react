@@ -16,6 +16,7 @@ const Home = () => {
   const [banner, setBanner] = useState([]);
   const [nuwPeraturan, setNuwPeraturan] = useState([]);
 
+
   useEffect(() => {
     
     // Data Nammer
@@ -25,7 +26,6 @@ const Home = () => {
 
     // get Nuw Peraturan
     getNuwPeraturan().then((result) => {
-
       setNuwPeraturan(result);
     });
 

@@ -1,7 +1,8 @@
-import React from 'react';
+import {React, useEffect, useState} from 'react';
 import {Rectangle, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import kuesioner from "/src/assets/kuesioner.png";
-
+import { getUnor } from '../services/home.services';
+import { useNavigate } from "react-router-dom";
 
 const data = [
     { name: 'Senin', Pengunjung: 3200},
@@ -24,8 +25,22 @@ const data = [
     return null;
   };
 
-const containerContens = () => {      
+const containerContens = () => {   
+    
+    const navigate = useNavigate();
 
+    const [unor, setUnor] = useState([]);
+
+      useEffect(() => {
+
+        // get all unor
+        getUnor().then((result) => {
+          setUnor(result);
+        });
+    
+      }, []);
+
+      console.log(unor[0]);
   return (
     <>
     <section className=' px-5 md:px-[60px] mt-[18px] group'>
@@ -34,39 +49,16 @@ const containerContens = () => {
 
         <div className="group md:px-6 px-6 md:py-4 text-center w-full md:my-4 my-2 md:text-[18px] text-[14px] ">
             <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>Unit Organisasi</p>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
-              <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
-            <div className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 ">
-                 <a href="">Sekretariat Jenderal</a>
-            </div>
+            
+            {unor?.length > 0 ? (
+              unor.map((item, index) => (
+                <div key={index} className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
+                <a href="#"
+                onClick={() => navigate(`/detail-dokumen/1`)}>{item.deptname}</a>
+                </div>
+             ))) : (
+                <p className='text-center text-slate-100'>Data Kosong</p>
+            )}
 
         </div>   
 

@@ -18,3 +18,12 @@ export const getNuwPeraturan = async () => {
         return err;
     }
 };
+
+export const getUnor = async () => {
+    try {
+        const res = await axios.get("http://localhost:3000/home/getUnitOrganisasi");
+        return res.data.data;
+    } catch (err) {
+        return err;
+    }
+};
