@@ -1,18 +1,10 @@
 import {React, useEffect, useState} from 'react';
 import {Rectangle, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import kuesioner from "/src/assets/kuesioner.png";
-import { getUnor } from '../services/home.services';
+import { getUnor, getLinkTerkait, getJnsPeraturan, getKurvaPengunjung } from '../services/home.services';
 import { useNavigate } from "react-router-dom";
 
-const data = [
-    { name: 'Senin', Pengunjung: 3200},
-    { name: 'Selasa', Pengunjung: 2800},
-    { name: 'Rabu', Pengunjung: 2600},
-    { name: 'Kamis', Pengunjung: 3000},
-    { name: 'Jumat', Pengunjung: 2700},
-    { name: 'Sabtu', Pengunjung: 2900},
-    { name: 'Minggu', Pengunjung: 3100},
-  ];
+
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -30,6 +22,9 @@ const containerContens = () => {
     const navigate = useNavigate();
 
     const [unor, setUnor] = useState([]);
+    const [linkTerkait, setlinkTerkait] = useState([]);
+    const [jnsPeraturan, setJnsPeraturan] = useState([]);
+    const [dataKurvaPengunjung, setDataKurvaPengunjung] = useState([]);
 
       useEffect(() => {
 
@@ -37,10 +32,25 @@ const containerContens = () => {
         getUnor().then((result) => {
           setUnor(result);
         });
+
+        // Get Link Terkait
+        getLinkTerkait().then((result) => {
+            setlinkTerkait(result);
+        });
+
+        // Get Jenis Peraturan
+        getJnsPeraturan().then((result) => {
+          setJnsPeraturan(result);
+        });
+
+         // Get Jenis Peraturan
+         getKurvaPengunjung().then((result) => {
+          setDataKurvaPengunjung(result);
+        });
     
       }, []);
 
-      console.log(unor[0]);
+      
   return (
     <>
     <section className=' px-5 md:px-[60px] mt-[18px] group'>
@@ -67,47 +77,36 @@ const containerContens = () => {
             <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>Link Terkait</p>
 
             <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left group">
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 md:my-2'>
-                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Badan Pembina Hukum Nasional</a>
+            {linkTerkait?.length > 0 ? (
+              linkTerkait.map((item, index) => (
+                <div key={index} className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 md:my-2'>
+                    <span className="material-symbols-outlined -rotate-45">link</span> <a href={item.linkurl} target="_blank">{item.linkname}</a>
                 </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">JDIHN</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kemenko Infra</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Perhubungan</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian LHK</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Parekaf</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Kementerian Kelautan & Perikanan</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined -rotate-45">link</span> <a href="">Arsip Nasional</a>
-                </div>
+            ))) : (
+                <p className='text-center text-slate-100'>Data Kosong</p>
+            )}
             </div>
 
             </div>
 
             <div className='group md:my-4 my-6'>
                 <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center">
-                    <p className='font-onest font-semibold text-slate-100 md:text-[20px] text-[18px]'>Statistik Pengunjung</p>
+                    <p className='font-onest font-semibold text-slate-100 md:text-[20px] text-[18px] mb-6'>Statistik Pengunjung</p>
                     <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={data} margin={{right:10, top:20}} barSize={30} >
-                        <CartesianGrid strokeDasharray="" />
-                        <XAxis dataKey="name" stroke="#ffffff" />
-                        <YAxis stroke="#ffffff" />
-                        <Tooltip content={<CustomTooltip />} />
-                        <Legend />
-                        <Bar dataKey="Pengunjung" fill="#FFE54E" activeBar={<Rectangle fill="#d1bc42" stroke="#d1bc42" />}/>
-                        </BarChart>
-                    </ResponsiveContainer>
+                      <BarChart data={dataKurvaPengunjung} margin={{ right: 10, top: 20 }} barSize={25} barGap={5}>
+                          <CartesianGrid strokeDasharray="" />
+                          <XAxis dataKey="name" stroke="#ffffff" />
+                          <YAxis stroke="#ffffff" domain={[0, dataMax => Math.ceil(dataMax / 10) * 10]} />
+                          <Tooltip content={<CustomTooltip />} />
+                          <Legend />
+                          <Bar 
+                              dataKey="Pengunjung" 
+                              fill="#FFE54E" 
+                              activeBar={<Rectangle fill="#d1bc42" stroke="#d1bc42" />} 
+                          />
+                      </BarChart>
+                  </ResponsiveContainer>
+
                 </div>
             </div>
         </div> 
@@ -117,48 +116,15 @@ const containerContens = () => {
             <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>Jenis Produk Hukum</p>
 
             <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left">
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Undang-undang</a>
+                
+            {jnsPeraturan?.length > 0 ? (
+              jnsPeraturan.map((item, index) => (
+                <div key={index} className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="#" onClick={() => navigate(`/Search/pencarian-detail/${item.peraturan_category_id}`)}>{item.percategoryname}</a>
                 </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">PP Pengganti Undang-undang</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Pemerintah</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Presiden</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Presiden</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Instruksi Presiden</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Peraturan Menteri</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Menteri</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Surat Edaran Menteri</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Instruksi Menteri</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Menteri</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Keputusan Sekertaris Jenderal</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Surat Edaran Sekretaris Jenderal</a>
-                </div>
-                <div className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="">Terjemahan</a>
-                </div>
+             ))) : (
+                <p className='text-center text-slate-100'>Data Kosong</p>
+            )}                
 
             </div>
 

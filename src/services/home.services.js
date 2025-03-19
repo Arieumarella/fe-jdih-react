@@ -27,3 +27,30 @@ export const getUnor = async () => {
         return err;
     }
 };
+
+export const getLinkTerkait = async () => {
+    try {
+        const res = await axios.get("http://localhost:3000/home/getLinkTerkait");
+        return res.data.data;
+    } catch (err) {
+        return err;
+    }
+};
+
+export const getJnsPeraturan = async () => {
+    try {
+        const res = await axios.get("http://localhost:3000/home/getJenisPeraturan");
+        return res.data.data;
+    } catch (err) {
+        return err;
+    }
+};
+
+export const getKurvaPengunjung = async () => {
+    try {
+        const res = await axios.get("http://localhost:3000/home/getKurvaPengunjung");
+        return res.data.data;
+    } catch (err) {
+        return err;
+    }
+};
