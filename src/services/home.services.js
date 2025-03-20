@@ -54,3 +54,22 @@ export const getKurvaPengunjung = async () => {
         return err;
     }
 };
+
+export const getBeritaHome = async () => {
+    try {
+        const res = await axios.get("http://localhost:3000/home/getDataBerita");
+        return res.data.data;
+    } catch (err) {
+        return err;
+    }
+};
+
+
+export const getMonografiHome = async () => {
+    try {
+        const res = await axios.get("http://localhost:3000/home/getDataMonografi");
+        return res.data.data;
+    } catch (err) {
+        return err;
+    }
+};

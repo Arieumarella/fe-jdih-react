@@ -1,10 +1,12 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import {getBeritaHome, getMonografiHome} from '../services/home.services';
 import satu from "/src/assets/1.jpg";
+import { useNavigate } from "react-router-dom";
 
 const images = [
   { id: 1, src: {satu}, alt: "Nature adfasdg asvdfuv uyasgdfg yugsfuy uyasgdfy" },
@@ -15,6 +17,25 @@ const images = [
 ];
 
 export default function ImageSlider() {
+
+  const [berita, setBerita] = useState([]);
+  const [monografi, setMonografi] = useState([]);
+
+  useEffect(() => {    
+      // Get Jenis Peraturan
+      getBeritaHome().then((result) => {
+        setBerita(result);
+      });
+
+      // Get Jenis Monografi
+      getMonografiHome().then((result) => {
+        setMonografi(result);
+      });
+      
+  }, []);
+
+  const navigate = useNavigate()
+
   return (
 
     <div className="md:flex md:justify-between px-5 md:px-[60px] md:mt-[18px]">
@@ -43,17 +64,17 @@ export default function ImageSlider() {
         modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper w-full" // Ubah max-w menjadi w-full
       >
-        {images.map((image) => (
-          <SwiperSlide key={image.id}>
+        {berita.map((item,key) => (
+          <SwiperSlide key={key}>
             <div className="group relative rounded-lg overflow-hidden shadow-lg transition-all duration-300">
-              <a href="#" className="block">
+              <a href="#" className="block" onClick={() => navigate(`/Berita/${item.slug}`)}>
                 <img
-                  src={satu}
-                  alt={image.alt}
+                  src={item.path_file}
+                  alt={item.judul}
                   className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="h-[50px] bg-kuningButton text-slate-900 text-center text-sm font-onest transition-all duration-300 group-hover:bg-yellow-500 group-hover:font-semibold font-onest flex items-center justify-center">
-                  {image.alt.length > 15 ? image.alt.substring(0, 15) + "..." : image.alt}
+                  {item.judul.length > 15 ? item.judul.substring(0, 15) + "..." : item.judul}
                 </div>
               </a>
             </div>
@@ -88,17 +109,17 @@ export default function ImageSlider() {
         modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper w-full" // Ubah max-w menjadi w-full
       >
-        {images.map((image) => (
-          <SwiperSlide key={image.id}>
+        {monografi.map((item,index) => (
+          <SwiperSlide key={index}>
             <div className="group relative rounded-lg overflow-hidden shadow-lg transition-all duration-300">
-              <a href="#" className="block">
+              <a href="#" className="block" onClick={() => navigate(`/Monografi/${item.slug}`)}>
                 <img
-                  src={satu}
-                  alt={image.alt}
+                  src={item.path_file}
+                  alt={item.judul}
                   className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="h-[50px] bg-kuningButton text-slate-900 text-center text-sm font-onest transition-all duration-300 group-hover:bg-yellow-500 group-hover:font-semibold font-onest flex items-center justify-center">
-                  {image.alt.length > 15 ? image.alt.substring(0, 15) + "..." : image.alt}
+                  {item.judul.length > 15 ? item.judul.substring(0, 15) + "..." : item.judul}
                 </div>
               </a>
             </div>
