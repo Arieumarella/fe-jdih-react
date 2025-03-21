@@ -17,6 +17,8 @@ import TentangKami from "./pages/TentangKami";
 import Prasyarat from "./pages/Prasyarat";
 import KontakKami from "./pages/KontakKami";
 import { Helmet } from "react-helmet-async";
+import { ToastProvider } from "./components/ToastProvider";
+
 
 
 
@@ -64,6 +66,7 @@ function App() {
   return (
     <>
       <TitleUpdater />
+      <ToastProvider />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Berita" element={<Berita />} />

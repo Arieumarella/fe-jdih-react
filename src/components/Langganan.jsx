@@ -1,13 +1,23 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import { Rating } from "react-simple-star-rating";
+import { getDataRating } from '../services/footer.services';
+import ModalPenilaian from '../components/ModalPenilaian';
 
 const Langganan = () => {
 
-  const [rating, setRating] = useState(4.1);
+  const [fatchData, setfatchData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleRating = (rate) => {
-    setRating(rate);
-  };
+  useEffect(() => {
+    
+    // Data fatch
+    getDataRating().then((result) => {
+      setfatchData(result);
+    });
+
+    
+
+  }, []);
 
   return (
     <>
@@ -21,9 +31,9 @@ const Langganan = () => {
         <div className="md:relative flex items-center justify-center w-48 h-48 rounded-full p-[13px] bg-gradient-to-r from-gradiankuning to-gradianBiru md:my-auto md:mx-1 mx-auto group">
           <div className="w-[93%] h-[93%] bg-[#D9D9D9] rounded-full flex items-center justify-center">
             <div className="w-[95%] h-[95%] bg-bluePu rounded-full  items-center justify-center">
-              <p className="text-2xl font-bold text-slate-200 font-onest text-[35px] mt-[35px]">4.1</p>
-              <Rating onClick={handleRating} ratingValue="4.1" size={25} fillColor="#FFE54E" className="block"/>
-              <p className="font-semibold text-slate-200 font-onest text-[14px] ">154 reviewer</p>
+              <p className="text-2xl font-bold text-slate-200 font-onest text-[35px] mt-[35px]">{fatchData.rataRata}</p>
+              <Rating initialValue={fatchData.rataRata} ratingValue="4" size={25} fillColor="#FFE54E" className="block" readonly={true} />
+              <p className="font-semibold text-slate-200 font-onest text-[14px] ">{fatchData.totalPemberiRating} reviewer</p>
             </div>
           </div>
         </div>
@@ -32,56 +42,28 @@ const Langganan = () => {
         <div className="relative items-center flex md:ml-2 my-4 md:w-[250px] md:pl-6"> 
           
           <div className='md:flex md:flex-col font-roboto gap-1'>        
-            <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
-              <p>5</p>
+           
+          {fatchData?.dataArray?.length > 0 ? (
+                fatchData.dataArray.map((item, index) => (
+            <div key={index} className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
+              <p>{item.rating}</p>
               <span className="material-symbols-outlined text-gradianBiru">
               stars
               </span>
-              <progress value={75} max={100} className='progres-bar'/>
-              <p>106</p>
+              <progress value={parseFloat(item.totData)} max={fatchData.totalPemberiRating} className='progres-bar'/>
+              <p>{item.totData}</p>
             </div>
+          ))) : (
+            <p className='text-center text-slate-100'>Data Kosong</p>
+          )}
 
-            <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
-              <p>4</p>
-              <span className="material-symbols-outlined text-gradianBiru">
-              stars
-              </span>
-              <progress value={75} max={100} className='progres-bar'/>
-              <p>9</p>
-            </div>
 
-            <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
-              <p>3</p>
-              <span className="material-symbols-outlined text-gradianBiru">
-              stars
-              </span>
-              <progress value={75} max={100} className='progres-bar'/>
-              <p>6</p>
-            </div>
-
-            <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
-              <p>2</p>
-              <span className="material-symbols-outlined text-gradianBiru">
-              stars
-              </span>
-              <progress value={75} max={100} className='progres-bar'/>
-              <p>14</p>
-            </div>
-
-            <div className='inline-flex items-center space-x-2 md:w-auto w-[70%]'>
-              <p>1</p>
-              <span className="material-symbols-outlined text-gradianBiru">
-              stars
-              </span>
-              <progress value={75} max={100} className='progres-bar'/>
-              <p>19</p>
-            </div>
           </div>
         </div>
 
         <div className=" md:w-[42%] md:h-48 mx-10 md:mt-[30px] group">
          <p className='md:text-left text-center mt-3 font-roboto md:text-[16px] flex-col'>Terima Kasih Telah Mengirimkan Indeks Kepuasan Masyarakat</p>
-         <button type='button' className='my-4 bg-kuningButton hover:bg-yellow-300 text-bluePu font-onest text-[15px] font-semibold md:w-[100px] w-[75px] md:h-[40px] h-[30px] rounded-xl md:mr-[280px] hover:bg-yellow-500 active:bg-yellow-600'>Review</button>
+         <button type='button' className='my-4 bg-kuningButton hover:bg-yellow-300 text-bluePu font-onest text-[15px] font-semibold md:w-[100px] w-[75px] md:h-[40px] h-[30px] rounded-xl md:mr-[280px] hover:bg-yellow-500 active:bg-yellow-600' onClick={() => setIsModalOpen(true)}>Review</button>
         </div>
 
       </div>
@@ -98,11 +80,11 @@ const Langganan = () => {
               <input 
                 type="text" 
                 placeholder="Masukan Email.." 
-                className="border border-slate-100 shadow-lg bg-slate-100 rounded-xl md:w-[500px] w-[290px] md:h-[40px] h-[35px] my-1 placeholder:font-onest placeholder:text-slate-500 placeholder:text-[14px] pr-12"
+                className="border border-slate-100 shadow-lg bg-slate-100 rounded-xl md:w-[500px] w-[290px] md:h-[40px] h-[35px] my-1 placeholder:font-onest placeholder:text-slate-500 placeholder:text-[14px] pr-12"              
               />
               <button 
                 type="submit" 
-                className="md:block hidden absolute right-2 top-1/2 -translate-y-1/2 bg-bluePu hover:bg-blue-950 text-kuningButton font-roboto w-[100px] px-3 py-1 rounded-xl "
+                className="md:block hidden absolute right-2 top-1/2 -translate-y-1/2 bg-bluePu hover:bg-blue-950 text-kuningButton font-roboto w-[100px] px-3 py-1 rounded-xl"
               >
                 Kirim
               </button>
@@ -113,6 +95,10 @@ const Langganan = () => {
         </div>
     
     </section>
+
+    <ModalPenilaian isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+
+    </ModalPenilaian>
     </>
   );
 };
