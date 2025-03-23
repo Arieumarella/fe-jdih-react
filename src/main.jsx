@@ -6,11 +6,10 @@ import App from "./App";
 import "./index.css"; // Opsional jika ada styling
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+
     <BrowserRouter>
       <HelmetProvider>
         <App />
       </HelmetProvider>
     </BrowserRouter>
-  </React.StrictMode>
 );

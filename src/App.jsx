@@ -62,6 +62,7 @@ function TitleUpdater() {
 
 
 function App() {
+  console.log("ulangi");
 
   return (
     <>
