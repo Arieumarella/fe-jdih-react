@@ -6,6 +6,7 @@ export const getDataRating = async () => {
         const res = await axios.get("http://localhost:3000/footer/getDataRating");
         return res.data.data;
     } catch (err) {
+        console.log(err);
         return err;
     }
 };
@@ -13,7 +14,16 @@ export const getDataRating = async () => {
 export const postDataRating = async (form) => {
     try {
         const res = await axios.post("http://localhost:3000/footer/postRating", form);
-        console.log(res);
+        return res;
+    } catch (err) {
+        console.log(err);
+        return err;
+    }
+};
+
+export const postDataLangganan = async (form) => {
+    try {
+        const res = await axios.post("http://localhost:3000/footer/postLangganan", form);
         return res;
     } catch (err) {
         console.log(err);

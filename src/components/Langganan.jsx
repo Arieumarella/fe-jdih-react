@@ -2,11 +2,46 @@ import {React, useState, useEffect} from 'react';
 import { Rating } from "react-simple-star-rating";
 import { getDataRating } from '../services/footer.services';
 import ModalPenilaian from '../components/ModalPenilaian';
+import { toast } from "../components/ToastProvider";
+import { postDataLangganan } from "../services/footer.services";
 
 const Langganan = () => {
 
   const [fatchData, setfatchData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formLangganan, setFormLangganan] = useState({nama: "", email: ""});
+
+  const handelFormLangganan = (e) => {
+    setFormLangganan({...formLangganan, [e.target.name]: e.target.value});
+  }
+
+  const handleSubmitLangganan = async (e) => {
+    e.preventDefault();
+    
+    if(!formLangganan.nama || !formLangganan.email) {
+      toast.error("Harap lengkapi semua kolom Terlebih Dahulu.", { position: "bottom-right"});
+      return;
+    }
+
+    try {
+      const response = await postDataLangganan(formLangganan);
+
+      console.log(response);
+
+      if (response.status !== 200) {
+        toast.error("Data gagal disimpan.", { position: "bottom-right"});
+      }else{
+        toast.success("Data berhasil disimpan.", { position: "bottom-right" });
+        setFormLangganan({nama: "", email: ""});
+      }
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      toast.error("Terjadi kesalahan, silakan coba lagi.", { position: "bottom-right"});
+    } 
+
+
+  }
+
 
   useEffect(() => {
     
@@ -72,15 +107,25 @@ const Langganan = () => {
       <div className='group w-full md:my-0 my-10 md:mb-[40px]'>
           <p className='font-roboto font-semibold md:text-[25px] text-[20px] py-4 text-kuningButton'>Berlangganan</p>
           <p className='font-roboto md:px-2 px-10 font-medium md:text-[16px] text-[14px]'>Anda dapat berlangganan untuk mendapatkan notifikasi dan info penting di bidang pekerjaan umum dari pengelola JDIH PU langsung lewat inbox email Anda. </p>
+          <form onSubmit={handleSubmitLangganan}>
           <div className="flex flex-col items-center relative w-full group">
-              <input type="text" placeholder=" Masukan Nama.." className="border border-slate-100 shadow-lg bg-slate-100 text-slate-800 rounded-xl md:w-[500px] w-[290px] md:h-[40px] h-[35px] my-4 placeholder:font-onest placeholder:text-slate-500 placeholder:text-[14px]"/>
+              <input 
+              type="text" 
+              name='nama' 
+              value={formLangganan.nama}
+              placeholder=" Masukan Nama.." 
+              onChange={handelFormLangganan}
+              className="border border-slate-100 shadow-lg bg-slate-100 text-slate-800 rounded-xl md:w-[500px] w-[290px] md:h-[40px] h-[35px] my-4 placeholder:font-onest placeholder:text-slate-500 placeholder:text-[14px]"/>
              
               <div className="relative md:w-[500px] w-[290px]">
   
               <input 
-                type="text" 
+                type="email"
+                name="email"
+                value={formLangganan.email} 
+                onChange={handelFormLangganan}
                 placeholder="Masukan Email.." 
-                className="border border-slate-100 shadow-lg bg-slate-100 rounded-xl md:w-[500px] w-[290px] md:h-[40px] h-[35px] my-1 placeholder:font-onest placeholder:text-slate-500 placeholder:text-[14px] pr-12"              
+                className="border border-slate-100 shadow-lg bg-slate-100 text-slate-800 rounded-xl md:w-[500px] w-[290px] md:h-[40px] h-[35px] my-1 placeholder:font-onest placeholder:text-slate-500 placeholder:text-[14px] pr-12"              
               />
               <button 
                 type="submit" 
@@ -92,6 +137,7 @@ const Langganan = () => {
   
               <button type='button' className='md:hidden block md:ml-[400px] my-4 bg-kuningButton hover:bg-yellow-300 items-end text-bluePu font-onest text-[15px] font-semibold md:w-[100px] w-[75px] md:h-[40px] h-[30px] rounded-xl relative hover:bg-yellow-500 active:bg-yellow-600'>Kirim</button>
           </div>
+          </form>
         </div>
     
     </section>

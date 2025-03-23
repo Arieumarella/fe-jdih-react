@@ -1,12 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
+import {getDetailMonografi} from "../services/monografi.services";
 
 const DetailMonografi = () => {
 
     const { slug } = useParams();
+    const [dataMonografi, setDataMonografi] = useState([]);
+
+    useEffect(() => {
+      getDetailMonografi(slug).then((result) => {
+        setDataMonografi(result.data);
+           });
+      }, []);
+
+      console.log(dataMonografi);
 
     return (
       <>

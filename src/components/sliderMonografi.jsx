@@ -112,7 +112,12 @@ export default function ImageSlider() {
         {monografi.map((item,index) => (
           <SwiperSlide key={index}>
             <div className="group relative rounded-lg overflow-hidden shadow-lg transition-all duration-300">
-              <a href="#" className="block" onClick={() => navigate(`/Monografi/${item.slug}`)}>
+              <a href={`/Monografi/${item.slug}`} className="block" onClick={(e) => {
+                 e.preventDefault();
+                    navigate(`/Monografi/${item.slug}`);
+                    window.scrollTo(0, 0);
+                  }}>
+  
                 <img
                   src={item.path_file}
                   alt={item.judul}
