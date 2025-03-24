@@ -5,16 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import {getBeritaHome, getMonografiHome} from '../services/home.services';
-import satu from "/src/assets/1.jpg";
 import { useNavigate } from "react-router-dom";
-
-const images = [
-  { id: 1, src: {satu}, alt: "Nature adfasdg asvdfuv uyasgdfg yugsfuy uyasgdfy" },
-  { id: 2, src: "https://source.unsplash.com/400x300/?city", alt: "City" },
-  { id: 3, src: "https://source.unsplash.com/400x300/?technology", alt: "Technology" },
-  { id: 4, src: "https://source.unsplash.com/400x300/?architecture", alt: "Architecture" },
-  { id: 5, src: "https://source.unsplash.com/400x300/?people", alt: "People" },
-];
 
 export default function ImageSlider() {
 
@@ -67,7 +58,11 @@ export default function ImageSlider() {
         {berita.map((item,key) => (
           <SwiperSlide key={key}>
             <div className="group relative rounded-lg overflow-hidden shadow-lg transition-all duration-300">
-              <a href="#" className="block" onClick={() => navigate(`/Berita/${item.slug}`)}>
+              <a href="#" className="block" onClick={(e) => {
+                e.preventDefault(); 
+                navigate(`/Berita/${item.slug}`)
+                window.scrollTo(0, 0);
+                }}>
                 <img
                   src={item.path_file}
                   alt={item.judul}
@@ -113,7 +108,7 @@ export default function ImageSlider() {
           <SwiperSlide key={index}>
             <div className="group relative rounded-lg overflow-hidden shadow-lg transition-all duration-300">
               <a href={`/Monografi/${item.slug}`} className="block" onClick={(e) => {
-                 e.preventDefault();
+                  e.preventDefault();
                     navigate(`/Monografi/${item.slug}`);
                     window.scrollTo(0, 0);
                   }}>

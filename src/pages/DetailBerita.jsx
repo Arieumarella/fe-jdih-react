@@ -1,31 +1,40 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
+import {getDetailBerita} from '../services/berita.services';
 
 const DetailBerita = () => {
 
     const { slug } = useParams();
 
-    const details = [
-      { label: "Tipe", value: "Peraturan Perundang-undangan" },
-      { label: "Judul", value: "Peraturan Menteri Koordinator Bidang Kemaritiman dan Investasi Nomor 5 Tahun 2024 tentang Tugas dan Tata Kerja Tim Koordinasi Serta Pedoman Teknis Tata Kelola Kompleks Candi Borobudur" },
-      { label: "T.E.U. Badan / Pengarang", value: "Indonesia. Kementerian Koordinator Bidang Kemaritiman dan Investasi" },
-      { label: "No. Peraturan", value: "5" },
-      { label: "Jenis/Bentuk Peraturan", value: "Peraturan Menteri" },
-      { label: "Singkatan Jenis/Bentuk Peraturan", value: "Permen" },
-      { label: "Tempat Penetapan", value: "Jakarta" },
-      { label: "Tanggal-Bulan-Tahun Penetapan", value: "16 Oktober 2024" },
-      { label: "Tanggal-Bulan-Tahun Pengundangan", value: "18 Oktober 2024" },
-      { label: "Sumber", value: "BN 2024 (718):14 hlm" },
-      { label: "Subjek", value: "CANDI BOROBUDUR - TIM KOORDINASI" },
-      { label: "Status Peraturan", value: "Berlaku" },
-      { label: "Bahasa", value: "Bahasa Indonesia" },
-      { label: "Lokasi", value: "Biro Hukum Kementerian Koordinator Bidang Kemaritiman dan Investasi" },
-      { label: "Bidang Hukum", value: "Kepariwisataan dan Ekonomi Kreatif" },
-      { label: "Lampiran", value: "-" },
-    ];
+    const [data, setData] = useState([]);
+
+      useEffect(() => {    
+    
+        // Get Jenis Peraturan
+        getDetailBerita(slug).then((result) => {
+            setData(result);
+        });
+            
+      }, [slug]);
+
+    console.log(data);
+
+    const formatDate = (dateString=null) => {
+        if(dateString==null){
+            return '-'
+        }
+        
+        const year = dateString.substring(0, 4);
+        const month = dateString.substring(4, 6) - 1; // JS bulan mulai dari 0
+        const day = dateString.substring(6, 8);
+    
+        const date = new Date(year, month, day);
+        return date.toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" });
+    };      
+
 
     return (
       <>
@@ -37,27 +46,28 @@ const DetailBerita = () => {
             <div className='md:flex justify-between md:w-[80%] w-full gap-4 mx-auto my-4'>
                 <div className="md:w-[80%] w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300">
 
-                <div className='font-roboto font-semibold text-sm text-gray-600'>21 Feb 2024</div>
+                <div className='font-roboto font-semibold text-sm text-gray-600'>{formatDate(data?.tgl_buat)}</div>
 
 
                 {/* Judul Berita */}
                 <h1 className="md:text-[23px] text-[23px] font-bold font-roboto text-blue-900 mt-3 text-center">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nesciunt quam harum debitis, placeat labore suscipit, ipsa quis tempora
+                    {data?.judul}
                 </h1>
 
                 {/* Gambar Berita */}
-                <div className="w-full h-[200px] md:h-[300px] overflow-hidden rounded-lg mt-4">
+                <div className="w-full h-[200px] md:h-[400px] overflow-hidden rounded-lg mt-4">
                     <img
-                    src="/1.jpg"
+                    src={`https://jdih.pu.go.id/internal/assets/assets/berita/${data?.gambar_1}`}
                     alt="Gambar Berita"
                     className="w-full h-full object-fill"
                     />
                 </div>
 
                 {/* Deskripsi Berita */}
-                <p className="text-gray-600 text-sm md:text-base mt-4 text-justify leading-relaxed font-roboto">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut sapiente temporibus neque, repellendus necessitatibus dignissimos, consequatur praesentium molestias molestiae mollitia sit laudantium delectus saepe quam ratione distinctio sequi iste architecto quasi ipsam recusandae ad! Alias, dolorum modi excepturi consequuntur molestias nulla accusamus, provident eos architecto ab libero id? Neque enim quia tempore, dolorum, expedita facere incidunt recusandae quod distinctio aut, corporis unde id? Voluptate culpa enim minima corrupti, ab ad error officiis impedit exercitationem sunt possimus dignissimos, eos nulla maxime, id autem repellendus doloremque ex. Omnis nam accusamus qui voluptates, maiores soluta consectetur doloribus dolorum nihil magni vel natus perferendis dignissimos aut eos architecto autem. Tempora necessitatibus saepe illo! Incidunt non voluptate laboriosam. Fuga, quae recusandae cumque ab a iusto molestiae provident reprehenderit perferendis non doloribus amet nesciunt voluptas adipisci error laboriosam suscipit illo reiciendis deserunt odio, molestias voluptatum neque! Incidunt libero omnis enim, sunt dolorem saepe dolores id voluptatibus minima architecto, explicabo praesentium quo distinctio temporibus quas laudantium quis laborum consectetur veniam iusto exercitationem inventore ab mollitia. Reprehenderit sed dolores quisquam nisi repellendus laudantium, unde quam voluptates ipsum porro, laborum doloremque et ab nemo accusantium alias enim harum sapiente sint aliquid. Impedit fuga culpa harum doloremque illum commodi reiciendis nisi, eveniet modi repellendus inventore excepturi odit ducimus, vero ex consequuntur alias. Ipsum ea in iure aliquam, sed ipsam voluptate reiciendis nam repudiandae ad.
-                </p>
+                <p
+                className="text-gray-600 text-sm md:text-base mt-4 text-justify leading-relaxed font-roboto"
+                dangerouslySetInnerHTML={{ __html: data?.isi || "" }}
+                />
                 
                 {/* Tombol Kembali */}
                 <div className="mt-6">
