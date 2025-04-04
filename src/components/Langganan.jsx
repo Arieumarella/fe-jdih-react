@@ -4,6 +4,8 @@ import { getDataRating } from '../services/footer.services';
 import ModalPenilaian from '../components/ModalPenilaian';
 import { toast } from "../components/ToastProvider";
 import { postDataLangganan } from "../services/footer.services";
+import CountUp from '../components/react-bits/CountUp/CountUp';
+import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 
 const Langganan = () => {
 
@@ -58,7 +60,17 @@ const Langganan = () => {
     <>
     
     <section className='bg-bluePu text-white  text-center  md:flex md:justify-between md:px-[60px] items-center'>
-
+    <AnimatedContent
+     distance={150}
+     delay={100}
+     direction="horizontal"
+     reverse={true}
+     config={{ tension: 400, friction: 100 }}
+     initialOpacity={0}
+     animateOpacity
+     scale={1.0}
+     threshold={0.1}
+    >
     <div className='w-full md:flex md:justify-center'>
       <p className='md:absolute font-semibold font-roboto md:text-[25px] text-[20px] py-4 md:mt-[18px] text-kuningButton text-center'>Indeks Kepuasan Masyarakat</p>
      
@@ -66,9 +78,23 @@ const Langganan = () => {
         <div className="md:relative flex items-center justify-center w-48 h-48 rounded-full p-[13px] bg-gradient-to-r from-gradiankuning to-gradianBiru md:my-auto md:mx-1 mx-auto group">
           <div className="w-[93%] h-[93%] bg-[#D9D9D9] rounded-full flex items-center justify-center">
             <div className="w-[95%] h-[95%] bg-bluePu rounded-full  items-center justify-center">
-              <p className="text-2xl font-bold text-slate-200 font-onest text-[35px] mt-[35px]">{fatchData.rataRata}</p>
+              <p className="text-2xl font-bold text-slate-200 font-onest text-[35px] mt-[35px]">
+                {fatchData.rataRata}
+              </p>
               <Rating initialValue={fatchData.rataRata} ratingValue="4" size={25} fillColor="#FFE54E" className="block" readonly={true} />
-              <p className="font-semibold text-slate-200 font-onest text-[14px] ">{fatchData.totalPemberiRating} reviewer</p>
+              <p className="font-semibold text-slate-200 font-onest text-[14px] ">
+                
+                <CountUp
+                  key={2}
+                  from={0}
+                  to={Number(fatchData.totalPemberiRating) || 0}
+                  separator=","
+                  direction="up"
+                  duration={2}
+                  className='mr-1'
+                /> 
+                reviewer
+              </p>
             </div>
           </div>
         </div>
@@ -103,7 +129,19 @@ const Langganan = () => {
 
       </div>
     </div>
-      
+    </AnimatedContent>
+    
+    <AnimatedContent
+     distance={150}
+     delay={100}
+     direction="horizontal"
+     reverse={false}
+     config={{ tension: 400, friction: 100 }}
+     initialOpacity={0}
+     animateOpacity
+     scale={1.0}
+     threshold={0.1}
+    >
       <div className='group w-full md:my-0 my-10 md:mb-[40px]'>
           <p className='font-roboto font-semibold md:text-[25px] text-[20px] py-4 text-kuningButton'>Berlangganan</p>
           <p className='font-roboto md:px-2 px-10 font-medium md:text-[16px] text-[14px]'>Anda dapat berlangganan untuk mendapatkan notifikasi dan info penting di bidang pekerjaan umum dari pengelola JDIH PU langsung lewat inbox email Anda. </p>
@@ -139,7 +177,7 @@ const Langganan = () => {
           </div>
           </form>
         </div>
-    
+        </AnimatedContent>
     </section>
 
     <ModalPenilaian isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>

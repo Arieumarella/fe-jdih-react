@@ -3,8 +3,8 @@ import {Rectangle, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, 
 import kuesioner from "/src/assets/kuesioner.png";
 import { getUnor, getLinkTerkait, getJnsPeraturan, getKurvaPengunjung } from '../services/home.services';
 import { useNavigate } from "react-router-dom";
-
-
+import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
+import Aurora from '../components/react-bits/Aurora/Aurora';
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -62,12 +62,36 @@ const containerContens = () => {
             
             {unor?.length > 0 ? (
               unor.map((item, index) => (
+              <AnimatedContent
+                key={index}
+                distance={80}
+                direction="vertical"
+                reverse={false}
+                config={{ tension: 80, friction: 20 }}
+                initialOpacity={0.2}
+                animateOpacity
+                scale={1}
+                threshold={0.2}
+              >
                 <div key={index} className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
                 <a href="#"
                 onClick={() => navigate(`/detail-dokumen/1`)}>{item.deptname}</a>
                 </div>
+              </AnimatedContent>
              ))) : (
+              <AnimatedContent
+                key={1}
+                distance={80}
+                direction="vertical"
+                reverse={false}
+                config={{ tension: 80, friction: 20 }}
+                initialOpacity={0.2}
+                animateOpacity
+                scale={1}
+                threshold={0.2}
+              >
                 <p className='text-center text-slate-100'>Data Kosong</p>
+                </AnimatedContent>
             )}
 
         </div>   
@@ -79,17 +103,42 @@ const containerContens = () => {
             <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left group">
             {linkTerkait?.length > 0 ? (
               linkTerkait.map((item, index) => (
+              <AnimatedContent
+                key={index+10}
+                distance={80}
+                direction="vertical"
+                reverse={false}
+                config={{ tension: 80, friction: 20 }}
+                initialOpacity={0.2}
+                animateOpacity
+                scale={1}
+                threshold={0.2}
+              >
                 <div key={index} className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 md:my-2'>
                     <span className="material-symbols-outlined -rotate-45">link</span> <a href={item.linkurl} target="_blank">{item.linkname}</a>
                 </div>
+              </AnimatedContent>
             ))) : (
+              <AnimatedContent
+                key={2}
+                distance={80}
+                direction="vertical"
+                reverse={false}
+                config={{ tension: 80, friction: 20 }}
+                initialOpacity={0.2}
+                animateOpacity
+                scale={1}
+                threshold={0.2}
+              >
                 <p className='text-center text-slate-100'>Data Kosong</p>
+              </AnimatedContent>
             )}
             </div>
 
             </div>
 
             <div className='group md:my-4 my-6'>
+              
                 <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center">
                     <p className='font-onest font-semibold text-slate-100 md:text-[20px] text-[18px] mb-6'>Statistik Pengunjung</p>
                     <ResponsiveContainer width="100%" height={300}>
@@ -119,11 +168,35 @@ const containerContens = () => {
                 
             {jnsPeraturan?.length > 0 ? (
               jnsPeraturan.map((item, index) => (
+              <AnimatedContent
+                key={index+20}
+                distance={80}
+                direction="vertical"
+                reverse={false}
+                config={{ tension: 80, friction: 20 }}
+                initialOpacity={0.2}
+                animateOpacity
+                scale={1}
+                threshold={0.2}
+              >
                 <div key={index} className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
                     <span className="material-symbols-outlined">receipt_long</span> <a href="#" onClick={() => navigate(`/Search/pencarian-detail/${item.peraturan_category_id}`)}>{item.percategoryname}</a>
                 </div>
+              </AnimatedContent>
              ))) : (
+              <AnimatedContent
+                key={3}
+                distance={80}
+                direction="vertical"
+                reverse={false}
+                config={{ tension: 80, friction: 20 }}
+                initialOpacity={0.2}
+                animateOpacity
+                scale={1}
+                threshold={0.2}
+              >
                 <p className='text-center text-slate-100'>Data Kosong</p>
+              </AnimatedContent>
             )}                
 
             </div>

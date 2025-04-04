@@ -6,6 +6,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import {getBeritaHome, getMonografiHome} from '../services/home.services';
 import { useNavigate } from "react-router-dom";
+import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 
 export default function ImageSlider() {
 
@@ -30,9 +31,20 @@ export default function ImageSlider() {
   return (
 
     <div className="md:flex md:justify-between px-5 md:px-[60px] md:mt-[18px]">
-
+    
     {/* Ini adalah slider Berita */}
     <div className="md:w-[50%] md:p-2">
+    <AnimatedContent
+     distance={150}
+     delay={100}
+     direction="horizontal"
+     reverse={true}
+     config={{ tension: 400, friction: 100 }}
+     initialOpacity={0}
+     animateOpacity
+     scale={1.0}
+     threshold={0.1}
+    >
       <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center bg-bluePu">
     <p className="font-onest font-semibold text-slate-100 md:text-[20px] text-[14px] my-4">
       BERITA
@@ -78,11 +90,23 @@ export default function ImageSlider() {
       </Swiper>
     </div>
   </div>
+  </AnimatedContent>
 </div>
 
     {/* Ini adalah slider Berita */}
     <div className="md:w-[50%] md:p-2">
-      <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center bg-bluePu">
+    <AnimatedContent
+     distance={150}
+     delay={100}
+     direction="horizontal"
+     reverse={false}
+     config={{ tension: 400, friction: 100 }}
+     initialOpacity={0}
+     animateOpacity
+     scale={1.0}
+     threshold={0.1}
+    >
+    <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center bg-bluePu">
     <p className="font-onest font-semibold text-slate-100 md:text-[20px] text-[14px] my-4">
       MONOGRAFI
     </p>
@@ -128,6 +152,7 @@ export default function ImageSlider() {
       </Swiper>
     </div>
   </div>
+  </AnimatedContent>
 </div>
 
 

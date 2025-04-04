@@ -14,11 +14,11 @@ export const getDetailBerita = async (slug) => {
     }
 };
 
-export const getBeritaPagination = async (pageX) => {
+export const getBeritaPagination = async (pageX, searchKey) => {
     try{
-
         const page = {
-            'page' : pageX
+            'page' : pageX,
+            'search' : searchKey
         }
 
         const res = await axios.post("http://localhost:3000/Berita/pagination", page);
