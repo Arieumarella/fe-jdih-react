@@ -137,24 +137,16 @@ const Home = () => {
           {posts?.length > 0 ? (
               posts.map((item, index) => (
                 <AnimatedContent
-                key={item.id}
-                distance={150}
-              
-                direction="vertical"
-              
-                reverse={false}
-              
-                config={{ tension: 45, friction: 15 }}
-              
-                initialOpacity={0.2}
-              
-                animateOpacity
-              
-                scale={1.1}
-              
-                threshold={0.2}
-              
-              >
+                  key={item.id}
+                  distance={150}
+                  direction="vertical"
+                  reverse={false}
+                  config={{ tension: 45, friction: 15 }}
+                  initialOpacity={0.2}
+                  animateOpacity
+                  scale={1.1}
+                  threshold={0.2}
+                >
                 <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 cursor-pointer"
                   onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita/"+item?.slug+""); window.scrollTo(0, 0); }}>
                     {/* Gambar */}
