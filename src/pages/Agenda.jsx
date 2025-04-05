@@ -13,6 +13,7 @@ const Agenda = () => {
     
       const navigateHandelClick = (link = '') => {
         navigate(`/${link}`);
+        window.scrollTo(0, 0);
       };
 
       let textKeterangan = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum.qadsf  sdfg dsfgdfshdfs";

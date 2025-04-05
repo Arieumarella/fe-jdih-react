@@ -4,6 +4,8 @@ import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import {getDetailBerita} from '../services/berita.services';
+import SplitText from "../components/react-bits/SplitText/SplitText";
+import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 
 const DetailBerita = () => {
 
@@ -46,15 +48,32 @@ const DetailBerita = () => {
             <div className='md:flex justify-between md:w-[80%] w-full gap-4 mx-auto my-4'>
                 <div className="md:w-[80%] w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300">
 
-                <div className='font-roboto font-semibold text-sm text-gray-600'>{formatDate(data?.tgl_buat)}</div>
+                <div className='font-roboto font-semibold text-sm text-gray-600'>
+                    <SplitText
+                      text={formatDate(data?.tgl_buat)}
+                      delay={100}
+                      animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                      animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                      easing="easeOutCubic"
+                      threshold={0.2}
+                    />
+                </div>
 
 
                 {/* Judul Berita */}
                 <h1 className="md:text-[23px] text-[23px] font-bold font-roboto text-blue-900 mt-3 text-center">
-                    {data?.judul}
+                    <SplitText
+                      text={data?.judul}
+                      delay={10}
+                      animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                      animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                      easing="easeOutCubic"
+                      threshold={0.2}
+                    />
                 </h1>
 
                 {/* Gambar Berita */}
+                <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
                 <div className="w-full h-[200px] md:h-[400px] overflow-hidden rounded-lg mt-4">
                     <img
                     src={`https://jdih.pu.go.id/internal/assets/assets/berita/${data?.gambar_1}`}
@@ -62,12 +81,15 @@ const DetailBerita = () => {
                     className="w-full h-full object-fill"
                     />
                 </div>
+                </FadeContent>
 
                 {/* Deskripsi Berita */}
+                <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
                 <p
                 className="text-gray-600 text-sm md:text-base mt-4 text-justify leading-relaxed font-roboto"
                 dangerouslySetInnerHTML={{ __html: data?.isi || "" }}
                 />
+                </FadeContent>
                 
                 {/* Tombol Kembali */}
                 <div className="mt-6">

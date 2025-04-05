@@ -4,6 +4,8 @@ import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import {getDetailMonografi} from "../services/monografi.services";
+import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
+import SplitText from "../components/react-bits/SplitText/SplitText";
 
 const DetailMonografi = () => {
 
@@ -27,6 +29,17 @@ const DetailMonografi = () => {
     
           {/* Bagian Kiri - Gambar Buku */}
           <div className="md:w-1/3 w-full flex flex-col mt-6">
+          <AnimatedContent
+            distance={150}
+            delay={100}
+            direction="horizontal"
+            reverse={true}
+            config={{ tension: 400, friction: 100 }}
+            initialOpacity={0}
+            animateOpacity
+            scale={1.0}
+            threshold={0.1}
+            >
               <img 
               src={ `https://jdih.pu.go.id/internal/assets/assets/produk/monografi/BukuHukum/${dataMonografi?.tanggal?.substring(0,4)}/11/${dataMonografi.file_upload}`} 
               alt="Cover Buku" 
@@ -34,8 +47,28 @@ const DetailMonografi = () => {
               />
               {/* Judul Buku */}
               <div className=' w-full mt-4'>
-                  <h2 className="text-[18px] font-roboto font-bold text-bluePu">{dataMonografi.judul}</h2>
-                  <p className="text-bluePu text-[14px] mt-1">Oleh: <span className="font-semibold">{dataMonografi.teu}</span></p>
+                  <h2 className="text-[18px] font-roboto font-bold text-bluePu">
+                    <SplitText
+                      text={dataMonografi.judul}
+                      delay={20}
+                      animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                      animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                      easing="easeOutCubic"
+                      threshold={0.2}
+                    />
+                    
+                  </h2>
+                  <p className="text-bluePu text-[14px] mt-1">Oleh: <span className="font-semibold">
+                  <SplitText
+                      text={dataMonografi.teu}
+                      delay={50}
+                      animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                      animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                      easing="easeOutCubic"
+                      threshold={0.2}
+                    />
+                    
+                  </span></p>
               </div>
               
               <div className="flex gap-3 mt-2 border-t py-4">
@@ -62,10 +95,22 @@ const DetailMonografi = () => {
                 </div>
               </div>
               </div>
+              </AnimatedContent>
           </div>
 
           {/* Bagian Kanan - Detail Buku */}
           <div className="md:w-2/3 w-full md:pl-8 mt-6 md:mt-0">
+          <AnimatedContent
+            distance={150}
+            delay={100}
+            direction="horizontal"
+            reverse={false}
+            config={{ tension: 400, friction: 100 }}
+            initialOpacity={0}
+            animateOpacity
+            scale={1.0}
+            threshold={0.1}
+            >
               {/* Deskripsi */}
               <div className="mt-4 border-b border-gray-300 pb-4">
               <h3 className="font-bold text-bluePu text-[20px] font-roboto">Deskripsi</h3>
@@ -201,7 +246,7 @@ const DetailMonografi = () => {
               
               </div>
               </div>
-
+              </AnimatedContent>
           </div>
 
           </div>

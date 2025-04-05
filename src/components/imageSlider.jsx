@@ -5,11 +5,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import satu from "/src/assets/1.jpg";
+import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 
 const ImageSlider = (data) => {
         
     return (
       <>
+      <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
         <div className="px-5 md:px-[60px] py-4">
         <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -47,6 +49,7 @@ const ImageSlider = (data) => {
 
         </Swiper>
         </div>
+        </FadeContent>
       </>
     );
   };

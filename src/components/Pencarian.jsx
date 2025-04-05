@@ -8,6 +8,7 @@ const Pencarian = () => {
     
       const navigateHandelClick = (link = '') => {
         navigate(`/${link}`);
+        window.scrollTo(0, 0);
       };
    
 

@@ -14,6 +14,7 @@ export default function Header() {
 
   const navigateHandelClick = (link = '') => {
     navigate(`/${link}`);
+    window.scrollTo(0, 0);
   };
 
   function hendelHuberger() {
