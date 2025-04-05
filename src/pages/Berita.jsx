@@ -83,7 +83,6 @@ const Home = () => {
         setPosts(result.data.posts);
         setTotalPages(result.data.totalPages); 
         setCurrentPage(result.data.currentPage);
-        console.log(posts);
       });
     } 
     
@@ -139,7 +138,7 @@ const Home = () => {
               posts.map((item, index) => (
                 <AnimatedContent
                   key={item.id}
-                  distance={150}
+                  distance={20}
                   direction="vertical"
                   reverse={false}
                   config={{ tension: 45, friction: 15 }}

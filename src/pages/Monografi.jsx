@@ -126,7 +126,7 @@ const Monografi = () => {
               posts.map((item, index) => (
           <AnimatedContent
             key={item.peraturan_id}
-            distance={150}
+            distance={20}
             direction="vertical"
             reverse={false}
             config={{ tension: 45, friction: 15 }}

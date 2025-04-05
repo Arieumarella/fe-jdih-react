@@ -1,11 +1,67 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import CardAgenda from "../components/CardAgenda";
 import { useNavigate } from "react-router-dom";
+import {getAgendaPagination}  from "../services/agenda.services";
+import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 
+const Pagination = ({ totalPages, currentPage, onPageChange }) => {
+  const generatePageNumbers = () => {
+    if (totalPages <= 5) {
+      return [...Array(totalPages)].map((_, i) => i + 1);
+    }
 
+    let pages = [];
+    if (currentPage <= 3) {
+      pages = [1, 2, 3, 4, "...", totalPages];
+    } else if (currentPage >= totalPages - 2) {
+      pages = [1, "...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    } else {
+      pages = [1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages];
+    }
+    return pages;
+  };
+
+  return (
+    <div className="flex justify-end items-center my-4 space-x-2 gap-4 md:w-[85%]">
+      <span className="font-medium font-roboto md:text-[30px] text-[14px]">Halaman</span>
+      <div className="flex space-x-2 font-roboto md:text-[18px] text-[14px]">
+        <button
+          className={`md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition`}
+          disabled={currentPage === 1}
+          onClick={() => onPageChange(currentPage - 1)}
+        >
+          Prev
+        </button>
+
+        {generatePageNumbers().map((page, index) => (
+          <button
+            key={index}
+            className={`md:px-4 px-3 md:py-2 py-1 rounded-lg shadow-md transition ${
+              currentPage === page
+                ? "bg-bluePu text-kuningButton"
+                : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+            }`}
+            onClick={() => typeof page === "number" && onPageChange(page)}
+            disabled={page === "..."}
+          >
+            {page}
+          </button>
+        ))}
+
+        <button
+          className={`md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition`}
+          disabled={currentPage === totalPages}
+          onClick={() => onPageChange(currentPage + 1)}
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const Agenda = () => {
 
@@ -16,8 +72,22 @@ const Agenda = () => {
         window.scrollTo(0, 0);
       };
 
-      let textKeterangan = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, eum.qadsf  sdfg dsfgdfshdfs";
-      const trimmedText = textKeterangan.length > 120 ? textKeterangan.substring(0, 120) + "..." : textKeterangan;
+      let [posts, setPosts] = useState([]);
+      let [currentPage, setCurrentPage] = useState(1);
+      let [totalPages, setTotalPages] = useState(1);
+      let [search, setSearch] = useState('');
+      
+      const paginateFunction = async () => {
+        await getAgendaPagination(currentPage, search).then((result) => {
+          setPosts(result.data.posts);
+          setTotalPages(result.data.totalPages); 
+          setCurrentPage(result.data.currentPage);
+        });
+      } 
+          
+      useEffect(() => {
+        paginateFunction(); 
+      }, [currentPage]);
 
 
     return (
@@ -28,32 +98,32 @@ const Agenda = () => {
           
           <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>Agenda</h1>
 
-          <CardAgenda/>
+          {posts?.length > 0 ? (
+              posts.map((item, index) => (
+              
+              <AnimatedContent
+                distance={100}
+                delay={200}
+                direction="horizontal"
+                reverse={index % 2 === 0}
+                config={{ tension: 400, friction: 100 }}
+                initialOpacity={0}
+                animateOpacity
+                scale={1.0}
+                threshold={0.1}
+              >
+               <CardAgenda key={item.id} data={item}/>
+              </AnimatedContent>
+            ))) : (
+            <p className='text-center text-slate-100'>Data Kosong</p>
+          )}  
 
         {/* Pagination */}
-        <div className='flex justify-end items-center my-4 space-x-2 gap-4 md:w-[85%]'>
-          <span className='font-medium font-roboto md:text-[30px] text-[14px]'>Halaman</span>
-          <div className='flex space-x-2 font-roboto md:text-[18px] text-[14px] shedow-lg'>
-            <button className="md:px-4 px-3 md:py-2 py-1 bg-bluePu text-kuningButton rounded-lg shadow-md hover:bg-opacity-80 transition">
-              1
-            </button>
-            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
-              2
-            </button>
-            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
-              3
-            </button>
-            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
-              4
-            </button>
-            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
-              5
-            </button>
-            <button className="md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition">
-              Next
-            </button>
-          </div>
-        </div>
+        <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={(page) => setCurrentPage(page)}
+       />
 
 
         </section>      
