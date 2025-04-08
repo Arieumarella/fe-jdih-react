@@ -22,8 +22,6 @@ const DetailBerita = () => {
             
       }, [slug]);
 
-    console.log(data);
-
     const formatDate = (dateString=null) => {
         if(dateString==null){
             return '-'

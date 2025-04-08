@@ -1,23 +1,49 @@
+import {React, useEffect, useState} from 'react';
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
+import {getTentangKami} from "../services/tentangKami.services";
+import DOMPurify from "dompurify";
+import FadeContent from '../components/react-bits/FadeContent/FadeContent'
+import SplitText from "../components/react-bits/SplitText/SplitText";
 
 const TentangKami = () => {
+
+    const [data, setData] = useState([]);
+      
+    useEffect(() => {    
+      getTentangKami().then((result) => {
+        setData(result);
+      });
+              
+    }, []);
+    
+
     return (
         <>
             <Headers/>
-            <section className='h-full bg-slate-100 py-4 h-[500px]'>
+            <section className='h-full bg-slate-100 py-6 h-[500px]'>
             
 
-                <h1 className="text-center font-roboto font-bold text-bluePu text-[24px] my-2">TENTANG KAMI</h1>
-                
+                <h1 className="text-center font-roboto font-bold text-bluePu text-[30px] my-2">
+                    <SplitText
+                        text={'TENTANG KAMI'}
+                        delay={15}
+                        animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                        animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                        easing="easeOutCubic"
+                        threshold={0.2}
+                    />
+                </h1>
+                <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
                 <div className="md:w-[70%] w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300 my-2">
                 
                 <div className="font-normal font-roboto text-slate-600 text-[18px] p-2 text-justify">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum, quasi excepturi dolores itaque minus eius soluta libero voluptate accusantium, quaerat suscipit veniam reprehenderit officiis fugit officia mollitia perspiciatis debitis ducimus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut inventore rerum iure perferendis consequuntur aperiam repellendus sint voluptas atque ex. Accusamus numquam voluptatibus excepturi quasi aliquid molestias voluptates iusto et? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim cum in deserunt obcaecati maxime iste earum porro, illum qui consequatur totam voluptatibus quibusdam, eveniet dignissimos dolor optio perferendis vel voluptas.
+                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.data?.data?.widgetcontent) }} />
+                    <div className='mt-4' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.data?.data?.widgetmore) }} />
                 </div>
-
                 </div>
+                </FadeContent>
             </section>
             <Langganan/>
             <Footer/>
