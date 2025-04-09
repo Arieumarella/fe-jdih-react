@@ -1,12 +1,23 @@
-import {React} from 'react';
+import {React, useEffect, useState} from 'react';
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
-
+import {getTentangKami} from "../services/tentangKami.services"
 
 const StrukturOrganisasi = () => {
+    
+    const [data, setData] = useState([]);
+  
+    useEffect(() => {    
+      getTentangKami().then((result) => {
+          setData(result);
+      });
+          
+    }, []);
+  
+  console.log(data)
 
   return (
       <>

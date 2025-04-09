@@ -28,8 +28,6 @@ const Langganan = () => {
     try {
       const response = await postDataLangganan(formLangganan);
 
-      console.log(response);
-
       if (response.status !== 200) {
         toast.error("Data gagal disimpan.", { position: "bottom-right"});
       }else{

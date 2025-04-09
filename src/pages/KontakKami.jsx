@@ -2,6 +2,10 @@ import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import React, { useState } from "react";
+import { toast } from "../components/ToastProvider";
+import {postDataSaran} from "../services/kontakKami.services";
+import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
+import SplitText from "../components/react-bits/SplitText/SplitText";
 
 const KontakKami = () => {
 
@@ -15,11 +19,28 @@ const KontakKami = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Terima kasih atas saran & komentar Anda!");
-    console.log(formData);
-    // Bisa dikirim ke backend API di sini
+    
+     if(!formData.nama || !formData.email || !formData.saran) {
+          toast.error("Harap lengkapi semua kolom Terlebih Dahulu.", { position: "bottom-right"});
+          return;
+        }
+    
+        try {
+          const response = await postDataSaran(formData);
+    
+          if (response.status !== 200) {
+            toast.error("Data gagal disimpan.", { position: "bottom-right"});
+          }else{
+            toast.success("Data berhasil disimpan.", { position: "bottom-right" });
+            setFormData({nama: "", email: "", saran:""});
+          }
+        } catch (error) {
+          console.error("Error submitting feedback:", error);
+          toast.error("Terjadi kesalahan, silakan coba lagi.", { position: "bottom-right"});
+        } 
+
   };
 
 
@@ -29,14 +50,25 @@ const KontakKami = () => {
 
           <section className='h-full bg-slate-100 py-4 h-[500px]'>
                             
-          <h1 className="text-center font-roboto font-bold text-bluePu text-[24px] my-4">KONTAK KAMI</h1>
+          <h1 className="text-center font-roboto font-bold text-bluePu text-[28px] my-4">
+            <SplitText
+                text={'KONTAK KAMI'}
+                delay={15}
+                animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                easing="easeOutCubic"
+                threshold={0.2}
+            />
+          </h1>
 
                 <div className="md:w-[70%] w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-4 border border-gray-300 my-2">
 
                 <div className="md:flex justify-between gap-8">
 
                     {/* Maps */}
+                    
                     <div className="mapouter md:w-[50%] w-[100%] mb-3" style={{ position: "relative", height: "400px" }}>
+                   
                       <div className="gmap_canvas rounded-lg" style={{ width: "100%", height: "100%" }}>
                         <iframe
                           className="gmap_iframe rounded-lg"
@@ -46,11 +78,23 @@ const KontakKami = () => {
                           allowFullScreen
                         ></iframe>
                       </div>
+                    
                     </div>
+                    
 
                   {/* Form saran & Komentar */}
                   <div className="md:w-[50%] w-[100%] md:mt-0 mt-10">
-
+                  <AnimatedContent
+                    distance={150}
+                    delay={100}
+                    direction="horizontal"
+                    reverse={true}
+                    config={{ tension: 400, friction: 100 }}
+                    initialOpacity={0}
+                    animateOpacity
+                    scale={1.0}
+                    threshold={0.1}
+                    >
                   <h2 className="text-center font-roboto font-bold text-bluePu text-[22px]">Saran & Komentar</h2>
         
                   <form onSubmit={handleSubmit} className="flex flex-col gap-2">
@@ -106,7 +150,9 @@ const KontakKami = () => {
                       Kirim
                     </button>
                   </form>
-                 </div>        
+                  </AnimatedContent>
+                 </div>    
+                 
                 </div>
 
 
