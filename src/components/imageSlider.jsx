@@ -11,7 +11,7 @@ const ImageSlider = (data) => {
         
     return (
       <>
-      <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
+      <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0} className='overflow-x-hidden'>
         <div className="px-5 md:px-[60px] py-4">
         <Swiper
             modules={[Navigation, Pagination, Autoplay]}

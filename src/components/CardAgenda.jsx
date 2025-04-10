@@ -41,7 +41,7 @@ const CardAgenda = ({data}) => {
   return (
   <>
 
-<div className={`w-full md:w-[75%] mx-auto rounded-xl md:flex md:flex-col cursor-pointer overflow-hidden transition-all duration-300 ease-in-out ${openItems.includes(1) ? 'bg-white shadow-lg my-4' : 'bg-transparent shadow-none my-0'}`}
+<div className={`w-full md:w-[75%] mx-auto rounded-xl md:flex md:flex-col cursor-pointer overflow-hidden transition-all duration-300 ease-in-out ${openItems.includes(1) ? 'bg-white shadow-lg my-4' : 'bg-transparent shadow-none my-0 overflow-x-hidden'}`}
       onClick={() => toggleItem(1)}>
       
   <div className="p-4 md:p-6 bg-white shadow-md rounded-t-lg md:flex justify-between gap-4 items-start border">

@@ -60,7 +60,7 @@ const CardPutusanPengadilan = ({data}) => {
 
   return (
     <>
-    <div className="w-full md:w-[70%] mx-auto bg-white rounded-xl shadow-lg flex flex-col overflow-hidden my-10">
+    <div className="w-full md:w-[70%] mx-auto bg-white rounded-xl shadow-lg flex flex-col overflow-hidden my-10 overflow-x-hidden">
     {/* Header */}
     <div className="flex md:justify-between items-center w-full bg-slate-200 p-4">
       <span className="text-kuningButton bg-bluePu px-2 py-1 rounded-lg md:text-[14px] text-[12px] font-medium font-roboto">

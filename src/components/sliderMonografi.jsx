@@ -30,7 +30,7 @@ export default function ImageSlider() {
 
   return (
 
-    <div className="md:flex md:justify-between px-5 md:px-[60px] md:mt-[18px]">
+    <div className="md:flex md:justify-between px-5 md:px-[60px] md:mt-[18px] overflow-x-hidden">
     
     {/* Ini adalah slider Berita */}
     <div className="md:w-[50%] md:p-2">

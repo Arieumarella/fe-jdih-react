@@ -1,16 +1,43 @@
-import React, {useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
+import {getJenisPeraturan, getDataSubstansi} from "../services/search.services"
+
+function getYearsArray(startYear = 2019) {
+  const currentYear = new Date().getFullYear();
+  const years = [];
+
+  for (let year = startYear; year <= currentYear; year++) {
+    years.push(year);
+  }
+
+  return years;
+}
+
+let arrayTahun = getYearsArray();
 
 const Search = () => {
 
     const { tipePencarian } = useParams();
-    const [pencarianDetail, setpencarianDetail] = useState(tipePencarian === 'pencarian-detail' ? true : false);
-    const [IconPencarianDetail, setIconPencarianDetail] = useState(tipePencarian === 'pencarian-detail' ? '-' :  '+');
+    const [pencarianDetail, setpencarianDetail] = useState(tipePencarian === 'pencarian-biasa' ? false : true);
+    const [IconPencarianDetail, setIconPencarianDetail] = useState(tipePencarian === 'pencarian-biasa' ? '+' :  '-');
+    const [jnsPeraturan, setJenisPeraturan] = useState([]);
+    const [paramJnsPeraturan, setParamJnsPeraturan] = useState(tipePencarian != 'pencarian-biasa' || tipePencarian != 'pencarian-detail' ? tipePencarian : '');
+    const [dataSubstansi, setDataSubstansi] = useState([]);
     
+    useEffect(() => {    
+        getJenisPeraturan().then((result) => {
+          setJenisPeraturan(result);
+        });
+
+        getDataSubstansi().then((result) => {
+          setDataSubstansi(result);
+        });
+                
+      }, []);
     
     function hendelPencarianDetail() {
         if (pencarianDetail) {
@@ -52,19 +79,41 @@ const Search = () => {
                 <div>
                     <label className="block text-white font-semibold mb-1">Jenis Peraturan</label>
                     <select className="w-full h-[50px] px-4 rounded-md text-gray-800">
-                        <option>Peraturan Menteri</option>
-                        <option>Peraturan Pemerintah</option>
-                        <option>Undang-Undang</option>
+                      <option value="">-- Pilih Jenis Peraturan --</option>
+                    {jnsPeraturan?.data?.data?.length > 0 ? (
+                      jnsPeraturan?.data?.data?.map((item, index) => (
+                        <option 
+                        key={index} 
+                        value={item.peraturan_category_id}
+                        selected={paramJnsPeraturan === item.singkatan_file}
+                       >
+                          {item.percategoryname}
+                       </option>
+                      ))) : (
+                        <p className='text-center text-slate-100'>Data Kosong</p>
+                    )}   
                     </select>
                 </div>
 
                 {/* Tema Peraturan */}
+                
                 <div>
                     <label className="block text-white font-semibold mb-1">Jenis Substansi</label>
                     <select className="w-full h-[50px] px-4 rounded-md text-gray-800">
-                        <option>Semua Tema</option>
-                        <option>Keuangan</option>
-                        <option>Pembangunan</option>
+                    <option value="">-- Pilih Jenis Substansi --</option>
+                    {dataSubstansi?.data?.data?.length > 0 ? (
+                      dataSubstansi?.data?.data?.map((item, index) => (                        
+                        <option
+                          key={index+5}
+                          value={item?.tag_id}
+                        >
+                          {item?.tagname}
+                        </option>
+                      ))) : (
+                        <p className='text-center text-slate-100'>Data Kosong</p>
+                    )} 
+                   
+                   
                     </select>
                 </div>
 
@@ -72,10 +121,18 @@ const Search = () => {
                 <div>
                     <label className="block text-white font-semibold mb-1">Tahun</label>
                     <select className="w-full h-[50px] px-4 rounded-md text-gray-800">
-                        <option>2024</option>
-                        <option>2023</option>
-                        <option>2022</option>
-                        <option>2009</option>
+                    <option value="">-- Pilih Tahun --</option>
+                    {arrayTahun
+                    .length > 0 ? (
+                      arrayTahun
+                      .map((item, index) => ( 
+                        <option
+                          key={index}
+                          value={item}
+                        >{item}</option>
+                      ))) : (
+                        <p className='text-center text-slate-100'>Data Kosong</p>
+                    )}
                     </select>
                 </div>
 

@@ -26,6 +26,7 @@ const titles = {
   "/": "JDIH PU - Home",
   "/Search/pencarian-detail": "JDIH PU - Pencarian Deail",
   "/Search/pencarian-biasa": "JDIH PU - Pencarian",
+  "/Search/:slug": "JDIH PU - Pencarian",
   "/detail-dokumen/:slug": "JDIH PU - Detail Dokumen",
   "/Berita": "JDIH PU - List Berita",
   "/Berita/:slug": "JDIH PU - Detail Berita",

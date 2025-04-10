@@ -2,7 +2,7 @@ import logoPu from "../assets/logoPu.png";
 
 const Footer = () => {
     return (
-      <footer className="pt-4 text-center bg-slate-100">
+      <footer className="pt-4 text-center bg-slate-100 overflow-x-hidden">
 
       <section className="px-5 md:px-[60px] justify-between md:flex font-roboto text-bluePu my-8">
 

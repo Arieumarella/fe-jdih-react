@@ -53,7 +53,7 @@ const containerContens = () => {
       
   return (
     <>
-    <section className=' px-5 md:px-[60px] mt-[18px] group'>
+    <section className=' px-5 md:px-[60px] mt-[18px] group overflow-x-hidden'>
 
         <div className="box-content size-25 border-2 md:w-full rounded-xl bg-bluePu md:flex">
 

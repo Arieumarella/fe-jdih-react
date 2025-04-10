@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logoJDIHN from "/src/assets/jdihn.png";
 import pu from "../assets/pu.png";
 import { useNavigate } from "react-router-dom";
+import {getJenisPeraturan} from "../services/header.services";
 
 
 export default function Header() {
@@ -9,7 +10,15 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSubmenu, setIsOpenSubmenu] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [jnsPeraturan, setJnsPeraturan] = useState([]);
 
+  useEffect(() => {    
+    getJenisPeraturan().then((result) => {
+      setJnsPeraturan(result);
+        });
+            
+  }, []);
+  
   const navigate = useNavigate();
 
   const navigateHandelClick = (link = '') => {
@@ -27,7 +36,7 @@ export default function Header() {
 
   // Handel Klik Submenu
   function handelClickSubmenu(jns_menu=null) {
-    console.log('2');
+    
     if(jns_menu !== null){
       if(isOpenSubmenu === jns_menu){
         setIsOpenSubmenu(false);
@@ -60,7 +69,7 @@ export default function Header() {
 
   return (
     
-    <section className={`sticky top-0 z-50 md:px-[60px] bg-bluePu bg-opacity-${scrollPosition == 0 ? '0' : scrollPosition <= 70 ? '30' : scrollPosition > 100 ? '100' : '100'}`}>
+    <section className={`sticky top-0 z-50 md:px-[60px]  bg-bluePu bg-opacity-${scrollPosition == 0 ? '0' : scrollPosition <= 70 ? '30' : scrollPosition > 100 ? '100' : '100'}`}>
       <div className='container flex max-w-none justify-between  w-full md:h-20'>
        
         <div className='flex items-center group'>
@@ -80,9 +89,18 @@ export default function Header() {
                Jenis Produk Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               {/* Submenu */}
-              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-[180px] ">
-                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Instruksi Menteri</a></li>
-                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Peraturan Menteri</a></li>
+              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-[250px] ">
+              
+              {jnsPeraturan?.data?.data?.length > 0 ? (
+              jnsPeraturan?.data?.data?.map((item, index) => (
+                <li 
+                key={index}
+                onClick={(e) => { e.preventDefault(); navigateHandelClick(`Search/${item.singkatan_file}`); }}
+                ><a href="#" className="block px-4 py-2 hover:bg-slate-100">{item.percategoryname}</a></li>
+              ))) : (
+                <p className='text-center text-slate-100'>Data Kosong</p>
+             )}  
+
               </ul>
             </div>
 

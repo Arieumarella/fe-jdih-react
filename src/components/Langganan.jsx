@@ -57,7 +57,7 @@ const Langganan = () => {
   return (
     <>
     
-    <section className='bg-bluePu text-white  text-center  md:flex md:justify-between md:px-[60px] items-center'>
+    <section className='bg-bluePu text-white  text-center  md:flex md:justify-between md:px-[60px] items-center overflow-x-hidden'>
     <AnimatedContent
      distance={150}
      delay={100}

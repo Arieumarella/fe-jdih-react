@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <>
     <Headers/>
-    <section className='container py-4 px-5 md:px-[60px] mt-[20px] flex justify-between item-center'>
+    <section className='container py-4 px-5 md:px-[60px] mt-[20px] flex justify-between item-center '>
       <div className='group'>
         
         <h1 className='font-medium text-slate-100 text-[35px] md:text-[96px] font-onest flex gap-2'> 

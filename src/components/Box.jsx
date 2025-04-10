@@ -69,7 +69,7 @@ const Box = (data) => {
 
   return (
     <>
-    <section className=' px-5 md:px-[60px] mt-[18px] group'>
+    <section className=' px-5 md:px-[60px] mt-[18px] group overflow-x-hidden'>
         <div className="box-content size-25 border-2 w-full rounded-xl shadow-lg bg-bluePu">
             <span className='md:text-[32px] text-[25px] font-semibold font-onest mt-[30px] block text-center text-slate-100'>Produk Hukum Terbaru</span>
             

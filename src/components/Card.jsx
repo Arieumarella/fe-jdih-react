@@ -12,7 +12,7 @@ const Card = () => {
 
   return (
     <>
-    <div className="w-full md:w-[70%] mx-auto bg-white rounded-xl shadow-lg flex flex-col overflow-hidden my-10">
+    <div className="w-full md:w-[70%] mx-auto bg-white rounded-xl shadow-lg flex flex-col overflow-hidden my-10 overflow-x-hidden">
     {/* Header */}
     <div className="flex md:justify-between items-center w-full bg-slate-200 p-4">
       <span className="text-slate-500 md:text-[16px] text-[14px] font-medium font-roboto">
