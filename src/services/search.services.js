@@ -25,3 +25,33 @@ export const getDataSubstansi = async (form) => {
     return err;
   }
 };
+
+export const getPeraturanPagination = async (pageX, searchKey) => {
+  try {
+    const page = {
+      page: pageX,
+      search: searchKey,
+    };
+
+    const res = await axios.post(
+      "http://localhost:3000/search/getDataPeraturan",
+      page
+    );
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getPeraturanDetail = async (slug) => {
+  try {
+    console.log(slug);
+    const res = await axios.post(
+      "http://localhost:3000/search/getDetailPeraturan",
+      { slug: slug }
+    );
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};

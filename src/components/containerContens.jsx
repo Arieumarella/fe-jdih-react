@@ -4,7 +4,6 @@ import kuesioner from "/src/assets/kuesioner.png";
 import { getUnor, getLinkTerkait, getJnsPeraturan, getKurvaPengunjung } from '../services/home.services';
 import { useNavigate } from "react-router-dom";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
-import Aurora from '../components/react-bits/Aurora/Aurora';
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {

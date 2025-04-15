@@ -62,11 +62,6 @@ const Box = (data) => {
     });
   };
 
-
-
-  
-
-
   return (
     <>
     <section className=' px-5 md:px-[60px] mt-[18px] group overflow-x-hidden'>

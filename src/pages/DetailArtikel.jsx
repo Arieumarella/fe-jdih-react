@@ -4,7 +4,7 @@ import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import {getDetailArtikel} from "../services/artikel.services"
-import FadeContent from '../components/react-bits/FadeContent/FadeContent'
+import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 
 const DetailArtikel = () => {
