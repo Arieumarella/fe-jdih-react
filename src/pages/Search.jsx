@@ -1,10 +1,10 @@
 import {React, useState, useEffect} from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
-import {getJenisPeraturan, getDataSubstansi, getPeraturanPagination} from "../services/search.services";
+import {getJenisPeraturan, getDataSubstansi, getPeraturanPagination, getUnor} from "../services/search.services";
 import { Atom } from 'react-loading-indicators';
 import {peraturanBySingkata} from "../assets/object/peraturanBySingkata";
 import Modal from '../components/modal';
@@ -93,18 +93,19 @@ const Search = () => {
     let [jnsPeraturan, setJenisPeraturan] = useState([]);
     let [paramJnsPeraturan, setParamJnsPeraturan] = useState(tipePencarian != 'pencarian-biasa' || tipePencarian != 'pencarian-detail' ? tipePencarian : '');
     let [dataSubstansi, setDataSubstansi] = useState([]);
-
+    let [dataUnor, setDataUnor] = useState([]);
     let [posts, setPosts] = useState([]);
     let [currentPage, setCurrentPage] = useState(1);
     let [totalPages, setTotalPages] = useState(1);
+    let [searchParams] = useSearchParams();
+    let deptIdParameter = searchParams.get('dept_id');
     let [search, setSearch] = useState({
-
       judul: "",
       peraturan_category_id: peraturanBySingkata[paramJnsPeraturan],
       jns_substansi : "",
       nomor : "",
-      tahun: ""
-
+      tahun: "",
+      unor: deptIdParameter,
     });
 
     let [isLoading, setIsLoading] = useState(false);
@@ -147,7 +148,6 @@ const Search = () => {
     }
   };
 
-
     const paginateFunction = async (e = null) => {
       if (e) e.preventDefault(); 
       setIsLoading(true);
@@ -183,7 +183,10 @@ const Search = () => {
         getDataSubstansi().then((result) => {
           setDataSubstansi(result);
         });
-                
+        
+        getUnor().then((result) => {
+          setDataUnor(result);
+        });
       }, []);
     
     function hendelPencarianDetail() {
@@ -199,12 +202,12 @@ const Search = () => {
 
       const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log(name, value);
+        console.log(search);
         setSearch((prev) => ({
           ...prev,
           [name]: value,
         }));
-
-        console.log(search)
       };
 
 
@@ -341,6 +344,36 @@ const Search = () => {
                 />
                 </div>
 
+                {/* Unit Organisasi (Baru Ditambahkan) */}
+                <div>
+                    <label className="block text-white font-semibold mb-1">Pilih Unit Organisasi</label>
+                    <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
+                      name="unor"
+                      value={search.unor}
+                      onChange={handleChange}
+                    >
+                    <option value="">-- Pilih Unit Organisasi --</option>
+                    {dataUnor?.data?.length > 0 ? (
+                      dataUnor?.data?.map((item, index) => (                        
+                        <option
+                          key={index+5}
+                          value={item?.dept_id}
+                        >
+                          {item?.deptname}
+                        </option>
+                      ))) : (
+                        <option 
+                        key={67}
+                       value=""
+                       disabled
+                       >-- Data Kosong --</option>
+                    )} 
+                   
+                   
+                    </select>
+                </div>
+
+                
             </div>
             </div>
             </form>
@@ -353,6 +386,7 @@ const Search = () => {
           ) : posts?.length > 0 ? (
             posts.map((item, index) => (
               <AnimatedContent
+                key={index}
                 distance={100}
                 delay={200}
                 direction="horizontal"

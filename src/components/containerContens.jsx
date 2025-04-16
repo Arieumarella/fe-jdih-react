@@ -5,6 +5,7 @@ import { getUnor, getLinkTerkait, getJnsPeraturan, getKurvaPengunjung } from '..
 import { useNavigate } from "react-router-dom";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 
+
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -24,6 +25,7 @@ const containerContens = () => {
     const [linkTerkait, setlinkTerkait] = useState([]);
     const [jnsPeraturan, setJnsPeraturan] = useState([]);
     const [dataKurvaPengunjung, setDataKurvaPengunjung] = useState([]);
+   
 
       useEffect(() => {
 
@@ -72,9 +74,10 @@ const containerContens = () => {
                 scale={1}
                 threshold={0.2}
               >
-                <div key={index} className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4">
-                <a href="#"
-                onClick={() => navigate(`/detail-dokumen/1`)}>{item.deptname}</a>
+                <div key={index} className="box-border p-2 border-2 w-full h-auto my-2 rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 cursor-pointer"
+                  onClick={(e) => { e.preventDefault(); window.scrollTo(0, 0); navigate(`/Search/-?dept_id=${item.dept_id}`);}}
+                >
+                {item.deptname}
                 </div>
               </AnimatedContent>
              ))) : (
@@ -179,7 +182,7 @@ const containerContens = () => {
                 threshold={0.2}
               >
                 <div key={index} className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                    <span className="material-symbols-outlined">receipt_long</span> <a href="#" onClick={() => navigate(`/Search/pencarian-detail/${item.peraturan_category_id}`)}>{item.percategoryname}</a>
+                    <span className="material-symbols-outlined">receipt_long</span> <a href="#" onClick={() => navigate(`/Search/${item.singkatan_file}`)}>{item.percategoryname}</a>
                 </div>
               </AnimatedContent>
              ))) : (

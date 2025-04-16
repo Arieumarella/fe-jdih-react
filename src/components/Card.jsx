@@ -29,8 +29,6 @@ const Card = (data) => {
 
   let dataParse = data.data;
 
-  console.log(dataParse);
-
   return (
     <>
     <div className="w-full md:w-[70%] mx-auto bg-white rounded-xl shadow-lg flex flex-col overflow-hidden my-10 overflow-x-hidden">

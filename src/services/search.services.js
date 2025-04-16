@@ -55,3 +55,24 @@ export const getPeraturanDetail = async (slug) => {
     return err;
   }
 };
+
+export const postDataMasukanDanKritik = async (data) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:3000/search/postMasukanDanKriting",
+      data
+    );
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getUnor = async () => {
+  try {
+    const res = await axios.get("http://localhost:3000/search/getUnor");
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};

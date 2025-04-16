@@ -6,10 +6,11 @@ import Footer from "../components/Footer";
 import {getPeraturanDetail} from "../services/search.services";
 import Modal from '../components/modal';
 import ModalAi from '../components/modal-chatAi';
+import KritikDanSaranModal from '../components/kritikDanSaranModal';
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useNavigate } from "react-router-dom";
-import FadeContent from '../components/react-bits/FadeContent/FadeContent';
+
 
 
 const formatTanggal = (tanggalString) => {
@@ -57,6 +58,10 @@ const DetailDokumen = () => {
       const [isModalOpenAi, setIsModalOpenAi] = useState(false);
       const [urlModalAi, setUrlModalAi] = useState('');
 
+      // Modal Kritik & Saran
+      const [isModalOpenKritik, setIsModalOpenKritik] = useState(false);
+      const [urlModalKritik, setUrlModalKritik] = useState('');
+
       const showModal = async (stateCondition, urlPath) => {
         setIsModalOpen(stateCondition);
         setUrlModal(urlPath);
@@ -64,7 +69,11 @@ const DetailDokumen = () => {
 
       const showModalAi = async (stateCondition, urlPath) => {
         setIsModalOpenAi(stateCondition);
-        setUrlModalAi(urlPath);
+        setUrlModalKritik(urlPath);
+      }
+
+      const showModalKritik = async (stateCondition) => {
+        setIsModalOpenKritik(stateCondition);
       }
 
       const handleDownload = async (urlDownload, fileName) => {
@@ -208,6 +217,15 @@ const DetailDokumen = () => {
 
 
             <div className="flex gap-3 mt-2 border-t py-2">
+              <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-auto w-full md:px-3 px-2 py-2 rounded-2xl font-roboto md:text-[15px] text-[16px] flex items-center justify-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg text-center"
+
+              onClick={() => showModalKritik(true)}
+
+              >
+                <span className="material-symbols-outlined md:text-lg text-xl text-kuningButton">edit_square</span>
+                <span>Kritik & Saran</span>
+              </button>
+
               <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-auto w-full md:px-3 px-2 py-2 rounded-2xl font-roboto md:text-[15px] text-[16px] flex items-center justify-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg text-center"
 
               onClick={() => showModalAi(true,`https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4,6)}/${data?.data?.file_upload}`)}
@@ -383,6 +401,11 @@ const DetailDokumen = () => {
 
         </section>
         
+
+        <KritikDanSaranModal isOpen={isModalOpenKritik} onClose={() => setIsModalOpenKritik(false)} title="Form Kritik & Saran" dataPeraturan={data}>
+
+        </KritikDanSaranModal>
+
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Preview Dokumen" urlPath={urlModal}>
 
         </Modal>
