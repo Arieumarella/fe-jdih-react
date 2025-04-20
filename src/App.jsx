@@ -16,6 +16,7 @@ import DetailArtikel from "./pages/DetailArtikel";
 import TentangKami from "./pages/TentangKami";
 import Prasyarat from "./pages/Prasyarat";
 import KontakKami from "./pages/KontakKami";
+import Statistik from "./pages/statistik";
 import { Helmet } from "react-helmet-async";
 import { ToastProvider } from "./components/ToastProvider";
 
@@ -41,6 +42,7 @@ const titles = {
   "/tentang-kami": "JDIH PU - Tentang Kami",
   "/prasyarat": "JDIH PU - Prsayarat",
   "/kontak-kami": "JDIH PU - Kontak Kami",
+  "/Statistik": "JDIH PU - Statistik",
 };
 
 function TitleUpdater() {
@@ -63,7 +65,6 @@ function TitleUpdater() {
 
 
 function App() {
-  console.log("ulangi");
 
   return (
     <>
@@ -86,6 +87,7 @@ function App() {
         <Route path="/tentang-kami" element={<TentangKami />} />
         <Route path="/prasyarat" element={<Prasyarat />} />
         <Route path="/kontak-kami" element={<KontakKami />} />
+        <Route path="/statistik" element={<Statistik />} />
       </Routes>
     </>
   )

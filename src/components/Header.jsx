@@ -121,16 +121,10 @@ export default function Header() {
             </div>
 
              {/* Dropdown Produk Hukum */}
-             <div className="relative group">
-              <button type="button" className="flex items-center hover:text-slate-300">
-                Produk Hukum <span className="material-symbols-outlined">arrow_drop_down</span>
-              </button>
-              {/* Submenu */}
-              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-[180px]">
-                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Instruksi Menteri</a></li>
-                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100">Peraturan Menteri</a></li>
-              </ul>
-            </div>
+           
+             <a href="#" className="hover:text-slate-300 mt-[2px]" onClick={(e) => { e.preventDefault(); navigateHandelClick("Statistik"); }}>Statistik</a>
+           
+            
 
              {/* Dropdown Produk Hukum */}
              <div className="relative group">
