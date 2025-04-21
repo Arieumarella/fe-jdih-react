@@ -1,11 +1,13 @@
-import {React, useState, useEffect} from 'react';
+import { React, useState, useEffect } from 'react';
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import CardPutusanPengadilan from "../components/CardPutusanPengadilan";
 import { useNavigate } from "react-router-dom";
-import {getPutusanPagination} from "../services/putusanPengadilan.service";
+import { getPutusanPagination } from "../services/putusanPengadilan.service";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
+import SplitText from "../components/react-bits/SplitText/SplitText";
+import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   window.scrollTo(0, 0);
@@ -40,11 +42,10 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         {generatePageNumbers().map((page, index) => (
           <button
             key={index}
-            className={`md:px-4 px-3 md:py-2 py-1 rounded-lg shadow-md transition ${
-              currentPage === page
-                ? "bg-bluePu text-kuningButton"
-                : "bg-gray-300 text-gray-800 hover:bg-gray-400"
-            }`}
+            className={`md:px-4 px-3 md:py-2 py-1 rounded-lg shadow-md transition ${currentPage === page
+              ? "bg-bluePu text-kuningButton"
+              : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+              }`}
             onClick={() => typeof page === "number" && onPageChange(page)}
             disabled={page === "..."}
           >
@@ -66,88 +67,98 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
 
 const PutusanPengadilan = () => {
 
-    const navigate = useNavigate();
-    
-      const navigateHandelClick = (link = '') => {
-        navigate(`/${link}`);
-        window.scrollTo(0, 0);
-      };
-      
-      const [posts, setPosts] = useState([]);
-      const [currentPage, setCurrentPage] = useState(1);
-      const [totalPages, setTotalPages] = useState(1);
-      const [search, setSearch] = useState('');
+  const navigate = useNavigate();
 
-      const paginateFunction = async () => {
-        await getPutusanPagination(currentPage, search).then((result) => {
-          setPosts(result.data.posts);
-          setTotalPages(result.data.totalPages); 
-          setCurrentPage(result.data.currentPage);  
-        });
-      } 
-      
-      useEffect(() => {
-        paginateFunction(); 
-      }, [currentPage]);
+  const navigateHandelClick = (link = '') => {
+    navigate(`/${link}`);
+    window.scrollTo(0, 0);
+  };
+
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [search, setSearch] = useState('');
+
+  const paginateFunction = async () => {
+    await getPutusanPagination(currentPage, search).then((result) => {
+      setPosts(result.data.posts);
+      setTotalPages(result.data.totalPages);
+      setCurrentPage(result.data.currentPage);
+    });
+  }
+
+  useEffect(() => {
+    paginateFunction();
+  }, [currentPage]);
 
 
-    return (
-      <>
-        <Headers/>
-            
-        <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 h-[500px]'>
-          
-          <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>Putusan Pengadilan</h1>
+  return (
+    <>
+      <Headers />
 
-          <form onSubmit={(e) => {e.preventDefault(); paginateFunction();}}>
-          <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
-            <input 
-              type="text" 
-              placeholder="Cari Putusan Pengadilan..." 
-              className="w-full bg-transparent outline-none text-white placeholder-white font-roboto text-lg"
-              onInput={(e) => setSearch(e.target.value)}
-            />
-            <button type='submit' className="ml-2 w-[90px] bg-kuningButton text-bluePu px-4 py-2 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition">
-              Cari
-            </button>
-          </div>
+      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 h-[500px]'>
+
+        <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
+          <SplitText
+            text={'Putusan Pengadilan'}
+            delay={15}
+            animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+            easing="easeOutCubic"
+            threshold={0.2}
+          />
+        </h1>
+
+        <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
+          <form onSubmit={(e) => { e.preventDefault(); paginateFunction(); }}>
+            <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
+              <input
+                type="text"
+                placeholder="Cari Putusan Pengadilan..."
+                className="w-full bg-transparent outline-none text-white placeholder-white font-roboto text-lg"
+                onInput={(e) => setSearch(e.target.value)}
+              />
+              <button type='submit' className="ml-2 w-[90px] bg-kuningButton text-bluePu px-4 py-2 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition">
+                Cari
+              </button>
+            </div>
           </form>
+        </FadeContent>
 
-          {posts?.length > 0 ? (
-              posts.map((item, index) => (
-                <AnimatedContent
-                distance={150}
-                delay={100}
-                direction="horizontal"
-                reverse={index % 2 === 0}
-                config={{ tension: 400, friction: 100 }}
-                initialOpacity={0}
-                animateOpacity
-                scale={1.0}
-                threshold={0.1}
-                >
-                <CardPutusanPengadilan key={index} data={item}/>
-              </AnimatedContent>
-              
-        ))) : (
-            <p className='text-center text-slate-100'>Data Kosong</p>
-          )}
+        {posts?.length > 0 ? (
+          posts.map((item, index) => (
+            <AnimatedContent
+              distance={150}
+              delay={100}
+              direction="horizontal"
+              reverse={index % 2 === 0}
+              config={{ tension: 400, friction: 100 }}
+              initialOpacity={0}
+              animateOpacity
+              scale={1.0}
+              threshold={0.1}
+            >
+              <CardPutusanPengadilan key={index} data={item} />
+            </AnimatedContent>
+
+          ))) : (
+          <p className='text-center text-slate-100'>Data Kosong</p>
+        )}
 
         {/* Pagination */}
         <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={(page) => setCurrentPage(page)}
-       />
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
 
 
-        </section>      
-        
-        <Langganan/>
-        <Footer/>
-      </>
-    );
-  };
-  
-  export default PutusanPengadilan;
-  
+      </section>
+
+      <Langganan />
+      <Footer />
+    </>
+  );
+};
+
+export default PutusanPengadilan;

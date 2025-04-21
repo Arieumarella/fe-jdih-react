@@ -1,5 +1,5 @@
 import React from "react";
-import {Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Berita from "./pages/Berita";
 import Monografi from "./pages/Monografi";
@@ -17,6 +17,7 @@ import TentangKami from "./pages/TentangKami";
 import Prasyarat from "./pages/Prasyarat";
 import KontakKami from "./pages/KontakKami";
 import Statistik from "./pages/statistik";
+import SiMPeL from "./pages/SiMPeL";
 import { Helmet } from "react-helmet-async";
 import { ToastProvider } from "./components/ToastProvider";
 
@@ -43,6 +44,7 @@ const titles = {
   "/prasyarat": "JDIH PU - Prsayarat",
   "/kontak-kami": "JDIH PU - Kontak Kami",
   "/Statistik": "JDIH PU - Statistik",
+  "/SiMPeL/:slug": "JDIH PU - SiMPeL",
 };
 
 function TitleUpdater() {
@@ -88,6 +90,7 @@ function App() {
         <Route path="/prasyarat" element={<Prasyarat />} />
         <Route path="/kontak-kami" element={<KontakKami />} />
         <Route path="/statistik" element={<Statistik />} />
+        <Route path="/SiMPeL/:slug" element={<SiMPeL />} />
       </Routes>
     </>
   )

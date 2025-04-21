@@ -94,7 +94,7 @@ const Statistik = () => {
 
                             {/* Kiri */}
 
-                            <div className='md:w-[60%] w-full md:h-auto h-[900px] px-2 py-2 text-center'>
+                            <div className='md:w-[60%] w-full md:h-autonpm np h-[900px] px-2 py-2 text-center'>
 
                                 <VerticalBarChart dataChart={dataPeraturanUnorTotalPeraturan} labels={labelsTotalPeraturan} tittle="Chart Dokumen" className="shadow-lg" />
 
