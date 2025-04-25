@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { getAgendaPagination } from "../services/agenda.services";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
+import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const generatePageNumbers = () => {
@@ -88,6 +89,21 @@ const Agenda = () => {
   useEffect(() => {
     paginateFunction();
   }, [currentPage]);
+
+  useEffect(() => {
+    getIpUser()
+      .then((res) => {
+        const ip = res.data.ip;
+        const halaman = "Halaman Agenda";
+        return insertDataPengunjung(ip, halaman);
+      })
+      .then((response) => {
+
+      })
+      .catch((err) => {
+        console.error("Terjadi error:", err);
+      });
+  }, []);
 
 
   return (

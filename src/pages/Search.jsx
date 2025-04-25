@@ -12,6 +12,7 @@ import ModalAi from '../components/modal-chatAi';
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
+import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 
 function getYearsArray(startYear = 2019) {
   const currentYear = new Date().getFullYear();
@@ -60,8 +61,8 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
           <button
             key={index}
             className={`md:px-4 px-3 md:py-2 py-1 rounded-lg shadow-md transition ${currentPage === page
-                ? "bg-bluePu text-kuningButton"
-                : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+              ? "bg-bluePu text-kuningButton"
+              : "bg-gray-300 text-gray-800 hover:bg-gray-400"
               }`}
             onClick={() => typeof page === "number" && onPageChange(page)}
             disabled={page === "..."}
@@ -186,6 +187,21 @@ const Search = () => {
     getUnor().then((result) => {
       setDataUnor(result);
     });
+
+    getIpUser()
+      .then((res) => {
+        const ip = res.data.ip;
+        const halaman = "Pencarian " + tipePencarian === 'pencarian-biasa' ? 'Biasa' : 'Detail';
+        return insertDataPengunjung(ip, halaman);
+      })
+      .then((response) => {
+
+      })
+      .catch((err) => {
+        console.error("Terjadi error:", err);
+      });
+
+
   }, []);
 
   function hendelPencarianDetail() {

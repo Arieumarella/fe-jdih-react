@@ -7,6 +7,7 @@ import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedCo
 import VerticalBarChart from '../components/VerticalBarChart';
 import LineChartWithPoints from '../components/LineChartWithPoints';
 import SplitText from "../components/react-bits/SplitText/SplitText";
+import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 
 const Statistik = () => {
 
@@ -64,6 +65,19 @@ const Statistik = () => {
             setLabelsTotalpengunjung(labelsTotalPengunjung);
             setDataTotalPengunjung(dataTotalPengunjung);
         });
+
+        getIpUser()
+            .then((res) => {
+                const ip = res.data.ip;
+                const halaman = "Halaman Statistik";
+                return insertDataPengunjung(ip, halaman);
+            })
+            .then((response) => {
+
+            })
+            .catch((err) => {
+                console.error("Terjadi error:", err);
+            });
 
 
     }, []);

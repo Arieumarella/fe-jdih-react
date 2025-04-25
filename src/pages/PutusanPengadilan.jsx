@@ -8,6 +8,7 @@ import { getPutusanPagination } from "../services/putusanPengadilan.service";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
+import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   window.scrollTo(0, 0);
@@ -68,6 +69,22 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
 const PutusanPengadilan = () => {
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getIpUser()
+      .then((res) => {
+        const ip = res.data.ip;
+        const halaman = "Halaman Putusan Pengadilan";
+        return insertDataPengunjung(ip, halaman);
+      })
+      .then((response) => {
+
+      })
+      .catch((err) => {
+        console.error("Terjadi error:", err);
+      });
+  }, []);
+
 
   const navigateHandelClick = (link = '') => {
     navigate(`/${link}`);

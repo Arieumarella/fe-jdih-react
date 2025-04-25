@@ -1,29 +1,43 @@
-import {React, useEffect, useState} from 'react';
+import { React, useEffect, useState } from 'react';
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
-import {getTentangKami} from "../services/tentangKami.services";
+import { getTentangKami } from "../services/tentangKami.services";
 import DOMPurify from "dompurify";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
+import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 
 const TentangKami = () => {
 
     const [data, setData] = useState([]);
-      
-    useEffect(() => {    
-      getTentangKami().then((result) => {
-        setData(result);
-      });
-              
+
+    useEffect(() => {
+        getTentangKami().then((result) => {
+            setData(result);
+        });
+
+        getIpUser()
+            .then((res) => {
+                const ip = res.data.ip;
+                const halaman = "Halaman Tentang Kami";
+                return insertDataPengunjung(ip, halaman);
+            })
+            .then((response) => {
+
+            })
+            .catch((err) => {
+                console.error("Terjadi error:", err);
+            });
+
     }, []);
-    
+
 
     return (
         <>
-            <Headers/>
+            <Headers />
             <section className='h-full bg-slate-100 py-6 h-[500px]'>
-            
+
 
                 <h1 className="text-center font-roboto font-bold text-bluePu text-[30px] my-2">
                     <SplitText
@@ -36,17 +50,17 @@ const TentangKami = () => {
                     />
                 </h1>
                 <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
-                <div className="md:w-[70%] w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300 my-2">
-                
-                <div className="font-normal font-roboto text-slate-600 text-[18px] p-2 text-justify">
-                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.data?.data?.widgetcontent) }} />
-                    <div className='mt-4' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.data?.data?.widgetmore) }} />
-                </div>
-                </div>
+                    <div className="md:w-[70%] w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300 my-2">
+
+                        <div className="font-normal font-roboto text-slate-600 text-[18px] p-2 text-justify">
+                            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.data?.data?.widgetcontent) }} />
+                            <div className='mt-4' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.data?.data?.widgetmore) }} />
+                        </div>
+                    </div>
                 </FadeContent>
             </section>
-            <Langganan/>
-            <Footer/>
+            <Langganan />
+            <Footer />
         </>
     );
 };

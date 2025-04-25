@@ -7,6 +7,7 @@ import { getArtikelPagination } from "../services/artikel.services";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
+import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const generatePageNumbers = () => {
@@ -107,6 +108,21 @@ const Artikel = () => {
   useEffect(() => {
     paginateFunction();
   }, [currentPage]);
+
+  useEffect(() => {
+    getIpUser()
+      .then((res) => {
+        const ip = res.data.ip;
+        const halaman = "Halaman Artikel";
+        return insertDataPengunjung(ip, halaman);
+      })
+      .then((response) => {
+
+      })
+      .catch((err) => {
+        console.error("Terjadi error:", err);
+      });
+  }, []);
 
 
   return (
