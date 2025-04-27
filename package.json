@@ -23,6 +23,7 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "dompurify": "^3.2.5",
     "framer-motion": "^11.18.2",
+    "html-react-parser": "^5.2.3",
     "material-symbols": "^0.28.1",
     "ogl": "^1.0.11",
     "pdfjs-dist": "^3.11.174",

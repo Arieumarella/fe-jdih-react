@@ -1,0 +1,19 @@
+import axios from "axios";
+
+export const getAiJdih = async (path, question, history) => {
+  try {
+    const page = {
+        path: path,
+        question: question,
+        history: history,
+    };
+
+    const res = await axios.post(
+      "http://localhost:3000/ai/chat",
+      page
+    );
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
