@@ -9,6 +9,7 @@ import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedCo
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
+import { useTranslation } from 'react-i18next';
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   window.scrollTo(0, 0);
@@ -108,16 +109,17 @@ const PutusanPengadilan = () => {
     paginateFunction();
   }, [currentPage]);
 
+  const { t } = useTranslation();
 
   return (
     <>
       <Headers />
 
-      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 h-[500px]'>
+      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4'>
 
         <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
           <SplitText
-            text={'Putusan Pengadilan'}
+            text={t("semuaPutusanPengandilan")}
             delay={15}
             animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
             animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -131,12 +133,12 @@ const PutusanPengadilan = () => {
             <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
               <input
                 type="text"
-                placeholder="Cari Putusan Pengadilan..."
+                placeholder={t("pliceHolderPutusanPengadilan")}
                 className="w-full bg-transparent outline-none text-white placeholder-white font-roboto text-lg"
                 onInput={(e) => setSearch(e.target.value)}
               />
               <button type='submit' className="ml-2 w-[90px] bg-kuningButton text-bluePu px-4 py-2 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition">
-                Cari
+                {t("btnCariJudulPutusanPengandilan")}
               </button>
             </div>
           </form>

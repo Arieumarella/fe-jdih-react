@@ -1,12 +1,13 @@
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "../components/ToastProvider";
 import { postDataSaran } from "../services/kontakKami.services";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
+import { useTranslation } from 'react-i18next';
 
 const KontakKami = () => {
 
@@ -15,6 +16,8 @@ const KontakKami = () => {
     email: "",
     saran: "",
   });
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     getIpUser()
@@ -64,11 +67,11 @@ const KontakKami = () => {
     <>
       <Headers />
 
-      <section className='h-full bg-slate-100 py-4 h-[500px]'>
+      <section className='h-full bg-slate-100 py-4'>
 
         <h1 className="text-center font-roboto font-bold text-bluePu text-[28px] my-4">
           <SplitText
-            text={'KONTAK KAMI'}
+            text={t("kontakKami")}
             delay={15}
             animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
             animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -111,7 +114,7 @@ const KontakKami = () => {
                 scale={1.0}
                 threshold={0.1}
               >
-                <h2 className="text-center font-roboto font-bold text-bluePu text-[22px]">Saran & Komentar</h2>
+                <h2 className="text-center font-roboto font-bold text-bluePu text-[22px]">{t("kontakKamiKritikdanKomentar")}</h2>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2">
                   {/* Input Nama */}

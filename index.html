@@ -1,13 +1,37 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/Logo - pu.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JDIH PU</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/Logo - pu.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JDIH PU</title>
+
+  <!-- Style untuk mengatur posisi Google Translate -->
+  <style>
+    .goog-te-banner-frame.skiptranslate {
+      display: none !important;
+    }
+
+    body {
+      top: 0px !important;
+    }
+
+    #google_translate_element {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 9999;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- React App -->
+  <script type="module" src="/src/main.jsx"></script>
+
+</body>
+
 </html>

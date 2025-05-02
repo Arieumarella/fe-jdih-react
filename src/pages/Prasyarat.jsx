@@ -7,10 +7,12 @@ import DOMPurify from "dompurify";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
+import { useTranslation } from 'react-i18next';
 
 const Prasyarat = () => {
 
     const [data, setData] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         getPrasayarat().then((result) => {
@@ -37,12 +39,12 @@ const Prasyarat = () => {
     return (
         <>
             <Headers />
-            <section className='h-full bg-slate-100 py-4 h-[500px]'>
+            <section className='h-full bg-slate-100 py-4'>
 
 
                 <h1 className="text-center font-roboto font-bold text-bluePu text-[30px] my-2">
                     <SplitText
-                        text={'PRASYARAT'}
+                        text={t("PRASYARAT")}
                         delay={15}
                         animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
                         animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}

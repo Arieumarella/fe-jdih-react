@@ -13,6 +13,7 @@ import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedCo
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
+import { useTranslation } from 'react-i18next';
 
 function getYearsArray(startYear = 2019) {
   const currentYear = new Date().getFullYear();
@@ -225,17 +226,19 @@ const Search = () => {
     }));
   };
 
+  const { t } = useTranslation();
+
 
   return (
     <>
       <Headers />
 
-      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 h-[500px]'>
+      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 '>
 
         <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
 
           <SplitText
-            text={'Pencarian Peraturan'}
+            text={t("pencarianTittle")}
             delay={15}
             animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
             animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -247,10 +250,10 @@ const Search = () => {
           <form onSubmit={paginateFunction}>
             <div className="box-border w-full md:w-[70%] mx-auto my-4 rounded-lg bg-bluePu shadow-lg p-4">
               {/* Input Nama Peraturan */}
-              <label className="block text-white font-semibold mb-1">Nama Peraturan</label>
+              <label className="block text-white font-semibold mb-1">{t("pencarianJudul")}</label>
               <input
                 type="text"
-                placeholder="Nama Peraturan"
+                placeholder={t("pencarianJudul")}
                 className="md:w-[90%] w-[100%] h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none"
                 name="judul"
                 value={search.judul}
@@ -259,21 +262,21 @@ const Search = () => {
 
               {/* Tombol Cari */}
               <button type="submit" className="md:ml-2 mt-2 w-[90px] bg-kuningButton text-bluePu px-4 py-3 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition cursor-pointer">
-                Cari
+                {t("btnPencarianSubmit")}
               </button>
-              <span className='block text-white font-semibold my-4 font-roboto cursor-pointer' onClick={hendelPencarianDetail}>Pencarian Detail <p className='inline' id='stsPencarianIcon'>{IconPencarianDetail}</p></span>
+              <span className='block text-white font-semibold my-4 font-roboto cursor-pointer' onClick={hendelPencarianDetail}>{t("pencarianDetail")} <p className='inline' id='stsPencarianIcon'>{IconPencarianDetail}</p></span>
               {/* Advanced Search */}
               <div className={`mt-4 grid grid-cols-1 md:grid-cols-4 gap-4 max-h-0 transition-all duration-500 ${pencarianDetail ? 'max-h-screen opacity-100' : 'opacity-0'}`}>
                 {/* Jenis Dokumen */}
                 <div>
-                  <label className="block text-white font-semibold mb-1">Jenis Peraturan</label>
+                  <label className="block text-white font-semibold mb-1">{t("JenisPeraturan")}</label>
                   <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="peraturan_category_id"
                     value={search.peraturan_category_id}
                     onChange={handleChange}
                     defaultValue={peraturanBySingkata[paramJnsPeraturan]}
                   >
-                    <option value="">-- Pilih Jenis Peraturan --</option>
+                    <option value="">-- {t("JenisPeraturan")} --</option>
                     {jnsPeraturan?.data?.data?.length > 0 ? (
                       jnsPeraturan?.data?.data?.map((item, index) => (
                         <option
@@ -286,7 +289,7 @@ const Search = () => {
                       <option
                         value=""
                         disabled
-                      >-- Data Kosong --</option>
+                      >-- {t("statistikDataTIdakDitemukan")} --</option>
                     )}
                   </select>
                 </div>
@@ -294,13 +297,13 @@ const Search = () => {
                 {/* Tema Peraturan */}
 
                 <div>
-                  <label className="block text-white font-semibold mb-1">Jenis Substansi</label>
+                  <label className="block text-white font-semibold mb-1">{t("JenisSubstansi")}</label>
                   <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="jns_substansi"
                     value={search.jns_substansi}
                     onChange={handleChange}
                   >
-                    <option value="">-- Pilih Jenis Substansi --</option>
+                    <option value="">-- {t("JenisSubstansi")} --</option>
                     {dataSubstansi?.data?.data?.length > 0 ? (
                       dataSubstansi?.data?.data?.map((item, index) => (
                         <option
@@ -313,7 +316,7 @@ const Search = () => {
                       <option
                         value=""
                         disabled
-                      >-- Data Kosong --</option>
+                      >-- {t("statistikDataTIdakDitemukan")} --</option>
                     )}
 
 
@@ -322,13 +325,13 @@ const Search = () => {
 
                 {/* Tahun */}
                 <div>
-                  <label className="block text-white font-semibold mb-1">Tahun</label>
+                  <label className="block text-white font-semibold mb-1">{t("tahunPeraturan")}</label>
                   <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="tahun"
                     value={search.tahun}
                     onChange={handleChange}
                   >
-                    <option value="">-- Pilih Tahun --</option>
+                    <option value="">-- {t("tahunPeraturan")} --</option>
                     {arrayTahun
                       .length > 0 ? (
                       arrayTahun
@@ -341,17 +344,17 @@ const Search = () => {
                       <option
                         value=""
                         disabled
-                      >-- Data Kosong --</option>
+                      >-- {t("statistikDataTIdakDitemukan")} --</option>
                     )}
                   </select>
                 </div>
 
                 {/* Nomor Peraturan (Baru Ditambahkan) */}
                 <div>
-                  <label className="block text-white font-semibold mb-1">Nomor Peraturan</label>
+                  <label className="block text-white font-semibold mb-1">{t("noPeraturan")}</label>
                   <input
                     type="text"
-                    placeholder="Masukkan Nomor"
+                    placeholder={'Input ' + t("noPeraturan")}
                     className="w-full h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none"
                     name="nomor"
                     value={search.nomor}
@@ -361,13 +364,13 @@ const Search = () => {
 
                 {/* Unit Organisasi (Baru Ditambahkan) */}
                 <div>
-                  <label className="block text-white font-semibold mb-1">Pilih Unit Organisasi</label>
+                  <label className="block text-white font-semibold mb-1">{t("pilihUnitOrganisasi")}</label>
                   <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="unor"
                     value={search.unor}
                     onChange={handleChange}
                   >
-                    <option value="">-- Pilih Unit Organisasi --</option>
+                    <option value="">-- {t("pilihUnitOrganisasi")} --</option>
                     {dataUnor?.data?.length > 0 ? (
                       dataUnor?.data?.map((item, index) => (
                         <option
@@ -381,7 +384,7 @@ const Search = () => {
                         key={67}
                         value=""
                         disabled
-                      >-- Data Kosong --</option>
+                      >-- {t("statistikDataTIdakDitemukan")} --</option>
                     )}
 
 
@@ -416,7 +419,7 @@ const Search = () => {
             </AnimatedContent>
           ))
         ) : (
-          <p className="text-center text-slate-100">Data Kosong</p>
+          <p className="text-center text-slate-100">{t("statistikDataTIdakDitemukan")}</p>
         )}
 
 

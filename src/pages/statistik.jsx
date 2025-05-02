@@ -8,6 +8,7 @@ import VerticalBarChart from '../components/VerticalBarChart';
 import LineChartWithPoints from '../components/LineChartWithPoints';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
+import { useTranslation } from 'react-i18next';
 
 const Statistik = () => {
 
@@ -27,6 +28,7 @@ const Statistik = () => {
 
     let [labelsTotalpengunjung, setLabelsTotalpengunjung] = useState([]);
     let [dataTotalPengunjung, setDataTotalPengunjung] = useState([]);
+    const { t } = useTranslation();
 
 
     useEffect(() => {
@@ -92,7 +94,7 @@ const Statistik = () => {
                 <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-2'>
 
                     <SplitText
-                        text={'Statistik Peraturan'}
+                        text={t("statistikPengunjungPage")}
                         delay={10}
                         animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
                         animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -130,12 +132,12 @@ const Statistik = () => {
                                     threshold={0.1}
 
                                 >
-                                    <h3 className='font-roboto font-semibold md:text-[22px] text-[18px] text-bluePu my-1'>Tabel Rekapitulasi</h3>
+                                    <h3 className='font-roboto font-semibold md:text-[22px] text-[18px] text-bluePu my-1'>{t("statistikTabelRekapitulasi")}</h3>
                                     <table className="min-w-full divide-y divide-gray-200 md:text-sm text-[12px] font-roboto text-center shadow-lg">
                                         <thead className="bg-gray-100 text-gray-700 text-Center">
                                             <tr>
-                                                <th className="px-6 py-4 font-semibold">Peraturan</th>
-                                                <th className="px-6 py-4 font-semibold">Total</th>
+                                                <th className="px-6 py-4 font-semibold">{t("statistikPeraturan")}</th>
+                                                <th className="px-6 py-4 font-semibold">{t("statistikTotal")}</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-100 bg-white">
@@ -152,7 +154,7 @@ const Statistik = () => {
                                             ) : (
                                                 <tr>
                                                     <td colSpan="2" className="px-6 py-4 text-gray-600">
-                                                        Data tidak ditemukan
+                                                        {t("statistikDataTIdakDitemukan")}
                                                     </td>
                                                 </tr>
                                             )}
@@ -183,7 +185,7 @@ const Statistik = () => {
                         >
                             <div className="md:w-full w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300">
                                 <div className='w-full h-[900px] px-2 py-2 text-center'>
-                                    <VerticalBarChart dataChart={dataPeraturanUnor} labels={labels} tittle="Peraturan Unit Organisasi" className="shadow-lg" />
+                                    <VerticalBarChart dataChart={dataPeraturanUnor} labels={labels} tittle={t("statistikPeraturanUnitOrganisasi")} className="shadow-lg" />
                                 </div>
                             </div>
                         </AnimatedContent>
@@ -203,7 +205,7 @@ const Statistik = () => {
                         >
                             <div className="md:w-full w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300">
                                 <div className='w-full h-[900px] px-2 py-2 text-center'>
-                                    <VerticalBarChart dataChart={dataPeraturanDownload} labels={labelsDownload} tittle="Total Peraturan diunduh" className="shadow-lg" />
+                                    <VerticalBarChart dataChart={dataPeraturanDownload} labels={labelsDownload} tittle={t("statistikTotalPeraturandiunduh")} className="shadow-lg" />
                                 </div>
                             </div>
                         </AnimatedContent>
@@ -225,7 +227,7 @@ const Statistik = () => {
                         >
                             <div className="md:w-full w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300">
                                 <div className='w-full h-[900px] px-2 py-2 text-center'>
-                                    <VerticalBarChart dataChart={dataPeraturanView} labels={labelsView} tittle="Total Peraturan dilihat" className="shadow-lg" />
+                                    <VerticalBarChart dataChart={dataPeraturanView} labels={labelsView} tittle={t("statistikTotalPeraturandilihat")} className="shadow-lg" />
                                 </div>
                             </div>
                         </AnimatedContent>
@@ -252,7 +254,7 @@ const Statistik = () => {
                                             backgroundColor: "#233b74",
                                         }
                                     ]}
-                                        labels={labelsTotalpengunjung} tittle="Data Pengunjung" className="shadow-lg" />
+                                        labels={labelsTotalpengunjung} tittle={t("statistikTotalPengunjung")} className="shadow-lg" />
                                 </div>
                             </div>
                         </AnimatedContent>

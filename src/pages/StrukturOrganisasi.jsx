@@ -6,9 +6,11 @@ import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getTentangKami } from "../services/tentangKami.services"
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
+import { useTranslation } from 'react-i18next';
 
 const StrukturOrganisasi = () => {
 
+  const { t } = useTranslation();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const StrukturOrganisasi = () => {
     <>
       <Headers />
 
-      <section className='h-full bg-slate-100 py-4 h-[500px]'>
+      <section className='h-full bg-slate-100 py-4'>
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
           <div className='md:flex justify-between md:w-[80%] w-full gap-4 mx-auto my-4'>
 
@@ -46,7 +48,7 @@ const StrukturOrganisasi = () => {
               {/* Judul Berita */}
               <h1 className="text-center font-roboto font-bold text-bluePu md:text-[30px] text-[23px] py-4">
                 <SplitText
-                  text={'STRUKTUR ORGANISASI JDIH KEMENTERIAN PU'}
+                  text={t("STRUKTURORGANISASI")}
                   delay={15}
                   animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
                   animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}

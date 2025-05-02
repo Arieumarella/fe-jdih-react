@@ -10,7 +10,7 @@ import KritikDanSaranModal from '../components/kritikDanSaranModal';
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from 'react-i18next';
 
 
 const formatTanggal = (tanggalString) => {
@@ -32,6 +32,8 @@ const formatTanggal = (tanggalString) => {
 };
 
 const DetailDokumen = () => {
+
+  const { t } = useTranslation();
 
   const { slug } = useParams();
 
@@ -106,22 +108,22 @@ const DetailDokumen = () => {
   }
 
   const details = [
-    { label: "Tipe", value: "Peraturan Perundang-undangan" },
-    { label: "Judul", value: data?.data?.judul?.replace(/<[^>]+>/g, '') },
-    { label: "T.E.U. Badan / Pengarang", value: data?.data?.teu },
-    { label: "No. Peraturan", value: data?.data?.noperaturan },
-    { label: "Jenis/Bentuk Peraturan", value: data?.dataCategory?.percategoryname },
-    { label: "Singkatan Jenis/Bentuk Peraturan", value: data?.dataCategory?.singkatan },
-    { label: "Tempat Penetapan", value: data?.data?.tempat_terbit },
-    { label: "Tanggal-Bulan-Tahun Penetapan", value: formatTanggal(data?.data?.tanggal_penetapan) },
-    { label: "Tanggal-Bulan-Tahun Pengundangan", value: formatTanggal(data?.data?.tanggal_pengundangan) },
-    { label: "Sumber", value: data?.data?.sumber },
-    { label: "Subjek", value: data?.data?.subjek },
-    { label: "Status Peraturan", value: "Berlaku" },
-    { label: "Bahasa", value: data?.data?.bahasa },
-    { label: "Lokasi", value: data?.data?.lokasi },
-    { label: "Bidang Hukum", value: data?.data?.bidang_hukum },
-    { label: "Lampiran", value: "-" },
+    { label: t("detailPeraturanTipe"), value: "Peraturan Perundang-undangan" },
+    { label: t("detailPeraturanJudul"), value: data?.data?.judul?.replace(/<[^>]+>/g, '') },
+    { label: t("detailPeraturanTeu"), value: data?.data?.teu },
+    { label: t("detailPeraturanNoPutusan"), value: data?.data?.noperaturan },
+    { label: t("detailPeraturanJenis"), value: data?.dataCategory?.percategoryname },
+    { label: t("detailPeraturanSingkatan"), value: data?.dataCategory?.singkatan },
+    { label: t("detailPeraturanTempatPenetapan"), value: data?.data?.tempat_terbit },
+    { label: t("detailPeraturanTanggal"), value: formatTanggal(data?.data?.tanggal_penetapan) },
+    { label: t("detailPeraturanTanggalPengundangan"), value: formatTanggal(data?.data?.tanggal_pengundangan) },
+    { label: t("detailPeraturanSumber"), value: data?.data?.sumber },
+    { label: t("detailPeraturanSubjek"), value: data?.data?.subjek },
+    { label: t("detailPeraturanStatusPeraturan"), value: "Berlaku" },
+    { label: t("detailPeraturanBahasa"), value: data?.data?.bahasa },
+    { label: t("detailPeraturanLokasi"), value: data?.data?.lokasi },
+    { label: t("detailPeraturanBidangHukum"), value: data?.data?.bidang_hukum },
+    { label: t("detailPeraturanLampiran"), value: "-" },
   ];
 
   const getSebelumTentang = (str = '-') => {
@@ -138,11 +140,11 @@ const DetailDokumen = () => {
     <>
       <Headers />
 
-      <section className="h-full bg-slate-100 py-4 h-[500px] ">
+      <section className="h-full bg-slate-100 py-4 ">
         {/* Judul */}
         <h1 className="text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4">
           <SplitText
-            text={`Detail Peraturan`}
+            text={t('detailPeraturan')}
             delay={20}
             animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
             animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -198,7 +200,7 @@ const DetailDokumen = () => {
 
                 <p className='font-roboto font-semibold text-slate-600 md:text-[23px] text-[18px]'>
                   <SplitText
-                    text={`Meta Data Peraturan`}
+                    text={t('detailPeraturanMetaData')}
                     delay={20}
                     animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
                     animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -232,7 +234,7 @@ const DetailDokumen = () => {
 
                 >
                   <span className="material-symbols-outlined md:text-lg text-xl text-kuningButton">edit_square</span>
-                  <span>Kritik & Saran</span>
+                  <span>{t("detailPeraturanKeritikdanSaran")}</span>
                 </button>
 
                 <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-auto w-full md:px-3 px-2 py-2 rounded-2xl font-roboto md:text-[15px] text-[16px] flex items-center justify-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg text-center"

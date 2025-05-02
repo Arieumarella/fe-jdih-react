@@ -8,6 +8,7 @@ import { getAgendaPagination } from "../services/agenda.services";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
+import { useTranslation } from 'react-i18next';
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const generatePageNumbers = () => {
@@ -67,6 +68,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
 const Agenda = () => {
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const navigateHandelClick = (link = '') => {
     navigate(`/${link}`);
@@ -110,11 +112,11 @@ const Agenda = () => {
     <>
       <Headers />
 
-      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 h-[500px]'>
+      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4'>
 
         <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
           <SplitText
-            text={'Agenda'}
+            text={t("agenda")}
             delay={15}
             animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
             animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
