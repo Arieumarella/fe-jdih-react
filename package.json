@@ -18,6 +18,9 @@
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@react-spring/web": "^9.7.5",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@react-three/rapier": "^1.5.0",
     "axios": "^1.8.3",
     "chart.js": "^4.4.9",
     "chartjs-plugin-datalabels": "^2.2.0",
@@ -27,6 +30,7 @@
     "i18next": "^25.0.2",
     "i18next-browser-languagedetector": "^8.1.0",
     "material-symbols": "^0.28.1",
+    "meshline": "^3.3.1",
     "ogl": "^1.0.11",
     "pdfjs-dist": "^3.11.174",
     "react": "^18.3.1",
@@ -42,7 +46,8 @@
     "react-toastify": "^11.0.5",
     "recharts": "^2.15.1",
     "striptags": "^3.2.0",
-    "swiper": "^11.2.4"
+    "swiper": "^11.2.4",
+    "three": "^0.167.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
@@ -50,6 +55,7 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "esbuild": "^0.25.4",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
@@ -57,7 +63,7 @@
     "globals": "^15.14.0",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
-    "vite": "^6.0.5"
+    "vite": "^6.3.5"
   },
   "description": "JDIH PU",
   "main": "eslint.config.js",

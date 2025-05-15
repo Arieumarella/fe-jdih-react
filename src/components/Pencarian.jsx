@@ -18,7 +18,7 @@ const Pencarian = () => {
 
   return (
     <>
-      <section className='px-5 md:px-[60px] mt-[18px]'>
+      <section className=' mt-[10px]'>
         <div className="flex gap-[25px]">
           <AnimatedContent
             key={1}

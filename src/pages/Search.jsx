@@ -254,7 +254,7 @@ const Search = () => {
               <input
                 type="text"
                 placeholder={t("pencarianJudul")}
-                className="md:w-[90%] w-[100%] h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none"
+                className="md:w-[85%] w-[100%] h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none"
                 name="judul"
                 value={search.judul}
                 onChange={handleChange}

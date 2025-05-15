@@ -59,7 +59,7 @@
 }
 
 #root {
-  @apply bg-gradient-to-b from-bluePu from-30% to-white h-full;
+  @apply bg-gradient-to-b from-bluePu from-30% to-white h-full w-[100%] overflow-x-hidden;
 }
 
 

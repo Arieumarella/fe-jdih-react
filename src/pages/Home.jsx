@@ -14,6 +14,7 @@ import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
 
+
 export function getFormattedWaktu() {
   const hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
   const bulan = [
@@ -31,6 +32,12 @@ export function getFormattedWaktu() {
 
   return `${namaHari} - ${tanggal} - ${namaBulan} - ${tahun} - ${jam}.${menit}`;
 }
+
+const galleryData = [
+  { path_file: '/1.jpg' },
+  { path_file: '/1.jpg' },
+  { path_file: '/atas-pu.jpg' }
+];
 
 const Home = () => {
 
@@ -67,14 +74,15 @@ const Home = () => {
 
   }, []);
 
+
+
   return (
     <>
       <Headers />
-      <section className='container py-4 px-5 md:px-[60px] mt-[20px] flex justify-between item-center '>
-        <div className='group'>
-
+      <section className='w-full py-4 mt-[20px] flex flex-col md:flex-row justify-between items-start gap-6 px-4 md:px-[60px]'>
+        {/* Kiri: Teks Sambutan */}
+        <div className='group w-full md:w-2/3'>
           <h1 className='font-medium text-slate-100 text-[35px] md:text-[96px] font-onest flex gap-2'>
-
             <BlurText
               text={t('homeSelmat')}
               delay={200}
@@ -82,8 +90,6 @@ const Home = () => {
               direction="top"
               className='inline-block'
             />
-
-
             <BlurText
               text={t('homeDatang')}
               delay={50}
@@ -91,12 +97,8 @@ const Home = () => {
               direction="top"
               className='text-kuningButton inline-block'
             />
-
           </h1>
-
-          <h2 className='font-normal font-onest text-slate-100 py- text-[21px] md:text-[45px] md:mt-[-15px]'>
-
-
+          <h2 className='font-normal font-onest text-slate-100 text-[21px] md:text-[45px] md:mt-[-15px]'>
             <SplitText
               text={t('homeDiJdih')}
               delay={25}
@@ -123,7 +125,6 @@ const Home = () => {
               easing="easeOutCubic"
               threshold={0.2}
             />
-
           </h2>
           <p className='font-light font-roboto text-slate-100 py-1 text-[15px] md:text-[18px] mt-[5px]'>
             <BlurText
@@ -133,14 +134,14 @@ const Home = () => {
               direction="bottom"
             />
           </p>
+          <Pencarian />
         </div>
 
-        <img className='md:mr-[-100px] md:block hidden h-[382px]' src={sluet} alt="siluet" />
-
+        {/* Kanan: Image Slider */}
+        <div className='w-full md:w-3/5w-full md:w-[60%] md:max-w-[1000px]'>
+          <ImageSlider data={galleryData} />
+        </div>
       </section>
-
-      <Pencarian />
-      <ImageSlider data={banner} />
       <Box data={nuwPeraturan} />
       <ContainerContens />
       <SliderMonografi />

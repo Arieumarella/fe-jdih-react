@@ -28,19 +28,21 @@ const Card = ({ data, showModalAi, showModal, handleDownload }) => {
 
   const dataParse = data;
 
+  console.log(dataParse.statusPeraturan);
+
   return (
-    <div className="group w-full md:w-[70%] mx-auto bg-white rounded-xl shadow-lg flex flex-col overflow-hidden my-4">
+    <div className="group w-auto md:w-[70%]  mx-auto bg-white rounded-xl shadow-lg flex flex-col overflow-hidden my-4">
 
       {/* Header */}
-      <div className="flex md:justify-between items-center w-full bg-slate-200 p-4">
-        <span className="text-slate-500 md:text-[14px] text-[14px] font-medium font-roboto">
-          {peraturanCategories[dataParse?.peraturan_category_id] || '-'} nomor {dataParse?.noperaturan || '-'}
+      <div className="flex md:justify-between items-center w-full bg-gradient-to-r from-slate-300 to-slate-200 p-4 rounded-md ">
+        <span className="text-slate-700 md:text-[16px] text-[14px] font-semibold font-roboto">
+          {peraturanCategories[dataParse?.peraturan_category_id] || '-'} <span className="font-normal">Nomor {dataParse?.noperaturan || '-'}</span>
         </span>
-        {dataParse?.statusPeraturn && (
-          <span className="md:block hidden text-slate-500 md:text-[14px] text-[14px] font-roboto">
-            • {dataParse.statusPeraturn}
-          </span>
-        )}
+
+        <span className={`md:block hidden md:text-[14px] text-[12px] font-medium rounded-full px-3 py-1 ${dataParse?.statusPeraturan?.trim() === 'Berlaku' ? 'bg-emerald-200 text-emerald-700' : 'bg-rose-200 text-rose-700'
+          }`}>
+          {dataParse?.statusPeraturan}
+        </span>
       </div>
 
       {/* Title */}
