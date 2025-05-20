@@ -198,7 +198,7 @@ const Home = () => {
 
                       {/* Jumlah Viewer */}
                       <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto md:mt-0 mt-2 text-[12px]">
-                        <span className="material-symbols-outlined">visibility</span> <span>3083</span>
+                        <span className="material-symbols-outlined">visibility</span> <span>{item?.views}</span>
                       </div>
                     </div>
                   </div>

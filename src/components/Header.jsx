@@ -131,7 +131,7 @@ export default function Header() {
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("putasn-pengadilan"); }} className="block px-4 py-2 hover:bg-slate-100">{t("putusanPengadilan")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("agenda"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.agenda")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("artikel"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.artikel")}</a></li>
-
+                <li><a href="#" onClick={(e) => { e.preventDefault(); navigateHandelClick("infografis"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.infografis")}</a></li>
               </ul>
             </div>
 

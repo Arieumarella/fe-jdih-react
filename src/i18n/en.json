@@ -130,6 +130,9 @@
     "detailPeraturanLokasi": "Location",
     "detailPeraturanLampiran": "Attachment",
     "detailPeraturanKeritikdanSaran": "Feedback & Suggestions",
+    "infografis": "Infographic List",
+    "pliceHolderInfografis": "Search Infographic Title...",
+    "btnCariJudulInfografis": "Search",
     "menu": {
         "home": "Home",
         "jenisProdukHukum": "Legal Product Types",
@@ -150,6 +153,7 @@
         "strukturOrganisasi": "Organizational Structure",
         "tentangKami": "About Us",
         "prasyarat": "Requirements",
-        "kontakKami": "Contact Us"
+        "kontakKami": "Contact Us",
+        "infografis": "Infographic"
     }
 }

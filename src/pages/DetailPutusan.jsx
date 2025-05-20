@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
-import { getDetailPutusan } from "../services/putusanPengadilan.service";
+import { getDetailPutusan, insertViews } from "../services/putusanPengadilan.service";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useTranslation } from 'react-i18next';
@@ -18,6 +18,8 @@ const DetailPutusan = () => {
     getDetailPutusan(slug).then((result) => {
       setDataPutusan(result.data.data);
     });
+
+    insertViews(slug);
   }, [slug]);
 
   const formatDate = (str = '') => {

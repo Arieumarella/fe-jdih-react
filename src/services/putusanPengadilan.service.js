@@ -29,3 +29,16 @@ export const getPutusanPagination = async (pageX, searchKey) => {
     return err;
   }
 };
+
+export const insertViews = async (slug) => {
+  try {
+    const data = {
+      slug: slug,
+    };
+    const res = await axios.post("http://localhost:3000/putusan/insertViews", data);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};

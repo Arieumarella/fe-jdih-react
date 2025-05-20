@@ -29,3 +29,16 @@ export const getBeritaPagination = async (pageX, searchKey) => {
     return err;
   }
 };
+
+export const addViews = async (slug) => {
+  try {
+    const data = {
+      slug: slug,
+    };
+
+    const res = await axios.post("http://localhost:3000/Berita/views", data);
+    return res.data.data;
+  } catch (err) {
+    return err;
+  }
+};

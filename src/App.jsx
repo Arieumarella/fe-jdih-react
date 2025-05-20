@@ -18,6 +18,8 @@ import Prasyarat from "./pages/Prasyarat";
 import KontakKami from "./pages/KontakKami";
 import Statistik from "./pages/statistik";
 import SiMPeL from "./pages/SiMPeL";
+import Infografis from "./pages/Infografis";
+import DetailInfografis from "./pages/DetailInfografis";
 import { Helmet } from "react-helmet-async";
 import { ToastProvider } from "./components/ToastProvider";
 
@@ -45,6 +47,8 @@ const titles = {
   "/kontak-kami": "JDIH PU - Kontak Kami",
   "/Statistik": "JDIH PU - Statistik",
   "/SiMPeL/:slug": "JDIH PU - SiMPeL",
+  "/Infografis": "JDIH PU - Infografis",
+  "/Infografis/:id": "JDIH PU - Detail Infografis",
 };
 
 function TitleUpdater() {
@@ -101,6 +105,8 @@ function App() {
         <Route path="/kontak-kami" element={<KontakKami />} />
         <Route path="/statistik" element={<Statistik />} />
         <Route path="/SiMPeL/:slug" element={<SiMPeL />} />
+        <Route path="/infografis" element={<Infografis />} />
+        <Route path="/infografis/:id" element={<DetailInfografis />} />
       </Routes>
     </>
   )

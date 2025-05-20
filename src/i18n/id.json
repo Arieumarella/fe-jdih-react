@@ -130,6 +130,9 @@
     "detailPeraturanLokasi": "Lokasi",
     "detailPeraturanLampiran": "Lampiran",
     "detailPeraturanKeritikdanSaran": "Kritik & Saran",
+    "infografis": "Infografis",
+    "pliceHolderInfografis": "Cari Judul Infografis...",
+    "btnCariJudulInfografis": "Cari",
     "menu": {
         "home": "Beranda",
         "jenisProdukHukum": "Jenis Produk Hukum",
@@ -150,6 +153,7 @@
         "strukturOrganisasi": "Struktur Organisasi",
         "tentangKami": "Tentang Kami",
         "prasyarat": "Prasyarat",
-        "kontakKami": "Kontak Kami"
+        "kontakKami": "Kontak Kami",
+        "infografis": "Infografis"
     }
 }

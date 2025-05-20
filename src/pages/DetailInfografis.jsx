@@ -3,26 +3,29 @@ import { useParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
-import { getDetailBerita, addViews } from '../services/berita.services';
+import { getInfografisDetail, insertViewr } from '../services/infografis.services';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 
-const DetailBerita = () => {
+const DetailInfografis = () => {
 
-    const { slug } = useParams();
+    const { id } = useParams();
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
 
         // Get Jenis Peraturan
-        getDetailBerita(slug).then((result) => {
+        getInfografisDetail(id).then((result) => {
             setData(result);
         });
 
-        addViews(slug);
+        // insert viewr
+        insertViewr(id)
 
-    }, [slug]);
+    }, [id]);
+
+    console.log(data);
 
     const formatDate = (dateString = null) => {
         if (dateString == null) {
@@ -50,7 +53,7 @@ const DetailBerita = () => {
 
                         <div className='font-roboto font-semibold text-sm text-gray-600'>
                             <SplitText
-                                text={formatDate(data?.tgl_buat)}
+                                text={formatDate(data?.data?.tgl_buat)}
                                 delay={100}
                                 animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
                                 animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -63,7 +66,7 @@ const DetailBerita = () => {
                         {/* Judul Berita */}
                         <h1 className="md:text-[23px] text-[23px] font-bold font-roboto text-blue-900 mt-3 text-center">
                             <SplitText
-                                text={data?.judul}
+                                text={data?.data?.judul}
                                 delay={10}
                                 animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
                                 animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -74,10 +77,10 @@ const DetailBerita = () => {
 
                         {/* Gambar Berita */}
                         <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
-                            <div className="w-full h-[200px] md:h-full overflow-hidden rounded-lg mt-4">
+                            <div className="w-full h-full overflow-hidden rounded-lg mt-4">
                                 <img
-                                    src={`https://jdih.pu.go.id/internal/assets/assets/berita/${data?.gambar_1}`}
-                                    alt="Gambar Berita"
+                                    src={`https://jdih.pu.go.id/internal/assets/assets/infografis/${data?.data?.gambar_1}`}
+                                    alt="Gambar infografis"
                                     className="w-full h-full object-fill"
                                 />
                             </div>
@@ -87,7 +90,7 @@ const DetailBerita = () => {
                         <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
                             <p
                                 className="text-gray-600 text-sm md:text-base mt-4 text-justify leading-relaxed font-roboto"
-                                dangerouslySetInnerHTML={{ __html: data?.isi || "" }}
+                                dangerouslySetInnerHTML={{ __html: data?.data?.isi || "" }}
                             />
                         </FadeContent>
 
@@ -131,7 +134,7 @@ const DetailBerita = () => {
                             <div className="flex gap-4 mt-2 px-2">
                                 <div className="flex items-center gap-1 font-roboto font-medium text-bluePu">
                                     <span className="material-symbols-outlined text-lg text-bluePu">visibility</span>
-                                    <p className="text-sm">{data?.views}</p>
+                                    <p className="text-sm">{data?.data?.viewr}</p>
                                 </div>
                             </div>
                         </div>
@@ -149,4 +152,4 @@ const DetailBerita = () => {
     );
 };
 
-export default DetailBerita;
+export default DetailInfografis;
