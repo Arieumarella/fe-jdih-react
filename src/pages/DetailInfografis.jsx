@@ -110,25 +110,46 @@ const DetailInfografis = () => {
                                 <p className='font-bold font-roboto text-slate-600'>Share :</p>
                                 <div className="flex gap-3 mt-2">
                                     {/* Twitter */}
-                                    <div className="w-10 h-10 flex items-center justify-center bg-[#1DA1F2] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                                    <a
+                                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 flex items-center justify-center bg-[#1DA1F2] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                                    >
                                         <i className="fa-brands fa-x-twitter text-white text-2xl"></i>
-                                    </div>
+                                    </a>
 
                                     {/* Facebook */}
-                                    <div className="w-10 h-10 flex items-center justify-center bg-[#3b5998] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                                    <a
+                                        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 flex items-center justify-center bg-[#3b5998] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                                    >
                                         <i className="fa-brands fa-facebook text-2xl text-white"></i>
-                                    </div>
+                                    </a>
 
                                     {/* WhatsApp */}
-                                    <div className="w-10 h-10 flex items-center justify-center bg-[#25D366] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                                    <a
+                                        href={`https://api.whatsapp.com/send?text=${encodeURIComponent(document.title + ' ' + window.location.href)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 flex items-center justify-center bg-[#25D366] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                                    >
                                         <i className="fa-brands fa-whatsapp text-white text-2xl"></i>
-                                    </div>
+                                    </a>
 
                                     {/* Telegram */}
-                                    <div className="w-10 h-10 flex items-center justify-center bg-[#0088cc] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                                    <a
+                                        href={`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 flex items-center justify-center bg-[#0088cc] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                                    >
                                         <i className="fa-brands fa-telegram text-white text-2xl"></i>
-                                    </div>
+                                    </a>
                                 </div>
+
                             </div>
 
                             <div className="flex gap-4 mt-2 px-2">

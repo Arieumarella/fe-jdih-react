@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
-import { getDetailPutusan, insertViews } from "../services/putusanPengadilan.service";
+import { getDetailPutusan, insertViews, addDownload } from "../services/putusanPengadilan.service";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useTranslation } from 'react-i18next';
@@ -30,7 +30,8 @@ const DetailPutusan = () => {
     return `${day}/${month}/${year}`;
   };
 
-  const handleDownload = async (path, nmFile) => {
+  const handleDownload = async (path, nmFile, slug) => {
+    addDownload(slug)
     const fileUrl = path;
     const fileName = nmFile;
 
@@ -54,17 +55,17 @@ const DetailPutusan = () => {
 
   const details = [
     { label: t("pengadilanTipe"), value: "Putusan Pengadilan / Yurispudensi" },
-    { label: t("pengadilanJudul"), value: dataPutusan.judul },
-    { label: t("pengadilanTeu"), value: dataPutusan.teu },
-    { label: t("pengadilanNoPutusan"), value: dataPutusan.noperaturan },
-    { label: t("pengadilanJnsPeradilan"), value: dataPutusan.teu },
+    { label: t("pengadilanJudul"), value: dataPutusan?.judul },
+    { label: t("pengadilanTeu"), value: dataPutusan?.teu },
+    { label: t("pengadilanNoPutusan"), value: dataPutusan?.noperaturan },
+    { label: t("pengadilanJnsPeradilan"), value: dataPutusan?.teu },
     { label: t("pengadilanSingkatanJenis"), value: "PTUN" },
-    { label: t("pengadilanTempatPeradilan"), value: dataPutusan.tempat_terbit },
+    { label: t("pengadilanTempatPeradilan"), value: dataPutusan?.tempat_terbit },
     { label: t("pengadilanTanggalDIbacakan"), value: formatDate(dataPutusan?.tanggal) },
-    { label: t("pengadilanSumber"), value: dataPutusan.sumber },
-    { label: t("pengadilanBahasa"), value: dataPutusan.bahasa },
+    { label: t("pengadilanSumber"), value: dataPutusan?.sumber },
+    { label: t("pengadilanBahasa"), value: dataPutusan?.bahasa },
     { label: t("pengadilanBidangHukum"), value: "Hukum Administrasi Negara" },
-    { label: t("pengadilanLokasi"), value: dataPutusan.lokasi }
+    { label: t("pengadilanLokasi"), value: dataPutusan?.lokasi }
   ];
 
   return (
@@ -129,7 +130,7 @@ const DetailPutusan = () => {
 
               <div className="flex gap-3 mt-2 border-t py-2">
                 <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-auto w-full md:px-3 px-2 py-2 rounded-2xl font-roboto md:text-[15px] text-[16px] flex items-center justify-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg text-center"
-                  onClick={() => handleDownload(`https://jdih.pu.go.id/internal/assets/assets/produk/putusan/PTUN/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`, dataPutusan.file_upload)}
+                  onClick={() => handleDownload(`https://jdih.pu.go.id/internal/assets/assets/produk/putusan/PTUN/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`, dataPutusan.file_upload, dataPutusan.slug)}
                 >
                   <span className="material-symbols-outlined md:text-lg text-xl text-kuningButton">download</span>
                   <span>Unduh</span>
@@ -140,25 +141,46 @@ const DetailPutusan = () => {
                 <p className='font-roboto font-semibold text-slate-600 md:text-[18px] text-[14px]'>Share :</p>
                 <div className="flex gap-3">
                   {/* Twitter */}
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#1DA1F2] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-[#1DA1F2] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                  >
                     <i className="fa-brands fa-x-twitter text-white text-2xl"></i>
-                  </div>
+                  </a>
 
                   {/* Facebook */}
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#3b5998] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-[#3b5998] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                  >
                     <i className="fa-brands fa-facebook text-2xl text-white"></i>
-                  </div>
+                  </a>
 
                   {/* WhatsApp */}
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#25D366] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                  <a
+                    href={`https://api.whatsapp.com/send?text=${encodeURIComponent(document.title + ' ' + window.location.href)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-[#25D366] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                  >
                     <i className="fa-brands fa-whatsapp text-white text-2xl"></i>
-                  </div>
+                  </a>
 
                   {/* Telegram */}
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#0088cc] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                  <a
+                    href={`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-[#0088cc] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                  >
                     <i className="fa-brands fa-telegram text-white text-2xl"></i>
-                  </div>
+                  </a>
                 </div>
+
               </div>
             </div>
 

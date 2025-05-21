@@ -122,7 +122,7 @@ const Card = ({ data, showModalAi, showModal, handleDownload }) => {
 
             <button
               className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-auto w-full md:px-3 px-2 py-2 rounded-2xl font-roboto md:text-[13px] text-[11px] flex items-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg"
-              onClick={() => handleDownload(dataParse.pathFile, dataParse.file_upload)}
+              onClick={() => handleDownload(dataParse.pathFile, dataParse.file_upload, dataParse.slug)}
             >
               <span className="material-symbols-outlined md:text-lg text-sm text-kuningButton">download_2</span>
               Unduh

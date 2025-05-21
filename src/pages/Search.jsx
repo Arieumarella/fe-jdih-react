@@ -4,7 +4,7 @@ import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
-import { getJenisPeraturan, getDataSubstansi, getPeraturanPagination, getUnor } from "../services/search.services";
+import { getJenisPeraturan, getDataSubstansi, getPeraturanPagination, getUnor, addDownload } from "../services/search.services";
 import { Atom } from 'react-loading-indicators';
 import { peraturanBySingkata } from "../assets/object/peraturanBySingkata";
 import Modal from '../components/modal';
@@ -130,13 +130,13 @@ const Search = () => {
   }
 
 
-  const handleDownload = async (urlDownload, fileName) => {
+  const handleDownload = async (urlDownload, fileName, slug) => {
     try {
+      addDownload(slug);
       const fileUrl = urlDownload;
       const response = await fetch(fileUrl);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", fileName);

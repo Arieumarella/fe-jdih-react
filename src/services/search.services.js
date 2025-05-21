@@ -76,3 +76,31 @@ export const getUnor = async () => {
     return err;
   }
 };
+
+export const addViews = async (slug) => {
+  try {
+
+    const body = {
+      slug:slug 
+    };
+
+    const res = await axios.post("http://localhost:3000/search/addViews", body);
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const addDownload = async (slug) => {
+  try {
+
+    const body = {
+      slug:slug 
+    };
+
+    const res = await axios.post("http://localhost:3000/search/addDownload", body);
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};

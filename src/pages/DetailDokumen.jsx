@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
-import { getPeraturanDetail } from "../services/search.services";
+import { getPeraturanDetail, addViews, addDownload } from "../services/search.services";
 import Modal from '../components/modal';
 import ModalAi from '../components/modal-chatAi';
 import KritikDanSaranModal from '../components/kritikDanSaranModal';
@@ -63,6 +63,8 @@ const DetailDokumen = () => {
       setData(result);
     });
 
+    addViews(slug)
+
   }, [slug]);
 
   useEffect(() => {
@@ -87,13 +89,13 @@ const DetailDokumen = () => {
     setIsModalOpenKritik(stateCondition);
   }
 
-  const handleDownload = async (urlDownload, fileName) => {
+  const handleDownload = async (urlDownload, fileName, slug) => {
     try {
+      addDownload(slug)
       const fileUrl = urlDownload;
       const response = await fetch(fileUrl);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", fileName);
@@ -251,25 +253,46 @@ const DetailDokumen = () => {
                 <p className='font-roboto font-semibold text-slate-600 md:text-[18px] text-[14px]'>Share :</p>
                 <div className="flex gap-3">
                   {/* Twitter */}
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#1DA1F2] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-[#1DA1F2] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                  >
                     <i className="fa-brands fa-x-twitter text-white text-2xl"></i>
-                  </div>
+                  </a>
 
                   {/* Facebook */}
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#3b5998] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-[#3b5998] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                  >
                     <i className="fa-brands fa-facebook text-2xl text-white"></i>
-                  </div>
+                  </a>
 
                   {/* WhatsApp */}
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#25D366] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                  <a
+                    href={`https://api.whatsapp.com/send?text=${encodeURIComponent(document.title + ' ' + window.location.href)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-[#25D366] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                  >
                     <i className="fa-brands fa-whatsapp text-white text-2xl"></i>
-                  </div>
+                  </a>
 
                   {/* Telegram */}
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#0088cc] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer">
+                  <a
+                    href={`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-[#0088cc] rounded-md shadow-lg hover:bg-opacity-70 transition-all duration-400 hover:scale-125 cursor-pointer"
+                  >
                     <i className="fa-brands fa-telegram text-white text-2xl"></i>
-                  </div>
+                  </a>
                 </div>
+
               </div>
             </AnimatedContent>
           </div>
@@ -299,7 +322,7 @@ const DetailDokumen = () => {
                     Preview
                   </button>
                   <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-full w-full h-[40px] rounded-2xl font-roboto md:text-[14px] text-[11px] flex items-center justify-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg"
-                    onClick={() => handleDownload(data?.data?.abstrak, `https://jdih.pu.go.id/internal/assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`)}
+                    onClick={() => handleDownload(data?.data?.abstrak, `https://jdih.pu.go.id/internal/assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`, data?.data?.slug)}
                   >
                     <span className="material-symbols-outlined md:text-xl text-sm text-kuningButton">download</span>
                     Download
@@ -333,7 +356,7 @@ const DetailDokumen = () => {
                   </button>
                   <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-full w-full h-[40px] rounded-2xl font-roboto md:text-[14px] text-[11px] flex items-center justify-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg"
 
-                    onClick={() => handleDownload(data?.data?.file_upload, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`)}
+                    onClick={() => handleDownload(data?.data?.file_upload, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`, data?.data?.slug)}
 
                   >
                     <span className="material-symbols-outlined md:text-xl text-sm text-kuningButton">download</span>
@@ -373,7 +396,7 @@ const DetailDokumen = () => {
                         </button>
                         <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover md:w-full w-full h-[40px] rounded-2xl font-roboto md:text-[14px] text-[11px] flex items-center justify-center md:gap-2 gap-1 transition-all duration-200 shadow-md hover:shadow-lg"
 
-                          onClick={() => handleDownload(item?.dataFileParsial?.file, `https://jdih.pu.go.id/internal/assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`)}
+                          onClick={() => handleDownload(item?.dataFileParsial?.file, `https://jdih.pu.go.id/internal/assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`, data?.data?.slug)}
 
                         >
                           <span className="material-symbols-outlined md:text-xl text-sm text-kuningButton">download</span>

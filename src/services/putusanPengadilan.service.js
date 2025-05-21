@@ -42,3 +42,16 @@ export const insertViews = async (slug) => {
     return err;
   }
 };
+
+export const addDownload = async (slug) => {
+  try {
+    const data = {
+      slug: slug,
+    };
+    const res = await axios.post("http://localhost:3000/putusan/addDownload", data);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
