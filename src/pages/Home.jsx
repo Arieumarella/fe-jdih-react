@@ -79,10 +79,16 @@ const Home = () => {
   return (
     <>
       <Headers />
-      <section className='w-full py-4 mt-[20px] flex flex-col md:flex-row justify-between items-start gap-6 px-4 md:px-[60px]'>
+      <section className='w-full py-4 mt-[20px] flex flex-col lg:flex-row justify-between items-start gap-6 px-4 lg:px-[60px]'>
+        {/* 1. Mengubah md:flex-row menjadi lg:flex-row */}
+        {/* 2. Mengubah md:px-[60px] menjadi lg:px-[60px] untuk padding section */}
+
         {/* Kiri: Teks Sambutan */}
-        <div className='group w-full md:w-2/3'>
-          <h1 className='font-medium text-slate-100 text-[35px] md:text-[96px] font-onest flex gap-2'>
+        {/* Lebar: Penuh di mobile dan tablet, 2/3 di lg ke atas */}
+        <div className='group w-full lg:w-2/3'>
+          {/* 3. Mengubah md:w-2/3 menjadi lg:w-2/3 */}
+          <h1 className='font-medium text-slate-100 text-[35px] lg:text-[96px] font-onest flex flex-wrap gap-2'>
+            {/* 4. Mengubah md:text-[96px] menjadi lg:text-[96px] */}
             <BlurText
               text={t('homeSelmat')}
               delay={200}
@@ -98,7 +104,8 @@ const Home = () => {
               className='text-kuningButton inline-block'
             />
           </h1>
-          <h2 className='font-normal font-onest text-slate-100 text-[21px] md:text-[45px] md:mt-[-15px]'>
+          <h2 className='font-normal font-onest text-slate-100 text-[21px] lg:text-[45px] lg:mt-[-15px]'>
+            {/* 5. Mengubah md:text-[45px] dan md:mt-[-15px] menjadi lg:text-[45px] dan lg:mt-[-15px] */}
             <SplitText
               text={t('homeDiJdih')}
               delay={25}
@@ -126,7 +133,8 @@ const Home = () => {
               threshold={0.2}
             />
           </h2>
-          <p className='font-light font-roboto text-slate-100 py-1 text-[15px] md:text-[18px] mt-[5px]'>
+          <p className='font-light font-roboto text-slate-100 py-1 text-[15px] lg:text-[18px] mt-[5px]'>
+            {/* 6. Mengubah md:text-[18px] menjadi lg:text-[18px] */}
             <BlurText
               text={waktuSaatIni}
               delay={10}
@@ -138,7 +146,13 @@ const Home = () => {
         </div>
 
         {/* Kanan: Image Slider */}
-        <div className='w-full md:w-3/5w-full md:w-[60%] md:max-w-[1000px]'>
+        {/* Lebar: Penuh di mobile dan tablet, 60% di lg ke atas */}
+        {/* Kelas visibilitas disederhanakan: selalu block (terlihat), layout diatur oleh parent flex */}
+        <div className='w-full lg:w-[60%] lg:max-w-[1000px]'>
+          {/* 7. Mengubah md:w-[60%] dan md:max-w-[1000px] menjadi lg:w-[60%] dan lg:max-w-[1000px] */}
+          {/* 8. Menghapus kelas visibilitas md:hidden sm:block lg:block yang rumit. */}
+          {/*    Karena parentnya flex-col secara default, dan lg:flex-row, slider akan otomatis di bawah */}
+          {/*    di mobile/tablet, dan di kanan pada lg. */}
           <ImageSlider data={galleryData} />
         </div>
       </section>

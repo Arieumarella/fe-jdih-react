@@ -248,33 +248,50 @@ const Search = () => {
         </h1>
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
           <form onSubmit={paginateFunction}>
-            <div className="box-border w-full md:w-[70%] mx-auto my-4 rounded-lg bg-bluePu shadow-lg p-4">
+            {/* Mengubah md:w-[70%] menjadi lg:w-[70%] */}
+            <div className="box-border w-full lg:w-[70%] mx-auto my-4 rounded-lg bg-bluePu shadow-lg p-4">
               {/* Input Nama Peraturan */}
               <label className="block text-white font-semibold mb-1">{t("pencarianJudul")}</label>
-              <input
-                type="text"
-                placeholder={t("pencarianJudul")}
-                className="md:w-[85%] w-[100%] h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none"
-                name="judul"
-                value={search.judul}
-                onChange={handleChange}
-              />
+              {/* Blok untuk input judul dan tombol agar bisa flex di lg */}
+              <div className="lg:flex lg:items-center">
+                {/* Mengubah md:w-[85%] menjadi lg:w-[85%] */}
+                <input
+                  type="text"
+                  placeholder={t("pencarianJudul")}
+                  className="lg:w-[85%] w-[100%] h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none mb-2 lg:mb-0"
+                  // Menambah mb-2 untuk mobile/tablet, lg:mb-0 jika berdampingan
+                  name="judul"
+                  value={search.judul}
+                  onChange={handleChange}
+                />
 
-              {/* Tombol Cari */}
-              <button type="submit" className="md:ml-2 mt-2 w-[90px] bg-kuningButton text-bluePu px-4 py-3 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition cursor-pointer">
-                {t("btnPencarianSubmit")}
-              </button>
-              <span className='block text-white font-semibold my-4 font-roboto cursor-pointer' onClick={hendelPencarianDetail}>{t("pencarianDetail")} <p className='inline' id='stsPencarianIcon'>{IconPencarianDetail}</p></span>
+                {/* Tombol Cari */}
+                {/* Mengubah md:ml-2 menjadi lg:ml-2 */}
+                <button
+                  type="submit"
+                  className="lg:ml-2 w-full lg:w-[90px] bg-kuningButton text-bluePu px-4 py-3 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition cursor-pointer"
+                // w-full untuk mobile/tablet, lg:w-[90px] untuk desktop
+                >
+                  {t("btnPencarianSubmit")}
+                </button>
+              </div>
+
+              <span className='block text-white font-semibold my-4 font-roboto cursor-pointer' onClick={hendelPencarianDetail}>
+                {t("pencarianDetail")} <p className='inline' id='stsPencarianIcon'>{IconPencarianDetail}</p>
+              </span>
+
               {/* Advanced Search */}
-              <div className={`mt-4 grid grid-cols-1 md:grid-cols-4 gap-4 max-h-0 transition-all duration-500 ${pencarianDetail ? 'max-h-screen opacity-100' : 'opacity-0'}`}>
+              {/* Mengubah md:grid-cols-4 menjadi lg:grid-cols-4 */}
+              <div className={`mt-4 grid grid-cols-1 lg:grid-cols-4 gap-4 max-h-0 transition-all duration-500 ${pencarianDetail ? 'max-h-screen opacity-100' : 'opacity-0'}`}>
                 {/* Jenis Dokumen */}
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("JenisPeraturan")}</label>
-                  <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
+                  <select
+                    className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="peraturan_category_id"
                     value={search.peraturan_category_id}
                     onChange={handleChange}
-                    defaultValue={peraturanBySingkata[paramJnsPeraturan]}
+                  // defaultValue={peraturanBySingkata[paramJnsPeraturan]} // defaultValue pada select lebih baik dihandle dengan value dan state
                   >
                     <option value="">-- {t("JenisPeraturan")} --</option>
                     {jnsPeraturan?.data?.data?.length > 0 ? (
@@ -285,7 +302,8 @@ const Search = () => {
                         >
                           {item.percategoryname}
                         </option>
-                      ))) : (
+                      ))
+                    ) : (
                       <option
                         value=""
                         disabled
@@ -295,10 +313,10 @@ const Search = () => {
                 </div>
 
                 {/* Tema Peraturan */}
-
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("JenisSubstansi")}</label>
-                  <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
+                  <select
+                    className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="jns_substansi"
                     value={search.jns_substansi}
                     onChange={handleChange}
@@ -307,40 +325,39 @@ const Search = () => {
                     {dataSubstansi?.data?.data?.length > 0 ? (
                       dataSubstansi?.data?.data?.map((item, index) => (
                         <option
-                          key={index + 5}
+                          key={item?.tag_id || `substansi-${index}`} // Gunakan ID unik jika ada
                           value={item?.tag_id}
                         >
                           {item?.tagname}
                         </option>
-                      ))) : (
+                      ))
+                    ) : (
                       <option
                         value=""
                         disabled
                       >-- {t("statistikDataTIdakDitemukan")} --</option>
                     )}
-
-
                   </select>
                 </div>
 
                 {/* Tahun */}
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("tahunPeraturan")}</label>
-                  <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
+                  <select
+                    className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="tahun"
                     value={search.tahun}
                     onChange={handleChange}
                   >
                     <option value="">-- {t("tahunPeraturan")} --</option>
-                    {arrayTahun
-                      .length > 0 ? (
-                      arrayTahun
-                        .map((item, index) => (
-                          <option
-                            key={index}
-                            value={item}
-                          >{item}</option>
-                        ))) : (
+                    {arrayTahun?.length > 0 ? ( // Menambahkan optional chaining untuk arrayTahun
+                      arrayTahun.map((item, index) => (
+                        <option
+                          key={index} // Untuk tahun, index biasanya aman jika arrayTahun tidak berubah urutannya
+                          value={item}
+                        >{item}</option>
+                      ))
+                    ) : (
                       <option
                         value=""
                         disabled
@@ -349,7 +366,7 @@ const Search = () => {
                   </select>
                 </div>
 
-                {/* Nomor Peraturan (Baru Ditambahkan) */}
+                {/* Nomor Peraturan */}
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("noPeraturan")}</label>
                   <input
@@ -362,36 +379,34 @@ const Search = () => {
                   />
                 </div>
 
-                {/* Unit Organisasi (Baru Ditambahkan) */}
+                {/* Unit Organisasi */}
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("pilihUnitOrganisasi")}</label>
-                  <select className="w-full h-[50px] px-4 rounded-md text-gray-800"
+                  <select
+                    className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="unor"
                     value={search.unor}
                     onChange={handleChange}
                   >
                     <option value="">-- {t("pilihUnitOrganisasi")} --</option>
-                    {dataUnor?.data?.length > 0 ? (
-                      dataUnor?.data?.map((item, index) => (
+                    {dataUnor?.data?.length > 0 ? ( // Menggunakan dataUnor.data bukan dataUnor.data.data
+                      dataUnor.data.map((item, index) => (
                         <option
-                          key={index + 5}
+                          key={item?.dept_id || `unor-${index}`} // Gunakan ID unik jika ada
                           value={item?.dept_id}
                         >
                           {item?.deptname}
                         </option>
-                      ))) : (
+                      ))
+                    ) : (
                       <option
-                        key={67}
+                        key="unor-empty" // Key yang lebih deskriptif
                         value=""
                         disabled
                       >-- {t("statistikDataTIdakDitemukan")} --</option>
                     )}
-
-
                   </select>
                 </div>
-
-
               </div>
             </div>
           </form>

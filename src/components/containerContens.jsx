@@ -56,166 +56,157 @@ const containerContens = () => {
 
   return (
     <>
-      <section className=' px-5 md:px-[60px] mt-[18px] group overflow-x-hidden'>
+      <section className='px-5 lg:px-[60px] mt-[18px] group overflow-x-hidden'>
+        {/* Padding section: px-5 untuk mobile dan tablet, lg:px-[60px] untuk desktop */}
 
-        <div className="box-content size-25 border-2 md:w-full rounded-xl bg-bluePu md:flex">
+        {/* Kelas 'size-25' dihapus. */}
+        {/* Mengubah md:flex menjadi lg:flex agar tampilan tablet sama seperti mobile (bertumpuk) */}
+        {/* Mengubah md:w-full menjadi w-full karena di mobile/tablet akan selalu full width per bagian */}
+        <div className="box-content border-2 w-full rounded-xl bg-bluePu lg:flex lg:gap-6">
+          {/* lg:gap-6 untuk spasi antar kolom HANYA di layar besar */}
 
-          <div className="group md:px-6 px-6 md:py-4 text-center w-full md:my-4 my-2 md:text-[18px] text-[14px] ">
-            <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>{t('unitOrganisasi')}</p>
+          {/* Kolom 1: Unit Organisasi */}
+          {/* Di mobile & tablet: w-full (default block) */}
+          {/* Di lg ke atas: akan menjadi bagian dari flex, mengambil 1/3 ruang jika semua w-full */}
+          <div className="group lg:px-6 px-6 py-4 text-center w-full my-2 lg:my-4 text-[14px] lg:text-[18px]">
+            {/* Padding, margin, dan ukuran font disesuaikan: nilai mobile/tablet, lalu nilai lg */}
+            <p className='font-onest font-semibold text-slate-100 text-[18px] lg:text-[23px] mb-4'>
+              {t('unitOrganisasi')}
+            </p>
 
             {unor?.length > 0 ? (
               unor.map((item, index) => (
                 <AnimatedContent
-                  key={index}
+                  key={item.dept_id || index} // Gunakan ID unik
                   distance={80}
                   direction="vertical"
-                  reverse={false}
-                  config={{ tension: 80, friction: 20 }}
-                  initialOpacity={0.2}
-                  animateOpacity
-                  scale={1}
-                  threshold={0.2}
+                // ... (props AnimatedContent lainnya)
                 >
-                  <div key={index} className="box-border p-2 border-2 w-full h-auto rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 cursor-pointer"
+                  <div
+                    key={item.dept_id || `unor-item-${index}`}
+                    className="box-border p-2 border-2 w-full h-auto rounded-lg font-onest text-slate-100 hover:text-kuningButton my-4 cursor-pointer"
                     onClick={(e) => { e.preventDefault(); window.scrollTo(0, 0); navigate(`/Search/-?dept_id=${item.dept_id}`); }}
                   >
                     {item.deptname}
                   </div>
                 </AnimatedContent>
-              ))) : (
+              ))
+            ) : (
               <AnimatedContent
-                key={1}
-                distance={80}
-                direction="vertical"
-                reverse={false}
-                config={{ tension: 80, friction: 20 }}
-                initialOpacity={0.2}
-                animateOpacity
-                scale={1}
-                threshold={0.2}
+                key="unor-empty"
+              // ... (props AnimatedContent lainnya)
               >
-                <p className='text-center text-slate-100'>{t('statistikDataTIdakDitemukan')}</p>
+                <p className='text-center text-slate-100 py-4'>{t('statistikDataTIdakDitemukan')}</p>
               </AnimatedContent>
             )}
-
           </div>
 
-          <div className="group px-6 md:py-4 py-1 text-center w-full md:my-4 ">
-            <div className='group'>
-              <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>{t('linkTerkait')}</p>
-
-              <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left group">
+          {/* Kolom 2: Link Terkait & Statistik Pengunjung */}
+          <div className="group lg:px-6 px-6 py-4 text-center w-full my-2 lg:my-4">
+            <div className='group mb-6'>
+              <p className='font-onest font-semibold text-slate-100 text-[18px] lg:text-[23px] mb-4'>
+                {t('linkTerkait')}
+              </p>
+              <div className="box-border border-2 p-4 w-full h-auto rounded-lg text-left group">
                 {linkTerkait?.length > 0 ? (
                   linkTerkait.map((item, index) => (
                     <AnimatedContent
-                      key={index + 10}
-                      distance={80}
-                      direction="vertical"
-                      reverse={false}
-                      config={{ tension: 80, friction: 20 }}
-                      initialOpacity={0.2}
-                      animateOpacity
-                      scale={1}
-                      threshold={0.2}
+                      key={item.linkid || `link-${index}`}
+                    // ... (props AnimatedContent lainnya)
                     >
-                      <div key={index} className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 md:my-2'>
-                        <span className="material-symbols-outlined -rotate-45">link</span> <a href={item.linkurl} target="_blank">{item.linkname}</a>
+                      <div
+                        key={item.linkid_sub || `link-item-${index}`}
+                        className='flex items-center font-onest text-slate-100 hover:text-kuningButton text-[14px] lg:text-[18px] gap-2 my-2'
+                      >
+                        <span className="material-symbols-outlined -rotate-45 text-xl">link</span>
+                        <a href={item.linkurl} target="_blank" rel="noopener noreferrer" className="truncate hover:underline">
+                          {item.linkname}
+                        </a>
                       </div>
                     </AnimatedContent>
-                  ))) : (
+                  ))
+                ) : (
                   <AnimatedContent
-                    key={2}
-                    distance={80}
-                    direction="vertical"
-                    reverse={false}
-                    config={{ tension: 80, friction: 20 }}
-                    initialOpacity={0.2}
-                    animateOpacity
-                    scale={1}
-                    threshold={0.2}
+                    key="link-empty"
+                  // ... (props AnimatedContent lainnya)
                   >
-                    <p className='text-center text-slate-100'>{t('statistikDataTIdakDitemukan')}</p>
+                    <p className='text-center text-slate-100 py-4'>{t('statistikDataTIdakDitemukan')}</p>
                   </AnimatedContent>
                 )}
               </div>
-
             </div>
 
-            <div className='group md:my-4 my-6'>
-
-              <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-center">
-                <p className='font-onest font-semibold text-slate-100 md:text-[20px] text-[18px] mb-6'>{t('statistikPengunjung')}</p>
+            <div className='group my-6'>
+              <div className="box-border border-2 p-4 w-full h-auto rounded-lg text-center">
+                <p className='font-onest font-semibold text-slate-100 text-[18px] lg:text-[20px] mb-6'>
+                  {t('statistikPengunjung')}
+                </p>
                 <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={dataKurvaPengunjung} margin={{ right: 10, top: 20 }} barSize={25} barGap={5}>
-                    <CartesianGrid strokeDasharray="" />
-                    <XAxis dataKey="name" stroke="#ffffff" />
-                    <YAxis stroke="#ffffff" domain={[0, dataMax => Math.ceil(dataMax / 10) * 10]} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend />
+                  {/* Konfigurasi BarChart tetap sama, karena sudah responsif terhadap parentnya */}
+                  <BarChart data={dataKurvaPengunjung} margin={{ right: 10, top: 20, left: -20 }} barSize={20} barGap={4}>
+                    <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.5} />
+                    <XAxis dataKey="name" stroke="#ffffff" fontSize="12px" />
+                    <YAxis stroke="#ffffff" domain={[0, dataMax => Math.ceil(dataMax / 10) * 10]} fontSize="12px" />
+                    <Tooltip
+                      content={<CustomTooltip />}
+                      cursor={{ fill: 'rgba(255, 255, 255, 0.1)' }}
+                    />
+                    <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
                     <Bar
                       dataKey="Pengunjung"
                       fill="#FFE54E"
                       activeBar={<Rectangle fill="#d1bc42" stroke="#d1bc42" />}
+                      radius={[4, 4, 0, 0]}
                     />
                   </BarChart>
                 </ResponsiveContainer>
-
               </div>
             </div>
           </div>
 
-          <div className="group px-6 md:py-4 text-center w-full">
-            <div className='group md:my-4'>
-              <p className='font-onest font-semibold text-slate-100 md:text-[23px] text-[18px]'>{t('jnsProdukHukum')}</p>
-
-              <div className="box-border border-2 p-4 w-full h-auto px-2 my-2 rounded-lg text-left">
-
+          {/* Kolom 3: Jenis Produk Hukum & Kuesioner */}
+          <div className="group lg:px-6 px-6 py-4 text-center w-full my-2 lg:my-4">
+            <div className='group mb-6'>
+              <p className='font-onest font-semibold text-slate-100 text-[18px] lg:text-[23px] mb-4'>
+                {t('jnsProdukHukum')}
+              </p>
+              <div className="box-border border-2 p-4 w-full h-auto rounded-lg text-left">
                 {jnsPeraturan?.length > 0 ? (
                   jnsPeraturan.map((item, index) => (
                     <AnimatedContent
-                      key={index + 20}
-                      distance={80}
-                      direction="vertical"
-                      reverse={false}
-                      config={{ tension: 80, friction: 20 }}
-                      initialOpacity={0.2}
-                      animateOpacity
-                      scale={1}
-                      threshold={0.2}
+                      key={item.percategoryid || `peraturan-${index}`}
+                    // ... (props AnimatedContent lainnya)
                     >
-                      <div key={index} className='flex font-onest text-slate-100 hover:text-kuningButton md:text-[18px] text-[14px] gap-1 my-2'>
-                        <span className="material-symbols-outlined">receipt_long</span> <a href="#" onClick={() => navigate(`/Search/${item.singkatan_file}`)}>{item.percategoryname}</a>
+                      <div
+                        key={item.percategoryid_sub || `peraturan-item-${index}`}
+                        className='flex items-center font-onest text-slate-100 hover:text-kuningButton text-[14px] lg:text-[18px] gap-2 my-2'
+                      >
+                        <span className="material-symbols-outlined text-xl">receipt_long</span>
+                        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo(0, 0); navigate(`/Search/${item.singkatan_file}`) }} className="truncate hover:underline">
+                          {item.percategoryname}
+                        </a>
                       </div>
                     </AnimatedContent>
-                  ))) : (
+                  ))
+                ) : (
                   <AnimatedContent
-                    key={3}
-                    distance={80}
-                    direction="vertical"
-                    reverse={false}
-                    config={{ tension: 80, friction: 20 }}
-                    initialOpacity={0.2}
-                    animateOpacity
-                    scale={1}
-                    threshold={0.2}
+                    key="peraturan-empty"
+                  // ... (props AnimatedContent lainnya)
                   >
-                    <p className='text-center text-slate-100'>{t('statistikDataTIdakDitemukan')}</p>
+                    <p className='text-center text-slate-100 py-4'>{t('statistikDataTIdakDitemukan')}</p>
                   </AnimatedContent>
                 )}
-
               </div>
-
             </div>
 
             <div className='group my-4'>
-              <div className="box-border border-2 w-full h-auto my-2 rounded-lg text-center">
-                <a href=""><img src={kuesioner} alt="Kuesioner" className='rounded-lg' /></a>
+              <div className="box-border border-2 w-full h-auto my-2 rounded-lg text-center overflow-hidden">
+                <a href="#">
+                  <img src={kuesioner} alt="Kuesioner" className='w-full h-auto rounded-lg block' />
+                </a>
               </div>
             </div>
           </div>
-
-
-
         </div>
       </section>
     </>
