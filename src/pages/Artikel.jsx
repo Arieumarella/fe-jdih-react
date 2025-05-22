@@ -131,9 +131,21 @@ const Artikel = () => {
     <>
       <Headers />
 
-      <section className='h-full bg-slate-100 md:px-[300px] px-5 py-4 '>
+      <section className='h-full bg-slate-100 px-5 py-4 md:px-5 lg:px-[300px]'>
+        {/*
+    Perubahan pada className section:
+    - Mobile (default): px-5
+    - Tablet (md:), disamakan dengan mobile: md:px-5
+    - Laptop (lg:), mengambil style md:px-[300px] yang asli: lg:px-[300px]
+  */}
 
-        <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
+        <h1 className='text-center font-roboto font-bold text-bluePu text-[23px] py-4 md:text-[23px] lg:text-[35px]'>
+          {/*
+      Perubahan pada className h1:
+      - Mobile (default): text-[23px]
+      - Tablet (md:), disamakan dengan mobile: md:text-[23px]
+      - Laptop (lg:), mengambil style md:text-[35px] yang asli: lg:text-[35px]
+    */}
           <SplitText
             text={t("semuaArtikel")}
             delay={15}
@@ -146,7 +158,13 @@ const Artikel = () => {
 
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
           <form onSubmit={(e) => { e.preventDefault(); paginateFunction(); }}>
-            <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
+            <div className="box-border w-full mx-auto my-2 mb-[20px] rounded-lg h-[60px] bg-bluePu shadow-lg flex items-center px-4 md:w-full md:my-2 md:mb-[20px] md:h-[60px] lg:w-[50%] lg:my-4 lg:mb-[50px] lg:h-[70px]">
+              {/*
+          Perubahan pada className div search bar:
+          - Mobile: w-full, my-2, mb-[20px], h-[60px]
+          - Tablet (md): md:w-full, md:my-2, md:mb-[20px], md:h-[60px]
+          - Laptop (lg): lg:w-[50%], lg:my-4, lg:mb-[50px], lg:h-[70px]
+        */}
               <input
                 type="text"
                 placeholder={t("pliceHolderArtikel")}
@@ -162,13 +180,18 @@ const Artikel = () => {
           </form>
         </FadeContent>
 
-
-        <div className='items-center grid md:grid-cols-3 grid-cols-1 md:gap-10 gap-4 mb-12'>
+        <div className='items-center grid grid-cols-1 gap-4 mb-12 md:grid-cols-1 md:gap-4 lg:grid-cols-3 lg:gap-10'>
+          {/*
+      Perubahan pada className div grid container:
+      - Mobile: grid-cols-1, gap-4
+      - Tablet (md): md:grid-cols-1, md:gap-4
+      - Laptop (lg): lg:grid-cols-3, lg:gap-10
+    */}
 
           {posts?.length > 0 ? (
-            posts.map((item, index) => (
+            posts.map((item, index) => ( // Gunakan item.id jika ada dan unik, jika tidak, index adalah fallback
               <AnimatedContent
-                key={index}
+                key={item.id || index} // Prefer item.id if available and unique
                 distance={20}
                 direction="vertical"
                 reverse={false}
@@ -185,13 +208,21 @@ const Artikel = () => {
                     navigateHandelClick(`artikel/${item.slug}`);
                     window.scrollTo(0, 0);
                   }}
-                  key={index}
+                // key di sini (jika AnimatedContent hanya Fragment) atau di AnimatedContent.
+                // Karena sudah ada di AnimatedContent, ini bisa dihilangkan kecuali ada alasan spesifik.
+                // Saya akan menghapusnya dari sini karena key sudah ada di AnimatedContent
                 >
-                  <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-gray-300 md:aspect-[4/4] aspect-[3/4]">
+                  <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-gray-300 aspect-[3/4] md:aspect-[3/4] lg:aspect-[4/4]">
+                    {/*
+                Perubahan pada className div card image container:
+                - Mobile: aspect-[3/4]
+                - Tablet (md): md:aspect-[3/4]
+                - Laptop (lg): lg:aspect-[4/4] (dari md:aspect-[4/4] asli)
+              */}
                     {/* Gambar Background */}
                     <div
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                      style={{ backgroundImage: 'url("./1.jpg")' }}
+                      style={{ backgroundImage: `url("${item?.gambar || './1.jpg'}")` }} // Menggunakan item.gambar jika ada
                     ></div>
 
                     {/* Overlay Gradasi */}
@@ -199,8 +230,20 @@ const Artikel = () => {
 
                     {/* Kotak Keterangan */}
                     <div className="absolute bottom-0 left-0 w-full p-4 text-center text-white">
-                      <p className="font-semibold text-lg md:text-xl line-clamp-2">{terminateText(item?.judul)}</p>
-                      <p className="mt-1 text-sm md:text-base text-gray-300">{formatedDate(item?.tanggal)}</p>
+                      <p className="font-semibold text-lg line-clamp-2 md:text-lg lg:text-xl">{terminateText(item?.judul)}</p>
+                      {/*
+                  Perubahan pada className p judul card:
+                  - Mobile: text-lg
+                  - Tablet (md): md:text-lg
+                  - Laptop (lg): lg:text-xl (dari md:text-xl asli)
+                */}
+                      <p className="mt-1 text-sm text-gray-300 md:text-sm lg:text-base">{formatedDate(item?.tanggal)}</p>
+                      {/*
+                  Perubahan pada className p tanggal card:
+                  - Mobile: text-sm
+                  - Tablet (md): md:text-sm
+                  - Laptop (lg): lg:text-base (dari md:text-base asli)
+                */}
                     </div>
                   </div>
                 </div>
@@ -208,7 +251,6 @@ const Artikel = () => {
             ))) : (
             <p className='text-center text-slate-100'>Data Kosong</p>
           )}
-
         </div>
 
         {/* Pagination */}
@@ -217,8 +259,6 @@ const Artikel = () => {
           currentPage={currentPage}
           onPageChange={(page) => setCurrentPage(page)}
         />
-
-
       </section>
 
       <Langganan />

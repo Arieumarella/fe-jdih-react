@@ -112,9 +112,20 @@ const Agenda = () => {
     <>
       <Headers />
 
-      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4'>
-
-        <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
+      <section className='h-full bg-slate-100 px-5 py-4 md:px-5 lg:px-[180px]'>
+        {/*
+    Perubahan pada className section:
+    - Mobile (default): px-5
+    - Tablet (md:), disamakan dengan mobile: md:px-5
+    - Laptop (lg:), mengambil style md:px-[180px] yang asli: lg:px-[180px]
+  */}
+        <h1 className='text-center font-roboto font-bold text-bluePu text-[23px] py-4 md:text-[23px] lg:text-[35px]'>
+          {/*
+      Perubahan pada className h1:
+      - Mobile (default): text-[23px]
+      - Tablet (md:), disamakan dengan mobile: md:text-[23px]
+      - Laptop (lg:), mengambil style md:text-[35px] yang asli: lg:text-[35px]
+    */}
           <SplitText
             text={t("agenda")}
             delay={15}
@@ -127,8 +138,8 @@ const Agenda = () => {
 
         {posts?.length > 0 ? (
           posts.map((item, index) => (
-
             <AnimatedContent
+              key={item.id} // Key sebaiknya ada di elemen terluar dalam loop
               distance={100}
               delay={200}
               direction="horizontal"
@@ -139,7 +150,7 @@ const Agenda = () => {
               scale={1.0}
               threshold={0.1}
             >
-              <CardAgenda key={item.id} data={item} />
+              <CardAgenda data={item} />
             </AnimatedContent>
           ))) : (
           <p className='text-center text-slate-100'>Data Kosong</p>
@@ -151,8 +162,6 @@ const Agenda = () => {
           currentPage={currentPage}
           onPageChange={(page) => setCurrentPage(page)}
         />
-
-
       </section>
 
       <Langganan />

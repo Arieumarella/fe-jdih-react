@@ -38,15 +38,32 @@ const StrukturOrganisasi = () => {
   return (
     <>
       <Headers />
-
       <section className='h-full bg-slate-100 py-4'>
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
-          <div className='md:flex justify-between md:w-[80%] w-full gap-4 mx-auto my-4'>
+          <div className='w-full gap-4 mx-auto my-4 md:w-full lg:flex lg:justify-between lg:w-[80%]'>
+            {/*
+        Perubahan pada div terluar (wrapper):
+        - Mobile (default): w-full (block by default)
+        - Tablet (md:), disamakan dengan mobile: md:w-full (block by default)
+        - Laptop (lg:), mengambil style md: yang asli: lg:flex, lg:justify-between, lg:w-[80%]
+      */}
 
-            <div className="md:w-[80%] w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300">
+            <div className="w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300 md:w-[95%] lg:w-[80%]">
+              {/*
+          Perubahan pada div card (konten):
+          - Mobile (default): w-[95%]
+          - Tablet (md:), disamakan dengan mobile: md:w-[95%]
+          - Laptop (lg:), mengambil style md: yang asli: lg:w-[80%]
+        */}
 
-              {/* Judul Berita */}
-              <h1 className="text-center font-roboto font-bold text-bluePu md:text-[30px] text-[23px] py-4">
+              {/* Judul */}
+              <h1 className="text-center font-roboto font-bold text-bluePu text-[23px] py-4 md:text-[23px] lg:text-[30px]">
+                {/*
+            Perubahan pada h1 Judul:
+            - Mobile (default): text-[23px]
+            - Tablet (md:), disamakan dengan mobile: md:text-[23px]
+            - Laptop (lg:), mengambil style md: yang asli: lg:text-[30px]
+          */}
                 <SplitText
                   text={t("STRUKTURORGANISASI")}
                   delay={15}
@@ -69,7 +86,6 @@ const StrukturOrganisasi = () => {
           </div>
         </FadeContent>
       </section>
-
       <Langganan />
       <Footer />
     </>

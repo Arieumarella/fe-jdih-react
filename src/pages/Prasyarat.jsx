@@ -40,9 +40,10 @@ const Prasyarat = () => {
         <>
             <Headers />
             <section className='h-full bg-slate-100 py-4'>
-
-
                 <h1 className="text-center font-roboto font-bold text-bluePu text-[30px] my-2">
+                    {/* Ukuran font h1 (text-[30px]) adalah sama untuk semua ukuran layar berdasarkan kode ini.
+          Jika ingin ukuran font h1 berbeda untuk laptop, perlu didefinisikan secara eksplisit.
+      */}
                     <SplitText
                         text={t("PRASYARAT")}
                         delay={15}
@@ -54,13 +55,19 @@ const Prasyarat = () => {
                 </h1>
 
                 <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
-                    <div className="md:w-[70%] w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300 my-2">
-
+                    <div className="w-[95%] mx-auto bg-white shadow-lg rounded-2xl p-6 border border-gray-300 my-2 md:w-[95%] lg:w-[70%]">
+                        {/*
+          Penjelasan Perubahan pada className div ini:
+          - Mobile (default): w-[95%]
+          - Tablet (md:), disamakan dengan mobile: md:w-[95%]
+          - Laptop (lg:), mengambil style md:w-[70%] yang asli: lg:w-[70%]
+          - Kelas lain (mx-auto, bg-white, shadow-lg, dll.) tetap berlaku untuk semua ukuran.
+        */}
                         <div className="font-normal font-roboto text-slate-600 text-[18px] p-2 text-justify">
+                            {/* Ukuran font konten (text-[18px]) juga sama untuk semua ukuran layar. */}
                             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.data?.data?.widgetcontent) }} />
                             <div className='mt-4' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.data?.data?.widgetmore) }} />
                         </div>
-
                     </div>
                 </FadeContent>
             </section>

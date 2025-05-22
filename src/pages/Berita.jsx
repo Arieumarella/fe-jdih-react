@@ -147,7 +147,16 @@ const Home = () => {
 
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
           <form onSubmit={(e) => { e.preventDefault(); paginateFunction(); }}>
-            <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
+            <div className="box-border w-full mx-auto my-2 mb-[20px] rounded-lg h-[60px] bg-bluePu shadow-lg flex items-center px-4 md:w-full md:my-2 md:mb-[20px] md:h-[60px] lg:w-[50%] lg:my-4 lg:mb-[50px] lg:h-[70px]">
+              {/* 
+      Perubahan pada className div di atas:
+      - Style mobile (default):
+        w-full, my-2, mb-[20px], h-[60px]
+      - Style tablet (md:), dibuat sama dengan mobile:
+        md:w-full, md:my-2, md:mb-[20px], md:h-[60px]
+      - Style laptop/desktop (lg:), menggunakan style md: yang asli:
+        lg:w-[50%], lg:my-4, lg:mb-[50px], lg:h-[70px]
+    */}
               <input
                 type="text"
                 placeholder={t("pliceHolderBerita")}
@@ -162,7 +171,14 @@ const Home = () => {
         </FadeContent>
 
 
-        <div className='items-center grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-4 mb-12'>
+        <div className='items-center grid grid-cols-1 gap-4 mb-12 md:grid-cols-1 md:gap-4 lg:grid-cols-3 lg:gap-8'>
+          {/*
+    Perubahan pada className div di atas:
+    - Mobile (default): grid-cols-1, gap-4
+    - Tablet (md:), sama dengan mobile: md:grid-cols-1, md:gap-4
+    - Laptop (lg:), sama dengan md: yang asli: lg:grid-cols-3, lg:gap-8
+    - mb-12 dan items-center tetap berlaku untuk semua.
+  */}
 
           {posts?.length > 0 ? (
             posts.map((item, index) => (
@@ -180,35 +196,58 @@ const Home = () => {
                 <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 cursor-pointer"
                   onClick={(e) => { e.preventDefault(); navigateHandelClick("Berita/" + item?.slug + ""); window.scrollTo(0, 0); }}>
                   {/* Gambar */}
-                  <div className="w-full h-[180px] md:h-[350px] overflow-hidden group">
+                  <div className="w-full h-[180px] overflow-hidden group md:h-[180px] lg:h-[350px]">
+                    {/*
+              Perubahan pada className div gambar:
+              - Mobile (default): h-[180px]
+              - Tablet (md:), sama dengan mobile: md:h-[180px]
+              - Laptop (lg:), sama dengan md: yang asli: lg:h-[350px]
+            */}
                     <img src={`https://jdih.pu.go.id/internal/assets/assets/berita/${item?.gambar_1}`} alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
                   </div>
                   {/* Konten */}
                   <div className="p-4">
                     {/* Tanggal Terbit */}
-                    <p className="text-gray-500 md:text-sm text-[14px] font-semibold">{formatDate(item?.tgl_buat)}</p>
+                    <p className="text-gray-500 text-[14px] font-semibold md:text-[14px] lg:text-sm">
+                      {/*
+                Perubahan pada className p tanggal:
+                - Mobile (default): text-[14px]
+                - Tablet (md:), sama dengan mobile: md:text-[14px]
+                - Laptop (lg:), sama dengan md: yang asli: lg:text-sm
+              */}
+                      {formatDate(item?.tgl_buat)}
+                    </p>
 
                     {/* Judul Berita */}
-                    <h3 className="text-bluePu font-roboto font-semibold text-[14px] md:text-base leading-tight md:mt-1 mt-2 hover:text-opacity-70 cursor-pointer ">
+                    <h3 className="text-bluePu font-roboto font-semibold text-[14px] leading-tight mt-2 hover:text-opacity-70 cursor-pointer md:text-[14px] md:mt-2 lg:text-base lg:mt-1">
+                      {/*
+                Perubahan pada className h3 judul:
+                - Mobile (default): text-[14px], mt-2
+                - Tablet (md:), sama dengan mobile: md:text-[14px], md:mt-2
+                - Laptop (lg:), sama dengan md: yang asli: lg:text-base, lg:mt-1
+              */}
                       {truncateWords(item?.judul)}
                     </h3>
 
-                    {/* Link Selengkapnya */}
+                    {/* Link Selengkapnya & Viewer */}
                     <div className="mt-1 flex justify-end items-center">
-
                       {/* Jumlah Viewer */}
-                      <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto md:mt-0 mt-2 text-[12px]">
+                      <div className="flex items-center gap-1 text-bluePu text-xs bg-bluePu bg-opacity-15 px-2 py-1 rounded-full font-roboto mt-2 text-[12px] md:mt-2 md:text-[12px] lg:mt-0">
+                        {/*
+                  Perubahan pada className div viewer:
+                  - Mobile (default): mt-2, text-[12px] (ini menimpa text-xs untuk mobile)
+                  - Tablet (md:), sama dengan mobile: md:mt-2, md:text-[12px]
+                  - Laptop (lg:), sama dengan md: yang asli: lg:mt-0 (text-xs akan berlaku karena tidak ada lg:text-size lain)
+                */}
                         <span className="material-symbols-outlined">visibility</span> <span>{item?.views}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </AnimatedContent>
-
             ))) : (
             <p className='text-center text-slate-100'>Data Kosong</p>
           )}
-
         </div>
 
 

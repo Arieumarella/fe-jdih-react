@@ -124,9 +124,21 @@ const SiMPeL = () => {
         <>
             <Headers />
 
-            <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4'>
+            <section className='h-full bg-slate-100 px-5 py-4 md:px-5 lg:px-[180px]'>
+                {/*
+    Perubahan pada className section:
+    - Mobile (default): px-5
+    - Tablet (md:), disamakan dengan mobile: md:px-5
+    - Laptop (lg:), mengambil style md:px-[180px] yang asli: lg:px-[180px]
+  */}
 
-                <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
+                <h1 className='text-center font-roboto font-bold text-bluePu text-[23px] py-4 md:text-[23px] lg:text-[35px]'>
+                    {/*
+      Perubahan pada className h1:
+      - Mobile (default): text-[23px]
+      - Tablet (md:), disamakan dengan mobile: md:text-[23px]
+      - Laptop (lg:), mengambil style md:text-[35px] yang asli: lg:text-[35px]
+    */}
                     <SplitText
                         text={t("Simpel")}
                         delay={15}
@@ -139,7 +151,13 @@ const SiMPeL = () => {
 
                 <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
                     <form onSubmit={(e) => { e.preventDefault(); paginateFunction(); }}>
-                        <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
+                        <div className="box-border w-full mx-auto my-2 mb-[20px] rounded-lg h-[60px] bg-bluePu shadow-lg flex items-center px-4 md:w-full md:my-2 md:mb-[20px] md:h-[60px] lg:w-[50%] lg:my-4 lg:mb-[50px] lg:h-[70px]">
+                            {/*
+          Perubahan pada className div search bar:
+          - Mobile: w-full, my-2, mb-[20px], h-[60px]
+          - Tablet (md): md:w-full, md:my-2, md:mb-[20px], md:h-[60px]
+          - Laptop (lg): lg:w-[50%], lg:my-4, lg:mb-[50px], lg:h-[70px]
+        */}
                             <input
                                 type="text"
                                 placeholder={t("pliceHolderSimpel")}
@@ -155,8 +173,8 @@ const SiMPeL = () => {
 
                 {posts?.length > 0 ? (
                     posts.map((item, index) => (
-
                         <AnimatedContent
+                            key={item.id || index} // Prefer item.id if available and unique
                             distance={100}
                             delay={200}
                             direction="horizontal"
@@ -166,9 +184,9 @@ const SiMPeL = () => {
                             animateOpacity
                             scale={1.0}
                             threshold={0.1}
-                            key={index}
                         >
-                            <CardSimpel key={item.id} data={item} />
+                            {/* CardSimpel sudah memiliki key={item.id}, jadi key di AnimatedContent sebaiknya juga merujuk ke item.id */}
+                            <CardSimpel data={item} />
                         </AnimatedContent>
                     ))) : (
                     <p className='text-center text-slate-100'>Data Kosong</p>
@@ -180,8 +198,6 @@ const SiMPeL = () => {
                     currentPage={currentPage}
                     onPageChange={(page) => setCurrentPage(page)}
                 />
-
-
             </section>
 
             <Langganan />

@@ -116,9 +116,21 @@ const Infografis = () => {
         <>
             <Headers />
 
-            <section className='h-full bg-slate-100 md:px-[300px] px-5 py-4 '>
+            <section className='h-full bg-slate-100 px-5 py-4 md:px-5 lg:px-[300px]'>
+                {/*
+    Perubahan pada className section:
+    - Mobile (default): px-5
+    - Tablet (md:), disamakan dengan mobile: md:px-5
+    - Laptop (lg:), mengambil style md:px-[300px] yang asli: lg:px-[300px]
+  */}
 
-                <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
+                <h1 className='text-center font-roboto font-bold text-bluePu text-[23px] py-4 md:text-[23px] lg:text-[35px]'>
+                    {/*
+      Perubahan pada className h1:
+      - Mobile (default): text-[23px]
+      - Tablet (md:), disamakan dengan mobile: md:text-[23px]
+      - Laptop (lg:), mengambil style md:text-[35px] yang asli: lg:text-[35px]
+    */}
                     <SplitText
                         text={t("infografis")}
                         delay={15}
@@ -131,7 +143,13 @@ const Infografis = () => {
 
                 <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
                     <form onSubmit={(e) => { e.preventDefault(); paginateFunction(); }}>
-                        <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
+                        <div className="box-border w-full mx-auto my-2 mb-[20px] rounded-lg h-[60px] bg-bluePu shadow-lg flex items-center px-4 md:w-full md:my-2 md:mb-[20px] md:h-[60px] lg:w-[50%] lg:my-4 lg:mb-[50px] lg:h-[70px]">
+                            {/*
+          Perubahan pada className div search bar:
+          - Mobile: w-full, my-2, mb-[20px], h-[60px]
+          - Tablet (md): md:w-full, md:my-2, md:mb-[20px], md:h-[60px]
+          - Laptop (lg): lg:w-[50%], lg:my-4, lg:mb-[50px], lg:h-[70px]
+        */}
                             <input
                                 type="text"
                                 placeholder={t("pliceHolderInfografis")}
@@ -145,14 +163,19 @@ const Infografis = () => {
                     </form>
                 </FadeContent>
 
+                <div className='items-center grid grid-cols-1 gap-4 mb-12 md:grid-cols-1 md:gap-4 lg:grid-cols-3 lg:gap-8'>
+                    {/*
+      Perubahan pada className div grid container:
+      - Mobile: grid-cols-1, gap-4
+      - Tablet (md): md:grid-cols-1, md:gap-4
+      - Laptop (lg): lg:grid-cols-3, lg:gap-8
+    */}
 
-                <div className='items-center grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-4 mb-12'>
-
-                    {/* Box Monografi */}
+                    {/* Box Infografis */}
                     {posts?.length > 0 ? (
                         posts.map((item, index) => (
                             <AnimatedContent
-                                key={item.peraturan_id}
+                                key={item.id || item.peraturan_id || index} // Menggunakan item.id jika ada, fallback ke peraturan_id atau index
                                 distance={20}
                                 direction="vertical"
                                 reverse={false}
@@ -164,7 +187,14 @@ const Infografis = () => {
                             >
                                 <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
                                     onClick={(e) => { e.preventDefault(); navigateHandelClick(`infografis/${item.id}`); }}>
-                                    <div className="w-full h-full bg-slate-400 md:aspect-[3/4] aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
+                                    <div className="w-full h-full bg-slate-400 aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
+                                        {/*
+                Perubahan pada className div card image container:
+                - Mobile: aspect-[3/4]
+                - Tablet (md): md:aspect-[3/4] (sama dengan mobile, karena md:aspect-[3/4] asli)
+                - Laptop (lg): lg:aspect-[3/4] (sama dengan mobile/tablet, karena md:aspect-[3/4] asli)
+                Jika md: asli sudah sama dengan mobile, maka 'aspect-[3/4]' saja cukup.
+              */}
 
                                         {/* Gambar Background */}
                                         <div className={`w-full h-full bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500`}
@@ -174,7 +204,13 @@ const Infografis = () => {
                                         ></div>
 
                                         {/* Kotak Keterangan di Bagian Bawah */}
-                                        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-white font-medium md:text-[16px] text-[12px] p-4 px-6 font-roboto h-[100px] transition-all duration-500 flex flex-col justify-between">
+                                        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-white font-medium text-[12px] p-4 px-6 font-roboto h-[100px] transition-all duration-500 flex flex-col justify-between md:text-[12px] lg:text-[16px]">
+                                            {/*
+                  Perubahan pada className div kotak keterangan (font size umum):
+                  - Mobile: text-[12px]
+                  - Tablet (md): md:text-[12px]
+                  - Laptop (lg): lg:text-[16px] (dari md:text-[16px] asli)
+                */}
 
                                             {/* Judul di kiri atas */}
                                             <div className="text-white line-clamp-2">
@@ -182,17 +218,26 @@ const Infografis = () => {
                                             </div>
 
                                             {/* Viewer di kanan bawah */}
-                                            <div className="flex justify-end items-center gap-1 text-white/70 text-[11px] md:text-[13px]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <div className="flex justify-end items-center gap-1 text-white/70 text-[11px] md:text-[11px] lg:text-[13px]">
+                                                {/*
+                    Perubahan pada className div viewer (font size):
+                    - Mobile: text-[11px]
+                    - Tablet (md): md:text-[11px]
+                    - Laptop (lg): lg:text-[13px] (dari md:text-[13px] asli)
+                  */}
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/60 md:h-4 md:w-4 lg:h-5 lg:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    {/*
+                      Perubahan pada className svg viewer (size):
+                      - Mobile: h-4 w-4
+                      - Tablet (md): md:h-4 md:w-4
+                      - Laptop (lg): lg:h-5 lg:w-5 (dari md:h-5 md:w-5 asli)
+                    */}
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                 </svg>
                                                 <span>{item.viewr ?? 0}</span>
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </AnimatedContent>
@@ -211,8 +256,7 @@ const Infografis = () => {
                             <p className='text-center text-slate-100'>Data Kosong</p>
                         </AnimatedContent>
                     )}
-                    {/* End Box Monografi */}
-
+                    {/* End Box Infografis */}
                 </div>
 
                 {/* Pagination */}
@@ -221,8 +265,6 @@ const Infografis = () => {
                     currentPage={currentPage}
                     onPageChange={(page) => setCurrentPage(page)}
                 />
-
-
             </section>
 
             <Langganan />

@@ -130,7 +130,8 @@ const PutusanPengadilan = () => {
 
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
           <form onSubmit={(e) => { e.preventDefault(); paginateFunction(); }}>
-            <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
+            <div className="box-border w-full mx-auto my-2 mb-[20px] rounded-lg h-[60px] bg-bluePu shadow-lg flex items-center px-4 md:w-full md:my-2 md:mb-[20px] md:h-[60px] lg:w-[50%] lg:my-4 lg:mb-[50px] lg:h-[70px]">
+
               <input
                 type="text"
                 placeholder={t("pliceHolderPutusanPengadilan")}

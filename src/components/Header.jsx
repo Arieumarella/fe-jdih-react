@@ -200,13 +200,13 @@ export default function Header() {
             <button
               type="button"
               // Ukuran font dan tombol disesuaikan: lebih kecil untuk md, asli untuk lg
-              className={`text-sm md:text-base lg:text-xl hover:bg-blue-900 active:bg-blue-950 w-[50px] lg:w-[70px] text-white font-semibold ${currentLang === 'id' ? 'bg-blue-950 ring-1 ring-white' : 'bg-blue-800'}`}
+              className={`text-sm md:text-base lg:text-xl hover:bg-blue-900 active:bg-blue-950 w-[50px] lg:w-[70px] text-white font-semibold ${currentLang === 'id' ? 'bg-blue-950' : 'bg-blue-800'}`}
               onClick={() => changeLang('id')}
               aria-pressed={currentLang === 'id'}
             > ID</button>
             <button
               type="button"
-              className={`text-sm md:text-base lg:text-xl hover:bg-yellow-600 active:bg-yellow-700 w-[50px] lg:w-[70px] font-semibold ${currentLang === 'en' || currentLang.startsWith('en-') ? 'bg-yellow-700 ring-1 ring-black' : 'bg-kuningButton'}`}
+              className={`text-sm md:text-base lg:text-xl hover:bg-yellow-600 active:bg-yellow-700 w-[50px] lg:w-[70px] font-semibold ${currentLang === 'en' || currentLang.startsWith('en-') ? 'bg-yellow-700 ' : 'bg-kuningButton'}`}
               onClick={() => changeLang('en')}
               aria-pressed={currentLang === 'en' || currentLang.startsWith('en-')}
             > EN</button>
@@ -219,7 +219,7 @@ export default function Header() {
           <div className='flex gap-1 mr-2'>
             <button
               type='button'
-              className={`text-xs hover:bg-blue-900 active:bg-blue-950 w-[28px] text-white font-semibold ${currentLang === 'id' ? 'bg-blue-950 ring-1 ring-white' : 'bg-blue-800'}`}
+              className={`text-xs hover:bg-blue-900 active:bg-blue-950 w-[28px] text-white font-semibold ${currentLang === 'id' ? 'bg-blue-950' : 'bg-blue-800'}`}
               onClick={() => changeLang('id')}
               aria-label="Ganti bahasa ke Indonesia"
               aria-pressed={currentLang === 'id'}

@@ -133,7 +133,7 @@ const Monografi = () => {
 
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
           <form onSubmit={(e) => { e.preventDefault(); paginateFunction(); }}>
-            <div className="box-border md:w-[50%] w-full mx-auto md:my-4 my-2 md:mb-[50px] mb-[20px]  rounded-lg md:h-[70px] h-[60px] bg-bluePu shadow-lg flex items-center px-4">
+            <div className="box-border w-full mx-auto my-2 mb-[20px] rounded-lg h-[60px] bg-bluePu shadow-lg flex items-center px-4 md:w-full md:my-2 md:mb-[20px] md:h-[60px] lg:w-[50%] lg:my-4 lg:mb-[50px] lg:h-[70px]">
               <input
                 type="text"
                 placeholder={t("pliceHolderMonografi")}
@@ -148,13 +148,20 @@ const Monografi = () => {
         </FadeContent>
 
 
-        <div className='items-center grid md:grid-cols-3 grid-cols-1 md:gap-8 gap-4 mb-12'>
+        <div className='items-center grid grid-cols-1 gap-4 mb-12 md:grid-cols-1 md:gap-4 lg:grid-cols-3 lg:gap-8'>
+          {/*
+    Perubahan pada className div grid utama:
+    - Mobile (default): grid-cols-1, gap-4
+    - Tablet (md:), disamakan dengan mobile: md:grid-cols-1, md:gap-4
+    - Laptop (lg:), mengambil style md: yang asli: lg:grid-cols-3, lg:gap-8
+    - items-center dan mb-12 tetap berlaku untuk semua ukuran.
+  */}
 
           {/* Box Monografi */}
           {posts?.length > 0 ? (
             posts.map((item, index) => (
               <AnimatedContent
-                key={item.peraturan_id}
+                key={item.peraturan_id} // Pastikan key ini unik, peraturan_id atau id
                 distance={20}
                 direction="vertical"
                 reverse={false}
@@ -166,8 +173,19 @@ const Monografi = () => {
               >
                 <div className="group text-center cursor-pointer transition-all duration-500 hover:scale-105"
                   onClick={(e) => { e.preventDefault(); navigateHandelClick(`Monografi/${item.slug}`); }}>
-                  <div className="w-full h-full bg-slate-400 md:aspect-[3/4] aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
-
+                  {/*
+            Untuk 'div' ini, style aspect ratio 'md:aspect-[3/4] aspect-[3/4]'
+            sudah berarti mobile dan md (tablet) akan memiliki aspect-[3/4].
+            Jika laptop (lg:) juga harus memiliki aspect-[3/4] (seperti md: yang asli),
+            maka 'aspect-[3/4]' saja sudah cukup atau bisa ditulis eksplisit:
+            'aspect-[3/4] md:aspect-[3/4] lg:aspect-[3/4]'
+            Karena tidak ada perubahan, kita bisa biarkan seperti ini atau sederhanakan ke 'aspect-[3/4]'
+            jika memang sama untuk semua. Untuk kejelasan, mari kita asumsikan md: asli adalah
+            target untuk lg:, dan mobile adalah target untuk md:.
+            Jadi, 'aspect-[3/4]' (mobile), 'md:aspect-[3/4]' (tablet), 'lg:aspect-[3/4]' (laptop).
+            Karena ketiganya sama, 'aspect-[3/4]' saja sudah cukup.
+          */}
+                  <div className="w-full h-full bg-slate-400 aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
                     {/* Gambar Background */}
                     <div className={`w-full h-full bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500`}
                       style={{
@@ -176,10 +194,31 @@ const Monografi = () => {
                     ></div>
 
                     {/* Kotak Keterangan di Bagian Bawah */}
-                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold md:text-[16px] text-[12px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start">
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-bluePu/90 to-bluePu/60 backdrop-blur-lg group-hover:bg-opacity-100 text-kuningButton font-semibold text-[12px] p-4 px-6 text-left font-roboto h-[100px] transition-all duration-500 flex items-start justify-start md:text-[12px] lg:text-[16px]">
+                      {/*
+                Perubahan pada className div kotak keterangan:
+                - Mobile (default): text-[12px]
+                - Tablet (md:), disamakan dengan mobile: md:text-[12px]
+                - Laptop (lg:), mengambil style md: yang asli: lg:text-[16px]
+                - h-[100px] dan style lain tetap.
+              */}
                       <div className='flex flex-col'>
                         <p className="line-clamp-2">{terminetTextLong(item.judul)}</p>
-                        <p className='mt-2 font-normal md:text-[14px] text-[22px] opacity-80'>{item.subjek}</p>
+                        {/*
+                  Perhatian pada text-[22px] untuk mobile di 'p' subjek. Ini sangat besar.
+                  Jika ini benar, maka tablet juga akan text-[22px].
+                  Jika ini typo dan seharusnya lebih kecil, sesuaikan.
+                  Saya akan mengikuti apa yang tertulis:
+                */}
+                        <p className='mt-2 font-normal text-[22px] opacity-80 md:text-[22px] lg:text-[14px]'>
+                          {/*
+                    Perubahan pada className p subjek:
+                    - Mobile (default): text-[22px]
+                    - Tablet (md:), disamakan dengan mobile: md:text-[22px]
+                    - Laptop (lg:), mengambil style md: yang asli: lg:text-[14px]
+                  */}
+                          {item.subjek}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -187,7 +226,7 @@ const Monografi = () => {
               </AnimatedContent>
             ))) : (
             <AnimatedContent
-              key={1}
+              key={1} // Jika ini satu-satunya elemen 'else', key statis oke.
               distance={150}
               direction="vertical"
               reverse={false}
@@ -201,7 +240,6 @@ const Monografi = () => {
             </AnimatedContent>
           )}
           {/* End Box Monografi */}
-
         </div>
 
         {/* Pagination */}
