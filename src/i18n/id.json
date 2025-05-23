@@ -60,6 +60,10 @@
     "monografiNib": "Nomor Induk Buku",
     "monografiLokasi": "Lokasi",
     "monografiJumlahHalaman": "Jumlah Halaman",
+    "semuaMou": "List Nota Kesepahaman",
+    "pliceHolderMou": "Cari Judul Nota Kesepahaman...",
+    "btnCariJudulMou": "Cari",
+    "detailMou": "Detail Nota Kesepahaman",
     "semuaPutusanPengandilan": "Semua Putusan Pengadilan",
     "pliceHolderPutusanPengadilan": "Cari Judul Putusan Pengadilan...",
     "btnCariJudulPutusanPengandilan": "Cari",
@@ -154,6 +158,25 @@
         "tentangKami": "Tentang Kami",
         "prasyarat": "Prasyarat",
         "kontakKami": "Kontak Kami",
-        "infografis": "Infografis"
+        "infografis": "Infografis",
+        "Mou": "Nota Kesepahaman"
+    },
+    "metaDataStandar": {
+        "tipe_dokumen": "Tipe Dokumen",
+        "judul": "Judul",
+        "jenisDokumen": "Jenis Dokumen Hukum",
+        "teujudul": "T.E.U Badan/Instansi/Pengarang",
+        "nomor_peraturan": "Nomor Peraturan/Putusan",
+        "noPeraturan": "No. Peraturan / Putusan",
+        "Tahun_Terbit": "Tahun Terbit",
+        "Singkatan_Jenis": "Singkatan Jenis",
+        "tempat_penetapan": "Tempat Terbit",
+        "subjek": "Subjek",
+        "sumber": "Sumber",
+        "status": "Status",
+        "bahasa": "Bahasa",
+        "Lokasi": "Lokasi",
+        "bidang_hukum": "Bidang Hukum",
+        "Lampiran": "Lampiran"
     }
 }

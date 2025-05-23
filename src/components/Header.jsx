@@ -157,6 +157,7 @@ export default function Header() {
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("agenda"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.agenda")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("artikel"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.artikel")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("infografis"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.infografis")}</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Mou"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.Mou")}</a></li>
               </ul>
             </div>
 

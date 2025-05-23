@@ -20,6 +20,8 @@ import Statistik from "./pages/statistik";
 import SiMPeL from "./pages/SiMPeL";
 import Infografis from "./pages/Infografis";
 import DetailInfografis from "./pages/DetailInfografis";
+import Mou from "./pages/Mou";
+import DetailMou from "./pages/detailMou";
 import { Helmet } from "react-helmet-async";
 import { ToastProvider } from "./components/ToastProvider";
 
@@ -47,8 +49,10 @@ const titles = {
   "/kontak-kami": "JDIH PU - Kontak Kami",
   "/Statistik": "JDIH PU - Statistik",
   "/SiMPeL/:slug": "JDIH PU - SiMPeL",
-  "/Infografis": "JDIH PU - Infografis",
-  "/Infografis/:id": "JDIH PU - Detail Infografis",
+  "/infografis": "JDIH PU - Infografis",
+  "/infografis/:id": "JDIH PU - Detail Infografis",
+  "/Mou": "JDIH PU - Mou",
+  "/Mou-detail/:slug": "JDIH PU - Detail Mou",
 };
 
 function TitleUpdater() {
@@ -107,6 +111,8 @@ function App() {
         <Route path="/SiMPeL/:slug" element={<SiMPeL />} />
         <Route path="/infografis" element={<Infografis />} />
         <Route path="/infografis/:id" element={<DetailInfografis />} />
+        <Route path="/Mou" element={<Mou />} />
+        <Route path="/Mou-detail/:slug" element={<DetailMou />} />
       </Routes>
     </>
   )

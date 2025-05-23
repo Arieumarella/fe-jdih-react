@@ -133,6 +133,10 @@
     "infografis": "Infographic List",
     "pliceHolderInfografis": "Search Infographic Title...",
     "btnCariJudulInfografis": "Search",
+    "semuaMou": "List of Memorandums of Understanding",
+    "pliceHolderMou": "Search Memorandum Title...",
+    "btnCariJudulMou": "Search",
+    "detailMou": "Memorandum of Understanding Details",
     "menu": {
         "home": "Home",
         "jenisProdukHukum": "Legal Product Types",
@@ -154,6 +158,25 @@
         "tentangKami": "About Us",
         "prasyarat": "Requirements",
         "kontakKami": "Contact Us",
-        "infografis": "Infographic"
+        "infografis": "Infographic",
+        "Mou": "Memorandum of Understanding"
+    },
+    "metaDataStandar": {
+        "tipe_dokumen": "Document Type",
+        "judul": "Title",
+        "jenisDokumen": "Type of Legal Document",
+        "teujudul": "T.E.U Institution/Agency/Author",
+        "nomor_peraturan": "Regulation/Decree Number",
+        "noPeraturan": "Regulation / Decree No.",
+        "Tahun_Terbit": "Year of Publication",
+        "Singkatan_Jenis": "Type Abbreviation",
+        "tempat_penetapan": "Place of Publication",
+        "subjek": "Subject",
+        "sumber": "Source",
+        "status": "Status",
+        "bahasa": "Language",
+        "Lokasi": "Location",
+        "bidang_hukum": "Legal Field",
+        "Lampiran": "Attachment"
     }
 }

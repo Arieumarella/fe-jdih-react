@@ -22,6 +22,12 @@ const DetailPutusan = () => {
     insertViews(slug);
   }, [slug]);
 
+  const ambilTahunBulan = (waktuString) => {
+    const tahun = waktuString.slice(0, 4);
+    const bulan = waktuString.slice(4, 6);
+    return { tahun, bulan };
+  };
+
   const formatDate = (str = '') => {
     if (str.length !== 14) return str;
     const year = str.substring(0, 4);

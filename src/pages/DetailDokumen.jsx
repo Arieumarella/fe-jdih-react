@@ -169,9 +169,9 @@ const DetailDokumen = () => {
             scale={1.0}
             threshold={0.1}
             // className untuk AnimatedContent (jika dibutuhkan untuk layoutnya sendiri)
-            className="w-full lg:w-[calc(70%-0.5rem)] mb-4 lg:mb-0"
+            className="w-full lg:w-[100%] mb-4 lg:mb-0"
           >
-            <div className="bg-white shadow-lg rounded-2xl p-6 border border-gray-300 h-full sm:m-5 md:m-5  lg:m-0"> {/* TAMBAHKAN DIV INI DENGAN BG-WHITE dan styling card lainnya */}
+            <div className="bg-white shadow-lg rounded-2xl p-6 border w-full lg:w-[120%] border-gray-300 h-full sm:m-5 md:m-5  lg:m-0"> {/* TAMBAHKAN DIV INI DENGAN BG-WHITE dan styling card lainnya */}
               <h2 className="text-[18px] lg:text-[24px] font-bold font-roboto text-bluePu mt-3 text-center lg:text-left">
                 <SplitText
                   text={getSebelumTentang(data?.data?.judul).replace(/<[^>]+>/g, '')}
@@ -258,7 +258,7 @@ const DetailDokumen = () => {
           </AnimatedContent>
 
           {/* Sidebar */}
-          <div className='flex flex-col w-full lg:w-[calc(30%-0.5rem)] max-w-[95%] lg:max-w-none mx-auto mt-4 lg:mt-0 gap-4'>
+          <div className='flex flex-col w-full lg:w-[25%] max-w-[95%] lg:max-w-none mx-auto mt-4 lg:mt-0 gap-4'>
 
             {/* Card Abstrak */}
             <AnimatedContent
