@@ -155,7 +155,7 @@ const DetailDokumen = () => {
           />
         </h1>
 
-        <div className='w-full lg:w-[80%] mx-auto lg:flex lg:justify-between gap-4'>
+        <div className='w-full px-4 md:px-6 lg:px-0 lg:w-[80%] mx-auto lg:flex lg:justify-between lg:gap-4'>
 
           {/* Card Peraturan Utama */}
           <AnimatedContent
@@ -168,10 +168,9 @@ const DetailDokumen = () => {
             animateOpacity
             scale={1.0}
             threshold={0.1}
-            // className untuk AnimatedContent (jika dibutuhkan untuk layoutnya sendiri)
-            className="w-full lg:w-[100%] mb-4 lg:mb-0"
+            className="w-full mb-6 lg:mb-0 lg:w-[calc(70%-0.5rem)]"
           >
-            <div className="bg-white shadow-lg rounded-2xl p-6 border w-full lg:w-[120%] border-gray-300 h-full sm:m-5 md:m-5  lg:m-0"> {/* TAMBAHKAN DIV INI DENGAN BG-WHITE dan styling card lainnya */}
+            <div className="bg-white shadow-lg rounded-2xl p-6 border border-gray-300 h-full w-full lg:m-0">
               <h2 className="text-[18px] lg:text-[24px] font-bold font-roboto text-bluePu mt-3 text-center lg:text-left">
                 <SplitText
                   text={getSebelumTentang(data?.data?.judul).replace(/<[^>]+>/g, '')}
@@ -258,26 +257,28 @@ const DetailDokumen = () => {
           </AnimatedContent>
 
           {/* Sidebar */}
-          <div className='flex flex-col w-full lg:w-[25%] max-w-[95%] lg:max-w-none mx-auto mt-4 lg:mt-0 gap-4'>
+          <div className='flex flex-col w-full lg:w-[calc(30%-0.5rem)] gap-6 lg:gap-4'>
 
             {/* Card Abstrak */}
             <AnimatedContent
               distance={150} delay={100} direction="horizontal" reverse={false} config={{ tension: 400, friction: 100 }} initialOpacity={0} animateOpacity scale={1.0} threshold={0.1}
-              className="w-full" // className untuk AnimatedContent (jika dibutuhkan untuk layoutnya sendiri)
+              className="w-full"
             >
-              <div className="bg-white shadow-lg rounded-2xl p-4 border border-gray-300 flex flex-col h-full"> {/* TAMBAHKAN DIV INI */}
+              <div className="bg-white shadow-lg rounded-2xl p-4 border border-gray-300 flex flex-col h-full">
                 <p className='font-roboto font-semibold text-slate-600 text-[12px] lg:text-[14px] flex items-center gap-2 border-b pb-2'><span className="material-symbols-outlined">description</span> ABSTRAK</p>
-                <div className='flex flex-col lg:flex-row gap-2 p-2 w-full my-2'>
-                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full h-[40px] rounded-2xl font-roboto text-[11px] lg:text-[14px] flex items-center justify-center gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                {/* PERUBAHAN KONTAINER TOMBOL */}
+                <div className='flex flex-col md:flex-row gap-2 p-2 w-full my-2'>
+                  {/* PERUBAHAN TOMBOL INDIVIDUAL */}
+                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
                     onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`)}
                   >
-                    <span className="material-symbols-outlined text-sm lg:text-xl text-kuningButton">visibility</span>
+                    <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                     Preview
                   </button>
-                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full h-[40px] rounded-2xl font-roboto text-[11px] lg:text-[14px] flex items-center justify-center gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
                     onClick={() => handleDownload(data?.data?.abstrak, `https://jdih.pu.go.id/internal/assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`, data?.data?.slug)}
                   >
-                    <span className="material-symbols-outlined text-sm lg:text-xl text-kuningButton">download</span>
+                    <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>
                     Download
                   </button>
                 </div>
@@ -287,21 +288,23 @@ const DetailDokumen = () => {
             {/* Card File Peraturan */}
             <AnimatedContent
               distance={150} delay={200} direction="horizontal" reverse={false} config={{ tension: 400, friction: 100 }} initialOpacity={0} animateOpacity scale={1.0} threshold={0.1}
-              className='w-full' // className untuk AnimatedContent (jika dibutuhkan untuk layoutnya sendiri)
+              className='w-full'
             >
-              <div className="bg-white shadow-lg rounded-2xl p-4 border border-gray-300 flex flex-col h-full"> {/* TAMBAHKAN DIV INI */}
+              <div className="bg-white shadow-lg rounded-2xl p-4 border border-gray-300 flex flex-col h-full">
                 <p className='font-roboto font-semibold text-slate-600 text-[12px] lg:text-[14px] flex items-center gap-2 border-b pb-2'><span className="material-symbols-outlined">description</span> FILE PERATURAN</p>
-                <div className='flex flex-col lg:flex-row gap-2 p-2 w-full my-2'>
-                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full h-[40px] rounded-2xl font-roboto text-[11px] lg:text-[14px] flex items-center justify-center gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                {/* PERUBAHAN KONTAINER TOMBOL */}
+                <div className='flex flex-col md:flex-row gap-2 p-2 w-full my-2'>
+                  {/* PERUBAHAN TOMBOL INDIVIDUAL */}
+                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
                     onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`)}
                   >
-                    <span className="material-symbols-outlined text-sm lg:text-xl text-kuningButton">visibility</span>
+                    <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                     Preview
                   </button>
-                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full h-[40px] rounded-2xl font-roboto text-[11px] lg:text-[14px] flex items-center justify-center gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
                     onClick={() => handleDownload(data?.data?.file_upload, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`, data?.data?.slug)}
                   >
-                    <span className="material-symbols-outlined text-sm lg:text-xl text-kuningButton">download</span>
+                    <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>
                     Download
                   </button>
                 </div>
@@ -312,24 +315,26 @@ const DetailDokumen = () => {
             {data?.dataFileParsial?.length > 0 ? (
               <AnimatedContent
                 distance={150} delay={300} direction="horizontal" reverse={false} config={{ tension: 400, friction: 100 }} initialOpacity={0} animateOpacity scale={1.0} threshold={0.1}
-                className="w-full" // className untuk AnimatedContent (jika dibutuhkan untuk layoutnya sendiri)
+                className="w-full"
               >
-                <div className="bg-white shadow-lg rounded-2xl p-4 border border-gray-300 flex flex-col h-full"> {/* TAMBAHKAN DIV INI */}
+                <div className="bg-white shadow-lg rounded-2xl p-4 border border-gray-300 flex flex-col h-full">
                   <p className='font-roboto font-semibold text-slate-600 text-[12px] lg:text-[14px] flex items-center gap-2 pb-2 border-b'><span className="material-symbols-outlined">description</span> BERKAS PARSIAL</p>
                   {data?.dataFileParsial?.map((item, index) => (
                     <div className='p-2' key={index}>
                       <p className='my-2 mx-2 font-roboto font-semibold text-[13px] lg:text-[16px] text-bluePu'>{index + 1}. Berkas Parsial Ke-{index + 1}</p>
-                      <div className='flex flex-col lg:flex-row gap-2 '>
-                        <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full h-[40px] rounded-2xl font-roboto text-[11px] lg:text-[14px] flex items-center justify-center gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                      {/* PERUBAHAN KONTAINER TOMBOL */}
+                      <div className='flex flex-col md:flex-row gap-2'>
+                        {/* PERUBAHAN TOMBOL INDIVIDUAL */}
+                        <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
                           onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`)}
                         >
-                          <span className="material-symbols-outlined text-sm lg:text-xl text-kuningButton">visibility</span>
+                          <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                           Preview
                         </button>
-                        <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full h-[40px] rounded-2xl font-roboto text-[11px] lg:text-[14px] flex items-center justify-center gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                        <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
                           onClick={() => handleDownload(item?.file, `https://jdih.pu.go.id/internal/assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`, data?.data?.slug)}
                         >
-                          <span className="material-symbols-outlined text-sm lg:text-xl text-kuningButton">download</span>
+                          <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>
                           Download
                         </button>
                       </div>
@@ -339,7 +344,7 @@ const DetailDokumen = () => {
               </AnimatedContent>
             ) : ''}
 
-            {/* Card Status Peraturan - ini sudah benar karena menggunakan div langsung */}
+            {/* Card Status Peraturan */}
             {data?.daraLogPeraturan?.length > 0 ? (
               <div className="w-full bg-white shadow-lg rounded-2xl p-4 border border-gray-300 flex flex-col">
                 <p className='font-roboto font-semibold text-slate-600 text-[12px] lg:text-[14px] flex items-center gap-1 border-b pb-2'><span className="material-symbols-outlined -rotate-12">priority_high</span> STATUS PERATURAN</p>
@@ -360,7 +365,6 @@ const DetailDokumen = () => {
           </div>
         </div>
       </section>
-
 
       <KritikDanSaranModal isOpen={isModalOpenKritik} onClose={() => setIsModalOpenKritik(false)} title="Form Kritik & Saran" dataPeraturan={data}>
 
