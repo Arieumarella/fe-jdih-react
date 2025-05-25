@@ -22,6 +22,7 @@ import Infografis from "./pages/Infografis";
 import DetailInfografis from "./pages/DetailInfografis";
 import Mou from "./pages/Mou";
 import DetailMou from "./pages/detailMou";
+import DokumenLangka from "./pages/DokumenLangka";
 import { Helmet } from "react-helmet-async";
 import { ToastProvider } from "./components/ToastProvider";
 
@@ -53,6 +54,7 @@ const titles = {
   "/infografis/:id": "JDIH PU - Detail Infografis",
   "/Mou": "JDIH PU - Mou",
   "/Mou-detail/:slug": "JDIH PU - Detail Mou",
+  "/Dokumen-Langka": "JDIH PU - Dokumen Langka",
 };
 
 function TitleUpdater() {
@@ -113,6 +115,7 @@ function App() {
         <Route path="/infografis/:id" element={<DetailInfografis />} />
         <Route path="/Mou" element={<Mou />} />
         <Route path="/Mou-detail/:slug" element={<DetailMou />} />
+        <Route path="/Dokumen-Langka" element={<DokumenLangka />} />
       </Routes>
     </>
   )

@@ -32,6 +32,11 @@ const detailMou = () => {
     const [urlModalAi, setUrlModalAi] = useState('');
 
     const showModalAi = async (stateCondition, urlPath) => {
+        const isPDF = typeof urlPath === 'string' && urlPath.toLowerCase().endsWith('.pdf');
+        if (!isPDF) {
+            toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+            return false;
+        }
         setIsModalOpenAi(stateCondition);
         setUrlModalAi(urlPath);
     }
@@ -41,6 +46,13 @@ const detailMou = () => {
     const [urlModal, setUrlModal] = useState('');
 
     const showModal = async (stateCondition, urlPath) => {
+
+        const isPDF = typeof urlPath === 'string' && urlPath.toLowerCase().endsWith('.pdf');
+        if (!isPDF) {
+            toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+            return false;
+        }
+
         setIsModalOpen(stateCondition);
         setUrlModal(urlPath);
     }

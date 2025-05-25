@@ -7,6 +7,7 @@ import { getDetailPutusan, insertViews, addDownload } from "../services/putusanP
 import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useTranslation } from 'react-i18next';
+import { toast } from "../components/ToastProvider";
 
 const DetailPutusan = () => {
 
@@ -37,6 +38,13 @@ const DetailPutusan = () => {
   };
 
   const handleDownload = async (path, nmFile, slug) => {
+
+    const isPDF = typeof nmFile === 'string' && nmFile.toLowerCase().endsWith('.pdf');
+    if (!isPDF) {
+      toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+      return false;
+    }
+
     addDownload(slug)
     const fileUrl = path;
     const fileName = nmFile;

@@ -64,6 +64,10 @@
     "pliceHolderMou": "Cari Judul Nota Kesepahaman...",
     "btnCariJudulMou": "Cari",
     "detailMou": "Detail Nota Kesepahaman",
+    "semuaDokLangka": "List Dokumen Langka",
+    "pliceHolderDokLangka": "Cari Judul Dokumen Langka...",
+    "btnCariJudulDokLangka": "Cari",
+    "detailDokLangka": "Detail Dokumen Langka",
     "semuaPutusanPengandilan": "Semua Putusan Pengadilan",
     "pliceHolderPutusanPengadilan": "Cari Judul Putusan Pengadilan...",
     "btnCariJudulPutusanPengandilan": "Cari",
@@ -143,7 +147,7 @@
         "informasiHukum": "Informasi Hukum",
         "berita": "Berita",
         "monografi": "Monografi",
-        "putusanPengadilan": "Putusan Pengadilan",
+        "putusanPengadilan": "Putusan pengadilan",
         "agenda": "Agenda",
         "artikel": "Artikel",
         "simpel": "SiMPeL",
@@ -159,7 +163,8 @@
         "prasyarat": "Prasyarat",
         "kontakKami": "Kontak Kami",
         "infografis": "Infografis",
-        "Mou": "Nota Kesepahaman"
+        "Mou": "Nota Kesepahaman",
+        "dokumenLangka": "Dokumen Langka"
     },
     "metaDataStandar": {
         "tipe_dokumen": "Tipe Dokumen",

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { addDownload } from "../services/putusanPengadilan.service";
+import { toast } from "../components/ToastProvider";
+
 
 const CardPutusanPengadilan = ({ data }) => {
 
@@ -38,6 +40,14 @@ const CardPutusanPengadilan = ({ data }) => {
   };
 
   const handleDownload = async (path, nmFile, slug) => {
+
+    const isPDF = typeof nmFile === 'string' && nmFile.toLowerCase().endsWith('.pdf');
+    if (!isPDF) {
+      toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+      return false;
+    }
+
+
     addDownload(slug)
     const fileUrl = path;
     const fileName = nmFile;

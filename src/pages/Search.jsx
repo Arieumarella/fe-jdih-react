@@ -1,36 +1,36 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useCallback } from 'react';
 import { useParams, useSearchParams } from "react-router-dom";
-import Headers from "../components/Header";
-import Langganan from "../components/Langganan";
-import Footer from "../components/Footer";
-import Card from "../components/Card";
-import { getJenisPeraturan, getDataSubstansi, getPeraturanPagination, getUnor, addDownload } from "../services/search.services";
+import Headers from "../components/Header"; // Pastikan path ini benar
+import Langganan from "../components/Langganan"; // Pastikan path ini benar
+import Footer from "../components/Footer"; // Pastikan path ini benar
+import Card from "../components/Card"; // Pastikan path ini benar
+import { getJenisPeraturan, getDataSubstansi, getPeraturanPagination, getUnor, addDownload } from "../services/search.services"; // Pastikan path ini benar
 import { Atom } from 'react-loading-indicators';
-import { peraturanBySingkata } from "../assets/object/peraturanBySingkata";
-import Modal from '../components/modal';
-import ModalAi from '../components/modal-chatAi';
-import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
-import FadeContent from '../components/react-bits/FadeContent/FadeContent';
-import SplitText from "../components/react-bits/SplitText/SplitText";
-import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
+import { peraturanBySingkata } from "../assets/object/peraturanBySingkata"; // Pastikan path ini benar dan objeknya valid
+import Modal from '../components/modal'; // Pastikan path ini benar
+import ModalAi from '../components/modal-chatAi'; // Pastikan path ini benar
+import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent'; // Pastikan path ini benar
+import FadeContent from '../components/react-bits/FadeContent/FadeContent'; // Pastikan path ini benar
+import SplitText from "../components/react-bits/SplitText/SplitText"; // Pastikan path ini benar
+import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services"; // Pastikan path ini benar
 import { useTranslation } from 'react-i18next';
 
+// Fungsi untuk mendapatkan array tahun dari tahun tertentu hingga tahun sekarang
 function getYearsArray(startYear = 2019) {
   const currentYear = new Date().getFullYear();
   const years = [];
-
   for (let year = startYear; year <= currentYear; year++) {
     years.push(year);
   }
-
   return years;
 }
 
+const arrayTahun = getYearsArray();
+
+// Komponen Pagination
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
-
-
-
   const generatePageNumbers = () => {
+    if (totalPages <= 1) return []; // Jika hanya 1 halaman, tidak perlu angka
     if (totalPages <= 5) {
       return [...Array(totalPages)].map((_, i) => i + 1);
     }
@@ -46,12 +46,16 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
     return pages;
   };
 
+  if (totalPages <= 1) {
+    return null;
+  }
+
   return (
     <div className="flex justify-end items-center my-4 space-x-2 gap-4 w-full md:w-[70%] mx-auto">
       <span className="font-medium font-roboto md:text-[30px] text-[14px]">Halaman</span>
       <div className="flex space-x-2 font-roboto md:text-[18px] text-[14px]">
         <button
-          className={`md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition`}
+          className={`md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition disabled:opacity-50 disabled:cursor-not-allowed`}
           disabled={currentPage === 1}
           onClick={() => onPageChange(currentPage - 1)}
         >
@@ -64,7 +68,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
             className={`md:px-4 px-3 md:py-2 py-1 rounded-lg shadow-md transition ${currentPage === page
               ? "bg-bluePu text-kuningButton"
               : "bg-gray-300 text-gray-800 hover:bg-gray-400"
-              }`}
+              } ${page === "..." ? "cursor-default" : ""}`}
             onClick={() => typeof page === "number" && onPageChange(page)}
             disabled={page === "..."}
           >
@@ -73,7 +77,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         ))}
 
         <button
-          className={`md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition`}
+          className={`md:px-4 px-3 md:py-2 py-1 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 transition disabled:opacity-50 disabled:cursor-not-allowed`}
           disabled={currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
         >
@@ -84,55 +88,52 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   );
 };
 
-let arrayTahun = getYearsArray();
-
 const Search = () => {
+  const { tipePencarian } = useParams();
+  const [searchParams] = useSearchParams();
+  const deptIdParameter = searchParams.get('dept_id');
+  const { t } = useTranslation();
 
-  let { tipePencarian } = useParams();
-  let [pencarianDetail, setpencarianDetail] = useState(tipePencarian === 'pencarian-biasa' ? false : true);
-  let [IconPencarianDetail, setIconPencarianDetail] = useState(tipePencarian === 'pencarian-biasa' ? '+' : '-');
-  let [jnsPeraturan, setJenisPeraturan] = useState([]);
-  let [paramJnsPeraturan, setParamJnsPeraturan] = useState(tipePencarian != 'pencarian-biasa' || tipePencarian != 'pencarian-detail' ? tipePencarian : '');
-  let [dataSubstansi, setDataSubstansi] = useState([]);
-  let [dataUnor, setDataUnor] = useState([]);
-  let [posts, setPosts] = useState([]);
-  let [currentPage, setCurrentPage] = useState(1);
-  let [totalPages, setTotalPages] = useState(1);
-  let [searchParams] = useSearchParams();
-  let deptIdParameter = searchParams.get('dept_id');
-  let [search, setSearch] = useState({
+  const [pencarianDetail, setPencarianDetail] = useState(false);
+  const [IconPencarianDetail, setIconPencarianDetail] = useState('+');
+
+  const [jnsPeraturan, setJenisPeraturan] = useState([]);
+  const [dataSubstansi, setDataSubstansi] = useState([]);
+  const [dataUnor, setDataUnor] = useState([]);
+
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const initialSearchState = {
     judul: "",
-    peraturan_category_id: peraturanBySingkata[paramJnsPeraturan],
+    peraturan_category_id: "",
     jns_substansi: "",
     nomor: "",
     tahun: "",
-    unor: deptIdParameter,
-  });
+    unor: "",
+  };
+  const [search, setSearch] = useState(initialSearchState);
+  const [isLoading, setIsLoading] = useState(false);
 
-  let [isLoading, setIsLoading] = useState(false);
-
-  // Modal Priview
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [urlModal, setUrlModal] = useState('');
-
-  const showModal = async (stateCondition, urlPath) => {
-    setIsModalOpen(stateCondition);
-    setUrlModal(urlPath);
-  }
-
-  // Modal Priview
   const [isModalOpenAi, setIsModalOpenAi] = useState(false);
   const [urlModalAi, setUrlModalAi] = useState('');
 
-  const showModalAi = async (stateCondition, urlPath) => {
+  const showModal = (stateCondition, urlPath) => {
+    setIsModalOpen(stateCondition);
+    setUrlModal(urlPath);
+  };
+
+  const showModalAi = (stateCondition, urlPath) => {
     setIsModalOpenAi(stateCondition);
     setUrlModalAi(urlPath);
-  }
-
+  };
 
   const handleDownload = async (urlDownload, fileName, slug) => {
     try {
-      addDownload(slug);
+      await addDownload(slug);
       const fileUrl = urlDownload;
       const response = await fetch(fileUrl);
       const blob = await response.blob();
@@ -149,94 +150,131 @@ const Search = () => {
     }
   };
 
-  const paginateFunction = async (e = null) => {
-    if (e) e.preventDefault();
+  const paginateFunction = useCallback(async (pageToFetch = 1, filtersToUse) => {
     setIsLoading(true);
-
-    const delay = new Promise(resolve => setTimeout(resolve, 300));
-
+    // console.log(`Memulai pencarian untuk halaman: ${pageToFetch} dengan filter:`, filtersToUse);
     try {
-      const [result] = await Promise.all([
-        getPeraturanPagination(currentPage, search),
-        delay
-      ]);
+      const result = await getPeraturanPagination(pageToFetch, filtersToUse);
+      // console.log("Hasil dari getPeraturanPagination:", result);
 
-      setPosts(result.data.posts);
-      setTotalPages(result.data.totalPages);
-      setCurrentPage(result.data.currentPage);
+      if (result && result.data) {
+        setPosts(result.data.posts || []);
+        setTotalPages(result.data.totalPages || 1);
+        setCurrentPage(result.data.currentPage || 1);
+      } else {
+        console.warn("Struktur data pagination tidak sesuai atau data kosong:", result);
+        setPosts([]);
+        setTotalPages(1);
+        setCurrentPage(1);
+      }
     } catch (error) {
-      console.error("Gagal mengambil data:", error);
+      console.error("Gagal mengambil data pagination:", error);
       setPosts([]);
+      setTotalPages(1);
+      setCurrentPage(1);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    paginateFunction();
-  }, [currentPage]);
+    const fetchDataDropdowns = async () => {
+      try {
+        const [jnsPeraturanRes, dataSubstansiRes, dataUnorRes] = await Promise.all([
+          getJenisPeraturan(),
+          getDataSubstansi(),
+          getUnor()
+        ]);
+
+        // Sesuaikan dengan struktur data API Anda
+        setJenisPeraturan(jnsPeraturanRes?.data?.data || jnsPeraturanRes?.data || jnsPeraturanRes || []);
+        setDataSubstansi(dataSubstansiRes?.data?.data || dataSubstansiRes?.data || dataSubstansiRes || []);
+        setDataUnor(dataUnorRes?.data || dataUnorRes || []);
+
+      } catch (error) {
+        console.error("Gagal mengambil data dropdown:", error);
+        setJenisPeraturan([]);
+        setDataSubstansi([]);
+        setDataUnor([]);
+      }
+    };
+    fetchDataDropdowns();
+  }, []);
 
   useEffect(() => {
-    getJenisPeraturan().then((result) => {
-      setJenisPeraturan(result);
-    });
-
-    getDataSubstansi().then((result) => {
-      setDataSubstansi(result);
-    });
-
-    getUnor().then((result) => {
-      setDataUnor(result);
-    });
-
     getIpUser()
       .then((res) => {
         const ip = res.data.ip;
-        const halaman = "Pencarian " + tipePencarian === 'pencarian-biasa' ? 'Biasa' : 'Detail';
-        return insertDataPengunjung(ip, halaman);
+        let pageName = "Pencarian Umum";
+        if (tipePencarian && tipePencarian !== 'pencarian-biasa' && tipePencarian !== 'pencarian-detail') {
+          pageName = `Pencarian Kategori: ${tipePencarian}`;
+        } else if (tipePencarian === 'pencarian-detail') {
+          pageName = "Form Pencarian Detail";
+        } else if (tipePencarian === 'pencarian-biasa') {
+          pageName = "Form Pencarian Biasa";
+        }
+        return insertDataPengunjung(ip, pageName);
       })
-      .then((response) => {
-
-      })
+      // .then(() => console.log("Data pengunjung dicatat untuk:", tipePencarian))
       .catch((err) => {
-        console.error("Terjadi error:", err);
+        console.error("Terjadi error saat mencatat pengunjung:", err);
       });
+  }, [tipePencarian]);
+
+  useEffect(() => {
+    // console.log("Parameter URL berubah. tipePencarian:", tipePencarian, "deptIdParameter:", deptIdParameter);
+
+    const isSpecificCategorySearch = tipePencarian &&
+      tipePencarian !== 'pencarian-biasa' &&
+      tipePencarian !== 'pencarian-detail';
+
+    setPencarianDetail(isSpecificCategorySearch);
+    setIconPencarianDetail(isSpecificCategorySearch ? '-' : '+');
+
+    const categoryIdFromParam = isSpecificCategorySearch
+      ? (peraturanBySingkata[tipePencarian] || "")
+      : "";
+
+    const newFilters = {
+      ...initialSearchState,
+      peraturan_category_id: categoryIdFromParam,
+      unor: deptIdParameter || "",
+    };
+
+    // console.log("Filter baru berdasarkan URL:", newFilters);
+    setSearch(newFilters);
+    paginateFunction(1, newFilters);
+
+  }, [tipePencarian, deptIdParameter, paginateFunction]);
 
 
-  }, []);
+  const handlePageChange = (newPage) => {
+    paginateFunction(newPage, search);
+  };
 
-  function hendelPencarianDetail() {
-    if (pencarianDetail) {
-      setpencarianDetail(false);
-      setIconPencarianDetail('+');
-    } else {
-      setpencarianDetail(true);
-      setIconPencarianDetail('-');
-    }
-
-  }
+  const handleSubmitSearchForm = (e) => {
+    e.preventDefault();
+    paginateFunction(1, search);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
-    console.log(search);
     setSearch((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const { t } = useTranslation();
-
+  function hendelPencarianDetail() {
+    setPencarianDetail(prev => !prev);
+    setIconPencarianDetail(prev => (prev === '+' ? '-' : '+'));
+  }
 
   return (
     <>
       <Headers />
-
-      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 '>
-
+      <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 min-h-screen'> {/* min-h-screen agar footer tidak naik jika konten sedikit */}
         <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
-
           <SplitText
             text={t("pencarianTittle")}
             delay={15}
@@ -247,30 +285,21 @@ const Search = () => {
           />
         </h1>
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>
-          <form onSubmit={paginateFunction}>
-            {/* Mengubah md:w-[70%] menjadi lg:w-[70%] */}
+          <form onSubmit={handleSubmitSearchForm}>
             <div className="box-border w-full lg:w-[70%] mx-auto my-4 rounded-lg bg-bluePu shadow-lg p-4">
-              {/* Input Nama Peraturan */}
               <label className="block text-white font-semibold mb-1">{t("pencarianJudul")}</label>
-              {/* Blok untuk input judul dan tombol agar bisa flex di lg */}
               <div className="lg:flex lg:items-center">
-                {/* Mengubah md:w-[85%] menjadi lg:w-[85%] */}
                 <input
                   type="text"
                   placeholder={t("pencarianJudul")}
                   className="lg:w-[85%] w-[100%] h-[50px] px-4 rounded-md text-gray-800 placeholder-gray-500 outline-none mb-2 lg:mb-0"
-                  // Menambah mb-2 untuk mobile/tablet, lg:mb-0 jika berdampingan
                   name="judul"
                   value={search.judul}
                   onChange={handleChange}
                 />
-
-                {/* Tombol Cari */}
-                {/* Mengubah md:ml-2 menjadi lg:ml-2 */}
                 <button
                   type="submit"
                   className="lg:ml-2 w-full lg:w-[90px] bg-kuningButton text-bluePu px-4 py-3 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition cursor-pointer"
-                // w-full untuk mobile/tablet, lg:w-[90px] untuk desktop
                 >
                   {t("btnPencarianSubmit")}
                 </button>
@@ -280,93 +309,56 @@ const Search = () => {
                 {t("pencarianDetail")} <p className='inline' id='stsPencarianIcon'>{IconPencarianDetail}</p>
               </span>
 
-              {/* Advanced Search */}
-              {/* Mengubah md:grid-cols-4 menjadi lg:grid-cols-4 */}
-              <div className={`mt-4 grid grid-cols-1 lg:grid-cols-4 gap-4 max-h-0 transition-all duration-500 ${pencarianDetail ? 'max-h-screen opacity-100' : 'opacity-0'}`}>
-                {/* Jenis Dokumen */}
+              <div className={`mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 transition-all duration-500 ease-in-out overflow-hidden ${pencarianDetail ? 'max-h-[1000px] opacity-100 py-2' : 'max-h-0 opacity-0 py-0'}`}>
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("JenisPeraturan")}</label>
                   <select
                     className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="peraturan_category_id"
-                    value={search.peraturan_category_id}
+                    value={search.peraturan_category_id || ""}
                     onChange={handleChange}
-                  // defaultValue={peraturanBySingkata[paramJnsPeraturan]} // defaultValue pada select lebih baik dihandle dengan value dan state
                   >
                     <option value="">-- {t("JenisPeraturan")} --</option>
-                    {jnsPeraturan?.data?.data?.length > 0 ? (
-                      jnsPeraturan?.data?.data?.map((item, index) => (
-                        <option
-                          key={index}
-                          value={item.peraturan_category_id}
-                        >
-                          {item.percategoryname}
-                        </option>
-                      ))
-                    ) : (
-                      <option
-                        value=""
-                        disabled
-                      >-- {t("statistikDataTIdakDitemukan")} --</option>
-                    )}
+                    {jnsPeraturan?.map((item, index) => (
+                      <option key={item.peraturan_category_id || index} value={item.peraturan_category_id}>
+                        {item.percategoryname}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
-                {/* Tema Peraturan */}
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("JenisSubstansi")}</label>
                   <select
                     className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="jns_substansi"
-                    value={search.jns_substansi}
+                    value={search.jns_substansi || ""}
                     onChange={handleChange}
                   >
                     <option value="">-- {t("JenisSubstansi")} --</option>
-                    {dataSubstansi?.data?.data?.length > 0 ? (
-                      dataSubstansi?.data?.data?.map((item, index) => (
-                        <option
-                          key={item?.tag_id || `substansi-${index}`} // Gunakan ID unik jika ada
-                          value={item?.tag_id}
-                        >
-                          {item?.tagname}
-                        </option>
-                      ))
-                    ) : (
-                      <option
-                        value=""
-                        disabled
-                      >-- {t("statistikDataTIdakDitemukan")} --</option>
-                    )}
+                    {dataSubstansi?.map((item, index) => (
+                      <option key={item?.tag_id || `substansi-${index}`} value={item?.tag_id}>
+                        {item?.tagname}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
-                {/* Tahun */}
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("tahunPeraturan")}</label>
                   <select
                     className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="tahun"
-                    value={search.tahun}
+                    value={search.tahun || ""}
                     onChange={handleChange}
                   >
                     <option value="">-- {t("tahunPeraturan")} --</option>
-                    {arrayTahun?.length > 0 ? ( // Menambahkan optional chaining untuk arrayTahun
-                      arrayTahun.map((item, index) => (
-                        <option
-                          key={index} // Untuk tahun, index biasanya aman jika arrayTahun tidak berubah urutannya
-                          value={item}
-                        >{item}</option>
-                      ))
-                    ) : (
-                      <option
-                        value=""
-                        disabled
-                      >-- {t("statistikDataTIdakDitemukan")} --</option>
-                    )}
+                    {arrayTahun?.map((item, index) => (
+                      <option key={index} value={item}>{item}</option>
+                    ))}
                   </select>
                 </div>
 
-                {/* Nomor Peraturan */}
                 <div>
                   <label className="block text-white font-semibold mb-1">{t("noPeraturan")}</label>
                   <input
@@ -379,32 +371,20 @@ const Search = () => {
                   />
                 </div>
 
-                {/* Unit Organisasi */}
-                <div>
+                <div className="md:col-span-2 lg:col-span-1">
                   <label className="block text-white font-semibold mb-1">{t("pilihUnitOrganisasi")}</label>
                   <select
                     className="w-full h-[50px] px-4 rounded-md text-gray-800"
                     name="unor"
-                    value={search.unor}
+                    value={search.unor || ""}
                     onChange={handleChange}
                   >
                     <option value="">-- {t("pilihUnitOrganisasi")} --</option>
-                    {dataUnor?.data?.length > 0 ? ( // Menggunakan dataUnor.data bukan dataUnor.data.data
-                      dataUnor.data.map((item, index) => (
-                        <option
-                          key={item?.dept_id || `unor-${index}`} // Gunakan ID unik jika ada
-                          value={item?.dept_id}
-                        >
-                          {item?.deptname}
-                        </option>
-                      ))
-                    ) : (
-                      <option
-                        key="unor-empty" // Key yang lebih deskriptif
-                        value=""
-                        disabled
-                      >-- {t("statistikDataTIdakDitemukan")} --</option>
-                    )}
+                    {dataUnor?.map((item, index) => (
+                      <option key={item?.dept_id || `unor-${index}`} value={item?.dept_id}>
+                        {item?.deptname}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -413,15 +393,15 @@ const Search = () => {
         </FadeContent>
 
         {isLoading ? (
-          <div className="flex justify-center items-center my-[40px]">
-            <Atom color="#233b74" size="large" text="Loading..." textColor="" />
+          <div className="flex justify-center items-center my-[40px] min-h-[200px]"> {/* min-h untuk loading */}
+            <Atom color="#233b74" size="large" text="Loading..." textColor="#233b74" />
           </div>
         ) : posts?.length > 0 ? (
           posts.map((item, index) => (
             <AnimatedContent
-              key={index}
+              key={item.perundang_id || `post-${index}`}
               distance={100}
-              delay={200}
+              delay={100 + (index * 50)}
               direction="horizontal"
               reverse={index % 2 === 0}
               config={{ tension: 500, friction: 100 }}
@@ -430,32 +410,24 @@ const Search = () => {
               scale={1.0}
               threshold={0.1}
             >
-              <Card key={index} data={item} showModal={showModal} showModalAi={showModalAi} handleDownload={handleDownload} />
+              <Card data={item} showModal={showModal} showModalAi={showModalAi} handleDownload={handleDownload} />
             </AnimatedContent>
           ))
         ) : (
-          <p className="text-center text-slate-100">{t("statistikDataTIdakDitemukan")}</p>
+          <div className="text-center text-gray-600 py-8 min-h-[200px] flex items-center justify-center"> {/* min-h untuk no data */}
+            <p>{t("statistikDataTIdakDitemukan")}</p>
+          </div>
         )}
 
-
-        {/* Pagination */}
         <Pagination
           totalPages={totalPages}
           currentPage={currentPage}
-          onPageChange={(page) => setCurrentPage(page)}
+          onPageChange={handlePageChange}
         />
 
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Abstrak" urlPath={urlModal}>
-
-        </Modal>
-
-        <ModalAi isOpen={isModalOpenAi} onClose={() => setIsModalOpenAi(false)} urlPath={urlModalAi}>
-
-        </ModalAi>
-
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Abstrak" urlPath={urlModal} />
+        <ModalAi isOpen={isModalOpenAi} onClose={() => setIsModalOpenAi(false)} urlPath={urlModalAi} />
       </section>
-
-
 
       <Langganan />
       <Footer />

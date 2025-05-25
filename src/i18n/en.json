@@ -137,6 +137,11 @@
     "pliceHolderMou": "Search Memorandum Title...",
     "btnCariJudulMou": "Search",
     "detailMou": "Memorandum of Understanding Details",
+    "detailMou": "Memorandum of Understanding Details",
+    "semuaDokLangka": "Rare Documents List",
+    "pliceHolderDokLangka": "Search Rare Document Title...",
+    "btnCariJudulDokLangka": "Search",
+    "detailDokLangka": "Rare Document Details",
     "menu": {
         "home": "Home",
         "jenisProdukHukum": "Legal Product Types",
@@ -159,7 +164,8 @@
         "prasyarat": "Requirements",
         "kontakKami": "Contact Us",
         "infografis": "Infographic",
-        "Mou": "Memorandum of Understanding"
+        "Mou": "Memorandum of Understanding",
+        "rareDocument": "Rare Document"
     },
     "metaDataStandar": {
         "tipe_dokumen": "Document Type",

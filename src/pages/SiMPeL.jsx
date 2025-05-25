@@ -102,7 +102,7 @@ const SiMPeL = () => {
 
     useEffect(() => {
         paginateFunction();
-    }, [currentPage]);
+    }, [slug, search, currentPage]);
 
     useEffect(() => {
         getIpUser()

@@ -11,6 +11,7 @@ import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedCo
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { toast } from "../components/ToastProvider";
 
 
 const formatTanggal = (tanggalString) => {
@@ -76,11 +77,22 @@ const DetailDokumen = () => {
   }, [data]);
 
   const showModal = async (stateCondition, urlPath) => {
+    const isPDF = typeof urlPath === 'string' && urlPath.toLowerCase().endsWith('.pdf');
+    if (!isPDF) {
+      toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+      return false;
+    }
+
     setIsModalOpen(stateCondition);
     setUrlModal(urlPath);
   }
 
   const showModalAi = async (stateCondition, urlPath) => {
+    const isPDF = typeof urlPath === 'string' && urlPath.toLowerCase().endsWith('.pdf');
+    if (!isPDF) {
+      toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+      return false;
+    }
     setIsModalOpenAi(stateCondition);
     setUrlModalKritik(urlPath);
   }
@@ -91,6 +103,12 @@ const DetailDokumen = () => {
 
   const handleDownload = async (urlDownload, fileName, slug) => {
     try {
+      const isPDF = typeof fileName === 'string' && fileName.toLowerCase().endsWith('.pdf');
+      if (!isPDF) {
+        toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+        return false;
+      }
+
       addDownload(slug)
       const fileUrl = urlDownload;
       const response = await fetch(fileUrl);
@@ -155,7 +173,7 @@ const DetailDokumen = () => {
           />
         </h1>
 
-        <div className='w-full px-4 md:px-6 lg:px-0 lg:w-[80%] mx-auto lg:flex lg:justify-between lg:gap-4'>
+        <div className='w-full px-4 md:px-6 lg:px-0 lg:w-[70%] mx-auto lg:flex lg:justify-between lg:gap-4'>
 
           {/* Card Peraturan Utama */}
           <AnimatedContent

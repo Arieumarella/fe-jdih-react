@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import logoJDIHN from "/src/assets/jdihn.png";
-import pu from "../assets/pu.png";
+import logoJDIHN from "/src/assets/jdihn.png"; // Pastikan path ini benar
+import pu from "../assets/pu.png"; // Pastikan path ini benar
 import { useNavigate } from "react-router-dom";
 import { getJenisPeraturan } from "../services/header.services"; // Pastikan path ini benar
 import { useTranslation } from 'react-i18next';
 
-// Custom Hook untuk posisi scroll (dipindahkan ke luar komponen)
+// Custom Hook untuk posisi scroll
 function useScrollPositionHook() {
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -22,8 +22,8 @@ function useScrollPositionHook() {
 }
 
 export default function Header() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Original: isOpen
-  const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null); // Original: isOpenSubmenu (dengan value string)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
   const [jnsPeraturan, setJnsPeraturan] = useState([]);
   const scrollPosition = useScrollPositionHook();
   const navigate = useNavigate();
@@ -32,9 +32,20 @@ export default function Header() {
 
   useEffect(() => {
     getJenisPeraturan().then((result) => {
-      setJnsPeraturan(result);
+      // Sesuaikan dengan struktur data API Anda
+      if (result && result.data && Array.isArray(result.data.data)) {
+        setJnsPeraturan(result.data.data);
+      } else if (result && Array.isArray(result.data)) {
+        setJnsPeraturan(result.data);
+      } else if (result && Array.isArray(result)) {
+        setJnsPeraturan(result);
+      } else {
+        console.warn("Struktur data Jenis Peraturan tidak sesuai atau data kosong:", result);
+        setJnsPeraturan([]);
+      }
     }).catch(error => {
       console.error("Gagal mengambil Jenis Peraturan:", error);
+      setJnsPeraturan([]);
     });
   }, []);
 
@@ -45,9 +56,9 @@ export default function Header() {
       setIsMobileMenuOpen(false);
       setActiveMobileSubmenu(null);
     }
-  }, [navigate, isMobileMenuOpen]);
+  }, [navigate, isMobileMenuOpen, setIsMobileMenuOpen, setActiveMobileSubmenu]);
 
-  const handleHamburgerToggle = () => { // Original: hendelHuberger
+  const handleHamburgerToggle = () => {
     const newOpenState = !isMobileMenuOpen;
     setIsMobileMenuOpen(newOpenState);
     if (!newOpenState) {
@@ -55,7 +66,7 @@ export default function Header() {
     }
   };
 
-  const handleMobileSubmenuToggle = (submenuName) => { // Original: handelClickSubmenu
+  const handleMobileSubmenuToggle = (submenuName) => {
     setActiveMobileSubmenu(prev => (prev === submenuName ? null : submenuName));
   };
 
@@ -63,68 +74,51 @@ export default function Header() {
     i18n.changeLanguage(lng);
   };
 
-  // CSS untuk hamburger icon dari kode asli Anda (pastikan ada di CSS global)
-  // .hamburger-line { /* ... */ }
-  // .humberger-aktif > span:nth-child(1) { /* ... */ }
-  // .humberger-aktif > span:nth-child(2) { /* ... */ }
-  // .humberger-aktif > span:nth-child(3) { /* ... */ }
-
+  // Pastikan class CSS untuk hamburger ('hamburger-line', 'humberger-aktif') terdefinisi di file CSS global Anda
   return (
     <section
-      className={`sticky top-0 z-50 md:px-[60px] bg-bluePu ${ // md:px-[60px] mungkin perlu penyesuaian untuk tablet
-        scrollPosition === 0
-          ? "bg-opacity-0"
-          : scrollPosition <= 70
-            ? "bg-opacity-30"
-            : "bg-opacity-100"
+      className={`sticky top-0 z-50 md:px-[60px] bg-bluePu ${scrollPosition === 0
+        ? "bg-opacity-0"
+        : scrollPosition <= 70
+          ? "bg-opacity-30"
+          : "bg-opacity-100"
         }`}
       aria-label="Header navigasi utama"
     >
-      <div className='container flex max-w-none justify-between items-center w-full h-16 md:h-20 px-4 md:px-0'> {/* h-16 untuk mobile/tablet, md:h-20 untuk desktop */}
-
-        {/* Logo Section */}
-        <div className='flex items-center group shrink-0'> {/* shrink-0 untuk mencegah logo mengecil terlalu banyak */}
+      <div className='container flex max-w-none justify-between items-center w-full h-16 md:h-20 px-4 md:px-0'>
+        <div className='flex items-center group shrink-0'>
           <img
             src={logoJDIHN}
             alt="JDIHN"
-            className='h-10 sm:h-12 md:h-12 lg:h-[65px] py-2 px-2 hidden md:block cursor-pointer' // Ukuran disesuaikan, md:block bisa jadi lg:block
+            className='h-10 sm:h-12 md:h-12 lg:h-[65px] py-2 px-2 hidden md:block cursor-pointer'
             onClick={() => handleNavigateAndCloseMenu("")}
           />
           <img
             src={pu}
             alt="Pekerjaan Umum"
-            // Pertimbangkan ukuran spesifik untuk tablet jika h-12 terlalu besar/kecil
-            className='h-10 sm:h-12 md:h-12 lg:h-[65px] py-2 px-2 cursor-pointer' // sm:w-[110px] dihapus jika menyebabkan masalah, biarkan height mengontrol
+            className='h-10 sm:h-12 md:h-12 lg:h-[65px] py-2 px-2 cursor-pointer'
             onClick={() => handleNavigateAndCloseMenu("")}
           />
         </div>
 
-        {/* Desktop Navigation */}
-        {/* KUNCI: Kapan navigasi ini muncul? `md:flex` mungkin terlalu cepat. Pertimbangkan `lg:flex` */}
         <div className="hidden lg:flex items-center font-roboto font-normal">
-          {/* Navigasi Utama: text-[25px] dan gap-8 mungkin terlalu besar untuk tablet */}
-          {/* Solusi: Kurangi ukuran font & gap untuk `md` (tablet) dan kembalikan ke nilai asli untuk `lg` (desktop besar) */}
           <nav className="flex gap-4 md:gap-6 lg:gap-8 text-white text-base md:text-[15px] lg:text-[15px] font-medium">
-            {/* mr-[-64px] mungkin perlu disesuaikan atau hanya berlaku di `lg` */}
-            {/* Jika mr-[-64px] adalah untuk "menarik" elemen ke kanan, pastikan ini tidak menyebabkan overflow di tablet */}
-
             <a
               href="#"
-              className="hover:text-slate-300 whitespace-nowrap" // whitespace-nowrap agar tidak pecah baris per item
+              className="hover:text-slate-300 whitespace-nowrap"
               onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu(""); }}
             >
               {t("menu.home")}
             </a>
 
-            {/* Dropdown Produk Hukum */}
             <div className="relative group">
               <button type="button" className="flex items-center hover:text-slate-300 whitespace-nowrap" aria-haspopup="true" aria-expanded="false">
                 {t("menu.jenisProdukHukum")} <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
-              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-max min-w-[200px] lg:w-[250px]"> {/* w-max atau min-w untuk submenu */}
-                {jnsPeraturan?.data?.data?.length > 0 ? (
-                  jnsPeraturan.data.data.map((item, index) => (
-                    <li key={index}>
+              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-max min-w-[200px] lg:w-[250px]">
+                {jnsPeraturan?.length > 0 ? (
+                  jnsPeraturan.map((item, index) => (
+                    <li key={item.singkatan_file || index}> {/* Gunakan ID unik jika ada */}
                       <a
                         href="#"
                         onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu(`Search/${item.singkatan_file}`); }}
@@ -140,34 +134,27 @@ export default function Header() {
               </ul>
             </div>
 
-            {/* Ulangi pola untuk dropdown lainnya: */}
-            {/* - `whitespace-nowrap` pada button */}
-            {/* - `w-max min-w-[...px] lg:w-[...px]` pada submenu ul */}
-
-            {/* Dropdown Informasi Hukum */}
             <div className="relative group">
               <button type="button" className="flex items-center hover:text-slate-300 whitespace-nowrap" aria-haspopup="true" aria-expanded="false">
                 {t("menu.informasiHukum")} <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-max min-w-[180px]">
-                {/* ... item submenu ... */}
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Berita"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.berita")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Monografi"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.monografi")}</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("putasn-pengadilan"); }} className="block px-4 py-2 hover:bg-slate-100">{t("putusanPengadilan")}</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("putasn-pengadilan"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.putusanPengadilan")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("agenda"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.agenda")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("artikel"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.artikel")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("infografis"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.infografis")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Mou"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.Mou")}</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Dokumen-Langka"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.dokumenLangka")}</a></li>
               </ul>
             </div>
 
-            {/* Dropdown SiMPeL */}
             <div className="relative group">
               <button type="button" className="flex items-center hover:text-slate-300 whitespace-nowrap" aria-haspopup="true" aria-expanded="false">
                 SiMPeL <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-max min-w-[180px]">
-                {/* ... item submenu ... */}
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("SiMPeL/Prolegnas"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.prolegnas")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("SiMPeL/Progsun"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.progsun")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("SiMPeL/Proleg"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.prolegPupr")}</a></li>
@@ -178,13 +165,11 @@ export default function Header() {
 
             <a href="#" className="hover:text-slate-300 mt-[2px] whitespace-nowrap" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Statistik"); }}>{t("menu.statistik")}</a>
 
-            {/* Dropdown Tentang JDIH */}
             <div className="relative group">
               <button type="button" className="flex items-center hover:text-slate-300 whitespace-nowrap" aria-haspopup="true" aria-expanded="false">
                 {t("menu.tentangJdih")} <span className="material-symbols-outlined">arrow_drop_down</span>
               </button>
               <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-max min-w-[180px]">
-                {/* ... item submenu ... */}
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("struktur-organisasi"); }}>{t("menu.strukturOrganisasi")}</a></li>
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("tentang-kami"); }}>{t("menu.tentangKami")}</a></li>
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("prasyarat"); }}>{t("menu.prasyarat")}</a></li>
@@ -194,13 +179,10 @@ export default function Header() {
           </nav>
         </div>
 
-        {/* Language Switcher - Desktop */}
-        {/* Sama seperti navigasi, pertimbangkan `lg:flex` */}
-        <div className="hidden lg:flex items-center space-x-2 lg:space-x-6 ml-4 lg:ml-8"> {/* Mengurangi space dan margin untuk tablet jika lg:flex dipakai */}
+        <div className="hidden lg:flex items-center space-x-2 lg:space-x-6 ml-4 lg:ml-8">
           <div className="flex">
             <button
               type="button"
-              // Ukuran font dan tombol disesuaikan: lebih kecil untuk md, asli untuk lg
               className={`text-sm md:text-base lg:text-xl hover:bg-blue-900 active:bg-blue-950 w-[50px] lg:w-[70px] text-white font-semibold ${currentLang === 'id' ? 'bg-blue-950' : 'bg-blue-800'}`}
               onClick={() => changeLang('id')}
               aria-pressed={currentLang === 'id'}
@@ -214,8 +196,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Hamburger Menu Area & Mobile Language Switcher */}
-        {/* Muncul hingga `lg` jika navigasi desktop diatur ke `lg:flex` */}
         <div className='flex items-center lg:hidden'>
           <div className='flex gap-1 mr-2'>
             <button
@@ -234,38 +214,36 @@ export default function Header() {
             >EN</button>
           </div>
           <button
-            id='hamburger' // ... (sisa atribut hamburger)
+            id='hamburger'
             className={`px-2 ${isMobileMenuOpen ? 'humberger-aktif' : ''}`}
             onClick={handleHamburgerToggle}
-          // ...
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="menu-mobile"
           >
-            <span className="hamburger-line"></span>
-            <span className="hamburger-line"></span>
-            <span className="hamburger-line"></span>
+            <span className="hamburger-line origin-top-left transition duration-300 ease-in-out"></span>
+            <span className="hamburger-line transition duration-300 ease-in-out"></span>
+            <span className="hamburger-line origin-bottom-left transition duration-300 ease-in-out"></span>
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Menu - Sekarang aktif hingga `lg` */}
       <nav
         id='menu-mobile'
         className={`absolute lg:hidden py-2 bg-bluePu/90 text-slate-100 shadow-lg w-screen top-full left-0 
           transition-all duration-300 ease-in-out
           ${isMobileMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-5 invisible pointer-events-none'} 
         `}
-      // ... (sisa menu mobile)
       >
-        {/* ... (isi ul li menu mobile seperti sebelumnya) ... */}
         <ul className='block px-4 text-sm space-y-2 text-left'>
           <li>
             <a href="#" className='hover:text-slate-300 block' onClick={() => handleNavigateAndCloseMenu("")}>{t("menu.home")}</a>
           </li>
 
-          {/* Mobile Dropdown Produk Hukum */}
           <li className='group'>
             <button
               type='button'
-              className='flex items-center justify-between w-full hover:text-slate-300' // Style asli
+              className='flex items-center justify-between w-full hover:text-slate-300'
               onClick={() => handleMobileSubmenuToggle('produk_hukum')}
               aria-expanded={activeMobileSubmenu === 'produk_hukum'}
               aria-controls="submenu-mobile-produk-hukum"
@@ -278,9 +256,9 @@ export default function Header() {
               className={`overflow-hidden mt-2 bg-slate-200 text-black rounded-md px-3 space-y-1 text-sm shadow-xl transition-all duration-300 ease-in-out ${activeMobileSubmenu === 'produk_hukum' ? 'max-h-96 py-2' : 'max-h-0 py-0'
                 }`}
             >
-              {jnsPeraturan?.data?.data?.length > 0 ? (
-                jnsPeraturan.data.data.map((item, index) => (
-                  <li key={index}>
+              {jnsPeraturan?.length > 0 ? (
+                jnsPeraturan.map((item, index) => (
+                  <li key={item.singkatan_file || index}> {/* Gunakan ID unik jika ada */}
                     <a
                       href="#"
                       onClick={() => handleNavigateAndCloseMenu(`Search/${item.singkatan_file}`)}
@@ -296,7 +274,6 @@ export default function Header() {
             </ul>
           </li>
 
-          {/* Mobile Dropdown Informasi Hukum */}
           <li className='group'>
             <button
               type='button'
@@ -315,14 +292,15 @@ export default function Header() {
             >
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Berita")} className='hover:text-slate-600 block'>{t("menu.berita")}</a></li>
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Monografi")} className='hover:text-slate-600 block'>{t("menu.monografi")}</a></li>
-              <li><a href="#" onClick={() => handleNavigateAndCloseMenu("putasn-pengadilan")} className='hover:text-slate-600 block'>{t("putusanPengadilan")}</a></li>
+              <li><a href="#" onClick={() => handleNavigateAndCloseMenu("putasn-pengadilan")} className='hover:text-slate-600 block'>{t("menu.putusanPengadilan")}</a></li>
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("agenda")} className='hover:text-slate-600 block'>{t("menu.agenda")}</a></li>
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("artikel")} className='hover:text-slate-600 block'>{t("menu.artikel")}</a></li>
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("infografis")} className='hover:text-slate-600 block'>{t("menu.infografis")}</a></li>
+              <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Mou")} className='hover:text-slate-600 block'>{t("menu.Mou")}</a></li>
+              <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Dokumen-Langka")} className='hover:text-slate-600 block'>{t("menu.dokumenLangka")}</a></li>
             </ul>
           </li>
 
-          {/* Mobile Dropdown SiMPeL */}
           <li className='group'>
             <button
               type='button'
@@ -351,7 +329,6 @@ export default function Header() {
             <a href="#" className='hover:text-slate-300 block' onClick={() => handleNavigateAndCloseMenu("Statistik")}>{t("menu.statistik")}</a>
           </li>
 
-          {/* Mobile Dropdown Tentang JDIH */}
           <li className='group'>
             <button
               type='button'

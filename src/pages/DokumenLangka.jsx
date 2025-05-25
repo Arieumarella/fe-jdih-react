@@ -4,7 +4,7 @@ import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import CardMou from "../components/CardMou";
 import { useNavigate } from "react-router-dom";
-import { getMouPagination } from "../services/mou.services";
+import { getDokumenLangkaPagination } from "../services/dokumenLangka.services";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
@@ -70,7 +70,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
     );
 };
 
-const Mou = () => {
+const dokumenLangka = () => {
 
     const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ const Mou = () => {
         getIpUser()
             .then((res) => {
                 const ip = res.data.ip;
-                const halaman = "Halaman Mou";
+                const halaman = "Halaman Dokumen Langka";
                 return insertDataPengunjung(ip, halaman);
             })
             .then((response) => {
@@ -116,7 +116,7 @@ const Mou = () => {
     const [search, setSearch] = useState('');
 
     const paginateFunction = async () => {
-        await getMouPagination(currentPage, search).then((result) => {
+        await getDokumenLangkaPagination(currentPage, search).then((result) => {
             setPosts(result.data.posts);
             setTotalPages(result.data.totalPages);
             setCurrentPage(result.data.currentPage);
@@ -137,7 +137,7 @@ const Mou = () => {
 
                 <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>
                     <SplitText
-                        text={t("semuaMou")}
+                        text={t("semuaDokLangka")}
                         delay={15}
                         animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
                         animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -152,12 +152,12 @@ const Mou = () => {
 
                             <input
                                 type="text"
-                                placeholder={t("pliceHolderMou")}
+                                placeholder={t("pliceHolderDokLangka")}
                                 className="w-full bg-transparent outline-none text-white placeholder-white font-roboto text-lg"
                                 onInput={(e) => setSearch(e.target.value)}
                             />
                             <button type='submit' className="ml-2 w-[90px] bg-kuningButton text-bluePu px-4 py-2 rounded-lg font-roboto font-semibold hover:bg-opacity-80 transition">
-                                {t("btnCariJudulMou")}
+                                {t("btnCariJudulDokLangka")}
                             </button>
                         </div>
                     </form>
@@ -203,4 +203,4 @@ const Mou = () => {
     );
 };
 
-export default Mou;
+export default dokumenLangka;

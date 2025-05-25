@@ -5,6 +5,7 @@ import Modal from '../components/modal';
 import ModalAi from '../components/modal-chatAi';
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import { useTranslation } from 'react-i18next';
+import { toast } from "../components/ToastProvider";
 
 
 const Box = (data) => {
@@ -19,6 +20,13 @@ const Box = (data) => {
   const { t, i18n } = useTranslation();
 
   const showModal = async (stateCondition, urlPath) => {
+
+    const isPDF = typeof urlPath === 'string' && urlPath.toLowerCase().endsWith('.pdf');
+    if (!isPDF) {
+      toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+      return false;
+    }
+
     setIsModalOpen(stateCondition);
     setUrlModal(urlPath);
   }
@@ -28,6 +36,13 @@ const Box = (data) => {
   const [urlModalAi, setUrlModalAi] = useState('');
 
   const showModalAi = async (stateCondition, urlPath) => {
+
+    const isPDF = typeof urlPath === 'string' && urlPath.toLowerCase().endsWith('.pdf');
+    if (!isPDF) {
+      toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+      return false;
+    }
+
     setIsModalOpenAi(stateCondition);
     setUrlModalAi(urlPath);
   }
@@ -35,6 +50,14 @@ const Box = (data) => {
 
   const handleDownload = async (urlDownload, fileName) => {
     try {
+
+      const isPDF = typeof fileName === 'string' && fileName.toLowerCase().endsWith('.pdf');
+      if (!isPDF) {
+        toast.error("Tidak Bisa Menemukan Dokumen.!", { position: "bottom-right" });
+        return false;
+      }
+
+
       const fileUrl = urlDownload;
       const response = await fetch(fileUrl);
       const blob = await response.blob();
