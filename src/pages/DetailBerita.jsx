@@ -5,7 +5,8 @@ import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import { getDetailBerita, addViews } from '../services/berita.services';
 import SplitText from "../components/react-bits/SplitText/SplitText";
-import FadeContent from '../components/react-bits/FadeContent/FadeContent'
+import FadeContent from '../components/react-bits/FadeContent/FadeContent';
+import MetaData from "../components/metaDataTags";
 
 const DetailBerita = () => {
 
@@ -40,6 +41,14 @@ const DetailBerita = () => {
 
     return (
         <>
+
+            <MetaData
+                title={data?.judul}
+                pageDescription={'Berita JDIH Kementerian PU tentang ' + data?.judul}
+                pageKeywords={data?.judul}
+                image={`https://jdih.pu.go.id/internal/assets/assets/berita/${data?.gambar_1}`}
+            />
+
             <Headers />
 
             <section className="h-full bg-slate-100 py-4">

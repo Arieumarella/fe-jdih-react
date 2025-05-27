@@ -8,6 +8,7 @@ import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedCo
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const KontakKami = () => {
 
@@ -65,6 +66,12 @@ const KontakKami = () => {
 
   return (
     <>
+      <MetaData
+        ttitle="Kontak Kami - JDIH Kementerian PU | Informasi Alamat, Telepon & Email Resmi"
+        pageDescription="Hubungi tim JDIH Kementerian PU untuk pertanyaan, masukan, atau permintaan informasi. Temukan detail alamat, nomor telepon, email resmi, dan formulir kontak kami di halaman ini."
+        pageKeywords="Kontak JDIH PU, Hubungi KemenPU, Alamat JDIH PU, Telepon KemenPU, Email JDIH PU, Formulir Kontak PU, Bantuan JDIH KemenPU, Call Center JDIH PU, Tanya JDIH"
+        image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+      />
       <Headers />
 
       <section className='h-full bg-slate-100 py-4'>

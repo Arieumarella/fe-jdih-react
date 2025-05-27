@@ -9,6 +9,7 @@ import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   window.scrollTo(0, 0);
@@ -116,6 +117,13 @@ const Monografi = () => {
 
   return (
     <>
+      <MetaData
+        title="Daftar & Pencarian Monografi Kementerian PU | Data Riset & Studi Teknis"
+        pageDescription="Akses daftar lengkap dan lakukan pencarian data monografi dari Kementerian PU. Temukan studi teknis, hasil penelitian, dan analisis mendalam di bidang pekerjaan umum."
+        pageKeywords="Monografi KemenPU, Monografi PU, Data Monografi PU, Daftar Monografi PU, Pencarian Monografi PU, Riset KemenPU, Studi Teknis PU, Analisis PU, Publikasi KemenPU, Dokumen Teknis PU, Penelitian Pekerjaan Umum, JDIH PU Monografi"
+        image="https://jdih.pu.go.id/Logogram.png"
+      />
+
       <Headers />
 
       <section className='h-full bg-slate-100 md:px-[300px] px-5 py-4 '>

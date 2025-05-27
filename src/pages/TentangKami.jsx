@@ -8,6 +8,7 @@ import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const TentangKami = () => {
 
@@ -37,6 +38,12 @@ const TentangKami = () => {
 
     return (
         <>
+            <MetaData
+                title="Tentang Kami - JDIH Kementerian PU | Profil, Visi, Misi & Dasar Hukum"
+                pageDescription="Pelajari lebih lanjut mengenai Jaringan Dokumentasi dan Informasi Hukum (JDIH) Kementerian PU, termasuk profil, visi, misi, tujuan, dan dasar hukum pembentukannya."
+                pageKeywords="Tentang JDIH PU, Profil KemenPU JDIH, Visi Misi JDIH PU, Dasar Hukum JDIH KemenPU, Sejarah JDIH, Tugas Pokok JDIH PU, Fungsi JDIH KemenPU, Informasi Lembaga PU, Mengenal JDIH"
+                image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+            />
             <Headers />
             <section className='h-full bg-slate-100 py-6'>
                 <h1 className="text-center font-roboto font-bold text-bluePu text-[30px] my-2">

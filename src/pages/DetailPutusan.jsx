@@ -8,6 +8,8 @@ import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useTranslation } from 'react-i18next';
 import { toast } from "../components/ToastProvider";
+import MetaData from "../components/metaDataTags";
+
 
 const DetailPutusan = () => {
 
@@ -84,6 +86,13 @@ const DetailPutusan = () => {
 
   return (
     <>
+      <MetaData
+        title={dataPutusan.judul}
+        pageDescription={'Monografi JDIH Kementerian PU tentang ' + dataPutusan?.judul}
+        pageKeywords={dataPutusan?.keyword}
+        image="https://jdih.pu.go.id/Logogram.png"
+      />
+
       <Headers />
 
       <section className="h-full bg-slate-100 py-4">

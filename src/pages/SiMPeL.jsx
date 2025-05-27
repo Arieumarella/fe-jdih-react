@@ -10,6 +10,7 @@ import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
     const generatePageNumbers = () => {
@@ -122,6 +123,14 @@ const SiMPeL = () => {
 
     return (
         <>
+
+            <MetaData
+                title="SiMPeL JDIH KemenPU: Sistem Monitoring & Pencarian Pembentukan Legislasi"
+                pageDescription="Akses SiMPeL (Sistem Monitoring Pembentukan Legislasi) JDIH KemenPU untuk melacak dan mencari progres penyusunan peraturan. Pantau status pembentukan legislasi secara transparan."
+                pageKeywords="SiMPeL KemenPU, Sistem Monitoring Pembentukan Legislasi PU, Monitoring Legislasi PU, Tracking Peraturan KemenPU, Pencarian Progres Legislasi, Status Penyusunan Peraturan PU, Proses Pembentukan Hukum KemenPU, JDIH SiMPeL, Transparansi Legislasi"
+                image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+            />
+
             <Headers />
 
             <section className='h-full bg-slate-100 px-5 py-4 md:px-5 lg:px-[180px]'>

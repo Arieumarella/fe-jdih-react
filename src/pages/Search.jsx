@@ -14,6 +14,7 @@ import FadeContent from '../components/react-bits/FadeContent/FadeContent'; // P
 import SplitText from "../components/react-bits/SplitText/SplitText"; // Pastikan path ini benar
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services"; // Pastikan path ini benar
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 // Fungsi untuk mendapatkan array tahun dari tahun tertentu hingga tahun sekarang
 function getYearsArray(startYear = 2019) {
@@ -272,6 +273,12 @@ const Search = () => {
 
   return (
     <>
+      <MetaData
+        title="Hasil Pencarian Produk Hukum - JDIH PU"
+        description="Temukan hasil pencarian produk hukum detail di JDIH Kementerian PUPR. Akses peraturan, keputusan, dan dokumen hukum PU/PUPR yang relevan dengan cepat dan akurat"
+        keywords="JDIH PU Pencarian, JDIH PUPR Hasil Pencarian, Cari Produk Hukum PU, Temukan Peraturan PUPR Cepat, Pencarian Dokumen Hukum PUPR Detail, Database Peraturan PU Hasil, Katalog Hukum PUPR, Peraturan Menteri PU (Hasil Pencarian), Keputusan Menteri PUPR (Hasil Pencarian)"
+        image="https://jdih.pu.go.id/Logogram.png"
+      />
       <Headers />
       <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 min-h-screen'> {/* min-h-screen agar footer tidak naik jika konten sedikit */}
         <h1 className='text-center font-roboto font-bold text-bluePu md:text-[35px] text-[23px] py-4'>

@@ -8,6 +8,7 @@ import FadeContent from '../components/react-bits/FadeContent/FadeContent'
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const Prasyarat = () => {
 
@@ -38,6 +39,12 @@ const Prasyarat = () => {
 
     return (
         <>
+            <MetaData
+                title="Prasyarat Layanan JDIH Kementerian PU | Syarat, Ketentuan & Kebijakan Privasi"
+                pageDescription="Baca prasyarat, syarat dan ketentuan penggunaan, serta kebijakan privasi layanan JDIH Kementerian PU. Pahami hak, kewajiban pengguna, disclaimer, dan aturan layanan kami."
+                pageKeywords="Prasyarat JDIH PU, Syarat dan Ketentuan PU, Kebijakan Privasi KemenPU, Disclaimer JDIH, Terms of Use PU, Ketentuan Layanan KemenPU, Aturan Penggunaan JDIH, Perlindungan Data Pribadi PU, Legal Notice KemenPU"
+                image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+            />
             <Headers />
             <section className='h-full bg-slate-100 py-4'>
                 <h1 className="text-center font-roboto font-bold text-bluePu text-[30px] my-2">

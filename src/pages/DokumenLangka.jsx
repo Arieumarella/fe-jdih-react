@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
-import CardMou from "../components/CardMou";
+import CardDokumenLangka from "../components/CardDokumenLangka";
 import { useNavigate } from "react-router-dom";
 import { getDokumenLangkaPagination } from "../services/dokumenLangka.services";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
@@ -12,6 +12,7 @@ import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjun
 import { useTranslation } from 'react-i18next';
 import ModalAi from '../components/modal-chatAi';
 import { toast } from "../components/ToastProvider";
+import MetaData from "../components/metaDataTags";
 
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
@@ -131,6 +132,14 @@ const dokumenLangka = () => {
 
     return (
         <>
+
+            <MetaData
+                title="Dokumen Langka JDIH KemenPU: Temukan Arsip & Naskah Bersejarah"
+                pageDescription="Jelajahi koleksi dokumen langka, naskah bersejarah, dan arsip penting dari JDIH Kementerian PU. Gunakan fitur pencarian untuk menemukan publikasi unik."
+                pageKeywords="Dokumen Langka KemenPU, Arsip Langka PU, Naskah Bersejarah PU, Koleksi Khusus KemenPU, Publikasi Langka PU, Dokumen Unik PU, Pencarian Dokumen Kuno KemenPU, JDIH Dokumen Langka, Sejarah Hukum PU"
+                image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+            />
+
             <Headers />
 
             <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4'>
@@ -176,7 +185,7 @@ const dokumenLangka = () => {
                             scale={1.0}
                             threshold={0.1}
                         >
-                            <CardMou key={index} data={item} showModalAi={showModalAi} />
+                            <CardDokumenLangka key={index} data={item} showModalAi={showModalAi} />
                         </AnimatedContent>
 
                     ))) : (

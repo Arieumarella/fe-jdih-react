@@ -12,6 +12,7 @@ import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { toast } from "../components/ToastProvider";
+import MetaData from "../components/metaDataTags";
 
 
 const formatTanggal = (tanggalString) => {
@@ -158,6 +159,13 @@ const DetailDokumen = () => {
 
   return (
     <>
+      <MetaData
+        title={data?.data?.judul?.replace(/<[^>]+>/g, '')}
+        description={data?.data?.judul?.replace(/<[^>]+>/g, '')}
+        keywords={data?.data?.keywords}
+        image="https://jdih.pu.go.id/Logogram.png"
+      />
+
       <Headers />
 
       <section className="h-full bg-slate-100 py-4 ">

@@ -7,6 +7,7 @@ import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getTentangKami } from "../services/tentangKami.services"
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const StrukturOrganisasi = () => {
 
@@ -37,6 +38,14 @@ const StrukturOrganisasi = () => {
 
   return (
     <>
+
+      <MetaData
+        title="Struktur Organisasi Kementerian PU | Bagan & Pejabat Resmi"
+        pageDescription="Pahami bagan dan struktur organisasi resmi Kementerian PU. Temukan informasi mengenai unit kerja, direktorat, biro, dan pejabat utama di lingkungan KemenPU."
+        pageKeywords="Struktur Organisasi KemenPU, Struktur Organisasi PU, Bagan Organisasi KemenPU, Susunan Organisasi PU, Pejabat KemenPU, Direktorat PU, Biro KemenPU, Unit Kerja PU, Organogram KemenPU"
+        image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+      />
+
       <Headers />
       <section className='h-full bg-slate-100 py-4'>
         <FadeContent blur={true} duration={400} easing="ease-out" initialOpacity={0}>

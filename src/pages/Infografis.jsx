@@ -9,6 +9,7 @@ import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
     window.scrollTo(0, 0);
@@ -114,6 +115,13 @@ const Infografis = () => {
 
     return (
         <>
+            <MetaData
+                title="Infografis JDIH KemenPU: Daftar & Cari Data Visual Resmi"
+                pageDescription="Jelajahi dan cari koleksi infografis resmi dari JDIH Kementerian PU. Dapatkan ringkasan visual data, peraturan, dan kebijakan PU yang mudah dipahami."
+                pageKeywords="Infografis KemenPU, Infografis PU, Data Visual PU, Ringkasan Visual PU, JDIH Infografis, Pencarian Infografis PU, Daftar Infografis KemenPU, Grafik Informasi PU, Visualisasi Data Pekerjaan Umum"
+                image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+            />
+
             <Headers />
 
             <section className='h-full bg-slate-100 px-5 py-4 md:px-5 lg:px-[300px]'>

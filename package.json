@@ -47,7 +47,8 @@
     "recharts": "^2.15.1",
     "striptags": "^3.2.0",
     "swiper": "^11.2.4",
-    "three": "^0.167.1"
+    "three": "^0.167.1",
+    "vite-plugin-sitemap": "^0.8.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

@@ -9,7 +9,7 @@ import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
-
+import MetaData from "../components/metaDataTags";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const generatePageNumbers = () => {
@@ -130,6 +130,12 @@ const Home = () => {
 
   return (
     <>
+      <MetaData
+        title="Berita Terbaru JDIH Kementerian PU | Informasi & Pengumuman Resmi"
+        pageDescription="Dapatkan berita, pengumuman, dan artikel terbaru dari JDIH Kementerian PU. Ikuti perkembangan terkini terkait informasi hukum dan peraturan di sektor Pekerjaan Umum."
+        pageKeywords="JDIH KemenPU Berita, JDIH PU News, Berita Hukum PU, Artikel JDIH PU, Pengumuman KemenPU, Informasi Hukum Terbaru PU, Perkembangan Peraturan PU, Update JDIH KemenPU, Kementerian Pekerjaan Umum Berita, Berita Resmi JDIH"
+        image="https://jdih.pu.go.id/Logogram.png"
+      />
       <Headers />
 
       <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4 '>

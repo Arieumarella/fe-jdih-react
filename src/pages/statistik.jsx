@@ -9,6 +9,7 @@ import LineChartWithPoints from '../components/LineChartWithPoints';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const Statistik = () => {
 
@@ -88,6 +89,14 @@ const Statistik = () => {
 
     return (
         <div>
+
+            <MetaData
+                title="Statistik JDIH Kementerian PU | Data, Tren, & Analisis Resmi"
+                pageDescription="Akses data statistik, tren, dan analisis resmi dari JDIH Kementerian PU. Pahami perkembangan jumlah dokumen, aktivitas pengguna, dan kinerja sistem melalui laporan visual."
+                pageKeywords="Statistik JDIH PU, Data Statistik KemenPU, Laporan JDIH, Tren Hukum PU, Analisis Data JDIH, Kinerja Sistem JDIH, Jumlah Dokumen PU, Statistik Pengguna JDIH, Dashboard JDIH, Grafik Statistik PU"
+                image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+            />
+
             <Headers />
             <section className='h-full bg-slate-100 px-5 py-4 md:px-5 lg:px-[180px]'>
                 {/*

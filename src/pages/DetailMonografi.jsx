@@ -7,6 +7,8 @@ import { getDetailMonografi } from "../services/monografi.services";
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
+
 
 const DetailMonografi = () => {
 
@@ -22,6 +24,14 @@ const DetailMonografi = () => {
 
   return (
     <>
+
+      <MetaData
+        title={dataMonografi.judul}
+        pageDescription={'Monografi JDIH Kementerian PU tentang ' + dataMonografi?.judul}
+        pageKeywords={dataMonografi?.keyword}
+        image={`https://jdih.pu.go.id/internal/assets/assets/produk/monografi/BukuHukum/${dataMonografi?.tanggal?.substring(0, 4)}/11/${dataMonografi.file_upload}`}
+      />
+
       <Headers />
 
       <section className="h-full bg-slate-100 py-4  ">

@@ -10,6 +10,7 @@ import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   window.scrollTo(0, 0);
@@ -113,6 +114,14 @@ const PutusanPengadilan = () => {
 
   return (
     <>
+
+      <MetaData
+        title="Putusan Hukum Kementerian PUPR: Daftar & Pencarian Keputusan Pengadilan Terkait"
+        pageDescription="Akses dan telusuri koleksi putusan hukum, yurisprudensi, serta keputusan pengadilan terkait Kementerian PUPR. Temukan data hukum penting dengan mudah melalui fitur pencarian JDIH."
+        pageKeywords="Putusan Hukum KemenPU, Putusan Hukum PUPR, Daftar Putusan Pengadilan PU, Pencarian Yurisprudensi PUPR, Data Keputusan Hukum KemenPU, JDIH PUPR Putusan, Keputusan Pengadilan Terkait PU, Kasus Hukum PUPR, Yurisprudensi Pekerjaan Umum, Putusan MA KemenPU"
+        image="https://jdih.pu.go.id/Logogram.png"
+      />
+
       <Headers />
 
       <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4'>

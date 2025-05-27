@@ -63,11 +63,15 @@
     "semuaMou": "List Nota Kesepahaman",
     "pliceHolderMou": "Cari Judul Nota Kesepahaman...",
     "btnCariJudulMou": "Cari",
+   
     "detailMou": "Detail Nota Kesepahaman",
+    
     "semuaDokLangka": "List Dokumen Langka",
     "pliceHolderDokLangka": "Cari Judul Dokumen Langka...",
     "btnCariJudulDokLangka": "Cari",
     "detailDokLangka": "Detail Dokumen Langka",
+
+
     "semuaPutusanPengandilan": "Semua Putusan Pengadilan",
     "pliceHolderPutusanPengadilan": "Cari Judul Putusan Pengadilan...",
     "btnCariJudulPutusanPengandilan": "Cari",

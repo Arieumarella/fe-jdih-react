@@ -9,6 +9,7 @@ import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedCo
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjung.services";
 import { useTranslation } from 'react-i18next';
+import MetaData from "../components/metaDataTags";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const generatePageNumbers = () => {
@@ -110,6 +111,16 @@ const Agenda = () => {
 
   return (
     <>
+
+      <MetaData
+        title="Agenda Kegiatan & Jadwal Terbaru JDIH Kementerian PU | Info Acara Resmi"
+        pageDescription="Dapatkan update jadwal dan agenda kegiatan resmi JDIH Kementerian PU. Ikuti informasi seminar, konsultasi publik, workshop, dan acara penting lainnya di bidang hukum pekerjaan umum."
+        pageKeywords="Agenda JDIH PU, Jadwal KemenPU, Kalender Kegiatan PU, Seminar Hukum PU, Workshop KemenPU, Acara JDIH PU, Kegiatan Kementerian Pekerjaan Umum, Jadwal Konsultasi Publik PU, Event JDIH PU"
+        image="https://jdih.pu.go.id/Logogram.png"
+      />
+
+
+
       <Headers />
 
       <section className='h-full bg-slate-100 px-5 py-4 md:px-5 lg:px-[180px]'>

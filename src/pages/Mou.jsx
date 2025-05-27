@@ -12,6 +12,7 @@ import { getIpUser, insertDataPengunjung } from "../services/insertDataPengunjun
 import { useTranslation } from 'react-i18next';
 import ModalAi from '../components/modal-chatAi';
 import { toast } from "../components/ToastProvider";
+import MetaData from "../components/metaDataTags";
 
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
@@ -69,6 +70,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         </div>
     );
 };
+
 
 const Mou = () => {
 
@@ -131,6 +133,14 @@ const Mou = () => {
 
     return (
         <>
+
+            <MetaData
+                title="MoU & Nota Kesepahaman KemenPU: Daftar & Cari Dokumen Kerjasama Resmi"
+                pageDescription="Jelajahi dan cari arsip MoU (Nota Kesepahaman) resmi JDIH Kementerian PU. Temukan dokumen kesepakatan kerjasama dengan instansi lain dan mitra strategis."
+                pageKeywords="MoU KemenPU, Nota Kesepahaman PU, Daftar MoU PU, Pencarian Nota Kesepahaman KemenPU, Dokumen Kerjasama PU, Arsip MoU PU, Perjanjian Kerjasama KemenPU, JDIH PU MoU"
+                image="https://jdih.pu.go.id/Logogram.png" // Gambar default atau banner infografis jika ada
+            />
+
             <Headers />
 
             <section className='h-full bg-slate-100 md:px-[180px] px-5 py-4'>

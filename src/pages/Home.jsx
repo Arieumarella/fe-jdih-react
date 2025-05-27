@@ -7,7 +7,7 @@ import Langganan from "../components/Langganan";
 import Footer from "../components/Footer";
 import ContainerContens from "../components/containerContens";
 import SliderMonografi from "../components/sliderMonografi";
-import sluet from "/lady of justice.png";
+import MetaData from "../components/metaDataTags";
 import { getBanner, getNuwPeraturan } from '../services/home.services';
 import BlurText from "../components/react-bits/BlurText/BlurText";
 import SplitText from "../components/react-bits/SplitText/SplitText";
@@ -78,6 +78,13 @@ const Home = () => {
 
   return (
     <>
+      <MetaData
+        title="Home - JDIH Kementerian PU"
+        description="JDIH - Jaringan Dokumentasi dan Informasi Hukum Kementerian Pekerjaan Umum"
+        keywords="JDIH PU, Peraturan PU, Hukum PU, Hukum PUPR, Jaringan Dokumentasi Informasi Hukum PU, Produk Hukum PU, Website JDIH PU, Kementerian Pekerjaan Umum, Kementerian PU, Cari Peraturan PU"
+        image="https://jdih.pu.go.id/Logogram.png"
+      />
+
       <Headers />
       <section className='w-full py-4 mt-[20px] flex flex-col lg:flex-row justify-between items-start gap-6 px-4 lg:px-[60px]'>
         {/* 1. Mengubah md:flex-row menjadi lg:flex-row */}

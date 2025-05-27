@@ -147,7 +147,7 @@ const detailMou = () => {
       - Tablet (md): md:text-[23px]
       - Laptop (lg): lg:text-[35px] (dari md:text-[35px] asli)
     */}
-                    {t("detailMou")}
+                    {t("detailDokLangka")}
                 </h1>
                 <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
                     <div className='w-full gap-4 mx-auto md:w-full lg:flex lg:justify-between lg:w-[80%]'>

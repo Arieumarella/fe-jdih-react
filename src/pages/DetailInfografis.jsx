@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { getInfografisDetail, insertViewr } from '../services/infografis.services';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent'
+import MetaData from "../components/metaDataTags";
 
 const DetailInfografis = () => {
 
@@ -43,6 +44,13 @@ const DetailInfografis = () => {
 
     return (
         <>
+            <MetaData
+                title={data?.data?.judul}
+                pageDescription={'Detail Infografis JDIH Kementerian PU tentang ' + data?.data?.judul}
+                pageKeywords={data?.data?.keyword}
+                image={`https://jdih.pu.go.id/internal/assets/assets/infografis/${data?.data?.gambar_1}`}
+            />
+
             <Headers />
 
             <section className="h-full bg-slate-100 py-4">
