@@ -107,7 +107,7 @@ const DetailPutusan = () => {
           Detail Putusan
         </h1>
         <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
-          <div className='w-full gap-4 mx-auto md:w-full lg:flex lg:justify-between lg:w-[80%]'>
+          <div className='w-full gap-4 mx-auto md:w-full lg:flex lg:justify-between lg:w-[95%]'>
             {/*
         Div Wrapper Utama:
         - Mobile: w-full (block by default)

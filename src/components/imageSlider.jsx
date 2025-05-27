@@ -31,7 +31,7 @@ const ImageSlider = (data) => {
                                     <img
                                         src={item.path_file} // Sesuaikan dengan field dari API
                                         alt={`image ${index}`} // Sesuaikan dengan field dari API
-                                        className="w-full md:h-[470px] sm:h-[10px] object-cover rounded-xl"
+                                        className="w-full md:h-[440px] sm:h-[10px] object-cover rounded-xl"
                                     />
                                 </SwiperSlide>
                             ))
@@ -40,7 +40,7 @@ const ImageSlider = (data) => {
                                 <img
                                     src={satu}
                                     alt="Slide 1"
-                                    className="w-full md:h-[470px] sm:h-[10px] object-cover rounded-xl"
+                                    className="w-full md:h-[440px] sm:h-[10px] object-cover rounded-xl"
                                 />
                             </SwiperSlide>
                         )}

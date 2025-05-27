@@ -86,7 +86,7 @@ const Home = () => {
       />
 
       <Headers />
-      <section className='w-full py-4 mt-[20px] flex flex-col lg:flex-row justify-between items-start gap-6 px-4 lg:px-[60px]'>
+      <section className='w-full py-4 sm:mt-[0px] md:mt-[0px] lg:mt-[20px] flex flex-col lg:flex-row justify-between items-start gap-6 px-4 lg:px-[60px]'>
         {/* 1. Mengubah md:flex-row menjadi lg:flex-row */}
         {/* 2. Mengubah md:px-[60px] menjadi lg:px-[60px] untuk padding section */}
 
@@ -94,7 +94,7 @@ const Home = () => {
         {/* Lebar: Penuh di mobile dan tablet, 2/3 di lg ke atas */}
         <div className='group w-full lg:w-2/3'>
           {/* 3. Mengubah md:w-2/3 menjadi lg:w-2/3 */}
-          <h1 className='font-medium text-slate-100 text-[35px] lg:text-[96px] font-onest flex flex-wrap gap-2'>
+          <h1 className='font-medium text-slate-100 text-[35px] lg:text-[70px] gap-2 font-onest flex flex-wrap'>
             {/* 4. Mengubah md:text-[96px] menjadi lg:text-[96px] */}
             <BlurText
               text={t('homeSelmat')}
@@ -111,7 +111,7 @@ const Home = () => {
               className='text-kuningButton inline-block'
             />
           </h1>
-          <h2 className='font-normal font-onest text-slate-100 text-[21px] lg:text-[45px] lg:mt-[-15px]'>
+          <h2 className='font-normal font-onest text-slate-100 text-[21px] lg:text-[35px] lg:mt-[-15px]'>
             {/* 5. Mengubah md:text-[45px] dan md:mt-[-15px] menjadi lg:text-[45px] dan lg:mt-[-15px] */}
             <SplitText
               text={t('homeDiJdih')}
@@ -160,7 +160,7 @@ const Home = () => {
           {/* 8. Menghapus kelas visibilitas md:hidden sm:block lg:block yang rumit. */}
           {/*    Karena parentnya flex-col secara default, dan lg:flex-row, slider akan otomatis di bawah */}
           {/*    di mobile/tablet, dan di kanan pada lg. */}
-          <ImageSlider data={galleryData} />
+          <ImageSlider data={banner} />
         </div>
       </section>
       <Box data={nuwPeraturan} />
