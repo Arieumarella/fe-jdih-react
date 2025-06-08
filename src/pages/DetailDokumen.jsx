@@ -181,7 +181,7 @@ const DetailDokumen = () => {
           />
         </h1>
 
-        <div className='w-full px-4 md:px-6 lg:px-0 lg:w-[70%] mx-auto lg:flex lg:justify-between lg:gap-4'>
+        <div className='w-full px-4 md:px-6 lg:px-0 lg:w-[75%] mx-auto lg:flex lg:justify-between lg:gap-4'>
 
           {/* Card Peraturan Utama */}
           <AnimatedContent
@@ -194,12 +194,12 @@ const DetailDokumen = () => {
             animateOpacity
             scale={1.0}
             threshold={0.1}
-            className="w-full mb-6 lg:mb-0 lg:w-[calc(70%-0.5rem)]"
+            className="w-full mb-6 lg:mb-0]"
           >
             <div className="bg-white shadow-lg rounded-2xl p-6 border border-gray-300 h-full w-full lg:m-0">
               <h2 className="text-[18px] lg:text-[24px] font-bold font-roboto text-bluePu mt-3 text-center lg:text-left">
                 <SplitText
-                  text={getSebelumTentang(data?.data?.judul).replace(/<[^>]+>/g, '')}
+                  text={getSebelumTentang(data?.data?.judul).replace(/<[^>]+>/g, '') + ` tentang ${data?.data?.tentang?.replace(/<[^>]+>/g, '')}`}
                   delay={20}
                   animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
                   animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
@@ -207,16 +207,7 @@ const DetailDokumen = () => {
                   threshold={0.2}
                 />
               </h2>
-              <p className="text-gray-700 mt-2 font-roboto text-sm lg:text-[17px] leading-relaxed text-center lg:text-left">
-                <SplitText
-                  text={`tentang ${data?.data?.tentang?.replace(/<[^>]+>/g, '')}`}
-                  delay={10}
-                  animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-                  animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-                  easing="easeOutCubic"
-                  threshold={0.2}
-                />
-              </p>
+
 
               <div className="flex items-center border-b border-t mt-4 py-4 gap-4">
                 <div className="box-border size-14 lg:size-16 p-1 rounded-lg shadow-lg bg-gradient-to-r from-[#2793a3] to-bluePu flex items-center justify-center">
@@ -283,7 +274,7 @@ const DetailDokumen = () => {
           </AnimatedContent>
 
           {/* Sidebar */}
-          <div className='flex flex-col w-full lg:w-[calc(30%-0.5rem)] gap-6 lg:gap-4'>
+          <div className='flex flex-col w-full md:w-[50%] lg:w-[45%] gap-6 lg:gap-4 lg:mt-0 mt-6'>
 
             {/* Card Abstrak */}
             <AnimatedContent
@@ -293,15 +284,15 @@ const DetailDokumen = () => {
               <div className="bg-white shadow-lg rounded-2xl p-4 border border-gray-300 flex flex-col h-full">
                 <p className='font-roboto font-semibold text-slate-600 text-[12px] lg:text-[14px] flex items-center gap-2 border-b pb-2'><span className="material-symbols-outlined">description</span> ABSTRAK</p>
                 {/* PERUBAHAN KONTAINER TOMBOL */}
-                <div className='flex flex-col md:flex-row gap-2 p-2 w-full my-2'>
+                <div className='flex flex-col md:flex-row gap-2 p-1 w-full my-2'>
                   {/* PERUBAHAN TOMBOL INDIVIDUAL */}
-                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
                     onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`)}
                   >
                     <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                     Preview
                   </button>
-                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
                     onClick={() => handleDownload(data?.data?.abstrak, `https://jdih.pu.go.id/internal/assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`, data?.data?.slug)}
                   >
                     <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>
@@ -321,13 +312,13 @@ const DetailDokumen = () => {
                 {/* PERUBAHAN KONTAINER TOMBOL */}
                 <div className='flex flex-col md:flex-row gap-2 p-2 w-full my-2'>
                   {/* PERUBAHAN TOMBOL INDIVIDUAL */}
-                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
                     onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`)}
                   >
                     <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                     Preview
                   </button>
-                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                  <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
                     onClick={() => handleDownload(data?.data?.file_upload, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`, data?.data?.slug)}
                   >
                     <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>
@@ -351,13 +342,13 @@ const DetailDokumen = () => {
                       {/* PERUBAHAN KONTAINER TOMBOL */}
                       <div className='flex flex-col md:flex-row gap-2'>
                         {/* PERUBAHAN TOMBOL INDIVIDUAL */}
-                        <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                        <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
                           onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`)}
                         >
                           <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                           Preview
                         </button>
-                        <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                        <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
                           onClick={() => handleDownload(item?.file, `https://jdih.pu.go.id/internal/assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`, data?.data?.slug)}
                         >
                           <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>

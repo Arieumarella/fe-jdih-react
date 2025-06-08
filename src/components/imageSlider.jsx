@@ -24,7 +24,6 @@ const ImageSlider = (data) => {
                         className="rounded-md shadow-xl"
                     >
 
-
                         {data?.data?.length > 0 ? (
                             data.data.map((item, index) => (
                                 <SwiperSlide key={index}>

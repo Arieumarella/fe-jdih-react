@@ -87,10 +87,10 @@ const Footer = () => {
           </p>
           <div className="flex mx-1 lg:my-4 my-0 text-bluePu lg:gap-5 gap-2">
             {/* Ganti '#' dengan URL sosial media yang sebenarnya */}
-            <a href="https://instagram.com/kemenpupr" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.instagram", "Instagram Kementerian PUPR")}><i className="fa-brands fa-instagram md:fa-3x fa-3x"></i></a>
-            <a href="https://twitter.com/kemenpu" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.twitter", "Twitter Kementerian PUPR")}><i className="fa-brands fa-twitter md:fa-3x fa-3x"></i></a>
-            <a href="https://facebook.com/KementerianPUPR" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.facebook", "Facebook Kementerian PUPR")}><i className="fa-brands fa-facebook md:fa-3x fa-3x"></i></a>
-            <a href="https://www.youtube.com/user/kemenPU" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.youtube", "YouTube Kementerian PUPR")}><i className="fa-brands fa-youtube md:fa-3x fa-3x"></i></a>
+            <a href="https://www.instagram.com/jdih.pu/" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.instagram", "Instagram Kementerian PUPR")}><i className="fa-brands fa-instagram md:fa-3x fa-3x"></i></a>
+            {/* <a href="https://twitter.com/kemenpu" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.twitter", "Twitter Kementerian PUPR")}><i className="fa-brands fa-twitter md:fa-3x fa-3x"></i></a> */}
+            <a href="https://www.facebook.com/jdih.pu?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.facebook", "Facebook Kementerian PUPR")}><i className="fa-brands fa-facebook md:fa-3x fa-3x"></i></a>
+            <a href="https://youtube.com/@jdihpu?si=leS_y3e8CdfcpIed" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.youtube", "YouTube Kementerian PUPR")}><i className="fa-brands fa-youtube md:fa-3x fa-3x"></i></a>
             {/* <a href="#" target="_blank" rel="noopener noreferrer" aria-label={t("sosmed.playstore", "Google Play Store")}><i className="fa-brands fa-google-play md:fa-3x fa-3x"></i></a> */}
           </div>
         </div>

@@ -24,6 +24,7 @@ import Mou from "./pages/Mou";
 import DetailMou from "./pages/detailMou";
 import DokumenLangka from "./pages/DokumenLangka";
 import DetailDokumenlangka from "./pages/DetailDokumenlangka";
+import ChatGeneral from "./components/ChatGeneral";
 import { Helmet } from "react-helmet-async";
 import { ToastProvider } from "./components/ToastProvider";
 
@@ -120,6 +121,7 @@ function App() {
         <Route path="/Dokumen-Langka" element={<DokumenLangka />} />
         <Route path="/Dokumen-Langka/:slug" element={<DetailDokumenlangka />} />
       </Routes>
+      <ChatGeneral />
     </>
   )
 }
