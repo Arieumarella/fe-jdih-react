@@ -34,3 +34,17 @@ export const getAiJDIHGeneral = async (question, history) => {
     return err;
   }
 }
+
+
+export const getPantunAwal = async () => {
+  try {
+
+    const res = await axios.get(
+      "http://localhost:3000/ai/ChatPantun"
+    );
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+}

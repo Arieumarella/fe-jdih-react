@@ -56,7 +56,7 @@ const containerContens = () => {
 
   return (
     <>
-      <section className='px-5 lg:px-[60px] mt-[18px] group overflow-x-hidden'>
+      <section className='px-5 lg:px-[60px] mt-[18px] group overflow-x-hidden mb-4'>
         {/* Padding section: px-5 untuk mobile dan tablet, lg:px-[60px] untuk desktop */}
 
         {/* Kelas 'size-25' dihapus. */}

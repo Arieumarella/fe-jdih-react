@@ -164,8 +164,8 @@ const Home = () => {
         </div>
       </section>
       <Box data={nuwPeraturan} />
-      <ContainerContens />
       <SliderMonografi />
+      <ContainerContens />
       <Langganan />
       <Footer />
     </>

@@ -15,6 +15,8 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.3",
     "@mui/material": "^6.4.3",
+    "@pdftron/pdfjs-express-viewer": "^8.7.5",
+    "@pdftron/webviewer": "^11.5.0",
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@react-spring/web": "^9.7.5",

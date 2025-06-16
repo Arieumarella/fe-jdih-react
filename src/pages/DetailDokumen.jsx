@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from "react-router-dom";
 import Headers from "../components/Header";
 import Langganan from "../components/Langganan";
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { toast } from "../components/ToastProvider";
 import MetaData from "../components/metaDataTags";
+import WebViewer from '@pdftron/pdfjs-express-viewer';
 
 
 const formatTanggal = (tanggalString) => {
@@ -77,6 +78,12 @@ const DetailDokumen = () => {
     }
   }, [data]);
 
+
+
+
+
+
+
   const showModal = async (stateCondition, urlPath) => {
     const isPDF = typeof urlPath === 'string' && urlPath.toLowerCase().endsWith('.pdf');
     if (!isPDF) {
@@ -120,7 +127,6 @@ const DetailDokumen = () => {
       link.setAttribute("download", fileName);
       document.body.appendChild(link);
       link.click();
-      console.log(link)
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
@@ -157,6 +163,8 @@ const DetailDokumen = () => {
     return split[1] ? split[1].trim() : '';
   };
 
+
+
   return (
     <>
       <MetaData
@@ -180,6 +188,8 @@ const DetailDokumen = () => {
             threshold={0.2}
           />
         </h1>
+
+
 
         <div className='w-full px-4 md:px-6 lg:px-0 lg:w-[75%] mx-auto lg:flex lg:justify-between lg:gap-4'>
 
@@ -252,6 +262,7 @@ const DetailDokumen = () => {
                   <span>Chat AI</span>
                 </button>
               </div>
+
 
               <div className="flex gap-3 mt-2 border-t py-4 items-center">
                 <p className='font-roboto font-semibold text-slate-600 text-[14px] lg:text-[18px]'>Share :</p>
