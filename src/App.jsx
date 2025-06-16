@@ -83,7 +83,7 @@ function App() {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.setAttribute('data-account', '2FbLy17kay'); // Ganti dengan ID akun UserWay-mu
+    script.setAttribute('data-account', process.env.id_key_userWay); // Ganti dengan ID akun UserWay-mu
     script.setAttribute('data-position', '7'); // Posisi 3 = kiri bawah
     script.src = 'https://cdn.userway.org/widget.js';
     script.async = true;
