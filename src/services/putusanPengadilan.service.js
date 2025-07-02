@@ -5,7 +5,7 @@ export const getDetailPutusan = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/putusan/detail", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}putusan/detail`, data);
     return res;
   } catch (err) {
     console.log(err);
@@ -21,7 +21,7 @@ export const getPutusanPagination = async (pageX, searchKey) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/putusan/pagination",
+      `${import.meta.env.VITE_BASE_URL}putusan/pagination`,
       page
     );
     return res.data;
@@ -35,7 +35,7 @@ export const insertViews = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/putusan/insertViews", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}putusan/insertViews`, data);
     return res;
   } catch (err) {
     console.log(err);
@@ -48,7 +48,7 @@ export const addDownload = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/putusan/addDownload", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}putusan/addDownload`, data);
     return res;
   } catch (err) {
     console.log(err);

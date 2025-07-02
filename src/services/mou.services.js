@@ -8,7 +8,7 @@ export const getMouPagination = async (pageX, searchKey) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/Mou/pagination",
+      `${import.meta.env.VITE_BASE_URL}Mou/pagination`,
       page
     );
     return res.data;
@@ -22,7 +22,7 @@ export const addDownload = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/Mou/addDownload", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}Mou/addDownload`, data);
     return res;
   } catch (err) {
     console.log(err);
@@ -35,7 +35,7 @@ export const addViews = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/Mou/addViews", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}Mou/addViews`, data);
     return res;
   } catch (err) {
     console.log(err);
@@ -49,7 +49,7 @@ export const detailMouFetch = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/Mou/detail", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}Mou/detail`, data);
     return res;
   } catch (err) {
     console.log(err);

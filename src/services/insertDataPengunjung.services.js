@@ -20,7 +20,7 @@ export const insertDataPengunjung = async (ip, halaman) => {
       halaman: halaman,
     };
     const res = await axios.post(
-      "http://localhost:3000/Pengunjung/insertData",
+      `${import.meta.env.VITE_BASE_URL}Pengunjung/insertData`,
       data
     );
     return res;

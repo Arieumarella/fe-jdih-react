@@ -8,7 +8,7 @@ export const getAgendaPagination = async (pageX, searchKey) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/agenda/pagination",
+      `${import.meta.env.VITE_BASE_URL}agenda/pagination`,
       page
     );
     return res.data;

@@ -6,7 +6,7 @@ export const getDetailMonografi = async (slug) => {
       slug: slug,
     };
     const res = await axios.post(
-      "http://localhost:3000/Monografi/detail",
+      `${import.meta.env.VITE_BASE_URL}Monografi/detail`,
       data
     );
     return res;
@@ -24,7 +24,7 @@ export const getMonografiPagination = async (pageX, searchKey) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/Monografi/pagination",
+      `${import.meta.env.VITE_BASE_URL}Monografi/pagination`,
       page
     );
     return res.data;

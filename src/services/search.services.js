@@ -3,7 +3,7 @@ import axios from "axios";
 export const getJenisPeraturan = async (form) => {
   try {
     const res = await axios.get(
-      "http://localhost:3000/search/getJenisPeraturan",
+      `${import.meta.env.VITE_BASE_URL}search/getJenisPeraturan`,
       form
     );
     return res;
@@ -16,7 +16,7 @@ export const getJenisPeraturan = async (form) => {
 export const getDataSubstansi = async (form) => {
   try {
     const res = await axios.get(
-      "http://localhost:3000/search/getJenisSubstansi",
+      `${import.meta.env.VITE_BASE_URL}search/getJenisSubstansi`,
       form
     );
     return res;
@@ -34,7 +34,7 @@ export const getPeraturanPagination = async (pageX, searchKey) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/search/getDataPeraturan",
+      `${import.meta.env.VITE_BASE_URL}search/getDataPeraturan`,
       page
     );
     return res.data;
@@ -47,7 +47,7 @@ export const getPeraturanDetail = async (slug) => {
   try {
     console.log(slug);
     const res = await axios.post(
-      "http://localhost:3000/search/getDetailPeraturan",
+      `${import.meta.env.VITE_BASE_URL}search/getDetailPeraturan`,
       { slug: slug }
     );
     return res.data;
@@ -59,7 +59,7 @@ export const getPeraturanDetail = async (slug) => {
 export const postDataMasukanDanKritik = async (data) => {
   try {
     const res = await axios.post(
-      "http://localhost:3000/search/postMasukanDanKriting",
+      `${import.meta.env.VITE_BASE_URL}search/postMasukanDanKriting`,
       data
     );
     return res.data;
@@ -70,7 +70,7 @@ export const postDataMasukanDanKritik = async (data) => {
 
 export const getUnor = async () => {
   try {
-    const res = await axios.get("http://localhost:3000/search/getUnor");
+    const res = await axios.get(`${import.meta.env.VITE_BASE_URL}search/getUnor`);
     return res.data;
   } catch (err) {
     return err;
@@ -84,7 +84,7 @@ export const addViews = async (slug) => {
       slug:slug 
     };
 
-    const res = await axios.post("http://localhost:3000/search/addViews", body);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}search/addViews`, body);
     return res.data;
   } catch (err) {
     return err;
@@ -98,7 +98,7 @@ export const addDownload = async (slug) => {
       slug:slug 
     };
 
-    const res = await axios.post("http://localhost:3000/search/addDownload", body);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}search/addDownload`, body);
     return res.data;
   } catch (err) {
     return err;

@@ -3,7 +3,7 @@ import axios from "axios";
 export const getTotalPeraturan = async () => {
   try {
     const res = await axios.get(
-      "http://localhost:3000/statistik/getRekapJumlahPeraturan"
+      `${import.meta.env.VITE_BASE_URL}statistik/getRekapJumlahPeraturan`
     );
     return res.data.data;
   } catch (err) {
@@ -15,7 +15,7 @@ export const getTotalPeraturan = async () => {
 export const getTotalPeraturanUnor = async () => {
   try {
     const res = await axios.get(
-      "http://localhost:3000/statistik/getTotalDokumentUnor"
+      `${import.meta.env.VITE_BASE_URL}statistik/getTotalDokumentUnor`
     );
     return res.data.data;
   } catch (err) {
@@ -27,7 +27,7 @@ export const getTotalPeraturanUnor = async () => {
 export const getTotalPeraturanDownload = async () => {
   try {
     const res = await axios.get(
-      "http://localhost:3000/statistik/getTotalDownloadDok"
+      `${import.meta.env.VITE_BASE_URL}statistik/getTotalDownloadDok`
     );
     return res.data.data;
   } catch (err) {
@@ -39,7 +39,7 @@ export const getTotalPeraturanDownload = async () => {
 export const getTotalViewPeraturan = async () => {
   try {
     const res = await axios.get(
-      "http://localhost:3000/statistik/getTotalViewPeraturan"
+      `${import.meta.env.VITE_BASE_URL}statistik/getTotalViewPeraturan`
     );
     return res.data.data;
   } catch (err) {
@@ -51,7 +51,7 @@ export const getTotalViewPeraturan = async () => {
 export const getTotalPengunjung = async () => {
   try {
     const res = await axios.get(
-      "http://localhost:3000/statistik/getTotalPengunjung"
+      `${import.meta.env.VITE_BASE_URL}statistik/getTotalPengunjung`
     );
     return res.data.data;
   } catch (err) {

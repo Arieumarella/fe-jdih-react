@@ -8,7 +8,7 @@ export const getInfografisPagination = async (pageX, searchKey) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/infografis/pagination",
+      `${import.meta.env.VITE_BASE_URL}infografis/pagination`,
       page
     );
     return res.data;
@@ -25,7 +25,7 @@ export const getInfografisDetail = async (id) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/infografis/detail",
+      `${import.meta.env.VITE_BASE_URL}infografis/detail`,
       data
     );
     return res.data;
@@ -41,7 +41,7 @@ export const insertViewr = async (id) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/infografis/InsertViewr",
+      `${import.meta.env.VITE_BASE_URL}infografis/InsertViewr`,
       data
     );
     return res.data;

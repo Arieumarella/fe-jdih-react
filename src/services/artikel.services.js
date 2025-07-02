@@ -7,7 +7,7 @@ export const getDetailArtikel = async (slug) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/artikel/detailArtikel",
+      `${import.meta.env.VITE_BASE_URL}artikel/detailArtikel`,
       data
     );
     return res.data.data;
@@ -24,7 +24,7 @@ export const getArtikelPagination = async (pageX, searchKey) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/artikel/pagination",
+      `${import.meta.env.VITE_BASE_URL}artikel/pagination`,
       page
     );
     return res.data;

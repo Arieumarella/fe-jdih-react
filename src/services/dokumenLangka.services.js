@@ -8,7 +8,7 @@ export const getDokumenLangkaPagination = async (pageX, searchKey) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/dokumenLangka/pagination",
+      `${import.meta.env.VITE_BASE_URL}dokumenLangka/pagination`,
       page
     );
     return res.data;
@@ -22,7 +22,7 @@ export const addDownload = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/dokumenLangka/addDownload", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}dokumenLangka/addDownload`, data);
     return res;
   } catch (err) {
     console.log(err);
@@ -35,7 +35,7 @@ export const addViews = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/dokumenLangka/addViews", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}dokumenLangka/addViews`, data);
     return res;
   } catch (err) {
     console.log(err);
@@ -49,7 +49,7 @@ export const detailDokumenLangkaFetch = async (slug) => {
     const data = {
       slug: slug,
     };
-    const res = await axios.post("http://localhost:3000/dokumenLangka/detail", data);
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}dokumenLangka/detail`, data);
     return res;
   } catch (err) {
     console.log(err);

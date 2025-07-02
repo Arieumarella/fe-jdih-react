@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getDataRating = async () => {
     try {
-        const res = await axios.get("http://localhost:3000/footer/getDataRating");
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}footer/getDataRating`);
         return res.data.data;
     } catch (err) {
         console.log(err);
@@ -13,7 +13,7 @@ export const getDataRating = async () => {
 
 export const postDataRating = async (form) => {
     try {
-        const res = await axios.post("http://localhost:3000/footer/postRating", form);
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}footer/postRating`, form);
         return res;
     } catch (err) {
         console.log(err);
@@ -23,7 +23,7 @@ export const postDataRating = async (form) => {
 
 export const postDataLangganan = async (form) => {
     try {
-        const res = await axios.post("http://localhost:3000/footer/postLangganan", form);
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}footer/postLangganan`, form);
         return res;
     } catch (err) {
         console.log(err);

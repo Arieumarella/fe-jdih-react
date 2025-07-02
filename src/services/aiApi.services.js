@@ -9,7 +9,7 @@ export const getAiJdih = async (path, question, history) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/ai/chat",
+      `${import.meta.env.VITE_BASE_URL}ai/chat`,
       page
     );
     return res.data;
@@ -26,7 +26,7 @@ export const getAiJDIHGeneral = async (question, history) => {
     };
 
     const res = await axios.post(
-      "http://localhost:3000/ai/chatGeneral",
+      `${import.meta.env.VITE_BASE_URL}ai/chatGeneral`,
       page
     );
     return res.data;
@@ -40,7 +40,7 @@ export const getPantunAwal = async () => {
   try {
 
     const res = await axios.get(
-      "http://localhost:3000/ai/ChatPantun"
+      `${import.meta.env.VITE_BASE_URL}ai/ChatPantun`
     );
 
     return res.data;
