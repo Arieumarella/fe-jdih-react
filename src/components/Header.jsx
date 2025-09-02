@@ -147,6 +147,8 @@ export default function Header() {
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("infografis"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.infografis")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Mou"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.Mou")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Dokumen-Langka"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.dokumenLangka")}</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Konsultasi-Publik"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.konsultasiPublik")}</a></li>
+
               </ul>
             </div>
 
@@ -298,6 +300,7 @@ export default function Header() {
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("infografis")} className='hover:text-slate-600 block'>{t("menu.infografis")}</a></li>
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Mou")} className='hover:text-slate-600 block'>{t("menu.Mou")}</a></li>
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Dokumen-Langka")} className='hover:text-slate-600 block'>{t("menu.dokumenLangka")}</a></li>
+              <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Konsultasi-Publik")} className='hover:text-slate-600 block'>{t("menu.konsultasiPublik")}</a></li>
             </ul>
           </li>
 

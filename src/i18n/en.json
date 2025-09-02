@@ -142,6 +142,9 @@
     "pliceHolderDokLangka": "Search Rare Document Title...",
     "btnCariJudulDokLangka": "Search",
     "detailDokLangka": "Rare Document Details",
+    "semuaKonsultasiPublik": "All Public Consultations",
+    "pliceHolderKonsultasiPublik": "Search for a Public Consultation title...",
+    "btnCariJudulKonsultasiPublik": "Search",
     "menu": {
         "home": "Home",
         "jenisProdukHukum": "Legal Product Types",
@@ -165,7 +168,8 @@
         "kontakKami": "Contact Us",
         "infografis": "Infographic",
         "Mou": "Memorandum of Understanding",
-        "rareDocument": "Rare Document"
+        "rareDocument": "Rare Document",
+        "konsultasiPublik": "Public Consultation"
     },
     "metaDataStandar": {
         "tipe_dokumen": "Document Type",

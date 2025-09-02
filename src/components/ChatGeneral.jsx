@@ -71,14 +71,7 @@ function ChatDialog() {
                 <button
                     onClick={toggleChat}
                     className={`fixed bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-full shadow-lg hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50 transition-all duration-300 ease-in-out transform hover:scale-105 z-50 flex items-center space-x-2 group
-                    
-                    // --- STYLE MOBILE (Default) ---
-                    // Tombol bulat di pojok kanan bawah yang lebih standar
-                    bottom-4 right-4
-
-                    // --- STYLE DESKTOP/LAPTOP (sm: Override) ---
-                    // Mengembalikan style asli Anda untuk layar lebih besar
-                    
+                    bottom-4 right-[85px] sm:right-[110px]
                     `}
                     aria-label="Tanya AJI"
                 >

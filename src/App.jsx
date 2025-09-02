@@ -24,7 +24,9 @@ import Mou from "./pages/Mou";
 import DetailMou from "./pages/detailMou";
 import DokumenLangka from "./pages/DokumenLangka";
 import DetailDokumenlangka from "./pages/DetailDokumenlangka";
+import DetailKonsultasiPublik from "./pages/DetailKonsultasiPublik";
 import ChatGeneral from "./components/ChatGeneral";
+import KonsultasiPublik from "./components/KonsultasiPublik";
 import { Helmet } from "react-helmet-async";
 import { ToastProvider } from "./components/ToastProvider";
 
@@ -58,6 +60,8 @@ const titles = {
   "/Mou-detail/:slug": "JDIH PU - Detail Mou",
   "/Dokumen-Langka": "JDIH PU - Dokumen Langka",
   "/Dokumen-Langka/:slug": "JDIH PU - Detail Dokumen Langka",
+  "/Konsultasi-Publik": "JDIH PU - Konsultasi Publik",
+  "/Konsultasi-Publik/:slug": "JDIH PU - Detail Konsultasi Publik",
 };
 
 function TitleUpdater() {
@@ -84,7 +88,7 @@ function App() {
   useEffect(() => {
     const script = document.createElement('script');
     script.setAttribute('data-account', import.meta.env.VITE_ID_KEY_USERWAY); // Ganti dengan ID akun UserWay-mu
-    script.setAttribute('data-position', '7'); // Posisi 3 = kiri bawah
+    script.setAttribute('data-position', '3'); // Posisi 3 = kiri bawah
     script.src = 'https://cdn.userway.org/widget.js';
     script.async = true;
     document.body.appendChild(script);
@@ -120,6 +124,8 @@ function App() {
         <Route path="/Mou-detail/:slug" element={<DetailMou />} />
         <Route path="/Dokumen-Langka" element={<DokumenLangka />} />
         <Route path="/Dokumen-Langka/:slug" element={<DetailDokumenlangka />} />
+        <Route path="/Konsultasi-Publik" element={<KonsultasiPublik />} />
+        <Route path="/Konsultasi-Publik/:slug" element={<DetailKonsultasiPublik />} />
       </Routes>
       <ChatGeneral />
     </>
