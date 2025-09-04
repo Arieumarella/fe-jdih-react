@@ -1,9 +1,13 @@
 import WebViewerWithLicense from './WebViewerWithLicense';
-import { React, useRef, useEffect } from "react";
+import { Viewer, Worker, SpecialZoomLevel  } from '@react-pdf-viewer/core';
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { motion, AnimatePresence } from "framer-motion";
 
 const Modal = ({ isOpen, onClose, title, urlPath }) => {
-  // Tidak perlu ref dan useEffect, gunakan komponen WebViewerWithLicense
+  
+      const defaultLayoutModal = defaultLayoutPlugin();
 
   return (
     <AnimatePresence>
@@ -29,7 +33,9 @@ const Modal = ({ isOpen, onClose, title, urlPath }) => {
 
             {/* Kontainer Viewer */}
             <div className="webviewer w-full flex-grow min-h-0">
-              <WebViewerWithLicense initialDoc={urlPath || '/a.pdf'} />
+              <Worker workerUrl="/pdf.worker.min.js">
+                 <Viewer key={'-Peraturan'} fileUrl={urlPath} plugins={[defaultLayoutModal]} defaultScale={SpecialZoomLevel.PageFit} />
+              </Worker>
             </div>
           </motion.div>
         </div>

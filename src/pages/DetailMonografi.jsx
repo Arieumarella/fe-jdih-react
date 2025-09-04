@@ -12,6 +12,8 @@ import MetaData from "../components/metaDataTags";
 
 const DetailMonografi = () => {
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const { slug } = useParams();
   const [dataMonografi, setDataMonografi] = useState([]);
   const { t } = useTranslation();
@@ -29,7 +31,7 @@ const DetailMonografi = () => {
         title={dataMonografi.judul}
         pageDescription={'Monografi JDIH Kementerian PU tentang ' + dataMonografi?.judul}
         pageKeywords={dataMonografi?.keyword}
-        image={`https://jdih.pu.go.id/internal/assets/assets/produk/monografi/BukuHukum/${dataMonografi?.tanggal?.substring(0, 4)}/11/${dataMonografi.file_upload}`}
+        image={`${BACKEND_URL}assets/assets/produk/monografi/BukuHukum/${dataMonografi?.tanggal?.substring(0, 4)}/11/${dataMonografi.file_upload}`}
       />
 
       <Headers />
@@ -52,7 +54,7 @@ const DetailMonografi = () => {
               threshold={0.1}
             >
               <img
-                src={`https://jdih.pu.go.id/internal/assets/assets/produk/monografi/BukuHukum/${dataMonografi?.tanggal?.substring(0, 4)}/11/${dataMonografi.file_upload}`}
+                src={`${BACKEND_URL}assets/assets/produk/monografi/BukuHukum/${dataMonografi?.tanggal?.substring(0, 4)}/11/${dataMonografi.file_upload}`}
                 alt="Cover Buku"
                 className="rounded-xl shadow-md  md:w-full object-cover h-2/3"
               />

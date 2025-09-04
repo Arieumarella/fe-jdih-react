@@ -68,6 +68,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
 
 
 const Home = () => {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -209,7 +210,7 @@ const Home = () => {
               - Tablet (md:), sama dengan mobile: md:h-[180px]
               - Laptop (lg:), sama dengan md: yang asli: lg:h-[350px]
             */}
-                    <img src={`https://jdih.pu.go.id/internal/assets/assets/berita/${item?.gambar_1}`} alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
+                    <img src={`${BACKEND_URL}assets/assets/berita/${item?.gambar_1}`} alt="Thumbnail" className="w-full h-full object-cover group-hover:scale-125 transition-all duration-500" />
                   </div>
                   {/* Konten */}
                   <div className="p-4">

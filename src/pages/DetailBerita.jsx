@@ -10,6 +10,8 @@ import MetaData from "../components/metaDataTags";
 
 const DetailBerita = () => {
 
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
     const { slug } = useParams();
 
     const [data, setData] = useState([]);
@@ -46,7 +48,7 @@ const DetailBerita = () => {
                 title={data?.judul}
                 pageDescription={'Berita JDIH Kementerian PU tentang ' + data?.judul}
                 pageKeywords={data?.judul}
-                image={`https://jdih.pu.go.id/internal/assets/assets/berita/${data?.gambar_1}`}
+                image={`${BACKEND_URL}assets/assets/berita/${data?.gambar_1}`}
             />
 
             <Headers />
@@ -85,7 +87,7 @@ const DetailBerita = () => {
                         <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
                             <div className="w-full h-[200px] md:h-full overflow-hidden rounded-lg mt-4">
                                 <img
-                                    src={`https://jdih.pu.go.id/internal/assets/assets/berita/${data?.gambar_1}`}
+                                    src={`${BACKEND_URL}assets/assets/berita/${data?.gambar_1}`}
                                     alt="Gambar Berita"
                                     className="w-full h-full object-fill"
                                 />

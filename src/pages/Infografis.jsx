@@ -68,6 +68,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
 };
 
 const Infografis = () => {
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
     const { t } = useTranslation();
     let terminetTextLong = (text = null) => {
         return text.length > 30 ? text.substring(0, 120) + "..." : text;
@@ -207,7 +208,7 @@ const Infografis = () => {
                                         {/* Gambar Background */}
                                         <div className={`w-full h-full bg-cover bg-center absolute group-hover:scale-110 transition-all duration-500`}
                                             style={{
-                                                backgroundImage: `url("https://jdih.pu.go.id/internal/assets/assets/infografis/${item.gambar_1}")`,
+                                                backgroundImage: `url("${BACKEND_URL}assets/assets/infografis/${item.gambar_1}")`,
                                             }}
                                         ></div>
 

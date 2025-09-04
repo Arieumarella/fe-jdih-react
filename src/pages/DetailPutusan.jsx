@@ -13,6 +13,7 @@ import MetaData from "../components/metaDataTags";
 
 const DetailPutusan = () => {
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const { slug } = useParams();
   const { t } = useTranslation();
   const [dataPutusan, setDataPutusan] = useState([]);
@@ -210,7 +211,7 @@ const DetailPutusan = () => {
 
               <div className="flex gap-3 mt-2 border-t py-2">
                 <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full px-2 py-2 rounded-2xl font-roboto text-[16px] flex items-center justify-center gap-1 transition-all duration-200 shadow-md hover:shadow-lg text-center md:w-full md:px-2 md:text-[16px] md:gap-1 lg:w-auto lg:px-3 lg:text-[15px] lg:gap-2"
-                  onClick={() => handleDownload(`https://jdih.pu.go.id/internal/assets/assets/produk/putusan/PTUN/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`, dataPutusan.file_upload, dataPutusan.slug)}
+                  onClick={() => handleDownload(`${BACKEND_URL}assets/assets/produk/putusan/PTUN/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`, dataPutusan.file_upload, dataPutusan.slug)}
                 >
                   {/*
               Tombol Unduh:

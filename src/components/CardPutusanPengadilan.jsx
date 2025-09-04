@@ -6,6 +6,8 @@ import { toast } from "../components/ToastProvider";
 
 const CardPutusanPengadilan = ({ data }) => {
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const navigate = useNavigate();
 
   const navigateHandelClick = (link = '') => {
@@ -155,7 +157,7 @@ const CardPutusanPengadilan = ({ data }) => {
             <div className="flex gap-3 mt-2">
               <button
                 className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full px-2 py-2 rounded-2xl font-roboto text-[11px] flex justify-center items-center gap-1 transition-all duration-200 shadow-md hover:shadow-lg md:w-full md:px-2 md:text-[11px] md:gap-1 lg:w-auto lg:px-3 lg:text-[15px] lg:gap-2"
-                onClick={() => handleDownload(`https://jdih.pu.go.id/internal/assets/assets/produk/putusan/PTUN/${ambilTahunBulan(data.tanggal).tahun}/${ambilTahunBulan(data.tanggal).bulan}/${data.file_upload}`, data.file_upload, data?.slug)}
+                onClick={() => handleDownload(`${BACKEND_URL}assets/assets/produk/putusan/PTUN/${ambilTahunBulan(data.tanggal).tahun}/${ambilTahunBulan(data.tanggal).bulan}/${data.file_upload}`, data.file_upload, data?.slug)}
               >
                 {/*
               Perubahan pada tombol Unduh:

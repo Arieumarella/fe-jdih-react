@@ -5,6 +5,8 @@ import { toast } from "../components/ToastProvider";
 
 const CardDokumenLangka = ({ data, showModalAi }) => {
 
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
     const navigate = useNavigate();
 
     const navigateHandelClick = (link = '') => {
@@ -140,7 +142,7 @@ const CardDokumenLangka = ({ data, showModalAi }) => {
                                 // Mobile/tablet: w-full, px-2, text-[11px], gap-1, icon text-sm.
                                 // Lg (desktop): w-auto, px-3, text-[13px], gap-2, icon text-lg.
                                 className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full lg:w-auto px-2 lg:px-3 py-2 rounded-2xl font-roboto text-[11px] lg:text-[13px] flex items-center justify-center lg:justify-start gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
-                                onClick={() => showModalAi(true, `https://jdih.pu.go.id/internal/produk_hukum/download/MoU/${ambilTahunBulan(data.tanggal).tahun}/${ambilTahunBulan(data.tanggal).bulan}/${data.file_upload}`)}
+                                onClick={() => showModalAi(true, `${BACKEND_URL}produk_hukum/download/MoU/${ambilTahunBulan(data.tanggal).tahun}/${ambilTahunBulan(data.tanggal).bulan}/${data.file_upload}`)}
                             >
                                 <span className="material-symbols-outlined text-sm lg:text-lg text-kuningButton">robot_2</span>
                                 Chat AI
@@ -149,7 +151,7 @@ const CardDokumenLangka = ({ data, showModalAi }) => {
 
                             <button
                                 className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full px-2 py-2 rounded-2xl font-roboto text-[11px] flex justify-center items-center gap-1 transition-all duration-200 shadow-md hover:shadow-lg md:w-full md:px-2 md:text-[11px] md:gap-1 lg:w-auto lg:px-3 lg:text-[15px] lg:gap-2"
-                                onClick={() => handleDownload(`https://jdih.pu.go.id/internal/produk_hukum/download/MoU/${ambilTahunBulan(data.tanggal).tahun}/${ambilTahunBulan(data.tanggal).bulan}/${data.file_upload}`, data.file_upload, data?.slug)}
+                                onClick={() => handleDownload(`${BACKEND_URL}produk_hukum/download/MoU/${ambilTahunBulan(data.tanggal).tahun}/${ambilTahunBulan(data.tanggal).bulan}/${data.file_upload}`, data.file_upload, data?.slug)}
                             >
 
                                 <span className="material-symbols-outlined text-base text-kuningButton md:text-base lg:text-lg">download_2</span> Unduh

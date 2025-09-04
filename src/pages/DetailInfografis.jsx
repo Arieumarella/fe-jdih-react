@@ -10,6 +10,8 @@ import MetaData from "../components/metaDataTags";
 
 const DetailInfografis = () => {
 
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
     const { id } = useParams();
 
     const [data, setData] = useState([]);
@@ -48,7 +50,7 @@ const DetailInfografis = () => {
                 title={data?.data?.judul}
                 pageDescription={'Detail Infografis JDIH Kementerian PU tentang ' + data?.data?.judul}
                 pageKeywords={data?.data?.keyword}
-                image={`https://jdih.pu.go.id/internal/assets/assets/infografis/${data?.data?.gambar_1}`}
+                image={`${BACKEND_URL}assets/assets/infografis/${data?.data?.gambar_1}`}
             />
 
             <Headers />
@@ -87,7 +89,7 @@ const DetailInfografis = () => {
                         <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
                             <div className="w-full h-full overflow-hidden rounded-lg mt-4">
                                 <img
-                                    src={`https://jdih.pu.go.id/internal/assets/assets/infografis/${data?.data?.gambar_1}`}
+                                    src={`${BACKEND_URL}assets/assets/infografis/${data?.data?.gambar_1}`}
                                     alt="Gambar infografis"
                                     className="w-full h-full object-fill"
                                 />

@@ -12,6 +12,10 @@ import FadeContent from '../components/react-bits/FadeContent/FadeContent';
 import { useTranslation } from 'react-i18next';
 import { getDetailKp, addViewsKP } from '../services/Kp.services';
 
+// Ambil backend url dari env
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_FILE_URL = import.meta.env.VITE_BACKEND_FILE_URL;
+
 const DetailKonsultasiPublik = () => {
     // Plugin untuk react-pdf-viewer (harus satu instance per viewer)
     const defaultLayoutPluginDraft = defaultLayoutPlugin({scale:50});
@@ -33,17 +37,27 @@ const DetailKonsultasiPublik = () => {
     useEffect(() => {
         
         getDetailKp(slug).then((result) => {
+            // Ambil gambar_1..gambar_4, filter yang tidak null/kosong
+            console.log("Detail Konsultasi Publik Result:", result);
+            const gambarKeys = ['gambar_1', 'gambar_2', 'gambar_3', 'gambar_4'];
+            const dokumentasi = gambarKeys
+                .map(key => result?.data?.[key])
+                .filter(Boolean)
+                .map(gambar => {
+                    // Jika sudah absolute url, pakai langsung. Jika relatif, prefix dengan backend url
+                    if (!gambar) return null;
+                    if (/^https?:\/\//i.test(gambar)) return gambar;
+                    return BACKEND_URL.replace(/\/$/, '') + '/' + gambar.replace(/^\/?/, '');
+                });
+
             setData({
                 judul: result?.data?.judul,
                 narasi: result?.data?.keterangan,
                 tipe: result?.data?.status == 'Luring' ? 'offline' : 'online',
-                draftPdf: '/b.pdf',
-                konsepPdf: '/b.pdf',
-                notulensiPdf: '/b.pdf',
-                dokumentasi: [
-                    'https://jdih.pu.go.id/Logogram.png',
-                    'https://jdih.pu.go.id/Logo%20-%20pu.svg',
-                ],
+                draftPdf: result?.data?.status == 'Luring' ? null : BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_draft,
+                konsepPdf: BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_konsepsi_pengaturan,
+                notulensiPdf: BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_notulensi,
+                dokumentasi, // array hasil filter dan mapping
             });
         });
 
@@ -51,7 +65,7 @@ const DetailKonsultasiPublik = () => {
 
     }, [slug]);
 
-    console.log("Detail Konsultasi Publik Data:", data);
+
 
     return (
         <>
@@ -175,7 +189,7 @@ const DetailKonsultasiPublik = () => {
                                 </div>
                             )}
                             {/* Section: Dokumentasi (online) */}
-                            {data?.tipe === 'offline' && data.dokumentasi && (
+                            {data?.tipe === 'offline' && data.dokumentasi && data.dokumentasi.length > 0 && (
                                 <div className="mb-6">
                                     <h2 className="text-lg font-semibold text-bluePu mb-2 leading-relaxed font-roboto">
                                         <SplitText

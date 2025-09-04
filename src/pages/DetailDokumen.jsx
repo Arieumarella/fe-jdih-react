@@ -36,6 +36,8 @@ const formatTanggal = (tanggalString) => {
 
 const DetailDokumen = () => {
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const { t } = useTranslation();
 
   const { slug } = useParams();
@@ -73,16 +75,10 @@ const DetailDokumen = () => {
   useEffect(() => {
     if (data) {
       setUrlModalAi(
-        `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`
+        `${BACKEND_URL}assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`
       );
     }
   }, [data]);
-
-
-
-
-
-
 
   const showModal = async (stateCondition, urlPath) => {
     const isPDF = typeof urlPath === 'string' && urlPath.toLowerCase().endsWith('.pdf');
@@ -256,7 +252,7 @@ const DetailDokumen = () => {
                   <span>{t("detailPeraturanKeritikdanSaran")}</span>
                 </button>
                 <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full lg:w-auto px-2 lg:px-3 py-2 rounded-2xl font-roboto text-[16px] lg:text-[15px] flex items-center justify-center gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg text-center"
-                  onClick={() => showModalAi(true, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`)}
+                  onClick={() => showModalAi(true, `${BACKEND_URL}assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`)}
                 >
                   <span className="material-symbols-outlined text-xl lg:text-lg text-kuningButton">robot_2</span>
                   <span>Chat AI</span>
@@ -298,13 +294,13 @@ const DetailDokumen = () => {
                 <div className='flex flex-col md:flex-row gap-2 p-1 w-full my-2'>
                   {/* PERUBAHAN TOMBOL INDIVIDUAL */}
                   <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
-                    onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`)}
+                    onClick={() => showModal(true, `${BACKEND_URL}assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`)}
                   >
                     <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                     Preview
                   </button>
                   <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
-                    onClick={() => handleDownload(data?.data?.abstrak, `https://jdih.pu.go.id/internal/assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`, data?.data?.slug)}
+                    onClick={() => handleDownload(data?.data?.abstrak, `${BACKEND_URL}assets/assets/produk_abstrak/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.abstrak}`, data?.data?.slug)}
                   >
                     <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>
                     Download
@@ -324,13 +320,13 @@ const DetailDokumen = () => {
                 <div className='flex flex-col md:flex-row gap-2 p-2 w-full my-2'>
                   {/* PERUBAHAN TOMBOL INDIVIDUAL */}
                   <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
-                    onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`)}
+                    onClick={() => showModal(true, `${BACKEND_URL}assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`)}
                   >
                     <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                     Preview
                   </button>
                   <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
-                    onClick={() => handleDownload(data?.data?.file_upload, `https://jdih.pu.go.id/internal/assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`, data?.data?.slug)}
+                    onClick={() => handleDownload(data?.data?.file_upload, `${BACKEND_URL}assets/assets/produk/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${data?.data?.file_upload}`, data?.data?.slug)}
                   >
                     <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>
                     Download
@@ -354,13 +350,13 @@ const DetailDokumen = () => {
                       <div className='flex flex-col md:flex-row gap-2'>
                         {/* PERUBAHAN TOMBOL INDIVIDUAL */}
                         <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
-                          onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`)}
+                          onClick={() => showModal(true, `${BACKEND_URL}assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`)}
                         >
                           <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">visibility</span>
                           Preview
                         </button>
                         <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full md:flex-1 h-[40px] rounded-2xl font-roboto text-[11px] md:text-[13px] lg:text-[14px] flex items-center justify-center gap-1 md:gap-1.5 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg p-4"
-                          onClick={() => handleDownload(item?.file, `https://jdih.pu.go.id/internal/assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`, data?.data?.slug)}
+                          onClick={() => handleDownload(item?.file, `${BACKEND_URL}assets/assets/produk_parsial/${data?.dataCategory?.percategorycode}/${data?.data?.tanggal?.substring(0, 4)}/${data?.data?.tanggal?.substring(4, 6)}/${item.file}`, data?.data?.slug)}
                         >
                           <span className="material-symbols-outlined text-sm md:text-base lg:text-xl text-kuningButton">download</span>
                           Download

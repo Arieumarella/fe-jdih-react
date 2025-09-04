@@ -32,7 +32,7 @@ const staticRoutes = [
   // '/informasi-hukum',
 ];
 
-// 4. FUNGSI PLACEHOLDER UNTUK MENGAMBIL DATA DINAMIS (SLUGS/IDs)
+// 4. FUNGSI PLACEHOLDER UNTUK MENGAMBIL DATA DINAMIS (SLUGS/Ids)
 // GANTI INI DENGAN IMPLEMENTASI FETCHING DATA YANG SEBENARNYA DARI API ANDA
 // Fungsi ini akan dijalankan saat proses build (`npm run build`)
 
@@ -166,5 +166,13 @@ export default defineConfig(async ({ command, mode }) => { // Ubah menjadi fungs
         // })),
       }),
     ],
+    server: {
+      proxy: {
+        '/JDIH_fix/internal/assets': {
+          target: 'http://localhost',
+          changeOrigin: true,
+        },
+      },
+    },
   };
 });

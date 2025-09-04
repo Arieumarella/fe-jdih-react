@@ -14,6 +14,8 @@ import MetaData from "../components/metaDataTags";
 
 const detailMou = () => {
 
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
     const { slug } = useParams();
     const { t } = useTranslation();
     const [dataPutusan, setDataPutusan] = useState([]);
@@ -257,7 +259,7 @@ const detailMou = () => {
                                     // Mobile/tablet: w-full, px-2, text-[11px], gap-1, icon text-sm.
                                     // Lg (desktop): w-auto, px-3, text-[13px], gap-2, icon text-lg.
                                     className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full lg:w-auto px-2 lg:px-3 py-2 rounded-2xl font-roboto text-[11px] lg:text-[13px] flex items-center justify-center lg:justify-start gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
-                                    onClick={() => showModalAi(true, `https://jdih.pu.go.id/internal/assets/assets/download/MoU/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`)}
+                                    onClick={() => showModalAi(true, `${BACKEND_URL}assets/assets/download/MoU/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`)}
                                 >
                                     <span className="material-symbols-outlined text-sm lg:text-lg text-kuningButton">robot_2</span>
                                     Chat AI
@@ -266,14 +268,14 @@ const detailMou = () => {
                                 <button
 
                                     className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full lg:w-auto px-2 lg:px-3 py-2 rounded-2xl font-roboto text-[11px] lg:text-[13px] flex items-center justify-center lg:justify-start gap-1 lg:gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
-                                    onClick={() => showModal(true, `https://jdih.pu.go.id/internal/assets/assets/download/MoU/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`)}
+                                    onClick={() => showModal(true, `${BACKEND_URL}assets/assets/download/MoU/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`)}
                                 >
                                     <span className="material-symbols-outlined text-sm lg:text-xl text-kuningButton">visibility</span>
                                     Preview
                                 </button>
 
                                 <button className="bg-bluePu hover:bg-opacity-70 text-kuningButton hover:bg-kuningHover w-full px-2 py-2 rounded-2xl font-roboto text-[16px] flex items-center justify-center gap-1 transition-all duration-200 shadow-md hover:shadow-lg text-center md:w-full md:px-2 md:text-[16px] md:gap-1 lg:w-auto lg:px-3 lg:text-[15px] lg:gap-2"
-                                    onClick={() => handleDownload(`https://jdih.pu.go.id/internal/assets/assets/download/MoU/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`, dataPutusan.file_upload, dataPutusan.slug)}
+                                    onClick={() => handleDownload(`${BACKEND_URL}assets/assets/download/MoU/${ambilTahunBulan(dataPutusan.tanggal).tahun}/${ambilTahunBulan(dataPutusan.tanggal).bulan}/${dataPutusan.file_upload}`, dataPutusan.file_upload, dataPutusan.slug)}
                                 >
                                     {/*
               Tombol Unduh:

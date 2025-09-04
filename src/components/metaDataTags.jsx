@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
+
 const MetaTags = ({
     title = "JDIH - Jaringan Dokumentasi dan Informasi Hukum Kementerian Pekerjaan Umum",
     description = "Website resmi Jaringan Dokumentasi dan informasi hukum, membantu kamu mencari peraturan di Pekerjaan Umum",
