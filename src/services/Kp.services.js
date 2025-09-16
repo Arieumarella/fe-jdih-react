@@ -48,3 +48,20 @@ export const addViewsKP = async (slug) => {
     return err;
   }
 };
+
+export const submitKonsultasiPublik = async (formData) => {
+  try {
+    const res = await axios.post(
+      `${import.meta.env.VITE_BACKEND_CI3_URL}Kp/submitKonsultasiPublik`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};

@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Viewer, Worker, SpecialZoomLevel  } from '@react-pdf-viewer/core';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
@@ -9,8 +9,11 @@ import Footer from '../components/Footer';
 import Langganan from '../components/Langganan';
 import SplitText from "../components/react-bits/SplitText/SplitText";
 import FadeContent from '../components/react-bits/FadeContent/FadeContent';
+import { toast } from "../components/ToastProvider";
 import { useTranslation } from 'react-i18next';
-import { getDetailKp, addViewsKP } from '../services/Kp.services';
+import { getDetailKp, addViewsKP, submitKonsultasiPublik } from '../services/Kp.services';
+import Turnstile from 'react-turnstile';
+
 
 // Ambil backend url dari env
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -27,6 +30,24 @@ const DetailKonsultasiPublik = () => {
     const [data, setData] = useState(null);
     // Tambahkan state untuk preview gambar
     const [previewImg, setPreviewImg] = useState(null);
+    const [captchaToken, setCaptchaToken] = useState(null);
+    const [nama, setNama] = useState("");
+    const [email, setEmail] = useState("");
+    const [masukan, setMasukan] = useState("");
+    const [file, setFile] = useState(null);
+    // Tambah state asal
+    const [asal, setAsal] = useState("");
+    const turnstileRef = useRef(null);
+
+    // Tambah: cek apakah periode daring sudah berakhir (pakai end-of-day)
+    const isPeriodOver = useMemo(() => {
+        if (data?.tipe !== 'online') return false;
+        if (!data?.tanggalSelesai) return false;
+        const end = new Date(data.tanggalSelesai);
+        if (isNaN(end)) return false;
+        end.setHours(23, 59, 59, 999);
+        return new Date() > end;
+    }, [data?.tipe, data?.tanggalSelesai]);
 
     // Hapus zoom PDF viewer di localStorage agar selalu pakai initialZoom
     useEffect(() => {
@@ -37,9 +58,9 @@ const DetailKonsultasiPublik = () => {
     useEffect(() => {
         
         getDetailKp(slug).then((result) => {
-            // Ambil gambar_1..gambar_4, filter yang tidak null/kosong
+            // Ambil gambar_1..gambar_5, filter yang tidak null/kosong
             console.log("Detail Konsultasi Publik Result:", result);
-            const gambarKeys = ['gambar_1', 'gambar_2', 'gambar_3', 'gambar_4'];
+            const gambarKeys = ['gambar_1', 'gambar_2', 'gambar_3', 'gambar_4', 'gambar_5'];
             const dokumentasi = gambarKeys
                 .map(key => result?.data?.[key])
                 .filter(Boolean)
@@ -51,13 +72,22 @@ const DetailKonsultasiPublik = () => {
                 });
 
             setData({
-                judul: result?.data?.judul,
+                judul: result?.data?.judul_rancangan_peraturan,
                 narasi: result?.data?.keterangan,
                 tipe: result?.data?.status == 'Luring' ? 'offline' : 'online',
-                draftPdf: result?.data?.status == 'Luring' ? null : BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_draft,
-                konsepPdf: BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_konsepsi_pengaturan,
-                notulensiPdf: BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_notulensi,
-                dokumentasi, // array hasil filter dan mapping
+                // Metadata fields
+                pemrakarsa: result?.data?.pemrakarsa || result?.data?.deptcode || 'Tidak Tersedia',
+                jenisPerencanaan: result?.data?.jenis_perencanaan,
+                tempatPelaksanaan: result?.data?.Tempat_pelaksanaan,
+                tglPenyusunan: result?.data?.tgl_pelaksanaan_penyusunan,
+                tanggalPelaksanaan: result?.data?.tanggal_pelaksanaan,
+                tanggalSelesai: result?.data?.tanggal_selesai_kp,
+                // File paths dengan pengecekan null/kosong
+                draftPdf: result?.data?.file_draft ? BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_draft : null,
+                konsepPdf: result?.data?.file_konsepsi_pengaturan ? BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_konsepsi_pengaturan : null,
+                notulensiPdf: result?.data?.file_notulensi ? BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_notulensi : null,
+                andakPdf: result?.data?.file_andak ? BACKEND_FILE_URL.replace(/\/$/, '') + '/' + result?.data?.file_andak : null,
+                dokumentasi,
             });
         });
 
@@ -65,7 +95,65 @@ const DetailKonsultasiPublik = () => {
 
     }, [slug]);
 
+    const handleSubmitForm = async (e) => {
+        e.preventDefault();
+        try {
+            // Tambah: guard jika periode sudah berakhir
+            if (isPeriodOver) {
+                toast.error("Konsultasi Publik telah selesai dilaksanakan.", { position: "bottom-right" });
+                return;
+            }
+            if (!captchaToken) {
+                toast.error("Harap Cheklist Captcha Terlebih Dahulu.", { position: "bottom-right" });
+                return;
+            }
+            // Data yang akan dikirim ke service
+            const formData = new FormData();
+            formData.append('slug', slug);
+            formData.append('nama', nama);
+            formData.append('asal', asal);
+            formData.append('email', email);
+            formData.append('masukan', masukan);
+            if (file) formData.append('file', file);
+            formData.append('captchaToken', captchaToken);
+            
+            const result = await submitKonsultasiPublik(formData);
+            console.log("Submit Konsultasi Publik Result:", result);
+            
+            // Reset form jika berhasil
+            setNama("");
+            setEmail("");
+            setMasukan("");
+            setFile(null);
+            setAsal("");
+            toast.success("Data berhasil disimpan.", { position: "bottom-right" });
+            
+        } catch (error) {
+            console.error("Submit error:", error);
+            // Handle different types of errors
+            if (error.response) {
+                // Server responded with error status
+                toast.error(error.response.data?.message || "Terjadi kesalahan pada server", { position: "bottom-right" });
+            } else if (error.request) {
+                // Network error
+                toast.error("Koneksi bermasalah. Periksa jaringan internet Anda.", { position: "bottom-right" });
+            } else {
+                // Other error
+                toast.error("Terjadi kesalahan yang tidak diketahui", { position: "bottom-right" });
+            }
+        } finally {
+            // Selalu refresh captcha setiap submit
+            setCaptchaToken(null);
+            turnstileRef.current?.reload();
+        }
+    };
 
+    const ubahFormatTanggal = (tanggalString) => {
+        if (!tanggalString) return '-';
+        const date = new Date(tanggalString);
+        const options = { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Jakarta' };
+        return date.toLocaleDateString('id-ID', options);
+    };
 
     return (
         <>
@@ -118,6 +206,96 @@ const DetailKonsultasiPublik = () => {
                             />
 
                             </h1>
+                            
+                            {/* Metadata Section */}
+                            <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
+                                <div className="bg-white rounded-xl p-8 mb-8 border border-gray-200 shadow-sm">
+                                    <div className="border-l-4 border-bluePu pl-6 mb-6">
+                                        <h3 className="text-lg font-bold text-bluePu font-roboto mb-2">Informasi Konsultasi Publik</h3>
+                                        <p className="text-gray-500 text-sm font-roboto">Detail informasi mengenai rancangan peraturan</p>
+                                    </div>
+                                    
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div className="space-y-5">
+                                            <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 border-l-4 border-bluePu">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <div className="w-8 h-8 bg-bluePu rounded-full flex items-center justify-center">
+                                                        <span className="material-symbols-outlined text-white text-sm">person</span>
+                                                    </div>
+                                                    <span className="text-sm font-bold text-bluePu uppercase tracking-wide font-roboto">Pemrakarsa</span>
+                                                </div>
+                                                <p className="text-gray-800 font-semibold font-roboto ml-11">{data?.pemrakarsa || '-'}</p>
+                                            </div>
+                                            
+                                            <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-4 border-l-4 border-purple-500">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                                                        <span className="material-symbols-outlined text-white text-sm">category</span>
+                                                    </div>
+                                                    <span className="text-sm font-bold text-purple-700 uppercase tracking-wide font-roboto">Jenis Perencanaan</span>
+                                                </div>
+                                                <p className="text-gray-800 font-semibold font-roboto ml-11">{data?.jenisPerencanaan || '-'}</p>
+                                            </div>
+                                            
+                                            {data?.tipe === 'offline' && data?.tempatPelaksanaan && (
+                                                <div className="bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg p-4 border-l-4 border-amber-500">
+                                                    <div className="flex items-center gap-3 mb-2">
+                                                        <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center">
+                                                            <span className="material-symbols-outlined text-white text-sm">location_on</span>
+                                                        </div>
+                                                        <span className="text-sm font-bold text-amber-700 uppercase tracking-wide font-roboto">Tempat Pelaksanaan</span>
+                                                    </div>
+                                                    <p className="text-gray-800 font-semibold font-roboto ml-11">{data?.tempatPelaksanaan}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                        <div className="space-y-5">
+                                            <div className="bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg p-4 border-l-4 border-emerald-500">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center">
+                                                        <span className="material-symbols-outlined text-white text-sm">edit_calendar</span>
+                                                    </div>
+                                                    <span className="text-sm font-bold text-emerald-700 uppercase tracking-wide font-roboto">Tanggal Perencanaan</span>
+                                                </div>
+                                                <p className="text-gray-800 font-semibold font-roboto ml-11">{ubahFormatTanggal(data?.tglPenyusunan)}</p>
+                                            </div>
+                                            
+                                            {data?.tanggalPelaksanaan && (
+                                                <div className="bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-lg p-4 border-l-4 border-indigo-500">
+                                                    <div className="flex items-center gap-3 mb-2">
+                                                        <div className="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center">
+                                                            <span className="material-symbols-outlined text-white text-sm">event</span>
+                                                        </div>
+                                                        <span className="text-sm font-bold text-indigo-700 uppercase tracking-wide font-roboto">
+                                                            {data?.tipe === 'online' ? 'Periode Pelaksanaan' : 'Tanggal Pelaksanaan'}
+                                                        </span>
+                                                    </div>
+                                                    <div className="ml-11">
+                                                        {data?.tipe === 'online' && data?.tanggalSelesai ? (
+                                                            <div className="flex flex-col gap-1">
+                                                                <div className="flex items-center gap-2">
+                                                                    <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                                                                    <span className="text-sm text-gray-600 font-roboto">Mulai:</span>
+                                                                    <span className="text-gray-800 font-semibold font-roboto">{ubahFormatTanggal(data?.tanggalPelaksanaan)}</span>
+                                                                </div>
+                                                                <div className="flex items-center gap-2">
+                                                                    <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                                                                    <span className="text-sm text-gray-600 font-roboto">Selesai:</span>
+                                                                    <span className="text-gray-800 font-semibold font-roboto">{ubahFormatTanggal(data?.tanggalSelesai)}</span>
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <p className="text-gray-800 font-semibold font-roboto">{ubahFormatTanggal(data?.tanggalPelaksanaan)}</p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </FadeContent>
+
                             {/* Deskripsi Berita */}
                             <FadeContent blur={true} duration={800} easing="ease-out" initialOpacity={0}>
                                 <p
@@ -126,7 +304,7 @@ const DetailKonsultasiPublik = () => {
                                 />
                             </FadeContent>
 
-                            {/* Section Preview Draft PDF (online) */}
+                            {/* Section Preview Draft PDF (daring) */}
                             {data?.tipe === 'online' && data?.draftPdf && (
                                 <div className="mb-6">
                                     <h2 className="text-xl font-semibold text-bluePu mb-2 leading-relaxed font-roboto">
@@ -168,8 +346,8 @@ const DetailKonsultasiPublik = () => {
                                 </div>
                             )}
 
-                            {/* Section: Notulensi (online) */}
-                            {data?.tipe === 'offline' && data?.notulensiPdf && (
+                            {/* Section: Notulensi */}
+                            {data?.notulensiPdf && (
                                 <div className="mb-6">
                                     <h2 className="text-lg font-semibold text-bluePu mb-2 leading-relaxed font-roboto">
                                         <SplitText
@@ -188,7 +366,29 @@ const DetailKonsultasiPublik = () => {
                                     </div>
                                 </div>
                             )}
-                            {/* Section: Dokumentasi (online) */}
+
+                            {/* Section: File Andak */}
+                            {data?.andakPdf && (
+                                <div className="mb-6">
+                                    <h2 className="text-lg font-semibold text-bluePu mb-2 leading-relaxed font-roboto">
+                                        <SplitText
+                                            text={`File Andak`}
+                                            delay={10}
+                                            animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                                            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                                            easing="easeOutCubic"
+                                            threshold={0.2}
+                                        />
+                                    </h2>
+                                    <div className="w-full h-[80vh] border rounded-lg overflow-auto">
+                                        <Worker workerUrl="/pdf.worker.min.js"> 
+                                            <Viewer key={slug + '-andak'} fileUrl={data?.andakPdf} plugins={[defaultLayoutPluginNotulensi]} defaultScale={SpecialZoomLevel.PageFit} />
+                                        </Worker>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Section: Dokumentasi (luring) */}
                             {data?.tipe === 'offline' && data.dokumentasi && data.dokumentasi.length > 0 && (
                                 <div className="mb-6">
                                     <h2 className="text-lg font-semibold text-bluePu mb-2 leading-relaxed font-roboto">
@@ -231,26 +431,91 @@ const DetailKonsultasiPublik = () => {
                                             threshold={0.2}
                                         />
                                     </h2>
-                                    <form className="flex flex-col gap-4">
+
+                                    {/* Tambah: Informasi jika sudah selesai */}
+                                    {isPeriodOver && (
+                                        <div className="p-3 rounded-lg border border-amber-300 bg-amber-50 text-amber-800 text-sm font-roboto text-center">
+                                            Konsultasi Publik telah selesai dilaksanakan.
+                                        </div>
+                                    )}
+
+                                    <form className="flex flex-col gap-4" onSubmit={handleSubmitForm}>
                                         <div className="flex flex-col gap-0.5">
                                             <label className="text-xs font-semibold text-bluePu mb-0.5">Nama</label>
-                                            <input type="text" className="w-full border border-slate-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-bluePu outline-none transition placeholder:text-slate-400 text-sm" placeholder="Nama Anda" required />
+                                            <input
+                                                type="text"
+                                                value={nama}
+                                                onChange={e => setNama(e.target.value)}
+                                                disabled={isPeriodOver}
+                                                className="w-full border border-slate-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-bluePu outline-none transition placeholder:text-slate-400 text-sm disabled:bg-slate-100 disabled:cursor-not-allowed"
+                                                placeholder="Nama Anda"
+                                                required
+                                            />
                                         </div>
+
+                                        {/* Tambah: Input Asal di bawah Nama */}
+                                        <div className="flex flex-col gap-0.5">
+                                            <label className="text-xs font-semibold text-bluePu mb-0.5">Asal</label>
+                                            <input
+                                                type="text"
+                                                value={asal}
+                                                onChange={e => setAsal(e.target.value)}
+                                                disabled={isPeriodOver}
+                                                className="w-full border border-slate-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-bluePu outline-none transition placeholder:text-slate-400 text-sm disabled:bg-slate-100 disabled:cursor-not-allowed"
+                                                placeholder="Asal (Instansi/Daerah)"
+                                                required
+                                            />
+                                        </div>
+
                                         <div className="flex flex-col gap-0.5">
                                             <label className="text-xs font-semibold text-bluePu mb-0.5">Email</label>
-                                            <input type="email" className="w-full border border-slate-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-bluePu outline-none transition placeholder:text-slate-400 text-sm" placeholder="Email Anda" required />
+                                            <input
+                                                type="email"
+                                                value={email}
+                                                onChange={e => setEmail(e.target.value)}
+                                                disabled={isPeriodOver}
+                                                className="w-full border border-slate-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-bluePu outline-none transition placeholder:text-slate-400 text-sm disabled:bg-slate-100 disabled:cursor-not-allowed"
+                                                placeholder="Email Anda"
+                                                required
+                                            />
                                         </div>
                                         <div className="flex flex-col gap-0.5">
                                             <label className="text-xs font-semibold text-bluePu mb-0.5">Masukan</label>
-                                            <textarea className="w-full border border-slate-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-bluePu outline-none transition placeholder:text-slate-400 resize-none text-sm" placeholder="Tulis masukan Anda di sini..." rows={3} required></textarea>
+                                            <textarea
+                                                value={masukan}
+                                                onChange={e => setMasukan(e.target.value)}
+                                                disabled={isPeriodOver}
+                                                className="w-full border border-slate-300 rounded-md px-3 py-1.5 focus:ring-2 focus:ring-bluePu outline-none transition placeholder:text-slate-400 resize-none text-sm disabled:bg-slate-100 disabled:cursor-not-allowed"
+                                                placeholder="Tulis masukan Anda di sini..."
+                                                rows={3}
+                                                required
+                                            ></textarea>
                                         </div>
                                         <div className="flex flex-col gap-0.5">
                                             <label className="text-xs font-semibold text-bluePu mb-0.5">Upload File (PDF)</label>
-                                            <input type="file" accept="application/pdf" className="w-full border border-slate-300 rounded-md px-3 py-1.5 bg-white file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:bg-bluePu file:text-kuningButton file:font-semibold transition text-xs" />
+                                            <input
+                                                type="file"
+                                                accept="application/pdf"
+                                                onChange={e => setFile(e.target.files[0])}
+                                                disabled={isPeriodOver}
+                                                className="w-full border border-slate-300 rounded-md px-3 py-1.5 bg-white file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:bg-bluePu file:text-kuningButton file:font-semibold transition text-xs disabled:bg-slate-100 disabled:cursor-not-allowed"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-0.5 w-full max-w-xs mx-auto">
+                                            <label className="text-xs font-semibold text-bluePu mb-0.5">Verifikasi</label>
+                                            <div className={`w-full overflow-x-auto ${isPeriodOver ? 'pointer-events-none opacity-60' : ''}`}>
+                                                <Turnstile
+                                                    ref={turnstileRef}
+                                                    sitekey="0x4AAAAAABz7kGa-ciojvvlI"
+                                                    onSuccess={token => setCaptchaToken(token)}
+                                                    onExpire={() => setCaptchaToken(null)}
+                                                    options={{ theme: 'light' }}
+                                                />
+                                            </div>
                                         </div>
                                         <div className="flex justify-between items-center mt-2 gap-2">
                                             <a
-                                                href="/format-masukan.pdf" // ganti dengan path file format yang benar
+                                                href="/format-masukan.pdf"
                                                 download
                                                 className="flex items-center gap-1.5 bg-gradient-to-r from-blue-100 to-blue-300 text-blue-900 px-4 py-1.5 rounded-lg font-semibold border border-blue-400 shadow hover:from-blue-200 hover:to-blue-400 hover:text-blue-800 transition-all duration-200 text-xs"
                                             >
@@ -259,7 +524,13 @@ const DetailKonsultasiPublik = () => {
                                                 </svg>
                                                 Download Format
                                             </a>
-                                            <button type="submit" className="bg-bluePu text-kuningButton px-6 py-1.5 rounded-lg hover:bg-blue-700 font-semibold shadow transition-all duration-200 text-xs">Kirim</button>
+                                            <button
+                                                type="submit"
+                                                disabled={isPeriodOver}
+                                                className="bg-bluePu text-kuningButton px-6 py-1.5 rounded-lg hover:bg-blue-700 font-semibold shadow transition-all duration-200 text-xs disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                Kirim
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -277,3 +548,4 @@ const DetailKonsultasiPublik = () => {
 
 
 export default DetailKonsultasiPublik;
+
