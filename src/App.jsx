@@ -27,6 +27,7 @@ import DetailDokumenlangka from "./pages/DetailDokumenlangka";
 import DetailKonsultasiPublik from "./pages/DetailKonsultasiPublik";
 import ChatGeneral from "./components/ChatGeneral";
 import KonsultasiPublik from "./components/KonsultasiPublik";
+import KonsultasiPublikPerencanaan from "./components/KonsultasiPublikPerencanaan";
 import { Helmet } from "react-helmet-async";
 import { ToastProvider } from "./components/ToastProvider";
 
@@ -60,8 +61,9 @@ const titles = {
   "/Mou-detail/:slug": "JDIH PU - Detail Mou",
   "/Dokumen-Langka": "JDIH PU - Dokumen Langka",
   "/Dokumen-Langka/:slug": "JDIH PU - Detail Dokumen Langka",
-  "/Konsultasi-Publik": "JDIH PU - Konsultasi Publik",
-  "/Konsultasi-Publik/:slug": "JDIH PU - Detail Konsultasi Publik",
+  "/Konsultasi-Publik": "JDIH PU - Konsultasi Publik Pembahasan",
+  "/Konsultasi-Publik/:slug": "JDIH PU - Detail Konsultasi Publik Pembahasan",
+  "/Konsultasi-Publik-Perencanaan": "JDIH PU - Konsultasi Publik Pembahasan",
 };
 
 function TitleUpdater() {
@@ -126,6 +128,7 @@ function App() {
         <Route path="/Dokumen-Langka/:slug" element={<DetailDokumenlangka />} />
         <Route path="/Konsultasi-Publik" element={<KonsultasiPublik />} />
         <Route path="/Konsultasi-Publik/:slug" element={<DetailKonsultasiPublik />} />
+        <Route path="/Konsultasi-Publik-Perencanaan" element={<KonsultasiPublikPerencanaan />} />
       </Routes>
       <ChatGeneral />
     </>

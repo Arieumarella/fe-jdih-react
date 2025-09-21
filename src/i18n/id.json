@@ -70,6 +70,9 @@
     "semuaKonsultasiPublik": "List Konsultasi Publik",
     "pliceHolderKonsultasiPublik": "Cari Judul Konsultasi Publik...",
     "btnCariJudulKonsultasiPublik": "Cari",
+    "semuaKonsultasiPublikPerencanaan": "List Konsultasi Publik Perencanaan",
+    "pliceHolderKonsultasiPublikPerencanaan": "Cari Judul Konsultasi Publik Perencanaan...",
+    "btnCariJudulKonsultasiPublikPerencanaan": "Cari",
     "detailDokLangka": "Detail Dokumen Langka",
     "semuaPutusanPengandilan": "Semua Putusan Pengadilan",
     "pliceHolderPutusanPengadilan": "Cari Judul Putusan Pengadilan...",
@@ -187,5 +190,11 @@
         "Lokasi": "Lokasi",
         "bidang_hukum": "Bidang Hukum",
         "Lampiran": "Lampiran"
+    },
+
+    "konsultasiPublik": {
+        "nmMenu": "Konsultasi Publik",
+        "SubmenuKPPerencanaan": "Konsultasi Publik Perencanaan",
+        "SubmenuKPPembahasan": "Konsultasi Publik Pembahasan"
     }
 }

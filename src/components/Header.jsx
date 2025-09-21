@@ -147,8 +147,16 @@ export default function Header() {
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("infografis"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.infografis")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Mou"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.Mou")}</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Dokumen-Langka"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.dokumenLangka")}</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Konsultasi-Publik"); }} className="block px-4 py-2 hover:bg-slate-100">{t("menu.konsultasiPublik")}</a></li>
+              </ul>
+            </div>
 
+            <div className="relative group">
+              <button type="button" className="flex items-center hover:text-slate-300 whitespace-nowrap" aria-haspopup="true" aria-expanded="false">
+                {t("konsultasiPublik.nmMenu")} <span className="material-symbols-outlined">arrow_drop_down</span>
+              </button>
+              <ul className="absolute hidden group-hover:block bg-white text-black shadow-lg rounded-md py-2 w-max min-w-[180px]">
+                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Konsultasi-Publik-Perencanaan"); }} className="block px-4 py-2 hover:bg-slate-100">{t("konsultasiPublik.SubmenuKPPerencanaan")}</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Konsultasi-Publik"); }} className="block px-4 py-2 hover:bg-slate-100">{t("konsultasiPublik.SubmenuKPPembahasan")}</a></li>               
               </ul>
             </div>
 
@@ -165,7 +173,6 @@ export default function Header() {
               </ul>
             </div>
 
-            <a href="#" className="hover:text-slate-300 mt-[2px] whitespace-nowrap" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Statistik"); }}>{t("menu.statistik")}</a>
 
             <div className="relative group">
               <button type="button" className="flex items-center hover:text-slate-300 whitespace-nowrap" aria-haspopup="true" aria-expanded="false">
@@ -176,6 +183,7 @@ export default function Header() {
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("tentang-kami"); }}>{t("menu.tentangKami")}</a></li>
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("prasyarat"); }}>{t("menu.prasyarat")}</a></li>
                 <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("kontak-kami"); }}>{t("menu.kontakKami")}</a></li>
+                <li><a href="#" className="block px-4 py-2 hover:bg-slate-100" onClick={(e) => { e.preventDefault(); handleNavigateAndCloseMenu("Statistik"); }}>{t("menu.statistik")}</a></li>
               </ul>
             </div>
           </nav>
@@ -308,6 +316,29 @@ export default function Header() {
             <button
               type='button'
               className='flex items-center justify-between w-full hover:text-slate-300'
+              onClick={() => handleMobileSubmenuToggle('konsultasi_publik')}
+              aria-expanded={activeMobileSubmenu === 'konsultasi_publik'}
+              aria-controls="submenu-mobile-konsultasi-publik"
+            >
+              {t("konsultasiPublik.nmMenu")}
+              <span className={`material-symbols-outlined transition-transform duration-200 ${activeMobileSubmenu === 'konsultasi_publik' ? 'rotate-180' : ''}`}>arrow_drop_down</span>
+            </button>
+            <ul
+              id="submenu-mobile-konsultasi-publik"
+              className={`overflow-hidden mt-2 bg-slate-200 text-black rounded-md px-3 space-y-1 text-sm shadow-xl transition-all duration-300 ease-in-out ${activeMobileSubmenu === 'konsultasi_publik' ? 'max-h-96 py-2' : 'max-h-0 py-0'
+                }`}
+            >
+              <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Konsultasi-Publik-Perencanaan")} className='hover:text-slate-600 block'>{t("konsultasiPublik.SubmenuKPPerencanaan")}</a></li>
+              <li><a href="#" onClick={() => handleNavigateAndCloseMenu("Konsultasi-Publik")} className='hover:text-slate-600 block'>{t("konsultasiPublik.SubmenuKPPembahasan")}</a></li>
+              
+            </ul>
+          </li>
+
+
+          <li className='group'>
+            <button
+              type='button'
+              className='flex items-center justify-between w-full hover:text-slate-300'
               onClick={() => handleMobileSubmenuToggle('simpel')}
               aria-expanded={activeMobileSubmenu === 'simpel'}
               aria-controls="submenu-mobile-simpel"
@@ -326,10 +357,6 @@ export default function Header() {
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("SiMPeL/IpRPP")} className='hover:text-slate-600 block'>{t("menu.ipRpp")}</a></li>
               <li><a href="#" onClick={() => handleNavigateAndCloseMenu("SiMPeL/IpRpermen")} className='hover:text-slate-600 block'>{t("menu.ipRpermen")}</a></li>
             </ul>
-          </li>
-
-          <li>
-            <a href="#" className='hover:text-slate-300 block' onClick={() => handleNavigateAndCloseMenu("Statistik")}>{t("menu.statistik")}</a>
           </li>
 
           <li className='group'>
@@ -352,6 +379,7 @@ export default function Header() {
               <li><a href="#" className='hover:text-slate-600 block' onClick={() => handleNavigateAndCloseMenu("tentang-kami")}>{t("menu.tentangKami")}</a></li>
               <li><a href="#" className='hover:text-slate-600 block' onClick={() => handleNavigateAndCloseMenu("prasyarat")}>{t("menu.prasyarat")}</a></li>
               <li><a href="#" className='hover:text-slate-600 block' onClick={() => handleNavigateAndCloseMenu("kontak-kami")}>{t("menu.kontakKami")}</a></li>
+              <li><a href="#" className='hover:text-slate-300 block' onClick={() => handleNavigateAndCloseMenu("Statistik")}>{t("menu.statistik")}</a></li>
             </ul>
           </li>
         </ul>

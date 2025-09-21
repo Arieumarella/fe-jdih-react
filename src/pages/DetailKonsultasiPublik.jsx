@@ -506,7 +506,7 @@ const DetailKonsultasiPublik = () => {
                                             <div className={`w-full overflow-x-auto ${isPeriodOver ? 'pointer-events-none opacity-60' : ''}`}>
                                                 <Turnstile
                                                     ref={turnstileRef}
-                                                    sitekey="0x4AAAAAABz7kGa-ciojvvlI"
+                                                    sitekey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
                                                     onSuccess={token => setCaptchaToken(token)}
                                                     onExpire={() => setCaptchaToken(null)}
                                                     options={{ theme: 'light' }}

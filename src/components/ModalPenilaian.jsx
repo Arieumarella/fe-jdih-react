@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Rating } from "react-simple-star-rating";
 import { toast } from "../components/ToastProvider";

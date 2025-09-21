@@ -137,7 +137,6 @@
     "pliceHolderMou": "Search Memorandum Title...",
     "btnCariJudulMou": "Search",
     "detailMou": "Memorandum of Understanding Details",
-    "detailMou": "Memorandum of Understanding Details",
     "semuaDokLangka": "Rare Documents List",
     "pliceHolderDokLangka": "Search Rare Document Title...",
     "btnCariJudulDokLangka": "Search",
@@ -188,5 +187,11 @@
         "Lokasi": "Location",
         "bidang_hukum": "Legal Field",
         "Lampiran": "Attachment"
+    },
+
+    "konsultasiPublik": {
+    "nmMenu": "Public Consultation",
+    "SubmenuKPPerencanaan": "Planning Public Consultation",
+    "SubmenuKPPembahasan": "Discussion Public Consultation"
     }
 }
