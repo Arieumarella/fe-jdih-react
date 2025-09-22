@@ -3,7 +3,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from 'react';
-import { useRef } from 'react';
+import axios from "axios";
 import Turnstile from 'react-turnstile';
 import { toast } from "../components/ToastProvider";
 import { insertMasukanKpPerencanaan } from "../services/kpPerencnaan.services";
@@ -26,14 +26,14 @@ const Illustration = ({ className = '' }) => (
 
 const ModalMasukanKpPerencanaan = ({ isOpen, onClose, data }) => {
     const [captchaToken, setCaptchaToken] = useState(null);
-    const turnstileRef = useRef(null);
+    const BACKEND_FILE_URL = import.meta.env.VITE_BACKEND_FILE_URL;
 
-      
+        console.log("ModalMasukanKpPerencanaan data:", data);
 
         const dummyData = {
             judul: 'Rancangan Peraturan Daerah Tentang Pengelolaan Sampah',
             tahun_anggaran: '2025',
-            file_konsepsi_pengaturan: 'https://example.com/konsepsi.pdf',
+            path_konsepsi: 'https://example.com/konsepsi.pdf',
             ringkasan: 'Peraturan ini bertujuan mengatur pengelolaan sampah terpadu untuk meningkatkan kebersihan dan kesehatan masyarakat.'
         };
 
@@ -43,8 +43,27 @@ const ModalMasukanKpPerencanaan = ({ isOpen, onClose, data }) => {
         setForm(f => ({ ...f, id: data?.id || '' }));
     }, [data]);
 
-    const handleDownloadKonsepsi = () => {
-        window.open((data && data.file_konsepsi_pengaturan) || dummyData.file_konsepsi_pengaturan, '_blank');
+    const handleDownloadKonsepsi = async () => {
+        const fileUrl =
+            (data &&
+            BACKEND_FILE_URL.replace(/\/$/, "") + "/" + data.path_konsepsi) ||
+            dummyData.path_konsepsi;
+
+        try {
+            const response = await axios.get(fileUrl, {
+            responseType: "blob", // ambil file sebagai blob
+            });
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", `konsepsi pengaturan ${data?.judul || dummyData.judul}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } catch (error) {
+            console.error("Gagal download file:", error);
+        }
     };
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -106,7 +125,7 @@ const ModalMasukanKpPerencanaan = ({ isOpen, onClose, data }) => {
                                             <input name="email" type="email" value={form.email} onChange={handleChange} required className="w-full border border-gray-200 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-100" />
                                         </div>
                                         <div>
-                                            <label className="text-sm text-gray-700 block mb-1">Asal</label>
+                                            <label className="text-sm text-gray-700 block mb-1">Asal/Domisili/Instansi</label>
                                             <input name="asal" value={form.asal} onChange={handleChange} required className="w-full border border-gray-200 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-100" />
                                         </div>
                                     </div>

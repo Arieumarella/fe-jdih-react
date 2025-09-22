@@ -1,13 +1,29 @@
-import WebViewerWithLicense from './WebViewerWithLicense';
 import { Viewer, Worker, SpecialZoomLevel  } from '@react-pdf-viewer/core';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from 'react';
 
 const Modal = ({ isOpen, onClose, title, urlPath }) => {
   
       const defaultLayoutModal = defaultLayoutPlugin();
+      const BACKEND_FILE_URL = import.meta.env.VITE_BACKEND_FILE_URL;
+      const [urlPathFix, setUrlPathFix] = useState('');
+      
+      useEffect(() => {
+        const idx = urlPath?.indexOf("assets/");
+        if (idx !== -1) {
+          let cleanPath = urlPath?.substring(idx)?.replace(/^assets\/assets\//, "assets/");
+          setUrlPathFix(urlPath ? BACKEND_FILE_URL + cleanPath : '');
+        } else {
+          setUrlPathFix(BACKEND_FILE_URL + urlPath);
+        }
+      }, [urlPath, BACKEND_FILE_URL]);
+      
+
+      console.log("Modal URL Path:",urlPathFix);
+
 
   return (
     <AnimatePresence>
@@ -34,7 +50,7 @@ const Modal = ({ isOpen, onClose, title, urlPath }) => {
             {/* Kontainer Viewer */}
             <div className="webviewer w-full flex-grow min-h-0">
               <Worker workerUrl="/pdf.worker.min.js">
-                 <Viewer key={'-Peraturan'} fileUrl={urlPath} plugins={[defaultLayoutModal]} defaultScale={SpecialZoomLevel.PageFit} />
+                 <Viewer key={'-Peraturan'} fileUrl={urlPathFix} plugins={[defaultLayoutModal]} defaultScale={SpecialZoomLevel.PageFit} />
               </Worker>
             </div>
           </motion.div>

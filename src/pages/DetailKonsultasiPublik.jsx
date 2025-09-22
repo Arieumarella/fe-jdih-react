@@ -59,7 +59,7 @@ const DetailKonsultasiPublik = () => {
         
         getDetailKp(slug).then((result) => {
             // Ambil gambar_1..gambar_5, filter yang tidak null/kosong
-            console.log("Detail Konsultasi Publik Result:", result);
+            
             const gambarKeys = ['gambar_1', 'gambar_2', 'gambar_3', 'gambar_4', 'gambar_5'];
             const dokumentasi = gambarKeys
                 .map(key => result?.data?.[key])
@@ -90,10 +90,12 @@ const DetailKonsultasiPublik = () => {
                 dokumentasi,
             });
         });
-
+        
           addViewsKP(slug);
 
     }, [slug]);
+
+    console.log(data);
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
@@ -118,7 +120,7 @@ const DetailKonsultasiPublik = () => {
             formData.append('captchaToken', captchaToken);
             
             const result = await submitKonsultasiPublik(formData);
-            console.log("Submit Konsultasi Publik Result:", result);
+          
             
             // Reset form jika berhasil
             setNama("");
@@ -129,7 +131,7 @@ const DetailKonsultasiPublik = () => {
             toast.success("Data berhasil disimpan.", { position: "bottom-right" });
             
         } catch (error) {
-            console.error("Submit error:", error);
+       
             // Handle different types of errors
             if (error.response) {
                 // Server responded with error status

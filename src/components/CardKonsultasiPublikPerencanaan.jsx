@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 
 
 const dummyData = {
@@ -24,13 +24,10 @@ const Illustration = ({ className = '' }) => (
     </div>
 );
 
-const CardKonsultasiPublikPerencanaan = ({ data, onMasukanClick }) => {
-   
-    const handleDownloadKonsepsi = () => {
-        window.open(data?.file_konsepsi_pengaturan || dummyData.file_konsepsi_pengaturan, '_blank');
-    };
 
-   
+const CardKonsultasiPublikPerencanaan = ({ data, onMasukanClick, onPreviewClick }) => {
+    const [showPreview, setShowPreview] = useState(false);
+    const pdfUrl = data?.file_konsepsi_pengaturan || dummyData.file_konsepsi_pengaturan;
 
     return (
         <div className="w-full mx-auto my-8 max-w-6xl px-2 sm:px-4">
@@ -57,19 +54,19 @@ const CardKonsultasiPublikPerencanaan = ({ data, onMasukanClick }) => {
 
                             <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2 sm:mt-0">
                                 <button
-                                    onClick={handleDownloadKonsepsi}
+                                    onClick={() => onPreviewClick && onPreviewClick()}
                                     className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg shadow-md hover:opacity-95 transition text-xs sm:text-sm"
                                 >
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 3v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M8 11l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M21 21H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    {/* Eye icon for preview */}
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.5 12s4-7 10.5-7 10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
                                     Konsepsi Pengaturan
                                 </button>
 
                                 <button
-                                    onClick={() => onMasukanClick && onMasukanClick()}
+                                    onClick={() => onMasukanClick && onMasukanClick(pdfUrl)}
                                     className="inline-flex items-center gap-2 border border-gray-200 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition text-xs sm:text-sm"
                                 >
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
