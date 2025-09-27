@@ -70,13 +70,13 @@ const DetailKonsultasiPublik = () => {
                     if (/^https?:\/\//i.test(gambar)) return gambar;
                     return BACKEND_URL.replace(/\/$/, '') + '/' + gambar.replace(/^\/?/, '');
                 });
-
+            console.log(result);
             setData({
                 judul: result?.data?.judul_rancangan_peraturan,
                 narasi: result?.data?.keterangan,
                 tipe: result?.data?.status == 'Luring' ? 'offline' : 'online',
                 // Metadata fields
-                pemrakarsa: result?.data?.pemrakarsa || result?.data?.deptcode || 'Tidak Tersedia',
+                pemrakarsa: result?.pemrakarsa?.deptname,
                 jenisPerencanaan: result?.data?.jenis_perencanaan,
                 tempatPelaksanaan: result?.data?.Tempat_pelaksanaan,
                 tglPenyusunan: result?.data?.tgl_pelaksanaan_penyusunan,

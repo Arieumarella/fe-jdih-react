@@ -1,9 +1,8 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import { Rating } from "react-simple-star-rating";
-import { getDataRating } from '../services/footer.services';
 import ModalPenilaian from '../components/ModalPenilaian';
 import { toast } from "../components/ToastProvider";
-import { postDataLangganan } from "../services/footer.services";
+import { postDataLangganan, getDataRating } from "../services/footer.services";
 import CountUp from '../components/react-bits/CountUp/CountUp';
 import AnimatedContent from '../components/react-bits/AnimatedContent/AnimatedContent';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +15,49 @@ const Langganan = () => {
 
   const { t } = useTranslation();
 
+  // Captcha state for langganan
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const captchaRef = useRef(null);
+  const captchaWidgetId = useRef(null);
+
+  // Inject Turnstile script once
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !window.turnstile) {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  // Render Turnstile widget hanya sekali saat mount
+  useEffect(() => {
+    const renderCaptcha = () => {
+      if (captchaRef.current && window.turnstile) {
+        // Bersihkan node captcha lama
+        captchaRef.current.innerHTML = '';
+        setCaptchaToken(null);
+        captchaWidgetId.current = window.turnstile.render(captchaRef.current, {
+          sitekey: import.meta.env.VITE_CAPTCHA_SITE_KEY,
+          callback: (token) => setCaptchaToken(token),
+        });
+      }
+    };
+    if (window.turnstile) {
+      renderCaptcha();
+    } else {
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          renderCaptcha();
+          clearInterval(interval);
+        }
+      }, 300);
+      return () => clearInterval(interval);
+    }
+    // eslint-disable-next-line
+  }, []);
+
   const handelFormLangganan = (e) => {
     setFormLangganan({ ...formLangganan, [e.target.name]: e.target.value });
   }
@@ -27,22 +69,40 @@ const Langganan = () => {
       toast.error("Harap lengkapi semua kolom Terlebih Dahulu.", { position: "bottom-right" });
       return;
     }
+    if (!captchaToken) {
+      toast.error("Silakan verifikasi captcha sebelum mengirim.", { position: "bottom-right" });
+      // Reset captcha jika gagal
+      if (window.turnstile && captchaWidgetId.current !== null && typeof window.turnstile.reset === 'function') {
+        try { window.turnstile.reset(captchaWidgetId.current); } catch (err) {}
+      }
+      setCaptchaToken(null);
+      return;
+    }
 
     try {
-      const response = await postDataLangganan(formLangganan);
+      const payload = { ...formLangganan, captcha: captchaToken };
+      const response = await postDataLangganan(payload);
 
       if (response.status !== 200) {
         toast.error("Data gagal disimpan.", { position: "bottom-right" });
       } else {
         toast.success("Data berhasil disimpan.", { position: "bottom-right" });
         setFormLangganan({ nama: "", email: "" });
+        // Reset captcha setelah submit
+        if (window.turnstile && captchaWidgetId.current !== null && typeof window.turnstile.reset === 'function') {
+          try { window.turnstile.reset(captchaWidgetId.current); } catch (err) {}
+        }
+        setCaptchaToken(null);
       }
     } catch (error) {
       console.error("Error submitting feedback:", error);
       toast.error("Terjadi kesalahan, silakan coba lagi.", { position: "bottom-right" });
+      // Reset captcha jika error
+      if (window.turnstile && captchaWidgetId.current !== null && typeof window.turnstile.reset === 'function') {
+        try { window.turnstile.reset(captchaWidgetId.current); } catch (err) {}
+      }
+      setCaptchaToken(null);
     }
-
-
   }
 
 
@@ -257,6 +317,10 @@ const Langganan = () => {
                   </button>
                 </div>
 
+                {/* Captcha */}
+                <div className="w-full flex justify-center my-2">
+                  <div ref={captchaRef} className="cf-turnstile" data-sitekey={import.meta.env.VITE_CAPTCHA_SITE_KEY}></div>
+                </div>
                 <button type='submit' className='block my-4 bg-kuningButton text-bluePu font-onest text-[15px] font-semibold w-[75px] h-[30px] rounded-xl relative hover:bg-yellow-500 active:bg-yellow-600 md:block lg:hidden'>
                   {/*
               BUTTON KIRIM (Mobile/Tablet):
