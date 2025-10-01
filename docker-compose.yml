@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  ui-jdih:
+    build: .
+    image: ui-jdih:latest
+    container_name: ui-jdih
+    restart: always
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:80"
+    volumes:
+      - /home/admin01/ui-jdih:/usr/share/nginx/html
+    networks:
+      - jdih-net
+networks:
+  jdih-net:
+    driver: bridge
